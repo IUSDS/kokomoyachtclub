@@ -18,7 +18,7 @@ const membershipPage = () => {
   const searchByDate = async (date) => {
     try {
       const formattedDate = date.toISOString().split("T")[0]; // Format to 'YYYY-MM-DD'
-      const response = await fetch("https://api.example.com/search-by-date", {
+      const response = await fetch("http://127.0.0.1:8000//user-details", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
