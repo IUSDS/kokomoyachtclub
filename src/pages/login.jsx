@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import hero_image from "../assets/images/hero.png";
 
 const login = () => {
-  const [id, setId] = useState("");
+  const [USER, setUser] = useState(""); // Changed from 'id' to 'USER'
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
@@ -10,30 +10,28 @@ const login = () => {
       const response = await fetch("http://127.0.0.1:8000/validate-user/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, password }),
+        body: JSON.stringify({ USER, password }), // Sending USER and password
       });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        // If successful (e.g., store token, redirect)
-        console.log("Login successful!", data);
-        localStorage.setItem("token", data.token); // Save token securely
 
+      const data = await response.json();
+
+      if (response.ok) {
+        // If successful
+        console.log("Login successful!", data);
+        localStorage.setItem("token", data.token || ""); // Save token if returned
+        alert("Login successful!");
         // Redirect or navigate
-        
-        
       } else {
         // Handle login failure
-        console.error("Login failed:", data.message);
-        alert(data.message); // Show user-friendly error
+        console.error("Login failed:", data.detail || data.status);
+        alert(data.detail || data.status || "Login failed!");
       }
     } catch (error) {
       console.error("An error occurred during login:", error);
       alert("Unable to login. Please try again later.");
     }
   };
-  
+
   return (
     <>
       {/* Hero Section Image */}
@@ -41,7 +39,7 @@ const login = () => {
 
       {/* Form Section */}
       <main
-        className={` flex flex-col items-center justify-center text-center text-gray-600 font-plus-jakarta-sans`}
+        className={`flex flex-col items-center justify-center text-center text-gray-600 font-plus-jakarta-sans`}
       >
         <div className="self-stretch overflow-hidden flex flex-col items-center justify-center">
           <div className="self-stretch overflow-hidden flex flex-col items-center justify-center">
@@ -64,8 +62,8 @@ const login = () => {
                       className="font-plus-jakarta-sans px-3 text-mini [outline:none] bg-steelblue rounded-2xl self-stretch h-10 placeholder-gray-300"
                       type="text"
                       placeholder="User ID"
-                      value={id}
-                      onChange={(e) => setId(e.target.value)}
+                      value={USER} // Updated to USER
+                      onChange={(e) => setUser(e.target.value)} // Updated to setUser
                     />
                     <input
                       className="font-plus-jakarta-sans px-3 text-mini [outline:none] bg-steelblue rounded-2xl self-stretch h-10 placeholder-gray-300"
@@ -77,7 +75,10 @@ const login = () => {
                   </form>
                 </div>
 
-                <button className="self-stretch cursor-pointer py-2 rounded-2xl hover:bg-opacity-80 transform duration-200 [border:none] text-center text-sm font-medium font-plus-jakarta-sans text-gray-100 bg-midnightblue" onClick={handleLogin}>
+                <button
+                  className="self-stretch cursor-pointer py-2 rounded-2xl hover:bg-opacity-80 transform duration-200 [border:none] text-center text-sm font-medium font-plus-jakarta-sans text-gray-100 bg-midnightblue"
+                  onClick={handleLogin}
+                >
                   LOGIN
                 </button>
               </div>
