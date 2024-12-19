@@ -7,33 +7,45 @@ const memberInfo = () => {
   const level = 'Rookie';
   const dueDate = '15/12/2004';
   const points = '113';
-  
+
   return (
     <div className='flex flex-col md:flex-row md:gap-8 md:w-full items-center md:justify-start gap-4 p-2'>
       {/* User Image */}
       <FaUserCircle className='text-midnightblue' size={200} />
 
       {/* Information */}
-      <div className='flex flex-col p-4 font-bold text-gray-500'>
-        <div className='flex w-[300px] justify-between'>
-          <p>Name:</p>
-          <p>{name}</p>
+      <div className='flex justify-evenly p-4 w-full font-semibold md:text-xl'>
+        <div className='flex flex-col text-midnightblue'>
+          <div className='flex justify-between'>
+            <p>Name:</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>Membership Level:</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>Next Due Date:</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>Available Mariner Points:</p>
+          </div>
         </div>
-        <div className='flex w-[300px] justify-between'>
-          <p>Memvership Level:</p>
-          <p>{level}</p>
-        </div>
-        <div className='flex w-[300px] justify-between'>
-          <p>Next Due Date:</p>
-          <p>{dueDate}</p>
-        </div>
-        <div className='flex w-[300px] justify-between'>
-          <p>Available Mariner Points:</p>
-          <p>{points}</p>
+        <div className='flex flex-col text-gray-600'>
+          <div className='flex justify-between'>
+            <p>{name}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>{level}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>{dueDate}</p>
+          </div>
+          <div className='flex justify-between'>
+            <p>{points}</p>
+          </div>
         </div>
       </div>
 
-      
+
     </div>
   )
 }

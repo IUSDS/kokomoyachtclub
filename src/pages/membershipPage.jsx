@@ -4,6 +4,11 @@ import MemberInfo from '../components/memberInfo';
 import DatePicker from 'react-datepicker';
 import DateButton from "../components/dateButton";
 import ImageCard from '../components/imageCard';
+import boca from '../assets/images/boca-grande.jpg';
+import naples from '../assets/images/naples.jpg';
+import keywest from '../assets/images/keywest.jpg';
+import captiva from '../assets/images/captiva.jpg';
+import marco from '../assets/images/marco.jpg';
 
 const membershipPage = () => {
   const [calenderOpen, setCalenderOpen] = useState(false);
@@ -29,7 +34,7 @@ const membershipPage = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center overflow-x-hidden'>
       {/* Hero Section Image */}
       <div className='relative '>
         <img className="w-screen h-fit object-cover" src={img} alt="" />
@@ -53,7 +58,7 @@ const membershipPage = () => {
 
           {/* optional calender */}
           {calenderOpen && (
-            <div className="absolute top-7 mt-2 shadow-md rounded w-fit h-fit">
+            <div className="absolute z-10 top-7 mt-2 shadow-md rounded w-fit h-fit">
               <DatePicker
                 selected={selectedDate}
                 onChange={(date) => {
@@ -76,8 +81,12 @@ const membershipPage = () => {
         <p className='font-bold text-lg'>Overnight Cruising Adventures</p>
 
         {/* Images */}
-        <div className='flex flex-col'>
-          <ImageCard link="../assets/images/boca-grande.jpg" name="" />
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mx-4'>
+          <ImageCard link={boca} name="BOCA GRANDE - GASPARILLA" />
+          <ImageCard link={naples} name="NAPLES" />
+          <ImageCard link={keywest} name="KEY WEST" />
+          <ImageCard link={captiva} name="CAPTIVA & SANIBEL ISLAND" />
+          <ImageCard link={marco} name="MARCO ISLAND" />
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ const login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://your-backend-url/login", {
+      const response = await fetch("http://127.0.0.1:8000/validate-user/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, password }),
@@ -21,6 +21,7 @@ const login = () => {
         localStorage.setItem("token", data.token); // Save token securely
 
         // Redirect or navigate
+        
         
       } else {
         // Handle login failure
