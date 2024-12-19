@@ -26,7 +26,7 @@ const memberInfo = () => {
             <p>Next Due Date:</p>
           </div>
           <div className='flex justify-between'>
-            <p>Available Mariner Points:</p>
+            <p>Available Mariner  Points:</p>
           </div>
         </div>
         <div className='flex flex-col text-gray-600'>

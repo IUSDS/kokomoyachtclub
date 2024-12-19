@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import hero_image from "../assets/images/hero.png";
+import { useNavigate } from "react-router-dom";
 
 const login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
+    const navigate = useNavigate(); 
     try {
       const response = await fetch("http://127.0.0.1:8000/validate-user/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, password }),
       });
-  
       const data = await response.json();
   
       if (response.ok) {
         // If successful (e.g., store token, redirect)
         console.log("Login successful!", data);
         localStorage.setItem("token", data.token); // Save token securely
-
-        // Redirect or navigate
-        
-        
+  
+        // Navigate to the /members page using React Router
+        navigate("/membership"); // Navigates to /members
       } else {
         // Handle login failure
         console.error("Login failed:", data.message);
