@@ -9,7 +9,7 @@ const memberInfo = () => {
   const points = '113';
 
   return (
-    <div className='flex flex-col md:flex-row md:gap-8 md:w-full items-center md:justify-start gap-4 p-2'>
+    <div className='flex flex-col md:flex-row md:gap-8 w-full items-center md:justify-start gap-4 p-2'>
       {/* User Image */}
       <FaUserCircle className='text-midnightblue' size={200} />
 
@@ -26,7 +26,7 @@ const memberInfo = () => {
             <p>Next Due Date:</p>
           </div>
           <div className='flex justify-between'>
-            <p>Available Mariner  Points:</p>
+            <p>Available Mariner <span className='block md:inline'>Points:</span></p>
           </div>
         </div>
         <div className='flex flex-col text-gray-600'>
@@ -39,7 +39,7 @@ const memberInfo = () => {
           <div className='flex justify-between'>
             <p>{dueDate}</p>
           </div>
-          <div className='flex justify-between'>
+          <div className='flex justify-between mt-6 md:mt-0'>
             <p>{points}</p>
           </div>
         </div>

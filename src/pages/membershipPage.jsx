@@ -16,8 +16,10 @@ const membershipPage = () => {
 
   // Function to make the API request
   const searchByDate = async (date) => {
+    console.log(date);
     try {
       const formattedDate = date.toISOString().split("T")[0]; // Format to 'YYYY-MM-DD'
+      console.log(formattedDate)
       const response = await fetch("http://127.0.0.1:8000//user-details", {
         method: "POST",
         headers: {
@@ -46,7 +48,7 @@ const membershipPage = () => {
 
       <div className='flex flex-col w-full md:flex-row justify-between md:px-36 items-center gap-4'>
         {/* Member Info Section */}
-        <div className='flex flex-col justify-center items-center my-2 md:w-full'>
+        <div className='flex flex-col justify-center items-center my-2 w-full'>
           <MemberInfo />
         </div>
 

@@ -23,6 +23,7 @@ const login = () => {
         localStorage.setItem("token", data.token || ""); // Save token if returned
         alert("Login successful!");
         // Redirect or navigate
+        navigate('/membership')
       } else {
         // Handle login failure
         console.error("Login failed:", data.detail || data.status);
