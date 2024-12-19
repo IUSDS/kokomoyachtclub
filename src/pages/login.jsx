@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 const login = () => {
   const [USER, setUser] = useState(""); // Changed from 'id' to 'USER'
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = async () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     try {
       const response = await fetch("http://127.0.0.1:8000/validate-user/", {
         method: "POST",
@@ -20,14 +21,14 @@ const login = () => {
       if (response.ok) {
         // If successful
         console.log("Login successful!", data);
-        localStorage.setItem("token", data.token || ""); // Save token if returned
+        localStorage.setItem("token", data.token || "");
+        setErrorMessage(""); // Clear any error message
         alert("Login successful!");
-        // Redirect or navigate
         navigate('/membership')
       } else {
         // Handle login failure
         console.error("Login failed:", data.detail || data.status);
-        alert(data.detail || data.status || "Login failed!");
+        setErrorMessage(data.detail || data.status || "Invalid credentials"); // Set error message
       }
     } catch (error) {
       console.error("An error occurred during login:", error);
@@ -77,6 +78,13 @@ const login = () => {
                     />
                   </form>
                 </div>
+
+                {/* Invalid credentials */}
+                {errorMessage && (
+                  <div className="self-stretch text-red-500 text-sm">
+                    {errorMessage}
+                  </div>
+                )}
 
                 <button
                   className="self-stretch cursor-pointer py-2 rounded-2xl hover:bg-opacity-80 transform duration-200 [border:none] text-center text-sm font-medium font-plus-jakarta-sans text-gray-100 bg-midnightblue"
