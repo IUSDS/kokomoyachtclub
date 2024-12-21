@@ -6,11 +6,11 @@ const login = () => {
   const [USER, setUser] = useState(""); // Changed from 'id' to 'USER'
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const navigate = useNavigate();
     try {
-      const response = await fetch("http://127.0.0.1:8000/validate-user/", {
+      const response = await fetch("http://3.27.181.229/validate-user/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ USER, password }), // Sending USER and password
@@ -18,13 +18,15 @@ const login = () => {
 
       const data = await response.json();
 
+      // console.log(data);
+
       if (response.ok) {
         // If successful
         console.log("Login successful!", data);
         localStorage.setItem("token", data.token || "");
         setErrorMessage(""); // Clear any error message
-        alert("Login successful!");
-        navigate('/membership')
+        // alert("Login successful!");
+        data.user_type === 'user' ? navigate('/membership') : navigate('/admin');
       } else {
         // Handle login failure
         console.error("Login failed:", data.detail || data.status);
