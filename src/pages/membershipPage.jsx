@@ -19,29 +19,32 @@ const MembershipPage = () => {
 
   // Function to make the API request and get member details
   const fetchMemberDetails = async () => {
-    try {
-      const response = await fetch("http://3.27.181.229/user-details", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    const username = localStorage.getItem("username");
 
-      if (response.ok) {
-        const data = await response.json();
-        setMemberDetails(data);
+    if (!username) {
+        setError("No username found. Please log in again.");
         setLoading(false);
-        console.log('This is from membership page ',data);
-      } else {
-        setError("Failed to fetch member details");
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error fetching member details:", error);
-      setError("An error occurred while fetching member details");
-      setLoading(false);
+        return;
     }
-  };
+
+    try {
+        const response = await fetch(`http://3.27.181.229/user-details?username=${username}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setMemberDetails(data);
+        } else {
+            setError("Failed to fetch member details");
+        }
+    } catch (error) {
+        setError("An error occurred while fetching member details");
+    } finally {
+        setLoading(false);
+    }
+};
 
   useEffect(() => {
     fetchMemberDetails(); // Fetch member details on component mount
