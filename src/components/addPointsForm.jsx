@@ -25,7 +25,7 @@ const AddPointsForm = () => {
   };
 
   return (
-    <div className="max-w-xl md:mx-10 text-black mx-auto bg-white p-6 rounded-2xl shadow-md space-y-6">
+    <div className="max-w-xl md:mx-10 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-lg space-y-6">
       <h2 className="text-xl font-semibold flex items-center">
         Add Points to User Profile{' '}
         {successMessage && (
