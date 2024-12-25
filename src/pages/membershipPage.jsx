@@ -20,7 +20,7 @@ const MembershipPage = () => {
   // Function to make the API request and get member details
   const fetchMemberDetails = async () => {
     try {
-      const response = await fetch("http://3.27.181.229/user-details", {
+      const response = await fetch("http://3.27.181.229/user-details/?username=${username}", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

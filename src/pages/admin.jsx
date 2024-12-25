@@ -8,12 +8,10 @@ import EditInfoCard from '../components/editInfoCard';
 
 const Admin = () => {
   const [activeComponent, setActiveComponent] = useState(null);
-  const [selectUser, setSelectUser] = useState(false);
-  const [userData, setUserData] = useState(true); // set this to null when api is ready
 
   // Mapping buttons to components
   const componentsMap = {
-    addPoints: <AddPoints />,
+    points: <AddPoints />,
     updateMembership: <UpdateMembership />,
     updateUserDetails: <UpdateUserDetails />,
     addRemoveMembers: <AddRemoveMembers />,
@@ -22,7 +20,7 @@ const Admin = () => {
 
   // Buttons
   const actions = [
-    { label: 'Add Points', type: 'addPoints' },
+    { label: 'Add Points', type: 'points' },
     { label: 'Update Membership', type: 'updateMembership' },
     { label: 'Update User Details', type: 'updateUserDetails' },
     { label: 'Add/Remove Members', type: 'addRemoveMembers' },
@@ -42,7 +40,7 @@ const Admin = () => {
   // Fetch user data from server
   const fetchUserData = async (username) => {
     try {
-      const response = await fetch(`/api/getUserData?username=${username}`);
+      const response = await fetch(`http://3.27.181.229/get/${activeComponent}/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found');
       }
@@ -52,6 +50,22 @@ const Admin = () => {
     } catch (err) {
       console.error("Error fetching user data:", err.message);
     }
+  };
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!username) {
+      alert('Please enter a username');
+      return;
+    }
+
+    fetchUserData(username);
   };
 
   return (
@@ -67,36 +81,25 @@ const Admin = () => {
         {actions.map((action) => (
           <button
             key={action.type}
-            className="py-2 px-4 border bg-midnightblue/10 hover:bg-midnightblue/20 rounded-lg border-midnightblue"
-            onClick={() => handleOnClick(action)}
+            className={`py-2 px-4 border rounded-lg transition-colors duration-200
+              ${activeComponent === action.type 
+                ? 'bg-midnightblue text-white border-midnightblue'
+                : 'bg-midnightblue/10 hover:bg-midnightblue/20 border-midnightblue'
+              }`}
+            onClick={() => setActiveComponent(action.type)}
           >
             {action.label}
           </button>
         ))}
       </div>
 
-      {/* Context section */}
-      <div className="py-4 flex flex-col md:flex-row">
-        <div className='md:w-1/3'>
-          {/* Select user component */}
-          {selectUser && (
-            <EditInfoCard fetchUserData={fetchUserData} />
-          )}
-        </div>
-
-        {/* Render the active component */}
-        <div className='md:w-2/3'>
-          {userData && componentsMap[activeComponent]}
-        </div>
-
-        {/* Display user data if available */}
-        {/* {userData && (
-          <div className="mt-4">
-            <h3>User Data:</h3>
-            <pre>{JSON.stringify(userData, null, 2)}</pre>
-          </div>
-        )} */}
+      {/* Render the active component */}
+      <div className='md:w-2/3'>
+        {activeComponent && componentsMap[activeComponent]}
       </div>
+
+      {/* Content section */}
+      
     </div>
   );
 };
