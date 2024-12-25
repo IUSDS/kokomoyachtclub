@@ -22,29 +22,29 @@ const MembershipPage = () => {
     const username = localStorage.getItem("username");
 
     if (!username) {
-        setError("No username found. Please log in again.");
-        setLoading(false);
-        return;
+      setError("No username found. Please log in again.");
+      setLoading(false);
+      return;
     }
 
     try {
-        const response = await fetch(`http://3.27.181.229/user-details?username=${username}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        });
+      const response = await fetch(`http://3.27.181.229/user-details?username=${username}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
 
-        if (response.ok) {
-            const data = await response.json();
-            setMemberDetails(data);
-        } else {
-            setError("Failed to fetch member details");
-        }
+      if (response.ok) {
+        const data = await response.json();
+        setMemberDetails(data);
+      } else {
+        setError("Failed to fetch member details");
+      }
     } catch (error) {
-        setError("An error occurred while fetching member details");
+      setError("An error occurred while fetching member details");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   useEffect(() => {
     fetchMemberDetails(); // Fetch member details on component mount
@@ -75,18 +75,36 @@ const MembershipPage = () => {
       <div className="font-semibold md:text-3xl text-xl mt-4">Welcome</div>
 
       {/* Member Info and Date Selection */}
-      <div className="flex flex-col w-full md:flex-row justify-between md:px-36 items-center gap-4">
-        <div className="flex flex-col justify-center items-center my-2 w-full">
+      <div className="flex flex-col w-full md:flex-row justify-center md:px-36 items-center gap-4">
+        <div className="flex flex-col justify-center items-center my-2 md:w-2/3">
           {/* Member Info Section */}
           {memberDetails ? (
-            <div>
-              <h3>{memberDetails.full_name}</h3>
-              <p>Membership Type: {memberDetails.membership_type}</p>
-              <p>Points: {memberDetails.points}</p>
-              {/* Render profile picture if available */}
-              {memberDetails.picture_url && (
-                <img src={memberDetails.picture_url} alt="Member" />
-              )}
+            <div className="bg-white md:w-full p-6">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
+
+                <div className="flex items-center space-x-2 justify-center md:justify-start">
+                  <span className="text-sm text-gray-500">Membership Type:</span>
+                  <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+                    {memberDetails.membership_type}
+                  </span>
+                </div>
+
+                <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
+                  <p className="text-sm font-medium text-gray-500">Points Balance</p>
+                  <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
+                </div>
+
+                {memberDetails.picture_url && (
+                  <div className="mt-4">
+                    <img
+                      src={memberDetails.picture_url}
+                      alt="Member"
+                      className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
             <div>No member data available</div>

@@ -3,7 +3,7 @@ import hero_image from "../assets/images/hero.png";
 import { useNavigate } from "react-router-dom";
 
 const login = () => {
-  const [USER, setUser] = useState(""); // Changed from 'id' to 'USER'
+  const [USER, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const login = () => {
                 navigate("/admin");
             }
         } else {
-            setErrorMessage(data.detail || data.status || "Invalid credentials");
+            setErrorMessage("Invalid credentials");
         }
     } catch (error) {
         setErrorMessage("Unable to login. Please try again later.");
