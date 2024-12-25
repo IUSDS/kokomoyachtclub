@@ -4,7 +4,6 @@ import UpdateMembership from '../components/updateMembershipForm';
 import UpdateUserDetails from '../components/updateUserDetailsForm';
 import AddRemoveMembers from '../components/addremoveMembersForm';
 import CreateInvoice from '../components/createInvoiceForm';
-import EditInfoCard from '../components/editInfoCard';
 
 const Admin = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -52,22 +51,6 @@ const Admin = () => {
     }
   };
 
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!username) {
-      alert('Please enter a username');
-      return;
-    }
-
-    fetchUserData(username);
-  };
-
   return (
     <div className="flex flex-col space-y-4 text-midnightblue px-16">
       <h1 className="text-center md:text-left font-bold mt-8 text-2xl md:text-4xl">
@@ -94,12 +77,9 @@ const Admin = () => {
       </div>
 
       {/* Render the active component */}
-      <div className='md:w-2/3'>
+      <div className=''>
         {activeComponent && componentsMap[activeComponent]}
       </div>
-
-      {/* Content section */}
-      
     </div>
   );
 };
