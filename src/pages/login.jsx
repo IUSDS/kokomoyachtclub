@@ -10,33 +10,29 @@ const login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://3.27.181.229/validate-user/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ USER, password }), // Sending USER and password
-      });
+        const response = await fetch("http://3.27.181.229/validate-user/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ USER, password }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
+        if (response.ok && data.status === "success") {
+            localStorage.setItem("username", USER); // Save the username
+            setErrorMessage("");
 
-      // console.log(data);
-
-      if (response.ok) {
-        // If successful
-        console.log("Login successful!", data);
-        localStorage.setItem("token", data.token || "");
-        setErrorMessage(""); // Clear any error message
-        // alert("Login successful!");
-        data.user_type === 'user' ? navigate('/membership') : navigate('/admin');
-      } else {
-        // Handle login failure
-        console.error("Login failed:", data.detail || data.status);
-        setErrorMessage(data.detail || data.status || "Invalid credentials"); // Set error message
-      }
+            if (data.user_type === "user") {
+                navigate("/membership");
+            } else if (data.user_type === "admin") {
+                navigate("/admin");
+            }
+        } else {
+            setErrorMessage(data.detail || data.status || "Invalid credentials");
+        }
     } catch (error) {
-      console.error("An error occurred during login:", error);
-      alert("Unable to login. Please try again later.");
+        setErrorMessage("Unable to login. Please try again later.");
     }
-  };
+};
 
   return (
     <>
