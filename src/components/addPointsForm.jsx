@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import imgIcon from '../assets/images/imageIcon.png';
 
 const AddPointsForm = () => {
   const [username, setUsername] = useState('');
@@ -28,12 +29,48 @@ const AddPointsForm = () => {
     // put this section under 
     // setSuccessMessage(true);
     // // Reset form after submission (optional)
-    // setTimeout(() => {
-    //   setSuccessMessage(false);
-    //   setUsername('');
-    //   setPoints('');
-    // }, 3000);
+
   };
+
+  const handleSave = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('username', username);       // Backend expects `username`
+      formData.append('add_points', Number(points)); // Backend expects `add_points`
+
+      const response = await fetch('http://3.27.181.229/update/update-points/', {
+        method: 'PUT',
+        headers: {
+          'accept': 'application/json', // Include this as Swagger specifies it
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to update points');
+      }
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        console.log('Points updated successfully:', data.message);
+        setSuccessMessage(true);
+        setTimeout(() => {
+          setSuccessMessage(false);
+          setUsername('');
+          setPoints('');
+        }, 3000);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error updating points:', error);
+      alert('Failed to update points. Please try again.');
+    }
+  };
+
+
 
   const handleCancel = () => {
     setUsername('');
@@ -42,12 +79,17 @@ const AddPointsForm = () => {
   };
 
   return (
-    <div className='flex flex-col md:flex-row'>
-      <div className="flex flex-col items-center">
-        {/* Username section */}
-        <div className="bg-white shadow-lg rounded-2xl p-6 w-fit h-fit">
-          <h2 className="text-lg font-semibold mb-4">Select user to proceed</h2>
+    <div className='flex flex-col md:flex-row gap-4'>
+      {/* User details section */}
+      <div className="flex flex-col items-center md:w-1/2 md:pl-5 md:py-2 gap-4">
+        {/* Select Username section */}
+        <div className="bg-white shadow-lg rounded-2xl p-6 w-full md:h-40">
+          <h2 className="text-lg font-semibold mb-4 text-center md:text-left">Add points to user profile</h2>
           <div className="flex flex-col md:flex-row md:items-end gap-4">
+            {/* Image */}
+            <div className='flex justify-center'>
+              <img src={imgIcon} alt="" className='w-[50px]' />
+            </div>
             {/* Form */}
             <div className="">
               <input
@@ -71,14 +113,31 @@ const AddPointsForm = () => {
 
         {/* user data section */}
         {userData && (
-          <div className="flex flex-col my-4 py-1">
-            <div className="flex justify-between items-center space-x-8">
-              <span className="text-gray-600 font-medium">Username</span>
-              <span className="text-gray-900 font-semibold">{userData.username}</span>
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-2xl">
+            {/* Table Header */}
+            <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-center md:text-left text-midnightblue">User Details</h3>
             </div>
-            <div className="flex justify-between items-center space-x-8">
-              <span className="text-gray-600 font-medium">Points</span>
-              <span className="text-gray-900 font-semibold">{userData.points}</span>
+
+            {/* Table Content */}
+            <div className="divide-y divide-gray-200">
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Username</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.username}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Points</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.points}</span>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -87,8 +146,8 @@ const AddPointsForm = () => {
 
       {/* main components section */}
       {userData && (
-        <div className="max-w-xl md:mx-10 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
-          <h2 className="text-xl font-semibold flex items-center">
+        <div className="md:w-1/2 md:mx-5 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
+          <h2 className="text-xl font-semibold flex items-center text-center md:text-left">
             Add Points to User Profile{' '}
             {successMessage && (
               <span className="ml-4 text-green-500 text-sm font-medium">
@@ -99,7 +158,7 @@ const AddPointsForm = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Points Field */}
             <div className="flex flex-col space-y-1">
-              <label className=" font-medium">Points Details</label>
+              <label className="text-center md:text-left font-medium">Points Details</label>
               <input
                 type="number"
                 placeholder="Enter points"
@@ -110,9 +169,10 @@ const AddPointsForm = () => {
             </div>
 
             {/* Buttons */}
-            <div className="flex space-x-4">
+            <div className="flex justify-center md:justify-start space-x-4">
               <button
                 type="submit"
+                onClick={handleSave}
                 className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
               >
                 Save
