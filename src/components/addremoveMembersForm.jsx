@@ -1,80 +1,241 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const AddRemoveMembersForm = () => {
-    const [username, setUsername] = useState('');
-    const [action, setAction] = useState('add');
-    const [successMessage, setSuccessMessage] = useState(false);
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setSuccessMessage(true);
-  
-      setTimeout(() => {
-        setSuccessMessage(false);
-        setUsername('');
-        setAction('add');
-      }, 3000);
-    };
-  
-    const handleCancel = () => {
-      setUsername('');
-      setAction('add');
-      setSuccessMessage(false);
-    };
-  
-    return (
-      <div className="max-w-xl md:mx-10 text-black mx-auto bg-white p-6 rounded-2xl shadow-md space-y-6">
-        <h2 className="text-xl font-semibold flex items-center">
-          Add/Remove Members{' '}
-          {successMessage && (
-            <span className="ml-4 text-green-500 text-sm font-medium">
-              ✓ Successfully Updated
-            </span>
-          )}
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col space-y-1">
-            <label className="font-medium">Username</label>
-            <input
-              type="text"
-              placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-500"
-            />
-          </div>
-  
-          <div className="flex flex-col space-y-1">
-            <label className="font-medium">Action</label>
-            <select
-              value={action}
-              onChange={(e) => setAction(e.target.value)}
-              className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-gray-500"
-            >
-              <option value="add">Add Member</option>
-              <option value="remove">Remove Member</option>
-            </select>
-          </div>
-  
-          <div className="flex space-x-4">
-            <button
-              type="submit"
-              className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-    );
-  };
-  
+  const [activeComponent, setActiveComponent] = useState(null);
+  const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [membershipType, setMembershipType] = useState('');
+  const [points, setPoints] = useState('');
+  const [pictureUrl, setPictureUrl] = useState('');
+  const [successMessage, setSuccessMessage] = useState(false);
 
-export default AddRemoveMembersForm
+  const actions = [
+    { label: 'Add Member', type: 'addMember' },
+    { label: 'Remove Member', type: 'removeMember' },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (activeComponent === 'addMember') {
+      handleAddMember();
+    } else if (activeComponent === 'removeMember') {
+      handleRemoveMember();
+    }
+    setSuccessMessage(true);
+
+    setTimeout(() => {
+      setSuccessMessage(false);
+      setUsername('');
+      setFirstName('');
+      setLastName('');
+      setPassword('');
+      setAddress('');
+      setPhoneNumber('');
+      setEmail('');
+      setMembershipType('');
+      setPoints('');
+      setPictureUrl('');
+    }, 3000);
+  };
+
+  const handleCancel = () => {
+    setUsername('');
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+    setAddress('');
+    setPhoneNumber('');
+    setEmail('');
+    setMembershipType('');
+    setPoints('');
+    setPictureUrl('');
+    setSuccessMessage(false);
+  };
+
+  const handleRemoveMember = async () => {
+    try {
+      const formData = new URLSearchParams();
+      formData.append('username', username);
+
+      const response = await fetch('http://3.27.181.229/update/delete/', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'accept': 'application/json',
+        },
+        body: formData.toString(),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message || 'Member removed successfully!');
+        handleCancel(); // Clear the form
+      } else {
+        alert(result.message || 'Failed to remove member. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error removing member:', error);
+      alert('Failed to remove member. Please try again.');
+    }
+  };
+
+
+
+  const handleAddMember = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('password', password);
+      formData.append('first_name', firstName);
+      formData.append('last_name', lastName);
+      formData.append('phone_number', phoneNumber);
+      formData.append('address', address);
+      formData.append('email_id', email);
+      formData.append('membership_type', membershipType);
+      formData.append('points', points);
+      formData.append('picture_url', pictureUrl);
+
+      const response = await fetch('http://3.27.181.229/create-member/add-member/', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message || 'Member added successfully!');
+        handleCancel(); // Clear the form
+      } else {
+        alert(result.message || 'Failed to add member. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error adding member:', error);
+      alert('Failed to add member. Please try again.');
+    }
+  };
+
+
+  return (
+    <div className='flex flex-col md:flex-row'>
+      {/* Select action */}
+      <div className="md:w-1/2 h-fit md:mx-2 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
+        <h2 className="text-xl font-semibold flex text-center md:text-left items-center">
+          Add/Remove Members
+        </h2>
+        <div className="flex gap-2 flex-col md:flex-row">
+          {actions.map((action) => (
+            <button
+              key={action.type}
+              className={`p-4 border rounded-lg transition-colors duration-200
+              ${activeComponent === action.type
+                  ? 'bg-midnightblue text-white border-midnightblue'
+                  : 'bg-midnightblue/10 hover:bg-midnightblue/20 border-midnightblue'
+                }`}
+              onClick={() => setActiveComponent(action.type)}
+            >
+              {action.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Action Section */}
+      {activeComponent && (
+        <div className="md:w-1/2 md:mx-2 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
+          {activeComponent === 'addMember' && (
+            <div className='space-y-4'>
+              <h3 className="text-lg font-medium flex flex-col md:flex-row">
+                Add Member
+                {successMessage && (
+                  <span className="ml-4 text-green-500 text-sm font-medium">
+                    ✓ Successfully Updated
+                  </span>
+                )}
+              </h3>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Input fields */}
+                {[
+                  { label: 'Username', value: username, setter: setUsername },
+                  { label: 'First Name', value: firstName, setter: setFirstName },
+                  { label: 'Last Name', value: lastName, setter: setLastName },
+                  { label: 'Password', value: password, setter: setPassword, type: 'password' },
+                  { label: 'Address', value: address, setter: setAddress },
+                  { label: 'Phone Number', value: phoneNumber, setter: setPhoneNumber },
+                  { label: 'Email', value: email, setter: setEmail, type: 'email' },
+                  { label: 'Membership Type', value: membershipType, setter: setMembershipType },
+                  { label: 'Points', value: points, setter: setPoints, type: 'number' },
+                  { label: 'Picture URL', value: pictureUrl, setter: setPictureUrl },
+                ].map(({ label, value, setter, type = 'text' }) => (
+                  <div className='flex flex-col px-2' key={label}>
+                    <p className='text-sm'>{label}</p>
+                    <input
+                      type={type}
+                      value={value}
+                      onChange={(e) => setter(e.target.value)}
+                      placeholder={`Enter ${label.toLowerCase()}`}
+                      className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+                    />
+                  </div>
+                ))}
+
+                {/* Buttons */}
+                <div className="flex justify-end my-4 space-x-2">
+                  <button
+                    type="button"
+                    className="p-3 bg-gray-200 rounded-md"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="p-3 bg-midnightblue text-white rounded-md"
+                  >
+                    Add Member
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+          {activeComponent === 'removeMember' && (
+            <div className='space-y-4'>
+              <h3 className="text-lg font-medium">Remove a Member</h3>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter username"
+                  className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+                />
+                <div className="flex justify-end space-x-2 mt-4">
+                  <button
+                    type="button"
+                    className="p-3 bg-gray-200 rounded-md"
+                    onClick={handleCancel}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="p-3 bg-red-600 text-white rounded-md"
+                  >
+                    Remove Member
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AddRemoveMembersForm;

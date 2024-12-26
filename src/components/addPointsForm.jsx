@@ -26,7 +26,7 @@ const AddPointsForm = () => {
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
     try {
       const formData = new FormData();
       formData.append('username', username); 
@@ -50,6 +50,7 @@ const AddPointsForm = () => {
       if (data.status === "success") {
         console.log('Points updated successfully:', data.message);
         setSuccessMessage(true);
+        handleSubmit(e);
         setTimeout(() => {
           setSuccessMessage(false);
           setPoints('');
@@ -164,16 +165,15 @@ const AddPointsForm = () => {
             {/* Buttons */}
             <div className="flex justify-center md:justify-start space-x-4">
               <button
-                type="submit"
                 onClick={handleSave}
-                className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
+                className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
               >
                 Save
               </button>
               <button
                 type="button"
                 onClick={handleCancel}
-                className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
+                className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
               >
                 Cancel
               </button>

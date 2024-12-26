@@ -167,14 +167,14 @@ const AddPointsForm = () => {
               <button
                 type="submit"
                 onClick={handleSave}
-                className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
+                className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
               >
                 Save
               </button>
               <button
                 type="button"
                 onClick={handleCancel}
-                className="px-4 py-1 text-black border-black border rounded-md hover:bg-gray-200"
+                className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
               >
                 Cancel
               </button>
