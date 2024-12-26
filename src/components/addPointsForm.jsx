@@ -13,7 +13,6 @@ const AddPointsForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate API call or form submission logic
     try {
       const response = await fetch(`http://3.27.181.229/get/points/?username=${username}`);
       if (!response.ok) {
@@ -25,23 +24,18 @@ const AddPointsForm = () => {
     } catch (err) {
       console.error("Error fetching user data:", err.message);
     }
-
-    // put this section under 
-    // setSuccessMessage(true);
-    // // Reset form after submission (optional)
-
   };
 
   const handleSave = async () => {
     try {
       const formData = new FormData();
-      formData.append('username', username);       // Backend expects `username`
-      formData.append('add_points', Number(points)); // Backend expects `add_points`
+      formData.append('username', username); 
+      formData.append('add_points', Number(points));
 
       const response = await fetch('http://3.27.181.229/update/update-points/', {
         method: 'PUT',
         headers: {
-          'accept': 'application/json', // Include this as Swagger specifies it
+          'accept': 'application/json',
         },
         body: formData,
       });
@@ -58,7 +52,6 @@ const AddPointsForm = () => {
         setSuccessMessage(true);
         setTimeout(() => {
           setSuccessMessage(false);
-          setUsername('');
           setPoints('');
         }, 3000);
       } else {
@@ -147,8 +140,8 @@ const AddPointsForm = () => {
       {/* main components section */}
       {userData && (
         <div className="md:w-1/2 md:mx-5 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
-          <h2 className="text-xl font-semibold flex items-center text-center md:text-left">
-            Add Points to User Profile{' '}
+          <h2 className="text-xl font-semibold flex flex-col md:flex-row items-center text-center md:text-left">
+            Add Points to User Profile{``}
             {successMessage && (
               <span className="ml-4 text-green-500 text-sm font-medium">
                 ✓ Successfully Updated

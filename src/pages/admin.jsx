@@ -10,7 +10,7 @@ const Admin = () => {
 
   // Mapping buttons to components
   const componentsMap = {
-    points: <AddPoints />,
+    addPoints: <AddPoints />,
     updateMembership: <UpdateMembership />,
     updateUserDetails: <UpdateUserDetails />,
     addRemoveMembers: <AddRemoveMembers />,
@@ -19,7 +19,7 @@ const Admin = () => {
 
   // Buttons
   const actions = [
-    { label: 'Add Points', type: 'points' },
+    { label: 'Add Points', type: 'addPoints' },
     { label: 'Update Membership', type: 'updateMembership' },
     { label: 'Update User Details', type: 'updateUserDetails' },
     { label: 'Add/Remove Members', type: 'addRemoveMembers' },
@@ -33,21 +33,6 @@ const Admin = () => {
       setActiveComponent(action.type);
     } catch (e) {
       console.error("Error handling click:", e);
-    }
-  };
-
-  // Fetch user data from server
-  const fetchUserData = async (username) => {
-    try {
-      const response = await fetch(`http://3.27.181.229/get/${activeComponent}/?username=${username}`);
-      if (!response.ok) {
-        throw new Error('User not found');
-      }
-      const data = await response.json();
-      console.log(data);
-      setUserData(data);
-    } catch (err) {
-      console.error("Error fetching user data:", err.message);
     }
   };
 
