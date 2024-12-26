@@ -18,7 +18,7 @@ const UpdateUserDetailsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://3.27.181.229/get/user-details/?username=${username}`);
+      const response = await fetch(`http://3.27.181.229/user-details/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found');
       }
@@ -45,7 +45,7 @@ const UpdateUserDetailsForm = () => {
       <div className="flex flex-col items-center md:w-1/2 md:pl-5 md:py-2 gap-4">
         {/* Select Username section */}
         <div className="bg-white shadow-lg rounded-2xl p-6 w-full md:h-40">
-          <h2 className="text-lg font-semibold mb-4 text-center md:text-left">Add points to user profile</h2>
+          <h2 className="text-lg font-semibold mb-4 text-center md:text-left">Update user details</h2>
           <div className="flex flex-col md:flex-row md:items-end gap-4">
             {/* Image */}
             <div className='flex justify-center'>
@@ -87,7 +87,7 @@ const UpdateUserDetailsForm = () => {
                   <span className="text-sm font-medium text-gray-600">Username</span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
-                  <span className="text-sm text-gray-900">{userData.username}</span>
+                  <span className="text-sm text-gray-900">{userData.full_name}</span>
                 </div>
               </div>
 

@@ -140,7 +140,7 @@ const AddPointsForm = () => {
 
       {/* main components section */}
       {userData && (
-        <div className="md:w-1/2 md:mx-5 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
+        <div className="md:w-1/2 h-fit md:mx-5 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
           <h2 className="text-xl font-semibold flex flex-col md:flex-row items-center text-center md:text-left">
             Add Points to User Profile{``}
             {successMessage && (

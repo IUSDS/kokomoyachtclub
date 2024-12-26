@@ -110,7 +110,7 @@ const AddRemoveMembersForm = () => {
 
       if (response.ok) {
         alert(result.message || 'Member added successfully!');
-        handleCancel(); // Clear the form
+        handleCancel();
       } else {
         alert(result.message || 'Failed to add member. Please try again.');
       }
@@ -168,27 +168,42 @@ const AddRemoveMembersForm = () => {
                   { label: 'Address', value: address, setter: setAddress },
                   { label: 'Phone Number', value: phoneNumber, setter: setPhoneNumber },
                   { label: 'Email', value: email, setter: setEmail, type: 'email' },
-                  { label: 'Membership Type', value: membershipType, setter: setMembershipType },
+                  { label: 'Membership Type', value: membershipType, setter: setMembershipType, isDropdown: true },
                   { label: 'Points', value: points, setter: setPoints, type: 'number' },
                   { label: 'Picture URL', value: pictureUrl, setter: setPictureUrl },
-                ].map(({ label, value, setter, type = 'text' }) => (
-                  <div className='flex flex-col px-2' key={label}>
-                    <p className='text-sm'>{label}</p>
-                    <input
-                      type={type}
-                      value={value}
-                      onChange={(e) => setter(e.target.value)}
-                      placeholder={`Enter ${label.toLowerCase()}`}
-                      className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
-                    />
+                ].map(({ label, value, setter, type = 'text', isDropdown }) => (
+                  <div className="flex flex-col px-2" key={label}>
+                    <p className="text-sm">{label}</p>
+                    {isDropdown ? (
+                      <select
+                        value={value}
+                        onChange={(e) => setter(e.target.value)}
+                        className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+                      >
+                        <option value="">Select {label}</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinum">Platinum</option>
+                        <option value="Premium">Premium</option>
+                      </select>
+                    ) : (
+                      <input
+                        type={type}
+                        value={value}
+                        onChange={(e) => setter(e.target.value)}
+                        placeholder={`Enter ${label.toLowerCase()}`}
+                        className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+                      />
+                    )}
                   </div>
                 ))}
+
 
                 {/* Buttons */}
                 <div className="flex justify-end my-4 space-x-2">
                   <button
                     type="button"
-                    className="p-3 bg-gray-200 rounded-md"
+                    className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
                     onClick={handleCancel}
                   >
                     Cancel
