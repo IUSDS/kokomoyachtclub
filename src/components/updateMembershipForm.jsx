@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import imgIcon from '../assets/images/imageIcon.png';
+import { API_URL } from '../constant';
 
 const AddPointsForm = () => {
   const [username, setUsername] = useState('');
@@ -14,7 +15,7 @@ const AddPointsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://3.27.181.229/get/membership/?username=${username}`);
+      const response = await fetch(`${API_URL}/get/membership/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found');
       }
@@ -32,7 +33,7 @@ const AddPointsForm = () => {
       formData.append('username', username);
       formData.append('membership_type', membershipType);
 
-      const response = await fetch('http://3.27.181.229/update/membership/', {
+      const response = await fetch(`${API_URL}/update/membership/`, {
         method: 'PUT',
         headers: {
           'accept': 'application/json',

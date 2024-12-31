@@ -61,6 +61,8 @@ const Admin = () => {
         ))}
       </div>
 
+      <hr className='border-t-2 border-midnightblue' />
+
       {/* Render the active component */}
       <div className=''>
         {activeComponent && componentsMap[activeComponent]}

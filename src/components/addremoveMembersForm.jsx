@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { API_URL } from '../constant';
 
 const AddRemoveMembersForm = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -62,7 +63,7 @@ const AddRemoveMembersForm = () => {
       const formData = new URLSearchParams();
       formData.append('username', username);
 
-      const response = await fetch('http://3.27.181.229/update/delete/', {
+      const response = await fetch(`${API_URL}/update/delete/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -101,7 +102,7 @@ const AddRemoveMembersForm = () => {
       formData.append('points', points);
       formData.append('picture_url', pictureUrl);
 
-      const response = await fetch('http://3.27.181.229/create-member/add-member/', {
+      const response = await fetch(`${API_URL}/create-member/add-member/`, {
         method: 'POST',
         body: formData,
       });

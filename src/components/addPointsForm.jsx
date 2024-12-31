@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import imgIcon from '../assets/images/imageIcon.png';
+import { imgIcon } from '../assets/images';
+import { API_URL } from '../constant';
+
 
 const AddPointsForm = () => {
   const [username, setUsername] = useState('');
   const [points, setPoints] = useState('');
   const [successMessage, setSuccessMessage] = useState(false);
   const [userData, setUserData] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -14,7 +17,11 @@ const AddPointsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://3.27.181.229/get/points/?username=${username}`);
+      const response = await fetch(`${API_URL}/get/points/?username=${username}`);
+      if (response.status === 401) {
+        setErrorMessage("Invalid credentials");
+        return;
+      }
       if (!response.ok) {
         throw new Error('User not found');
       }
@@ -29,10 +36,10 @@ const AddPointsForm = () => {
   const handleSave = async (e) => {
     try {
       const formData = new FormData();
-      formData.append('username', username); 
-      formData.append('add_points', Number(points));
+      formData.append('username', username);
+      formData.append('update_points', Number(points));
 
-      const response = await fetch('http://3.27.181.229/update/update-points/', {
+      const response = await fetch(`${API_URL}/update/update-points/`, {
         method: 'PUT',
         headers: {
           'accept': 'application/json',
@@ -64,8 +71,6 @@ const AddPointsForm = () => {
     }
   };
 
-
-
   const handleCancel = () => {
     setUsername('');
     setPoints('');
@@ -95,6 +100,14 @@ const AddPointsForm = () => {
                 className="mt-1 block w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-midnightblue text-gray-600"
               />
             </div>
+
+            {/* Invalid credentials */}
+            {errorMessage && (
+              <div className="self-stretch text-red-500 text-sm">
+                {errorMessage}
+              </div>
+            )}
+
             {/* Submit Button */}
             <button
               onClick={handleSubmit}

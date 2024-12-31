@@ -1,38 +1,40 @@
 import React, { useState } from "react";
 import hero_image from "../assets/images/hero.png";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../constant";
 
 const login = () => {
-  const [USER, setUser] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-        const response = await fetch("http://3.27.181.229/validate-user/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ USER, password }),
-        });
+      const response = await fetch(`${API_URL}/validate-user/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user, password }),
+      });
 
-        const data = await response.json();
-        if (response.ok && data.status === "success") {
-            localStorage.setItem("username", USER); // Save the username
-            setErrorMessage("");
+      const data = await response.json();
+      console.log(data)
+      if (response.ok && data.status === "SUCCESS") {
+        localStorage.setItem("username", USER);
+        setErrorMessage("");
 
-            if (data.user_type === "user") {
-                navigate("/membership");
-            } else if (data.user_type === "admin") {
-                navigate("/admin");
-            }
-        } else {
-            setErrorMessage("Invalid credentials");
+        if (data.user_type === "USER") {
+          navigate("/membership");
+        } else if (data.user_type === "ADMIN") {
+          navigate("/admin");
         }
+      } else {
+        setErrorMessage("Invalid credentials");
+      }
     } catch (error) {
-        setErrorMessage("Unable to login. Please try again later.");
+      setErrorMessage("Unable to login. Please try again later.");
     }
-};
+  };
 
   return (
     <>
@@ -64,8 +66,8 @@ const login = () => {
                       className="font-plus-jakarta-sans px-3 text-mini [outline:none] bg-steelblue rounded-2xl self-stretch h-10 placeholder-gray-300"
                       type="text"
                       placeholder="User ID"
-                      value={USER} // Updated to USER
-                      onChange={(e) => setUser(e.target.value)} // Updated to setUser
+                      value={user}
+                      onChange={(e) => setUser(e.target.value)}
                     />
                     <input
                       className="font-plus-jakarta-sans px-3 text-mini [outline:none] bg-steelblue rounded-2xl self-stretch h-10 placeholder-gray-300"

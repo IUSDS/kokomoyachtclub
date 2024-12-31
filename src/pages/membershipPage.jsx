@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import img from '../assets/images/member_page.png';
+import { useNavigate } from "react-router-dom";
 import MemberInfo from '../components/memberInfo';
 import DatePicker from 'react-datepicker';
 import DateButton from "../components/dateButton";
 import ImageCard from '../components/imageCard';
-import boca from '../assets/images/boca-grande.jpg';
-import naples from '../assets/images/naples.jpg';
-import keywest from '../assets/images/keywest.jpg';
-import captiva from '../assets/images/captiva.jpg';
-import marco from '../assets/images/marco.jpg';
+import { boca, captiva, keywest, marco, memberImg, naples } from '../assets/images';
+import { API_URL } from '../constant';
+
 
 const MembershipPage = () => {
   const [calenderOpen, setCalenderOpen] = useState(false);
@@ -16,39 +14,67 @@ const MembershipPage = () => {
   const [memberDetails, setMemberDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   // Function to make the API request and get member details
-  const fetchMemberDetails = async () => {
-    const username = localStorage.getItem("username");
+  // const fetchMemberDetails = async () => {
+  //   const username = localStorage.getItem("username");
+
+  //   if (!username) {
+  //     setError("No username found. Please log in again.");
+  //     setLoading(false);
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch(`${API_URL}/user-details?username=${username}`, {
+  //       method: "GET",
+  //       headers: { "Content-Type": "application/json" },
+  //     });
+
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setMemberDetails(data);
+  //     } else {
+  //       setError("Failed to fetch member details");
+  //     }
+  //   } catch (error) {
+  //     setError("An error occurred while fetching member details");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
+  // demo function
+  const username = 'testuser_2'
+  const fetchMemberDetails = () => {
 
     if (!username) {
       setError("No username found. Please log in again.");
       setLoading(false);
       return;
     }
-
-    try {
-      const response = await fetch(`http://3.27.181.229/user-details?username=${username}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setMemberDetails(data);
-      } else {
-        setError("Failed to fetch member details");
-      }
-    } catch (error) {
-      setError("An error occurred while fetching member details");
-    } finally {
-      setLoading(false);
-    }
+    setMemberDetails({
+      full_name: 'TESTUSER_2',
+      membership_type: 'GOLD',
+      points: '1000'
+    })
+    setLoading(false);
   };
 
+
+  const handlePreviousBooking = () => {
+    navigate("previous_booking");
+  }
+
+  const handleExperience = () => {
+    navigate("plan_experiences");
+  }
+
   useEffect(() => {
-    fetchMemberDetails(); // Fetch member details on component mount
-    window.scrollTo(0, 0); // Scroll to top
+    fetchMemberDetails();
+    // window.scrollTo(0, 0);
   }, []);
 
   // Render loading state, error, or member details
@@ -64,7 +90,7 @@ const MembershipPage = () => {
     <div className="flex flex-col justify-center items-center overflow-x-hidden">
       {/* Hero Section */}
       <div className="relative">
-        <img className="w-screen h-fit object-cover" src={img} alt="Hero" />
+        <img className="w-screen h-fit object-cover" src={memberImg} alt="Hero" />
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <p className="absolute text-white font-bold top-[45%] text-center text-xl w-full md:text-6xl">
           Member Services
@@ -79,10 +105,9 @@ const MembershipPage = () => {
         <div className="flex flex-col justify-center items-center my-2 md:w-2/3">
           {/* Member Info Section */}
           {memberDetails ? (
-            <div className="bg-white md:w-full p-6">
+            <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
               <div className="space-y-4">
                 <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
-
                 <div className="flex items-center space-x-2 justify-center md:justify-start">
                   <span className="text-sm text-gray-500">Membership Type:</span>
                   <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
@@ -129,6 +154,22 @@ const MembershipPage = () => {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Buttons Section */}
+      <div className='flex flex-col md:flex-row gap-4 md:gap-8 my-8'>
+        <button
+          onClick={handleExperience}
+          className="py-4 px-6 bg-midnightblue/90 text-white rounded-lg hover:bg-midnightblue shadow-lg"
+        >
+          PLAN YOUR EXPERIENCE
+        </button>
+        <button
+          onClick={handlePreviousBooking}
+          className="py-4 px-6 bg-midnightblue/90 text-white rounded-lg hover:bg-midnightblue shadow-lg"
+        >
+          CHECK PREVIOUS BOOKINGS
+        </button>
       </div>
 
       {/* Overnight Cruising Adventures */}
