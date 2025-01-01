@@ -12,7 +12,7 @@ const AddRemoveMembersForm = () => {
   const [email, setEmail] = useState('');
   const [membershipType, setMembershipType] = useState('');
   const [points, setPoints] = useState('');
-  const [pictureUrl, setPictureUrl] = useState('');
+  const [picture, setPicture] = useState(null);
   const [successMessage, setSuccessMessage] = useState(false);
 
   const actions = [
@@ -40,7 +40,7 @@ const AddRemoveMembersForm = () => {
       setEmail('');
       setMembershipType('');
       setPoints('');
-      setPictureUrl('');
+      setPicture('');
     }, 3000);
   };
 
@@ -54,7 +54,7 @@ const AddRemoveMembersForm = () => {
     setEmail('');
     setMembershipType('');
     setPoints('');
-    setPictureUrl('');
+    setPicture('');
     setSuccessMessage(false);
   };
 
@@ -86,6 +86,10 @@ const AddRemoveMembersForm = () => {
     }
   };
 
+  const handlePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) setPicture(file);
+  };
 
 
   const handleAddMember = async () => {
@@ -100,7 +104,7 @@ const AddRemoveMembersForm = () => {
       formData.append('email_id', email);
       formData.append('membership_type', membershipType);
       formData.append('points', points);
-      formData.append('picture_url', pictureUrl);
+      if (picture) formData.append('file', picture);
 
       const response = await fetch(`${API_URL}/create-member/add-member/`, {
         method: 'POST',
@@ -146,10 +150,10 @@ const AddRemoveMembersForm = () => {
         </div>
       </div>
 
-      {/* Action Section */}
-      {activeComponent && (
-        <div className="md:w-1/2 md:mx-2 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
-          {activeComponent === 'addMember' && (
+      {/* Active Section */}
+      {activeComponent === 'addMember' && (
+        <div className="md:w-1/2 md:mx-2 md:my-2 my-4 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
+          {activeComponent && (
             <div className='space-y-4'>
               <h3 className="text-lg font-medium flex flex-col md:flex-row">
                 Add Member
@@ -171,8 +175,8 @@ const AddRemoveMembersForm = () => {
                   { label: 'Email', value: email, setter: setEmail, type: 'email' },
                   { label: 'Membership Type', value: membershipType, setter: setMembershipType, isDropdown: true },
                   { label: 'Points', value: points, setter: setPoints, type: 'number' },
-                  { label: 'Picture URL', value: pictureUrl, setter: setPictureUrl },
-                ].map(({ label, value, setter, type = 'text', isDropdown }) => (
+                  { label: 'Picture', value: picture, setter: setPicture, isFile: true },
+                ].map(({ label, value, setter, type = 'text', isDropdown, isFile }) => (
                   <div className="flex flex-col px-2" key={label}>
                     <p className="text-sm">{label}</p>
                     {isDropdown ? (
@@ -187,6 +191,17 @@ const AddRemoveMembersForm = () => {
                         <option value="Platinum">Platinum</option>
                         <option value="Premium">Premium</option>
                       </select>
+                    ) : isFile ? (
+                      <div>
+                        <label htmlFor="picture">Upload Picture</label>
+                        <input
+                          type="file"
+                          id="picture"
+                          accept="image/*"
+                          onChange={handlePictureChange}
+                          className="file-input"
+                        />
+                      </div>
                     ) : (
                       <input
                         type={type}
@@ -196,6 +211,7 @@ const AddRemoveMembersForm = () => {
                         className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
                       />
                     )}
+
                   </div>
                 ))}
 
@@ -219,35 +235,35 @@ const AddRemoveMembersForm = () => {
               </form>
             </div>
           )}
-          {activeComponent === 'removeMember' && (
-            <div className='space-y-4'>
-              <h3 className="text-lg font-medium">Remove a Member</h3>
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter username"
-                  className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
-                />
-                <div className="flex justify-end space-x-2 mt-4">
-                  <button
-                    type="button"
-                    className="p-3 bg-gray-200 rounded-md"
-                    onClick={handleCancel}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="p-3 bg-red-600 text-white rounded-md"
-                  >
-                    Remove Member
-                  </button>
-                </div>
-              </form>
+        </div>
+      )}
+      {activeComponent === 'removeMember' && (
+        <div className='md:w-1/2 Nmd:mx-2 md:my-2 my-4 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6'>
+          <h3 className="text-lg font-medium">Remove a Member</h3>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username"
+              className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+            />
+            <div className="flex justify-end space-x-2 mt-4">
+              <button
+                type="button"
+                className="p-3 bg-gray-200 rounded-md"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="p-3 bg-red-600 text-white rounded-md"
+              >
+                Remove Member
+              </button>
             </div>
-          )}
+          </form>
         </div>
       )}
     </div>

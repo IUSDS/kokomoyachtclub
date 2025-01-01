@@ -122,14 +122,14 @@ const AddPointsForm = () => {
         {userData && (
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-2xl">
             {/* Table Header */}
-            <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
+            <div className="px-6 py-3 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-center md:text-left text-midnightblue">User Details</h3>
             </div>
 
             {/* Table Content */}
             <div className="divide-y divide-gray-200">
-              <div className="flex hover:bg-gray-50">
-                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+              <div className="flex">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
                   <span className="text-sm font-medium text-gray-600">Username</span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
@@ -137,8 +137,8 @@ const AddPointsForm = () => {
                 </div>
               </div>
 
-              <div className="flex hover:bg-gray-50">
-                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+              <div className="flex">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
                   <span className="text-sm font-medium text-gray-600">Points</span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">

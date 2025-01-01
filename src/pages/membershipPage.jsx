@@ -16,7 +16,7 @@ const MembershipPage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Function to make the API request and get member details
+  // // Function to make the API request and get member details
   // const fetchMemberDetails = async () => {
   //   const username = localStorage.getItem("username");
 

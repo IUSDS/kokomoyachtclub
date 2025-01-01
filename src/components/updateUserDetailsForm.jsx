@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import imgIcon from '../assets/images/imageIcon.png';
+import { API_URL } from '../constant';
 
 const UpdateUserDetailsForm = () => {
   const [username, setUsername] = useState('');
