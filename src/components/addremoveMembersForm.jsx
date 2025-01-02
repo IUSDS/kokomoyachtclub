@@ -93,6 +93,7 @@ const AddRemoveMembersForm = () => {
 
 
   const handleAddMember = async () => {
+    console.log("in handleAddMember")
     try {
       const formData = new FormData();
       formData.append('username', username);
@@ -112,6 +113,7 @@ const AddRemoveMembersForm = () => {
       });
 
       const result = await response.json();
+      console.log(result);
 
       if (response.ok) {
         alert(result.message || 'Member added successfully!');
@@ -124,7 +126,6 @@ const AddRemoveMembersForm = () => {
       alert('Failed to add member. Please try again.');
     }
   };
-
 
   return (
     <div className='flex flex-col md:flex-row'>

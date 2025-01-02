@@ -8,7 +8,7 @@ const AddPointsForm = () => {
   const [points, setPoints] = useState('');
   const [successMessage, setSuccessMessage] = useState(false);
   const [userData, setUserData] = useState(null);
-    const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -29,7 +29,13 @@ const AddPointsForm = () => {
       console.log(data);
       setUserData(data);
     } catch (err) {
+      setErrorMessage("User not found!")
       console.error("Error fetching user data:", err.message);
+      setTimeout(() => {
+        setUsername('');
+        setErrorMessage('');
+        setUserData(null);
+      },4000);
     }
   };
 
@@ -49,6 +55,7 @@ const AddPointsForm = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
+        setErrorMessage('Failed to update points');
         throw new Error(errorData.detail || 'Failed to update points');
       }
 
@@ -61,19 +68,30 @@ const AddPointsForm = () => {
         setTimeout(() => {
           setSuccessMessage(false);
           setPoints('');
-        }, 3000);
+        },3000);
       } else {
-        alert(data.message);
+        setErrorMessage(data.message);
+        setTimeout(() => {
+          setErrorMessage('');
+          setUsername('');
+          setUserData(null);
+        },3000);
       }
     } catch (error) {
       console.error('Error updating points:', error);
-      alert('Failed to update points. Please try again.');
+      setErrorMessage('Failed to update points. Please try again.');
+      setTimeout(() => {
+        setUsername('');
+        setErrorMessage('');
+        setUserData(null);
+      },4000);
     }
   };
 
   const handleCancel = () => {
     setUsername('');
     setPoints('');
+    setUserData(null);
     setSuccessMessage(false);
   };
 
@@ -84,7 +102,7 @@ const AddPointsForm = () => {
         {/* Select Username section */}
         <div className="bg-white shadow-lg rounded-2xl p-6 w-full md:h-40">
           <h2 className="text-lg font-semibold mb-4 text-center md:text-left">Add points to user profile</h2>
-          <div className="flex flex-col md:flex-row md:items-end gap-4">
+          <div className="flex flex-col md:flex-row md:items-center gap-4">
             {/* Image */}
             <div className='flex justify-center'>
               <img src={imgIcon} alt="" className='w-[50px]' />
@@ -101,9 +119,9 @@ const AddPointsForm = () => {
               />
             </div>
 
-            {/* Invalid credentials */}
+            {/* Error message */}
             {errorMessage && (
-              <div className="self-stretch text-red-500 text-sm">
+              <div className="self-stretch text-red-500 text-sm mx-auto md:mx-0 md:mt-4">
                 {errorMessage}
               </div>
             )}
@@ -158,7 +176,7 @@ const AddPointsForm = () => {
             Add Points to User Profile{``}
             {successMessage && (
               <span className="ml-4 text-green-500 text-sm font-medium">
-                ✓ Successfully Updated
+                Successfully Updated ✓
               </span>
             )}
           </h2>

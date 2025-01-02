@@ -16,52 +16,51 @@ const MembershipPage = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // // Function to make the API request and get member details
-  // const fetchMemberDetails = async () => {
-  //   const username = localStorage.getItem("username");
-
-  //   if (!username) {
-  //     setError("No username found. Please log in again.");
-  //     setLoading(false);
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await fetch(`${API_URL}/user-details?username=${username}`, {
-  //       method: "GET",
-  //       headers: { "Content-Type": "application/json" },
-  //     });
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       setMemberDetails(data);
-  //     } else {
-  //       setError("Failed to fetch member details");
-  //     }
-  //   } catch (error) {
-  //     setError("An error occurred while fetching member details");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-
-  // demo function
-  const username = 'testuser_2'
-  const fetchMemberDetails = () => {
+  // Function to make the API request and get member details
+  const fetchMemberDetails = async () => {
+    const username = localStorage.getItem("username");
 
     if (!username) {
       setError("No username found. Please log in again.");
       setLoading(false);
       return;
     }
-    setMemberDetails({
-      full_name: 'TESTUSER_2',
-      membership_type: 'GOLD',
-      points: '1000'
-    })
-    setLoading(false);
+
+    try {
+      const response = await fetch(`${API_URL}/user-details?username=${username}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMemberDetails(data);
+      } else {
+        setError("Failed to fetch member details");
+      }
+    } catch (error) {
+      setError("An error occurred while fetching member details");
+    } finally {
+      setLoading(false);
+    }
   };
+
+  // demo function
+  // const username = 'testuser_2'
+  // const fetchMemberDetails = () => {
+
+  //   if (!username) {
+  //     setError("No username found. Please log in again.");
+  //     setLoading(false);
+  //     return;
+  //   }
+  //   setMemberDetails({
+  //     full_name: 'TESTUSER_2',
+  //     membership_type: 'GOLD',
+  //     points: '1000'
+  //   })
+  //   setLoading(false);
+  // };
 
 
   const handlePreviousBooking = () => {

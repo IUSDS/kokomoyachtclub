@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import imgIcon from '../assets/images/imageIcon.png';
 import { API_URL } from '../constant';
+import { SiSuperuser } from 'react-icons/si';
 
 const AddPointsForm = () => {
   const [username, setUsername] = useState('');
   const [membershipType, setMembershipType] = useState('');
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const [userData, setUserData] = useState(null);
 
   const handleUsernameChange = (e) => {
@@ -17,13 +19,19 @@ const AddPointsForm = () => {
     try {
       const response = await fetch(`${API_URL}/get/membership/?username=${username}`);
       if (!response.ok) {
-        throw new Error('User not found');
+        throw new Error('User not found!');
       }
       const data = await response.json();
       console.log(data);
       setUserData(data);
     } catch (err) {
+      setErrorMessage(err.message);
       console.error("Error fetching user data:", err.message);
+      setTimeout(() => {
+        setUsername('');
+        setUserData(null);
+        setErrorMessage('');
+      },3000);
     }
   };
 
@@ -60,12 +68,13 @@ const AddPointsForm = () => {
       }
     } catch (error) {
       console.error('Error updating membership:', error);
-      alert('Failed to update membership. Please try again.');
+      setErrorMessage('Failed to update membership. Please try again.');
     }
   };
 
   const handleCancel = () => {
     setUsername('');
+    setUserData(null);
     setPoints('');
     setSuccessMessage(false);
   };
@@ -93,6 +102,12 @@ const AddPointsForm = () => {
                 className="mt-1 block w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-midnightblue text-gray-600"
               />
             </div>
+            {/* Error message */}
+            {errorMessage && (
+              <div className="self-stretch text-red-500 text-sm mx-auto md:mx-0 md:mt-4">
+                {errorMessage}
+              </div>
+            )}
             {/* Submit Button */}
             <button
               onClick={handleSubmit}
@@ -143,7 +158,7 @@ const AddPointsForm = () => {
             Update Membership
             {successMessage && (
               <span className="ml-4 text-green-500 text-sm font-medium">
-                ✓ Successfully Updated
+                Successfully Updated ✓
               </span>
             )}
           </h2>
@@ -166,7 +181,6 @@ const AddPointsForm = () => {
 
             <div className="flex space-x-4">
               <button
-                type="submit"
                 onClick={handleSave}
                 className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
               >

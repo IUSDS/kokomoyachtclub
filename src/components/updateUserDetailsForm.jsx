@@ -19,7 +19,7 @@ const UpdateUserDetailsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/user-details/?username=${username}`);
+      const response = await fetch(`${API_URL}/validate-user/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found');
       }

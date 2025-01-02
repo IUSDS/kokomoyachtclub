@@ -11,21 +11,21 @@ const login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`${API_URL}/validate-user/`, {
+      const response = await fetch(`${API_URL}/validate-user/validate-user/?username=${user}&password=${password}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user, password }),
+        body: '',
       });
 
       const data = await response.json();
       console.log(data)
       if (response.ok && data.status === "SUCCESS") {
-        localStorage.setItem("username", USER);
+        localStorage.setItem("username", user);
         setErrorMessage("");
 
-        if (data.user_type === "USER") {
+        if (data.user_type.toLowerCase() === "user") {
           navigate("/membership");
-        } else if (data.user_type === "ADMIN") {
+        } else if (data.user_type.toLowerCase() === "admin") {
           navigate("/admin");
         }
       } else {
