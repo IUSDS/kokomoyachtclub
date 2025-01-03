@@ -6,38 +6,84 @@ const UpdateUserDetailsForm = () => {
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [firstName, setFirstName] = useState('');
+  const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
+  const [picture, setPicture] = useState(null);
   const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/validate-user/?username=${username}`);
+      const response = await fetch(`${API_URL}/get/user-details/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found');
       }
       const data = await response.json();
-      console.log(data);
       setUserData(data);
+  
+      // Sync form state with fetched user data
+      setFirstName(data.first_name || '');
+      setLastName(data.last_name || '');
+      setPhoneNumber(data.phone_number || '');
+      setAddress(data.address || '');
+      setPassword(''); // Clear password field for security
     } catch (err) {
       console.error("Error fetching user data:", err.message);
+      setErrorMessage(err.message);
     }
   };
+  
+
+  const handleSave = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('password', password);
+      formData.append('username', username);
+      formData.append('first_name', firstName);
+      formData.append('last_name', lastName);
+      formData.append('phone_number', phoneNumber);
+      formData.append('address', address);
+      if (picture) formData.append('file', picture);
+  
+      const response = await fetch(`${API_URL}/update/update/user/`, {
+        method: 'PUT',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        setSuccessMessage(true);
+        await handleSubmit(); // Refresh data after successful update
+        setTimeout(() => {
+          setSuccessMessage(false);
+          handleCancel();
+        }, 4000);
+      } else {
+        setErrorMessage('Failed to update member.');
+      }
+    } catch (e) {
+      console.error('Error updating member:', e);
+      setErrorMessage('Failed to update member.');
+    }
+  };
+  
 
   const handleCancel = () => {
     setFirstName('');
     setLastName('');
-    setPhone('');
+    setPhoneNumber('');
     setAddress('');
-    setEmail('');
-    setSuccessMessage(false);
+  };
+
+  const handlePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) setPicture(file);
   };
 
   return (
@@ -63,6 +109,12 @@ const UpdateUserDetailsForm = () => {
                 className="mt-1 block w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-midnightblue text-gray-600"
               />
             </div>
+            {/* Error message */}
+            {errorMessage && (
+              <div className="self-stretch text-red-500 text-sm mx-auto md:mx-0 md:mt-4">
+                {errorMessage}
+              </div>
+            )}
             {/* Submit Button */}
             <button
               onClick={handleSubmit}
@@ -81,14 +133,41 @@ const UpdateUserDetailsForm = () => {
               <h3 className="text-lg font-semibold text-center md:text-left text-midnightblue">User Details</h3>
             </div>
 
+            {/* Picture Section */}
+            <div className="flex justify-center p-6">
+              <img
+                src={userData.picture_url}
+                alt={`${userData.full_name}'s Profile`}
+                className="rounded-full w-32 h-32 object-cover shadow-lg"
+              />
+            </div>
+
             {/* Table Content */}
             <div className="divide-y divide-gray-200">
               <div className="flex hover:bg-gray-50">
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
-                  <span className="text-sm font-medium text-gray-600">Username</span>
+                  <span className="text-sm font-medium text-gray-600">Member ID</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.member_id}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Full Name</span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
                   <span className="text-sm text-gray-900">{userData.full_name}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Membership Type</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.membership_type}</span>
                 </div>
               </div>
 
@@ -100,10 +179,36 @@ const UpdateUserDetailsForm = () => {
                   <span className="text-sm text-gray-900">{userData.points}</span>
                 </div>
               </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Phone Number</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.phone_number}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Email ID</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.email_id}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Address</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.address}</span>
+                </div>
+              </div>
             </div>
           </div>
         )}
-
       </div>
 
       {/* Main content section */}
@@ -111,10 +216,19 @@ const UpdateUserDetailsForm = () => {
         <div className="md:w-1/2 md:mx-5 md:my-2 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
           <h2 className="text-xl font-semibold flex items-center">
             Update User Details
+
+            {/* Success message */}
             {successMessage && (
               <span className="ml-4 text-green-500 text-sm font-medium">
-                ✓ Successfully Updated
+                Successfully Updated ✓
               </span>
+            )}
+
+            {/* Error message */}
+            {errorMessage && (
+              <div className="self-stretch text-red-500 text-sm mx-auto md:mx-0 md:mt-4">
+                {errorMessage}
+              </div>
             )}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -145,8 +259,19 @@ const UpdateUserDetailsForm = () => {
               <input
                 type="text"
                 placeholder="Enter phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">Password</label>
+              <input
+                type="text"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
               />
             </div>
@@ -163,19 +288,19 @@ const UpdateUserDetailsForm = () => {
             </div>
 
             <div className="flex flex-col space-y-1">
-              <label className="font-medium text-midnightblue">Email</label>
+              <label className="font-medium text-midnightblue">Picture</label>
               <input
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+                type="file"
+                id="picture"
+                accept="image/*"
+                onChange={handlePictureChange}
+                className="file-input"
               />
             </div>
 
             <div className="flex space-x-4">
               <button
-                type="submit"
+                onClick={handleSave}
                 className="px-4 py-1 text-midnightblue border-midnightblue border rounded-md hover:bg-midnightblue hover:text-white"
               >
                 Save

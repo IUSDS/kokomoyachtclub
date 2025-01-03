@@ -75,8 +75,8 @@ const AddRemoveMembersForm = () => {
       const result = await response.json();
 
       if (response.ok) {
-        alert(result.message || 'Member removed successfully!');
-        handleCancel(); // Clear the form
+        setSuccessMessage('Member removed successfully!');
+        handleCancel(); 
       } else {
         alert(result.message || 'Failed to remove member. Please try again.');
       }
@@ -93,7 +93,6 @@ const AddRemoveMembersForm = () => {
 
 
   const handleAddMember = async () => {
-    console.log("in handleAddMember")
     try {
       const formData = new FormData();
       formData.append('username', username);
@@ -194,7 +193,6 @@ const AddRemoveMembersForm = () => {
                       </select>
                     ) : isFile ? (
                       <div>
-                        <label htmlFor="picture">Upload Picture</label>
                         <input
                           type="file"
                           id="picture"

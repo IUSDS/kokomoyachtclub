@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import MemberInfo from '../components/memberInfo';
 import DatePicker from 'react-datepicker';
 import DateButton from "../components/dateButton";
 import ImageCard from '../components/imageCard';
@@ -27,10 +26,7 @@ const MembershipPage = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/user-details?username=${username}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(`${API_URL}/get/user-details/?username=${username}`);
 
       if (response.ok) {
         const data = await response.json();
@@ -48,7 +44,6 @@ const MembershipPage = () => {
   // demo function
   // const username = 'testuser_2'
   // const fetchMemberDetails = () => {
-
   //   if (!username) {
   //     setError("No username found. Please log in again.");
   //     setLoading(false);
@@ -99,60 +94,43 @@ const MembershipPage = () => {
       {/* Welcome Section */}
       <div className="font-semibold md:text-3xl text-xl mt-4">Welcome</div>
 
-      {/* Member Info and Date Selection */}
-      <div className="flex flex-col w-full md:flex-row justify-center md:px-36 items-center gap-4">
-        <div className="flex flex-col justify-center items-center my-2 md:w-2/3">
-          {/* Member Info Section */}
-          {memberDetails ? (
-            <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
-                <div className="flex items-center space-x-2 justify-center md:justify-start">
-                  <span className="text-sm text-gray-500">Membership Type:</span>
-                  <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
-                    {memberDetails.membership_type}
-                  </span>
-                </div>
+      {/* User details */}
+      <div className='flex flex-col md:flex-row w-full md:justify-evenly items-center '>
+        {/* Picture */}
+        {memberDetails.picture_url && (
+          <div className="mt-4">
+            <img
+              src={memberDetails.picture_url}
+              alt="Member"
+              className="w-20 md:w-40 md:h-40 h-20 rounded-full object-cover border-2 border-gray-200"
+            />
+          </div>
+        )}
 
-                <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
-                  <p className="text-sm font-medium text-gray-500">Points Balance</p>
-                  <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
-                </div>
-
-                {memberDetails.picture_url && (
-                  <div className="mt-4">
-                    <img
-                      src={memberDetails.picture_url}
-                      alt="Member"
-                      className="w-20 h-20 rounded-full object-cover border-2 border-gray-200"
-                    />
+        {/* Member Info and Date Selection */}
+          <div className="flex flex-col justify-center items-center my-2 md:w-1/2">
+            {/* Member Info Section */}
+            {memberDetails ? (
+              <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
+                  <div className="flex items-center space-x-2 justify-center md:justify-start">
+                    <span className="text-sm text-gray-500">Membership Type:</span>
+                    <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+                      {memberDetails.membership_type}
+                    </span>
                   </div>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div>No member data available</div>
-          )}
-        </div>
 
-        {/* Date Selection Section */}
-        <div className="relative items-center justify-start">
-          <button onClick={() => setCalenderOpen(!calenderOpen)}>
-            <DateButton />
-          </button>
-          {calenderOpen && (
-            <div className="absolute z-10 top-7 mt-2 shadow-md rounded w-fit h-fit">
-              <DatePicker
-                selected={selectedDate}
-                onChange={(date) => {
-                  setSelectedDate(date);
-                  setCalenderOpen(false);
-                }}
-                inline
-              />
-            </div>
-          )}
-        </div>
+                  <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
+                    <p className="text-sm font-medium text-gray-500">Points Balance</p>
+                    <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>No member data available</div>
+            )}
+          </div>
       </div>
 
       {/* Buttons Section */}

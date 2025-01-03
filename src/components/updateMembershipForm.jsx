@@ -69,6 +69,10 @@ const AddPointsForm = () => {
     } catch (error) {
       console.error('Error updating membership:', error);
       setErrorMessage('Failed to update membership. Please try again.');
+      setTimeout(() => {
+        setSuccessMessage(false);
+        setMembershipType('');
+      }, 3000);
     }
   };
 
