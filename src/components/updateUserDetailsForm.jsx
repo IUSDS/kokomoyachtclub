@@ -23,7 +23,7 @@ const UpdateUserDetailsForm = () => {
     try {
       const response = await fetch(`${API_URL}/get/user-details/?username=${username}`);
       if (!response.ok) {
-        throw new Error('User not found');
+        throw new Error('User not found!');
       }
       const data = await response.json();
       setUserData(data);
@@ -31,12 +31,15 @@ const UpdateUserDetailsForm = () => {
       // Sync form state with fetched user data
       setFirstName(data.first_name || '');
       setLastName(data.last_name || '');
-      setPhoneNumber(data.phone_number || '');
+      setPhoneNumber('');
       setAddress(data.address || '');
       setPassword(''); // Clear password field for security
     } catch (err) {
       console.error("Error fetching user data:", err.message);
       setErrorMessage(err.message);
+      setTimeout(() => {
+        setErrorMessage('')
+      },3000)
     }
   };
   

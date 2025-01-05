@@ -63,7 +63,8 @@ const MembershipPage = () => {
   }
 
   const handleExperience = () => {
-    navigate("plan_experiences");
+    const url = "/membership/plan_experiences";
+    window.open(url, "_blank"); 
   }
 
   useEffect(() => {

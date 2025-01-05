@@ -31,7 +31,7 @@ const AddPointsForm = () => {
         setUsername('');
         setUserData(null);
         setErrorMessage('');
-      },3000);
+      }, 3000);
     }
   };
 
@@ -174,14 +174,13 @@ const AddPointsForm = () => {
                 onChange={(e) => setMembershipType(e.target.value)}
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue/80"
               >
-                <option value="">Select Membership Type</option>
-                <option value="Silver">Silver</option>
-                <option value="Gold">Gold</option>
-                <option value="Platinum">Platinum</option>
-                <option value="Premium">Premium</option>
+                <option value="" disabled>Select Membership Type</option>
+                <option value="Silver" disabled={userData.membership_type === "Silver"}>Silver</option>
+                <option value="Gold" disabled={userData.membership_type === "Gold"}>Gold</option>
+                <option value="Platinum" disabled={userData.membership_type === "Platinum"}>Platinum</option>
+                <option value="Premium" disabled={userData.membership_type === "Premium"}>Premium</option>
               </select>
             </div>
-
 
             <div className="flex space-x-4">
               <button
@@ -200,7 +199,6 @@ const AddPointsForm = () => {
             </div>
           </form>
         </div>
-
       )}
     </div>
   );
