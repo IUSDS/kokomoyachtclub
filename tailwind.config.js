@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontWeight: {
+        veryLight: '50',
+      },
       colors: {
         midnightblue: "#2f3292",
         steelblue: "rgba(42, 91, 121, 0.09)",
