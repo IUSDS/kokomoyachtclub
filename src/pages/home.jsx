@@ -66,7 +66,7 @@ const Home = () => {
                 </video>
 
                 {/* Overlay Content */}
-                <div className="absolute inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white">
+                <div className="xl:w-2/3 absolute inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white">
                     <h1 className="text-2xl md:text-6xl font-extralight mb-4">The Pure Joy of Luxury Boating Without the Hassle</h1>
                     <p className="text-sm font-extralight md:text-lg mb-6">Welcome to Sarasota’s luxury private boat club offering our members a
                         world class fleet of USCG captained vessels.</p>
