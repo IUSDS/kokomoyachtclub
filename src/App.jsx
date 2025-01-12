@@ -10,14 +10,16 @@ import Home from './pages/home';
 import Fleet from './pages/fleet';
 import Membership from './pages/membership';
 import Founders from './pages/founders';
+import Contact from './pages/contact';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
+    <div className='overflow-x-hidden'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/founders' element={<Founders />} />
         <Route path='/fleet' element={<Fleet />} />
         <Route path='/members' element={<Membership />} />
@@ -28,7 +30,7 @@ function App() {
         <Route path='/admin' element={<AdminPage />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   )
 }
 

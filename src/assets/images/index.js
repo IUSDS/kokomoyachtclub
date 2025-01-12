@@ -40,9 +40,11 @@ import L2 from "./L2.jpg";
 import L3 from "./L3.jpg";
 import founderImg from "./founderImg.jpg";
 import foundersKokomo from "./foundersKokomo.png";
+import wanderlust from "./wanderlust.jpg";
 
 export {
   foundersKokomo,
+  wanderlust,
   founderImg,
   memberImg,
   boca,

@@ -5,3 +5,8 @@
 .lightfont{
     font-weight: 100;
 }
+
+video {
+    will-change: transform;
+  }
+  

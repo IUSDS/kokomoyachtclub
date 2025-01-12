@@ -12,74 +12,75 @@ const footer = () => {
                         <p className="text-midnightblue ">Fleet</p>
                         <ul>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                                <a href={`/fleet#memorymaker`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     50' Memory Maker
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                            <a href={`/fleet#clubyacht`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     50' Club Yacht
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                            <a href={`/fleet#giddyup`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     43' Giddy Up
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                            <a href={`/fleet#wnaderlust`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     42' Wanderlust
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                            <a href={`/fleet#topshelf`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     38' Top Shelf
+                                </a>
+                            </li>
+                            <li>
+                            <a href={`/fleet#thelife`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                    29' The Life
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <p className="text-midnightblue ">Helpful Links</p>
+                        <p className="text-midnightblue">Helpful Links</p>
                         <ul>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                                <a href="/" className="cursor-pointer hover:text-blue-600">
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                                <a href="/founders" className="cursor-pointer hover:text-blue-600">
                                     From the Founders
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                                <a href="/fleet" className="cursor-pointer hover:text-blue-600">
                                     Fleet
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                                <a href="/membership" className="cursor-pointer hover:text-blue-600">
                                     Membership
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
-                                    Membership Brochure
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" className="cursor-pointer hover:text-midnightblue">
+                                <a href="/contact" className="cursor-pointer hover:text-blue-600">
                                     Contact
                                 </a>
                             </li>
                         </ul>
                     </div>
+
                     <div>
                         <p className="text-midnightblue">Contact</p>
                         <ul>
                             <li>
                                 <a
                                     href="tel:+194125YACHT"
-                                    className="cursor-pointer hover:text-midnightblue"
+                                    className="cursor-pointer hover:text-blue-600"
                                 >
                                     (941) 25-YACHT
                                 </a>
@@ -87,7 +88,7 @@ const footer = () => {
                             <li>
                                 <a
                                     href="tel:+19412592248"
-                                    className="cursor-pointer hover:text-midnightblue"
+                                    className="cursor-pointer hover:text-blue-600"
                                 >
                                     (941) 259-2248
                                 </a>
@@ -95,7 +96,7 @@ const footer = () => {
                             <li>
                                 <a
                                     href="mailto:Info@KokomoYachtClub.vip"
-                                    className="cursor-pointer hover:text-midnightblue"
+                                    className="cursor-pointer hover:text-blue-600"
                                 >
                                     Info@KokomoYachtClub.vip
                                 </a>
@@ -104,7 +105,7 @@ const footer = () => {
                                 <a
                                     href="https://maps.google.com/?q=1000 Boulevard of the Arts, Sarasota, FL"
                                     target="_blank"
-                                    className="cursor-pointer hover:text-midnightblue"
+                                    className="cursor-pointer hover:text-blue-600"
                                 >
                                     1000 Boulevard of the Arts, Sarasota, FL
                                 </a>
