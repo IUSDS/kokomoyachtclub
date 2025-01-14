@@ -30,10 +30,20 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setName('');
       setPhone('');
       setEmail('');
-      window.open(
-        'https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/profile_pictures/KokomoYachtClubBrochure8-24.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAXKPUZZCOMSXIVJLZ%2F20250113%2Fap-southeast-2%2Fs3%2Faws4_request&X-Amz-Date=20250113T080237Z&X-Amz-Expires=300&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAAaDmFwLXNvdXRoZWFzdC0yIkcwRQIhAMZNmJsCAFx8pxPXob7FNE1yQP3k9kEpqoLWRneN%2ByGHAiBPdMcT6LEY14Rczni%2BdHXEd5tcYLcFxewCpmf3iSMwkSqSAwjp%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAAaDDUwMzU2MTQzOTM4OCIMA%2B6MDthpvQQTMQeBKuYC5sUPm3yhCahOuT2mXWSQvG0KLCFe3OvsYt5HgqyJU421om4yxVHs9ZJqT3hov8WQvGHjZpJsGWsWyyczDWh%2BhZBVxlfvoPmecrU1HZZxDIzGK4ZxWlgD%2B8V4U4HVIL4%2BOqQCManrUbIhTe8SGdWfiLt%2B0B3OSaO8wXoucykurLt%2BcGs6j8oI%2Fdfs%2FdF12ek19tE60AgDLmhgtVTtYcQiAD%2B7WutkObJLOf0GrVD031wpb%2BqdQlK6D5AxsXycCO%2FjMrOK%2BoSGF4BFxXJ6I1xyUWeR0gvkKqqnMLzSmGLq3nugksdmJYC6N1n3%2F6IOiNCfT6Cucg3T1orwFh4cWy79CRuF%2BnGHVcAEqq8sSZKws%2FeID9bNeKMVwBjx7dfTiuGTqezaMROjAWavEBMceGJ302GYivBqjf4dFFRO5uWtzfgXgkAzeCsOWBbHdnLFLNPJpDYs6ZZ2GkMeML20YT4R1bh3e8TSADCBjZO8BjqzAhYCZyYOUQngR7GplFODCFXhcZ%2FCdhrKYnrzYcNJAId2rRJnogdz4wlNkthRdUSgi5bAzKIVNvg30y00WYTC9MPwhkLrygAYghPMDXvZZMPRh0ZEX16osHtvEWNAxePuUFnZ0bp56W6yyJYpEcAYhy8G5y%2BugwZwTEYDcYv35vKTXs%2BKrmVAmtMvUWPFYKePWJcdsYdfhCJP01qh0KHOHaXhHItmv9oTRYr50Lm23IYmFrYj9tFJsaGGWXWVgNkydkGICtUAdyC6JShsvWXqhPS0I8%2BjQdTKnwukZLGKMNS%2B2TD4T46dDHgIQs3iVOiPTGDvxu36moAhTqEaodrj49hVHJjYoHp1u8%2BkwU70hWc46qdK0jUR%2BnmCA4PyK%2FgtfNPZWX9loqHjBYSiGGRHs1exerU%3D&X-Amz-Signature=4757b64d64e3727f95cc6bc1bba72ef14f7b5e6fd22dc6b43425026bfc23ecd9&X-Amz-SignedHeaders=host&response-content-disposition=inline',
-        '_blank'
-      )
+
+      fetch("http://your-domain.com/get-pdf")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.url) {
+            // Open the PDF in a new tab
+            window.open(data.url, "_blank");
+          } else {
+            console.error("No presigned URL returned:", data);
+          }
+        })
+        .catch((error) => console.error("Error fetching PDF URL:", error));
+
+
     } catch (error) {
       console.error(error);
     }
