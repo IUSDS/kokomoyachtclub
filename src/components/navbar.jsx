@@ -49,9 +49,11 @@ const Navbar = () => {
         <nav className='sticky top-0 z-50'>
           <div className="w-full flex items-center justify-between py-2 px-10 shadow-lg">
             {/* Logo */}
-            <div className="">
-              <img src={logo} alt="kokomo_logo" />
-            </div>
+            <Link to={'/'}>
+              <div className="">
+                <img src={logo} alt="kokomo_logo" />
+              </div>
+            </Link>
 
             {/* Menu section */}
             <div className="hidden xl:block">
@@ -122,7 +124,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile side section */}
-      <ResponsiveMenu open={open} />
+      <ResponsiveMenu open={open} setOpen={setOpen} />
     </>
   );
 };

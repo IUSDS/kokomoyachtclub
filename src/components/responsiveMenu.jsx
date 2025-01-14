@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ResponsiveMenu = ({ open }) => {
+const ResponsiveMenu = ({ open,setOpen }) => {
   return (
     <AnimatePresence mode="wait">
       {open && (
@@ -15,31 +15,32 @@ const ResponsiveMenu = ({ open }) => {
           <div className="texl-xl uppercase font-semibold text-white bg-midnightblue py-8 m-6 rounded-3xl">
             <ul className="flex flex-col items-center justify-center gap-10">
               <li className="cursor-pointer hover:text-gray-300">
-                <Link to="/">Home</Link>
+                <Link onClick={() => setOpen(false)} to="/">Home</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link to="/founders">From the Founder</Link>
+                <Link onClick={() => setOpen(false)} to="/founders">From the Founder</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link to="/fleet">Fleet</Link>
+                <Link onClick={() => setOpen(false)} to="/fleet">Fleet</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link to="/members">Membership</Link>
+                <Link onClick={() => setOpen(false)} to="/members">Membership</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link to="/contact">Contact</Link>
+                <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <a
                   href="/contact"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
                 >
                   Become a Member
                 </a>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link to="/login">Login</Link>
+                <Link onClick={() => setOpen(false)} to="/login">Login</Link>
               </li>
             </ul>
           </div>

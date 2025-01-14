@@ -31,17 +31,25 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setPhone('');
       setEmail('');
 
-      fetch("http://your-domain.com/get-pdf")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.url) {
-            // Open the PDF in a new tab
-            window.open(data.url, "_blank");
-          } else {
-            console.error("No presigned URL returned:", data);
+      fetch("http://3.27.181.229/vistors/get-pdf", {
+        method: "GET",
+        headers: {
+          "accept": "application/json",
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
           }
+          return response.json();
         })
-        .catch((error) => console.error("Error fetching PDF URL:", error));
+        .then((data) => {
+          console.log("Pre-signed URL:", data.url);
+          window.open(data.url, "_blank");
+        })
+        .catch((error) => {
+          console.error("Error fetching PDF URL:", error);
+        });
 
 
     } catch (error) {
