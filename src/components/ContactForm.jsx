@@ -4,19 +4,64 @@ import { home5 } from '../assets/images';
 
 const ContactForm = () => {
   const [isVerified, setIsVerified] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleCaptcha = (value) => {
     console.log("Captcha value:", value);
     setIsVerified(true);
   };
 
-  const handleSubmit = (e) => {
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isVerified) {
-      alert("Please verify that you are not a robot!");
-      return;
+    // if (!isVerified) {
+    //   alert("Please verify that you are not a robot!");
+    //   return;
+    // }
+
+    if (phone.length != 10) {
+      alert(`Please enter 10 digits mobile number!`);
+    } else if (!(validateEmail(email))) {
+      alert(`Please enter a valid email!`);
+    } else {
+      try {
+        const response = await fetch('http://3.27.181.229/vistors/add-visitor', {
+          method: 'POST',
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            visitor_name: `${firstName} ${lastName}`,
+            phone_no: phone,
+            ques: message,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error submitting form');
+        }
+
+        console.log('Form submitted successfully!');
+        setFirstName('');
+        setLastName('');
+        setPhone('');
+        setEmail('');
+        setMessage('');
+        setIsVerified(false);
+      } catch (error) {
+        console.error(error);
+      }
     }
-    alert("Form submitted successfully!");
   };
 
   return (
@@ -35,6 +80,9 @@ const ContactForm = () => {
               <label htmlFor="first_name">First Name</label>
               <input
                 type="text"
+                name="first_name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 className="rounded-md h-10 px-4 text-black focus:outline-none"
                 placeholder="First Name"
                 required
@@ -44,6 +92,9 @@ const ContactForm = () => {
               <label htmlFor="last_name">Last Name</label>
               <input
                 type="text"
+                name="last_name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 className="rounded-md h-10 px-4 text-black focus:outline-none"
                 placeholder="Last Name"
                 required
@@ -53,6 +104,9 @@ const ContactForm = () => {
               <label htmlFor="phone">Phone</label>
               <input
                 type="number"
+                name="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="rounded-md h-10 px-4 text-black focus:outline-none"
                 placeholder="Phone"
                 required
@@ -62,6 +116,9 @@ const ContactForm = () => {
               <label htmlFor="email">Email</label>
               <input
                 type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="rounded-md h-10 px-4 text-black focus:outline-none"
                 placeholder="Email"
                 required
@@ -71,14 +128,17 @@ const ContactForm = () => {
           <div className="flex flex-col w-full">
             <label htmlFor="message">Message</label>
             <textarea
-              className="rounded-md h-20 px-4 text-black focus:outline-none"
+              name="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="rounded-md h-20 px-4 py-2 text-black focus:outline-none"
               placeholder="Message"
               required
             ></textarea>
           </div>
           <div className="mt-4">
             <ReCAPTCHA
-              sitekey="YOUR_SITE_KEY" // Replace with your reCAPTCHA site key
+              sitekey="YOUR_SITE_KEY"
               onChange={handleCaptcha}
             />
           </div>

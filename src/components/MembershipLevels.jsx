@@ -76,7 +76,7 @@ const MembershipLevels = () => {
                 Membership Levels
             </p>
             <p className="text-left md:text-center">
-                Membership has its privileges. The higher the tier, the higher the privileges. Membership components consist of Mariner Points, the number of open reservations allowed in the system and the flexibility of booking outings on weekdays, weekends and multi days.
+                Membership has its privileges. The higher the tier, the higher the privileges. Membership components of Mariner Points, the number of open reservations allowed in the system and the flexibility of booking outings on weekdays, weekends and multi days. All Yachting Memberships begin with a one-time capital contribution then simply choose which membership suits you best. Membership is an annual commitment, paid annually or quarterly.
             </p>
 
             {/* Dynamically Render Membership Tiers */}
@@ -130,7 +130,7 @@ const MembershipLevels = () => {
 
             <div className="text-left md:text-center">
                 <p>
-                    See detailed membership overview for specific terms and conditions regarding rules by membership tier. Higher tiers have greater flexibility. Reservations may have restrictions based on day of week, time of year and number of open reservations. Vessel, staff, fuel for coastal cruising, water toys, insurance and core provisioning included in membership. Additional provisioning of catering and adult beverages, $85 booking fee, excess fuel and optional staff gratuity not included. Kokomo Yacht Club is a private luxury boat membership club. All potential members must be approved for membership by Kokomo Yacht Club.
+                See detailed membership overview for specific terms and conditions regarding rules by membership tier. Higher tiers have greater flexibility. Reservations may have restrictions based on day of week, time of year and number of open reservations. Vessel, staff, fuel for coastal cruising, water toys, insurance and core provisioning included in membership. Additional provisioning of catering and adult beverages, $85 booking fee, excess fuel and optional staff gratuity not included. Kokomo Yacht Club is a private luxury boat membership club. All potential members must be approved for membership by Kokomo Yacht Club.
                 </p>
             </div>
         </div>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import DatePicker from 'react-datepicker';
-import DateButton from "../components/dateButton";
 import ImageCard from '../components/imageCard';
 import { boca, captiva, keywest, marco, memberImg, naples } from '../assets/images';
 import { API_URL } from '../constant';
@@ -31,6 +29,7 @@ const MembershipPage = () => {
       if (response.ok) {
         const data = await response.json();
         setMemberDetails(data);
+        console.log(data);
       } else {
         setError("Failed to fetch member details");
       }
@@ -40,23 +39,6 @@ const MembershipPage = () => {
       setLoading(false);
     }
   };
-
-  // demo function
-  // const username = 'testuser_2'
-  // const fetchMemberDetails = () => {
-  //   if (!username) {
-  //     setError("No username found. Please log in again.");
-  //     setLoading(false);
-  //     return;
-  //   }
-  //   setMemberDetails({
-  //     full_name: 'TESTUSER_2',
-  //     membership_type: 'GOLD',
-  //     points: '1000'
-  //   })
-  //   setLoading(false);
-  // };
-
 
   const handlePreviousBooking = () => {
     navigate("previous_booking");
