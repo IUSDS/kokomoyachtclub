@@ -12,6 +12,7 @@ import Membership from './pages/membership';
 import Founders from './pages/founders';
 import Contact from './pages/contact';
 import { Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path='/admin' element={<AdminPage />} />
       </Routes>
       <Footer />
+      <Analytics />
     </div>
   )
 }
