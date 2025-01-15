@@ -55,7 +55,7 @@ const UpdateUserDetailsForm = () => {
       formData.append('address', address);
       if (picture) formData.append('file', picture);
   
-      const response = await fetch(`http://3.27.32.197/update/update/user/`, {
+      const response = await fetch(`http://13.210.171.75/update/update/user/`, {
         method: 'PUT',
         body: formData,
       });

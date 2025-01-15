@@ -17,7 +17,7 @@ const AddPointsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://3.27.32.197/get/membership/?username=${username}`);
+      const response = await fetch(`http://13.210.171.75/get/membership/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found!');
       }

@@ -38,7 +38,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     }
 
     try {
-      const response = await fetch('http://3.27.32.197/visitors/add-visitor', {
+      const response = await fetch('http://13.210.171.75/visitors/add-visitor', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -58,7 +58,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setPhone('');
       setEmail('');
 
-      fetch("http://3.27.32.197/visitors/get-pdf", {
+      fetch("http://13.210.171.75/visitors/get-pdf", {
         method: "GET",
         headers: {
           "accept": "application/json",
@@ -101,11 +101,16 @@ const Modal = ({ isModalOpen, closeModal }) => {
               animate={{ y: 0 }}
               exit={{ y: 100 }}
               transition={{ duration: 0.3 }}
-              className="bg-white p-8 rounded-lg w-80"
+              className="bg-white p-8 rounded-lg w-[500px]"
             >
-              <h2 className="text-2xl font-semibold text-midnightblue mb-4">
-                Fill Out the Form
-              </h2>
+              <div className='mb-4 text-sm font-semibold text-midnightblue space-y-1'>
+                <p >
+                  Thank you for your interest in the membership.
+                </p>
+                <p >
+                  Please provide your contact information to download our brochure.
+                </p>
+              </div>
               <form onSubmit={handleModalSubmit}>
                 <div className="mb-4">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">

@@ -106,7 +106,7 @@ const AddRemoveMembersForm = () => {
       formData.append('points', points);
       if (picture) formData.append('file', picture);
 
-      const response = await fetch(`http://3.27.32.197/create-member/add-member/`, {
+      const response = await fetch(`http://13.210.171.75/create-member/add-member/`, {
         method: 'POST',
         body: formData,
       });
