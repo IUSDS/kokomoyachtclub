@@ -63,7 +63,7 @@ const AddRemoveMembersForm = () => {
       const formData = new URLSearchParams();
       formData.append('username', username);
 
-      const response = await fetch(`${API_URL}/update/delete/`, {
+      const response = await fetch(`http://3.27.32.197/update/delete/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -106,7 +106,7 @@ const AddRemoveMembersForm = () => {
       formData.append('points', points);
       if (picture) formData.append('file', picture);
 
-      const response = await fetch(`${API_URL}/create-member/add-member/`, {
+      const response = await fetch(`http://3.27.32.197/create-member/add-member/`, {
         method: 'POST',
         body: formData,
       });

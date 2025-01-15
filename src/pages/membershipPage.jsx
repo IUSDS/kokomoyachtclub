@@ -24,7 +24,7 @@ const MembershipPage = () => {
     }
 
     try {
-      const response = await fetch(`${API_URL}/get/user-details/?username=${username}`);
+      const response = await fetch(`http://3.27.32.197/get/user-details/?username=${username}`);
 
       if (response.ok) {
         const data = await response.json();

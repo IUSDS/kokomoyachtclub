@@ -11,7 +11,7 @@ const login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`http://3.27.181.229/validate-user/validate-user/?username=${user}&password=${password}`, {
+      const response = await fetch(`http://3.27.32.197/validate-user/validate-user/?username=${user}&password=${password}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: '',

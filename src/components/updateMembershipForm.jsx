@@ -17,7 +17,7 @@ const AddPointsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/get/membership/?username=${username}`);
+      const response = await fetch(`http://3.27.32.197/get/membership/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found!');
       }
@@ -41,7 +41,7 @@ const AddPointsForm = () => {
       formData.append('username', username);
       formData.append('membership_type', membershipType);
 
-      const response = await fetch(`${API_URL}/update/membership/`, {
+      const response = await fetch(`http://3.27.32.197/update/membership/`, {
         method: 'PUT',
         headers: {
           'accept': 'application/json',

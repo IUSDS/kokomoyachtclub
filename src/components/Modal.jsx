@@ -11,7 +11,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://3.27.181.229/visitors/add-visitor', {
+      const response = await fetch('http://3.27.32.197/visitors/add-visitor', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -31,7 +31,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setPhone('');
       setEmail('');
 
-      fetch("http://3.27.181.229/vistors/get-pdf", {
+      fetch("http://3.27.32.197/vistors/get-pdf", {
         method: "GET",
         headers: {
           "accept": "application/json",
