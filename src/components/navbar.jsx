@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GiHamburgerMenu } from "react-icons/gi";
 import ResponsiveMenu from "./responsiveMenu";
 import { FaUser } from "react-icons/fa";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/logos/logo.png";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -51,7 +51,7 @@ const Navbar = () => {
             {/* Logo */}
             <Link to={'/'}>
               <div className="">
-                <img src={logo} alt="kokomo_logo" />
+                <img src={logo} className='w-[150px]' alt="kokomo_logo" />
               </div>
             </Link>
 
