@@ -259,10 +259,10 @@ const Contact = () => {
                 </div>
 
                 {/* reCAPTCHA */}
-                <ReCAPTCHA
+                {/* <ReCAPTCHA
                   sitekey="YOUR_SITE_KEY"
                 // onChange={handleCaptcha}
-                />
+                /> */}
 
                 {/* Submit Button */}
                 <div className="mt-6">

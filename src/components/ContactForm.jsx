@@ -170,12 +170,12 @@ const ContactForm = () => {
                 required
               ></textarea>
             </div>
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <ReCAPTCHA
                 sitekey="YOUR_SITE_KEY"
                 onChange={handleCaptcha}
               />
-            </div>
+            </div> */}
             <button
               type="submit"
               className="mt-4 px-2 py-2 w-full rounded-full bg-blue-600 hover:bg-blue-700 transition-colors"
