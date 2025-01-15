@@ -58,26 +58,28 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setPhone('');
       setEmail('');
 
-      fetch("http://13.210.171.75/visitors/get-pdf", {
-        method: "GET",
-        headers: {
-          "accept": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          console.log("Pre-signed URL:", data.url);
-          window.open(data.url, "_blank");
-        })
-        .catch((error) => {
-          console.error("Error fetching PDF URL:", error);
-        });
+      window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/pdfs/KokomoYachtClubBrochure8-24_compressed.pdf","_blank");
+
+      // fetch("http://13.210.171.75/visitors/get-pdf", {
+      //   method: "GET",
+      //   headers: {
+      //     "accept": "application/json",
+      //   },
+      // })
+      //   .then((response) => {
+      //     if (!response.ok) {
+      //       throw new Error(`Request failed with status ${response.status}`);
+      //     }
+      //     return response.json();
+      //   })
+      //   .then((data) => {
+      //     console.log(data);
+      //     console.log("Pre-signed URL:", data.url);
+      //     window.open(data.url, "_blank");
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error fetching PDF URL:", error);
+      //   });
 
 
     } catch (error) {
