@@ -11,7 +11,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://3.27.181.229/vistors/add-visitor', {
+      const response = await fetch('http://3.27.181.229/visitors/add-visitor', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -44,6 +44,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
           return response.json();
         })
         .then((data) => {
+          console.log(data);
           console.log("Pre-signed URL:", data.url);
           window.open(data.url, "_blank");
         })
