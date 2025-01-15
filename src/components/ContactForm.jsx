@@ -61,7 +61,7 @@ const ContactForm = () => {
         },
         body: JSON.stringify({
           email,
-          visitor_name: name,
+          visitor_name: `${firstName} ${lastName}`,
           phone_no: phone,
           ques: message,
         }),

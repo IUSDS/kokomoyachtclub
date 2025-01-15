@@ -1,14 +1,41 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import CustomAlert from '../components/CustomAlert';
 
 const Modal = ({ isModalOpen, closeModal }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [alertopen, setAlertOpen] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertBody, setAlertBody] = useState('');
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleAlertColse = () => {
+    setAlertOpen(false);
+  }
 
   // Handle form submission
   const handleModalSubmit = async (e) => {
     e.preventDefault();
+
+    if (!/^\d{10}$/.test(phone)) {
+      setAlertTitle("Invalid Number!");
+      setAlertBody("Please enter a 10-digit mobile number");
+      setAlertOpen(true);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setAlertTitle("Invalid Email!");
+      setAlertBody("Please enter a valid email");
+      setAlertOpen(true);
+      return;
+    }
 
     try {
       const response = await fetch('http://3.27.32.197/visitors/add-visitor', {
@@ -31,7 +58,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setPhone('');
       setEmail('');
 
-      fetch("http://3.27.32.197/vistors/get-pdf", {
+      fetch("http://3.27.32.197/visitors/get-pdf", {
         method: "GET",
         headers: {
           "accept": "application/json",
@@ -145,6 +172,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
           </motion.div>
         )}
       </AnimatePresence>
+      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
     </div>
   );
 };
