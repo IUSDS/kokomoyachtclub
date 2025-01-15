@@ -53,7 +53,7 @@ const ContactForm = () => {
 
     // 4. Submit Form
     try {
-      const response = await fetch("http://3.27.32.197/vistors/add-visitor", {
+      const response = await fetch("http://3.27.32.197/visitors/add-visitor", {
         method: "POST",
         headers: {
           accept: "application/json",
