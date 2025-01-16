@@ -38,7 +38,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     }
 
     try {
-      const response = await fetch('http://13.210.171.75/visitors/add-visitor', {
+      const response = await fetch('https://13.210.171.75/visitors/add-visitor', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -60,7 +60,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
 
       window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/pdfs/KokomoYachtClubBrochure8-24_compressed.pdf","_blank");
 
-      // fetch("http://13.210.171.75/visitors/get-pdf", {
+      // fetch("https://13.210.171.75/visitors/get-pdf", {
       //   method: "GET",
       //   headers: {
       //     "accept": "application/json",

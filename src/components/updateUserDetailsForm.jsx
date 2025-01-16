@@ -21,7 +21,7 @@ const UpdateUserDetailsForm = () => {
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
     try {
-      const response = await fetch(`http://3.27.32.197/get/user-details/?username=${username}`);
+      const response = await fetch(`https://3.27.32.197/get/user-details/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found!');
       }
@@ -55,7 +55,7 @@ const UpdateUserDetailsForm = () => {
       formData.append('address', address);
       if (picture) formData.append('file', picture);
   
-      const response = await fetch(`http://13.210.171.75/update/update/user/`, {
+      const response = await fetch(`https://13.210.171.75/update/update/user/`, {
         method: 'PUT',
         body: formData,
       });
