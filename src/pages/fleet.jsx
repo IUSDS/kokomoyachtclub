@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import Vid from '../assets/videos/home.mp4';
+import Vid from '../assets/videos/vid.mp4';
 import ImageCarousel from '../components/ImageCarousel';
 import { memory_maker, MM1, MM2, MM3, CY1, CY2, CY3, club_yacht, giddy_up, GU1, GU2, GU3, home4, GU5, home7, wl2, wl3, wl4, wl5, wl6, wl7, TS1, TS2, home5, home2, L1, L2, L3, home3, home6, home8 } from '../assets/images';
 import { FaRegCheckCircle } from "react-icons/fa";
@@ -169,7 +169,7 @@ const Fleet = () => {
                     Your browser does not support the video tag.
                 </video>
 
-                <div className="absolute top-0 left-0 w-full h-full bg-blue-900 bg-opacity-50 z-20 pointer-events-none"></div>
+                {/* <div className="absolute top-0 left-0 w-full h-full bg-blue-900 bg-opacity-50 z-20 pointer-events-none"></div> */}
 
                 <div className="absolute xl:w-2/3 inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white z-30">
                     <h1 className="text-3xl md:text-6xl font-medium mb-4">Vessels</h1>

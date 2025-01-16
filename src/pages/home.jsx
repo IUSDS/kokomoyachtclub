@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import Vid from '../assets/videos/home.mp4';
+import Vid from '../assets/videos/vid.mp4';
 import { home1, home2, home3, home4, home5, home6, home7, home8, home9 } from '../assets/images';
 import homeicon from '../assets/icons/homeicon.png';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -124,17 +124,23 @@ const Home = () => {
                 variants={fadeInUpVariant}
                 className="relative w-full h-screen overflow-hidden"
             >
+                {/* Background video */}
                 <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover z-10">
                     <source src={Vid} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
-                <div className="absolute top-0 left-0 w-full h-full bg-blue-900 bg-opacity-50 z-20"></div>
+
+                {/* Dark overlay */}
+                {/* <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-20"></div> */}
+
+                {/* Content on top of overlay */}
                 <div className="xl:w-2/3 absolute inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white z-30">
                     <h1 className="text-2xl md:text-6xl font-medium mb-4">The Pure Joy of Luxury Boating Without the Hassle</h1>
                     <p className="text-sm font-normal md:text-xl mb-6">Welcome to Sarasota’s luxury private boat club offering our members a world-class fleet of USCG captained vessels.</p>
                     <button onClick={handleInquireButton} className="px-6 py-3 bg-midnightblue hover:bg-midnightblue text-white rounded-full">Inquire About Membership</button>
                 </div>
             </motion.div>
+
 
             {/* Info Section */}
             <motion.div
@@ -170,7 +176,7 @@ const Home = () => {
                 </motion.div>
 
                 {/* Modal */}
-                {isModalOpen && <Modal isModalOpen={true} closeModal={closeModal}/>}
+                {isModalOpen && <Modal isModalOpen={true} closeModal={closeModal} />}
             </motion.div>
 
             {/* Membership Benefits Section */}

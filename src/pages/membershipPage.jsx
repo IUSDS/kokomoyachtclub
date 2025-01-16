@@ -24,7 +24,7 @@ const MembershipPage = () => {
     }
 
     try {
-      const response = await fetch(`https://13.210.171.75/get/user-details/?username=${username}`);
+      const response = await fetch(`https://kokomoyachtclub.vip/get/user-details/?username=${username}`);
 
       if (response.ok) {
         const data = await response.json();

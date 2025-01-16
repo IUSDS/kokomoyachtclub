@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Vid from '../assets/videos/home.mp4';
+import Vid from '../assets/videos/vid.mp4';
 import { FaRegCheckCircle } from "react-icons/fa";
 import ReCAPTCHA from 'react-google-recaptcha';
 import { home5 } from '../assets/images';
@@ -67,7 +67,7 @@ const Membership = () => {
                     <source src={Vid} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
-                <div className="absolute top-0 left-0 w-full h-full bg-blue-900 bg-opacity-50 z-20 pointer-events-none"></div>
+                {/* <div className="absolute top-0 left-0 w-full h-full bg-blue-900 bg-opacity-50 z-20 pointer-events-none"></div> */}
                 <div className="absolute xl:w-2/3 inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white z-30">
                     <h1 className="text-3xl md:text-6xl font-medium mb-4">Membership</h1>
                     <p className="text-base font-normal md:text-xl mb-6">
