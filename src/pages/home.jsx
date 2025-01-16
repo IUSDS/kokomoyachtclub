@@ -116,7 +116,7 @@ const Home = () => {
     };
 
     return (
-        <div className='space-y-10 md:space-y-16'>
+        <div className='space-y-10 md:space-y-16 font-jakarta'>
             {/* Hero Section */}
             <motion.div
                 initial="hidden"

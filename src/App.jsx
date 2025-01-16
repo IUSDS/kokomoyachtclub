@@ -16,7 +16,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   return (
-    <div className='overflow-x-hidden'>
+    <div className='overflow-x-hidden font-jakarta'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

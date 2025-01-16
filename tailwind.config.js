@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+        monteserrat: ['Monteserrat', 'sans-serif'],
+      },
       fontWeight: {
         veryLight: '50',
       },
