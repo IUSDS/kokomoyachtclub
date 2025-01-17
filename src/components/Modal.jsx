@@ -38,7 +38,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     }
 
     try {
-      const response = await fetch('https://13.210.171.75/visitors/add-visitor', {
+      const response = await fetch('https://kokomoyachtclub.vip/visitors/add-visitor', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -53,6 +53,11 @@ const Modal = ({ isModalOpen, closeModal }) => {
       if (!response.ok) {
         throw new Error('Error submitting form');
       }
+
+      setAlertTitle("Successful");
+      setAlertBody("Thankyou for sharing your details");
+      setAlertOpen(true);
+
       console.log('Form submitted');
       setName('');
       setPhone('');

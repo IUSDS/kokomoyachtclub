@@ -92,7 +92,7 @@ const Contact = () => {
 
     // 4. Submit Form
     try {
-      const response = await fetch("https://13.210.171.75/visitors/add-visitor", {
+      const response = await fetch("https://kokomoyachtclub.vip/visitors/add-visitor", {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -113,8 +113,8 @@ const Contact = () => {
 
       console.log("Form submitted successfully!");
       // Show a success message (optional)
-      setAlertTitle("Successfull");
-      setAlertBody("Form submitted successfully!");
+      setAlertTitle("Successful");
+      setAlertBody("Thankyou for sharing your details");
       setAlertOpen(true);
 
       // 5. Clear Fields

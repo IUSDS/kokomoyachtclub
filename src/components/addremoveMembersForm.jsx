@@ -63,7 +63,7 @@ const AddRemoveMembersForm = () => {
       const formData = new URLSearchParams();
       formData.append('username', username);
 
-      const response = await fetch(`https://3.27.32.197/update/delete/`, {
+      const response = await fetch(`https://kokomoyachtclub.vip/update/delete/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -106,7 +106,7 @@ const AddRemoveMembersForm = () => {
       formData.append('points', points);
       if (picture) formData.append('file', picture);
 
-      const response = await fetch(`https://13.210.171.75/create-member/add-member/`, {
+      const response = await fetch(`https://kokomoyachtclub.vip/create-member/add-member/`, {
         method: 'POST',
         body: formData,
       });
