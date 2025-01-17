@@ -3,15 +3,17 @@ import { useNavigate } from "react-router-dom";
 import ImageCard from '../components/imageCard';
 import { boca, captiva, keywest, marco, memberImg, naples } from '../assets/images';
 import { API_URL } from '../constant';
+import useAuthStore from '../authStore';
 
 
 const MembershipPage = () => {
-  const [calenderOpen, setCalenderOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  // const [calenderOpen, setCalenderOpen] = useState(false);
+  // const [selectedDate, setSelectedDate] = useState(null);
   const [memberDetails, setMemberDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   // Function to make the API request and get member details
   const fetchMemberDetails = async () => {
@@ -29,7 +31,6 @@ const MembershipPage = () => {
       if (response.ok) {
         const data = await response.json();
         setMemberDetails(data);
-        console.log(data);
       } else {
         setError("Failed to fetch member details");
       }
@@ -46,8 +47,14 @@ const MembershipPage = () => {
 
   const handleExperience = () => {
     const url = "/membership/plan_experiences";
-    window.open(url, "_blank"); 
+    window.open(url, "_blank");
   }
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
+  },[isLoggedIn])
 
   useEffect(() => {
     fetchMemberDetails();
@@ -91,29 +98,29 @@ const MembershipPage = () => {
         )}
 
         {/* Member Info and Date Selection */}
-          <div className="flex flex-col justify-center items-center my-2 md:w-1/2">
-            {/* Member Info Section */}
-            {memberDetails ? (
-              <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
-                  <div className="flex items-center space-x-2 justify-center md:justify-start">
-                    <span className="text-sm text-gray-500">Membership Type:</span>
-                    <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
-                      {memberDetails.membership_type}
-                    </span>
-                  </div>
+        <div className="flex flex-col justify-center items-center my-2 md:w-1/2">
+          {/* Member Info Section */}
+          {memberDetails ? (
+            <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
+                <div className="flex items-center space-x-2 justify-center md:justify-start">
+                  <span className="text-sm text-gray-500">Membership Type:</span>
+                  <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+                    {memberDetails.membership_type}
+                  </span>
+                </div>
 
-                  <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
-                    <p className="text-sm font-medium text-gray-500">Points Balance</p>
-                    <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
-                  </div>
+                <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
+                  <p className="text-sm font-medium text-gray-500">Points Balance</p>
+                  <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
                 </div>
               </div>
-            ) : (
-              <div>No member data available</div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div>No member data available</div>
+          )}
+        </div>
       </div>
 
       {/* Buttons Section */}

@@ -4,16 +4,53 @@ import ResponsiveMenu from "./responsiveMenu";
 import { FaUser } from "react-icons/fa";
 import logo from "../assets/logos/logo.png";
 import { Link, useLocation } from "react-router-dom";
+import useAuthStore from '../authStore';
+import { div } from 'framer-motion/client';
+
+const Popup = ({ isVisible, closePopup }) => {
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    logout(); 
+    closePopup();
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed top-24 xl:right-12 md:right-24 z-50">
+      <div className="flex flex-col bg-midnightblue text-white p-4 rounded-lg shadow-lg">
+        <Link to="/login" onClick={closePopup}>
+          <p className="cursor-pointer hover:text-blue-200">Go to Login Page</p>
+        </Link>
+        <p
+          onClick={handleLogout}
+          className="cursor-pointer hover:text-blue-200 mt-2"
+        >
+          Log out
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState('');
   const location = useLocation();
+  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     const path = location.pathname.split('/')[1];
     setSelectedMenu(path || 'home');
   }, [location]);
+
+  // Tries to get user login info
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+
+  const handlePopup = () => {
+    setPopup(!popup);
+  }
 
   return (
     <>
@@ -97,17 +134,25 @@ const Navbar = () => {
                       window.open("/contact", "_blank");
                     }}
                   >
-                    <button className="bg-midnightblue text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
-                      Become a Member
-                    </button>
+                    {!isLoggedIn && (
+                      <button className="bg-midnightblue text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
+                        Become a Member
+                      </button>
+                    )}
                   </Link>
 
-                  {/* Log in button */}
-                  <Link to="/login">
-                    <button className="bg-midnightblue hidden xl:block text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
-                      Log in
-                    </button>
-                  </Link>
+                  <div>
+                    {isLoggedIn ? (
+                      <div className='text-midnightblue cursor-pointer hidden xl:block' onClick={handlePopup} > <FaUser size={30} /> </div>
+                    ) : (
+                      // Log in button
+                      <Link to="/login">
+                        <button className="bg-midnightblue hidden xl:block text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
+                          Log in
+                        </button>
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -125,6 +170,8 @@ const Navbar = () => {
 
       {/* Mobile side section */}
       <ResponsiveMenu open={open} setOpen={setOpen} />
+
+      <Popup isVisible={popup} closePopup={() => setPopup(false)} />
     </>
   );
 };

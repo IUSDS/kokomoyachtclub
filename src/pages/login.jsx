@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import hero_image from "../assets/images/hero.png";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../constant";
+import useAuthStore from "../authStore";
 
 const login = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const login = useAuthStore((state) => state.login);  //login function from store
 
   const handleLogin = async () => {
     try {
@@ -20,6 +22,7 @@ const login = () => {
       const data = await response.json();
       console.log(data)
       if (response.ok && data.status === "SUCCESS") {
+        login(data); // sets user in store
         localStorage.setItem("username", user);
         setErrorMessage("");
 
