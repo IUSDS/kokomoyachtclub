@@ -25,20 +25,20 @@ const Modal = ({ isModalOpen, closeModal }) => {
 
     if (!/^\d{10}$/.test(phone)) {
       setAlertTitle("Invalid Number!");
-      setAlertBody("Please enter a 10-digit mobile number");
+      setAlertBody("Please enter a 10-digit mobile number.");
       setAlertOpen(true);
       return;
     }
 
     if (!validateEmail(email)) {
       setAlertTitle("Invalid Email!");
-      setAlertBody("Please enter a valid email");
+      setAlertBody("Please enter a valid email.");
       setAlertOpen(true);
       return;
     }
 
     try {
-      const response = await fetch('https://kokomoyachtclub.vip/visitors/add-visitor', {
+      const response = await fetch('https://api.kokomoyachtclub.vip/visitors/add-visitor', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -55,10 +55,10 @@ const Modal = ({ isModalOpen, closeModal }) => {
       }
 
       setAlertTitle("Successful");
-      setAlertBody("Thankyou for sharing your details");
+      setAlertBody("Thank you for sharing your details.");
       setAlertOpen(true);
 
-      console.log('Form submitted');
+      // console.log('Form submitted');
       setName('');
       setPhone('');
       setEmail('');

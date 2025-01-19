@@ -31,7 +31,7 @@ function App() {
         <Route path='/admin' element={<AdminPage />} />
       </Routes>
       <Footer />
-      <SpeedInsights />
+      {/* <SpeedInsights /> */}
     </div>
   )
 }

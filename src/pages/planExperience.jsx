@@ -20,7 +20,7 @@ const PlanExperience = () => {
       <div className="flex-grow w-full p-4">
         <iframe
           className="w-full h-[800px] mx-auto"
-          src="https://fareharbor.com/embeds/items/kokomocharters/?full-items=yes&fallback=simple&flow=1257684"
+          src="https://fareharbor.com/embeds/book/kokomocharters/?full-items=yes&flow=1257684"
           title="FareHarbor Item Grid"
           allowFullScreen
           sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation-by-user-activation"

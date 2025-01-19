@@ -1,14 +1,16 @@
 import React from 'react'
-import logo from "../assets/images/logo.png";
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
+import logo from "../assets/logos/logo.png";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { Link, useLocation } from "react-router-dom";
 
 const footer = () => {
     return (
         <>
             <div className="flex flex-col lg:flex-row-reverse items-center justify-center gap-10 my-8 lg:my-16">
                 {/* links section */}
-                <div className="flex flex-col md:flex-row gap-8 text-gray-600">
-                    <div>
+                <div className="flex flex-col md:flex-row gap-6 text-gray-600">
+                    <div className='text-center md:text-left'>
                         <p className="text-midnightblue ">Fleet</p>
                         <ul>
                             <li>
@@ -17,35 +19,40 @@ const footer = () => {
                                 </a>
                             </li>
                             <li>
-                            <a href={`/fleet#clubyacht`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                <a href={`/fleet#clubyacht`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     50' Club Yacht
                                 </a>
                             </li>
                             <li>
-                            <a href={`/fleet#giddyup`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                <a href={`/fleet#giddyup`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     43' Giddy Up
                                 </a>
                             </li>
                             <li>
-                            <a href={`/fleet#wnaderlust`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                <a href={`/fleet#wnaderlust`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     42' Wanderlust
                                 </a>
                             </li>
                             <li>
-                            <a href={`/fleet#topshelf`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                <a href={`/fleet#topshelf`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     38' Top Shelf
                                 </a>
                             </li>
                             <li>
-                            <a href={`/fleet#thelife`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                <a href={`/fleet#thelife`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     29' The Life
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    <div className='text-center md:text-left'>
                         <p className="text-midnightblue">Helpful Links</p>
                         <ul>
+                            <li>
+                                <a href="/contact" className="cursor-pointer hover:text-blue-600">
+                                    Become a Member
+                                </a>
+                            </li>
                             <li>
                                 <a href="/" className="cursor-pointer hover:text-blue-600">
                                     Home
@@ -73,8 +80,7 @@ const footer = () => {
                             </li>
                         </ul>
                     </div>
-
-                    <div>
+                    <div className='text-center md:text-left '>
                         <p className="text-midnightblue">Contact</p>
                         <ul>
                             <li>
@@ -95,10 +101,10 @@ const footer = () => {
                             </li>
                             <li>
                                 <a
-                                    href="mailto:Info@KokomoYachtClub.vip"
+                                    href="mailto:info@kokomoyachtclub.vip"
                                     className="cursor-pointer hover:text-blue-600"
                                 >
-                                    Info@KokomoYachtClub.vip
+                                    info@kokomoyachtclub.vip
                                 </a>
                             </li>
                             <li>
@@ -137,20 +143,20 @@ const footer = () => {
                     Copyright © 2024
                 </div>
                 <div className="text-smi">
-                    Powered by IUS Digital Solutions
+                    <a href='https://www.iusdigitalsolutions.com/' target='_blank'>Powered by IUS Digital Solutions</a>
                 </div>
                 <div className="flex items-center space-x-3">
-                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center">
+                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center" href='https://www.facebook.com/profile.php?id=61564983026145' target='_blank'>
                         <FaFacebookF className='text-black' />
                     </a>
-                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center">
-                        <FaTwitter className='text-black' />
+                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center" href='https://x.com/kokomoyachtclub' target='_blank'>
+                        <FaXTwitter className='text-black' />
                     </a>
-                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center">
+                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center" href='https://www.instagram.com/kokomoyachtclub' target='_blank'>
                         <FaInstagram className='text-black' />
                     </a>
-                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center">
-                        <FaYoutube className='text-black' />
+                    <a className="hover:bg-opacity-80 cursor-pointer rounded-2xl bg-myGray w-8 h-8 flex items-center justify-center" href='https://www.linkedin.com/company/kokomo-yacht-club/' target='_blank'>
+                        <FaLinkedinIn className='text-black' />
                     </a>
                 </div>
             </div>

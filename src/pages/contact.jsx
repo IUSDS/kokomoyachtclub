@@ -77,7 +77,7 @@ const Contact = () => {
     // 2. Validate Phone (must be 10 digits)
     if (!/^\d{10}$/.test(phone)) {
       setAlertTitle("Invalid Number!");
-      setAlertBody("Please enter a 10-digit mobile number");
+      setAlertBody("Please enter a 10-digit mobile number.");
       setAlertOpen(true);
       return;
     }
@@ -85,14 +85,14 @@ const Contact = () => {
     // 3. Validate Email
     if (!validateEmail(email)) {
       setAlertTitle("Invalid Email!");
-      setAlertBody("Please enter a valid email");
+      setAlertBody("Please enter a valid email.");
       setAlertOpen(true);
       return;
     }
 
     // 4. Submit Form
     try {
-      const response = await fetch("https://kokomoyachtclub.vip/visitors/add-visitor", {
+      const response = await fetch("https://api.kokomoyachtclub.vip/visitors/add-visitor", {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -114,7 +114,7 @@ const Contact = () => {
       console.log("Form submitted successfully!");
       // Show a success message (optional)
       setAlertTitle("Successful");
-      setAlertBody("Thankyou for sharing your details");
+      setAlertBody("Thank you for sharing your details.");
       setAlertOpen(true);
 
       // 5. Clear Fields

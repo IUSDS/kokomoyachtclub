@@ -19,13 +19,13 @@ const Popup = ({ isVisible, closePopup }) => {
 
   return (
     <div className="fixed top-24 xl:right-12 md:right-24 z-50">
-      <div className="flex flex-col bg-midnightblue text-white p-4 rounded-lg shadow-lg">
-        <Link to="/login" onClick={closePopup}>
+      <div className="flex flex-col bg-midnightblue text-white px-4 py-2 rounded-lg shadow-lg">
+        {/* <Link to="/login" onClick={closePopup}>
           <p className="cursor-pointer hover:text-blue-200">Go to Login Page</p>
-        </Link>
+        </Link> */}
         <p
           onClick={handleLogout}
-          className="cursor-pointer hover:text-blue-200 mt-2"
+          className="cursor-pointer hover:text-blue-200"
         >
           Log out
         </p>
@@ -127,7 +127,7 @@ const Navbar = () => {
               {/* Buttons */}
               <div className="hidden md:flex justify-between items-center gap-4">
                 <div className="flex items-center space-x-4 px-2 py-1">
-                  <Link
+                  {/* <Link
                     to="/contact"
                     onClick={(e) => {
                       e.preventDefault();
@@ -139,7 +139,7 @@ const Navbar = () => {
                         Become a Member
                       </button>
                     )}
-                  </Link>
+                  </Link> */}
 
                   <div>
                     {isLoggedIn ? (
@@ -147,8 +147,8 @@ const Navbar = () => {
                     ) : (
                       // Log in button
                       <Link to="/login">
-                        <button className="bg-midnightblue hidden xl:block text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
-                          Log in
+                        <button className="bg-midnightblue hidden xl:block text-white rounded-full px-4 py-3 cursor-pointer text-sm hover:bg-opacity-80">
+                          Login
                         </button>
                       </Link>
                     )}

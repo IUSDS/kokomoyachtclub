@@ -26,7 +26,7 @@ const MembershipPage = () => {
     }
 
     try {
-      const response = await fetch(`https://kokomoyachtclub.vip/get/user-details/?username=${username}`);
+      const response = await fetch(`https://api.kokomoyachtclub.vip/get/user-details/?username=${username}`);
 
       if (response.ok) {
         const data = await response.json();
@@ -71,7 +71,7 @@ const MembershipPage = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-hidden">
+    <div className="flex flex-col justify-center items-center overflow-x-hidden space-y-16">
       {/* Hero Section */}
       <div className="relative">
         <img className="w-screen h-fit object-cover" src={memberImg} alt="Hero" />
@@ -82,7 +82,7 @@ const MembershipPage = () => {
       </div>
 
       {/* Welcome Section */}
-      <div className="font-semibold md:text-3xl text-xl mt-4">Welcome</div>
+      <div className="font-semibold md:text-3xl text-xl xl:text-6xl mt-4">Welcome</div>
 
       {/* User details */}
       <div className='flex flex-col md:flex-row w-full md:justify-evenly items-center '>
@@ -123,8 +123,20 @@ const MembershipPage = () => {
         </div>
       </div>
 
+      {/* Plan Your Experiences Section */}
+      <div className="flex-grow w-full p-4 space-y-8">
+        <h1 className='xl:text-4xl text-center font-semibold'>Plan your Experiences</h1>
+        <iframe
+          className="w-full h-[800px] mx-auto"
+          src="https://fareharbor.com/embeds/book/kokomocharters/?full-items=yes&flow=1257684"
+          title="FareHarbor Item Grid"
+          allowFullScreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation-by-user-activation"
+        />
+      </div>
+
       {/* Buttons Section */}
-      <div className='flex flex-col md:flex-row gap-4 md:gap-8 my-8'>
+      {/* <div className='flex flex-col md:flex-row gap-4 md:gap-8 my-8'>
         <button
           onClick={handleExperience}
           className="py-4 px-6 bg-midnightblue/90 text-white rounded-lg hover:bg-midnightblue shadow-lg"
@@ -137,10 +149,10 @@ const MembershipPage = () => {
         >
           CHECK PREVIOUS BOOKINGS
         </button>
-      </div>
+      </div> */}
 
       {/* Overnight Cruising Adventures */}
-      <div className="flex flex-col justify-center items-center mt-8 gap-4">
+      {/* <div className="flex flex-col justify-center items-center mt-8 gap-4">
         <p className="font-bold text-lg">Overnight Cruising Adventures</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-4">
           <ImageCard link={boca} name="BOCA GRANDE - GASPARILLA" />
@@ -149,7 +161,7 @@ const MembershipPage = () => {
           <ImageCard link={captiva} name="CAPTIVA & SANIBEL ISLAND" />
           <ImageCard link={marco} name="MARCO ISLAND" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

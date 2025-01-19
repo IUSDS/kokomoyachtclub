@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaRegCheckCircle } from 'react-icons/fa';
-import useAuthStore from "../authStore";
 
 const MembershipLevels = () => {
     const membershipData = [
@@ -70,7 +69,6 @@ const MembershipLevels = () => {
             buttonText: "Request a Member Packet",
         }
     ];
-    const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
     return (
         <div className="bg-gray-100 space-y-8 py-20 px-6 md:px-16">
@@ -96,8 +94,7 @@ const MembershipLevels = () => {
                     {membershipData.map((tier, index) => (
                         <motion.div
                             key={index}
-                            className={`px-4 md:h-[510px] w-full flex flex-col items-center ${tier.bgColor} rounded-lg space-y-4 py-4 ${!isLoggedIn ? "blur-sm" : ""
-                                }`}
+                            className={`px-4 md:h-[510px] w-full flex flex-col items-center ${tier.bgColor} rounded-lg space-y-4 py-4`}
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true, amount: 0.3 }}
