@@ -4,6 +4,8 @@ import UpdateMembership from '../components/updateMembershipForm';
 import UpdateUserDetails from '../components/updateUserDetailsForm';
 import AddRemoveMembers from '../components/addremoveMembersForm';
 import CreateInvoice from '../components/createInvoiceForm';
+import PreviousBookings from '../components/PreviousBookings';
+import ExportData from '../components/ExportData';
 
 const Admin = () => {
   const [activeComponent, setActiveComponent] = useState(null);
@@ -15,6 +17,8 @@ const Admin = () => {
     updateUserDetails: <UpdateUserDetails />,
     addRemoveMembers: <AddRemoveMembers />,
     createInvoice: <CreateInvoice />,
+    previousBookings: <PreviousBookings />,
+    exportData: <ExportData />
   };
 
   // Buttons
@@ -24,6 +28,8 @@ const Admin = () => {
     { label: 'Update User Details', type: 'updateUserDetails' },
     { label: 'Add/Remove Members', type: 'addRemoveMembers' },
     { label: 'Create Invoice', type: 'createInvoice' },
+    { label: 'Previous Bookings', type: 'previousBookings' },
+    { label: 'Export Data', type: 'exportData' },
   ];
 
   // Handle button click to switch active component
