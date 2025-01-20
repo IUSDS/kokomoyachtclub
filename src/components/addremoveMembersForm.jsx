@@ -9,6 +9,7 @@ const AddRemoveMembersForm = () => {
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [emergencyPhoneNumber, setEmergencyPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [membershipType, setMembershipType] = useState('');
   const [points, setPoints] = useState('');
@@ -37,6 +38,7 @@ const AddRemoveMembersForm = () => {
       setPassword('');
       setAddress('');
       setPhoneNumber('');
+      setEmergencyPhoneNumber('');
       setEmail('');
       setMembershipType('');
       setPoints('');
@@ -51,6 +53,7 @@ const AddRemoveMembersForm = () => {
     setPassword('');
     setAddress('');
     setPhoneNumber('');
+    setEmergencyPhoneNumber('');
     setEmail('');
     setMembershipType('');
     setPoints('');
@@ -100,6 +103,7 @@ const AddRemoveMembersForm = () => {
       formData.append('first_name', firstName);
       formData.append('last_name', lastName);
       formData.append('phone_number', phoneNumber);
+      formData.append('emergency_phone_number', emergencyPhoneNumber);
       formData.append('address', address);
       formData.append('email_id', email);
       formData.append('membership_type', membershipType);
@@ -172,6 +176,7 @@ const AddRemoveMembersForm = () => {
                   { label: 'Password', value: password, setter: setPassword, type: 'password' },
                   { label: 'Address', value: address, setter: setAddress },
                   { label: 'Phone Number', value: phoneNumber, setter: setPhoneNumber },
+                  { label: 'Emergency Phone Number', value: emergencyPhoneNumber, setter: setEmergencyPhoneNumber},
                   { label: 'Email', value: email, setter: setEmail, type: 'email' },
                   { label: 'Membership Type', value: membershipType, setter: setMembershipType, isDropdown: true },
                   { label: 'Points', value: points, setter: setPoints, type: 'number' },
