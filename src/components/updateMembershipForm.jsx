@@ -35,7 +35,7 @@ const AddPointsForm = () => {
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e) => {
     try {
       const formData = new FormData();
       formData.append('username', username);
@@ -49,37 +49,32 @@ const AddPointsForm = () => {
         body: formData,
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to update membership');
+      if (response.ok) {
+        setSuccessMessage(true);
+        await handleSubmit(e); // Refresh data after successful update
+        setTimeout(() => {
+          setSuccessMessage(false);
+        }, 4000);
+      } else {
+        setErrorMessage('Failed to add member.');
+        console.log(data.message);
       }
 
       const data = await response.json();
 
-      if (data.status === "success") {
-        // console.log('Membership updated successfully:', data.message);
-        setSuccessMessage(true);
-        setTimeout(() => {
-          setSuccessMessage(false);
-          setMembershipType('');
-        }, 3000);
-      } else {
-        alert(data.message);
-      }
     } catch (error) {
       console.error('Error updating membership:', error);
-      setErrorMessage('Failed to update membership. Please try again.');
+      setErrorMessage('Failed to add membership. Please try again.');
       setTimeout(() => {
         setSuccessMessage(false);
         setMembershipType('');
-      }, 3000);
+      }, 4000);
     }
   };
 
   const handleCancel = () => {
     setUsername('');
     setUserData(null);
-    setPoints('');
     setSuccessMessage(false);
   };
 
