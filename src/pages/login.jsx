@@ -82,19 +82,21 @@ const login = () => {
                   </form>
                 </div>
 
-                {/* Invalid credentials */}
-                {errorMessage && (
-                  <div className="self-stretch text-red-500 text-sm">
-                    {errorMessage}
-                  </div>
-                )}
-
                 <button
                   className="self-stretch cursor-pointer py-2 rounded-2xl hover:bg-opacity-80 transform duration-200 [border:none] text-center text-sm font-medium font-plus-jakarta-sans text-gray-100 bg-midnightblue"
                   onClick={handleLogin}
                 >
                   LOGIN
                 </button>
+
+                <p className="text-midnightblue">forget password</p>
+
+                {/* Invalid credentials */}
+                {errorMessage && (
+                  <div className="self-stretch text-red-500 text-sm">
+                    {errorMessage}
+                  </div>
+                )}
               </div>
             </div>
           </div>

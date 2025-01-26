@@ -23,13 +23,13 @@ const MembershipLevels = () => {
         {
             title: "Gold",
             description: "Our most popular, ideal for snowbirds",
-            points: "1,850 Mariner Points Annually",
+            points: "3,350 Mariner Points Annually",
             benefits: [
-                "2 Open Reservations",
-                "12 Weekend Outings Annually",
+                "4 Open Reservations",
+                "24 Weekend Outings Annually",
                 "Unlimited Last-Minute Reservations",
-                "1 Overnight Trip Included",
-                "Base Tier Scheduling",
+                "2 Overnight Trip Included",
+                "Gold Priority Tier Scheduling",
             ],
             bgColor: "bg-midnightblue",
             borderColor: 'border-white',

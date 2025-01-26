@@ -3,7 +3,7 @@ import imgIcon from '../assets/images/imageIcon.png';
 import { API_URL } from '../constant';
 import { SiSuperuser } from 'react-icons/si';
 
-const AddPointsForm = () => {
+const UpdateMembershipForm = () => {
   const [username, setUsername] = useState('');
   const [membershipType, setMembershipType] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
@@ -199,4 +199,4 @@ const AddPointsForm = () => {
   );
 };
 
-export default AddPointsForm;
+export default UpdateMembershipForm;
