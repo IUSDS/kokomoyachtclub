@@ -468,7 +468,7 @@ const AddRemoveMembersForm = () => {
     { label: 'Personal', type: 'personal' },
     { label: 'Family', type: 'family' },
     { label: 'ACH', type: 'ach' },
-    { label: 'Emergency', type: 'emergency' },
+    { label: 'Emergency Contact', type: 'emergency' },
   ]
 
   const handleSubmit = (e) => {
