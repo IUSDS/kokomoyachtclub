@@ -3,16 +3,18 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import ResponsiveMenu from "./responsiveMenu";
 import { FaUser } from "react-icons/fa";
 import logo from "../assets/logos/logo.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuthStore from '../authStore';
 import { div } from 'framer-motion/client';
 
 const Popup = ({ isVisible, closePopup }) => {
   const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout(); 
     closePopup();
+    navigate("/login");
   };
 
   if (!isVisible) return null;
