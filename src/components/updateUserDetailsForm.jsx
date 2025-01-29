@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import imgIcon from '../assets/images/imageIcon.png';
+import imgIcon from '../assets/images/imageIcon.webp';
 import { API_URL } from '../constant';
 
 const UpdateUserDetailsForm = () => {

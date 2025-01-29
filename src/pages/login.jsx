@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import hero_image from "../assets/images/hero.png";
+import hero_image from "../assets/images/hero.webp";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../constant";
 import useAuthStore from "../authStore";
