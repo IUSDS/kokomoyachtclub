@@ -63,7 +63,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setPhone('');
       setEmail('');
 
-      window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/pdfs/Kokomo+Yacht+Club+Brochure+8-24_compressed.pdf","_blank");
+      window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/Kokomo_Yacht_Club_General_Brohure.pdf","_blank");
 
       // fetch("https://13.210.171.75/visitors/get-pdf", {
       //   method: "GET",
