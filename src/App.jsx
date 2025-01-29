@@ -11,27 +11,31 @@ import Fleet from './pages/fleet';
 import Membership from './pages/membership';
 import Founders from './pages/founders';
 import Contact from './pages/contact';
+import ForgotPassword from './pages/ForgotPassword';
+import NewPassword from './pages/NewPassword';
 import { Routes, Route } from 'react-router-dom';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   return (
-    <div className='overflow-x-hidden font-jakarta'>
+    <div className="flex flex-col min-h-screen overflow-x-hidden font-jakarta">
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/founders' element={<Founders />} />
-        <Route path='/fleet' element={<Fleet />} />
-        <Route path='/members' element={<Membership />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/membership' element={<MembershipPage />} />
-        <Route path='/membership/plan_experiences' element={<PlanYourExpriences />} />
-        <Route path='/membership/previous_booking' element={<PreviousBookings />} />
-        <Route path='/admin' element={<AdminPage />} />
-      </Routes>
+      <div className="flex-grow">
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/founders' element={<Founders />} />
+          <Route path='/fleet' element={<Fleet />} />
+          <Route path='/members' element={<Membership />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/membership' element={<MembershipPage />} />
+          <Route path='/membership/plan_experiences' element={<PlanYourExpriences />} />
+          <Route path='/membership/previous_booking' element={<PreviousBookings />} />
+          <Route path='/admin' element={<AdminPage />} />
+          <Route path='/forgot_password' element={<ForgotPassword />} />
+          <Route path='/new_password' element={<NewPassword />} />
+        </Routes>
+      </div>
       <Footer />
-      {/* <SpeedInsights /> */}
     </div>
   )
 }

@@ -39,6 +39,10 @@ const login = () => {
     }
   };
 
+  const handleForgetPassword = () => {
+    navigate('/forgot_password');
+  }
+
   return (
     <>
       {/* Hero Section Image */}
@@ -89,7 +93,7 @@ const login = () => {
                   LOGIN
                 </button>
 
-                <p className="text-midnightblue">forget password</p>
+                <p className="text-midnightblue cursor-pointer hover:text-blue-600 transform duration-200" onClick={handleForgetPassword}>Forgot Password?</p>
 
                 {/* Invalid credentials */}
                 {errorMessage && (
