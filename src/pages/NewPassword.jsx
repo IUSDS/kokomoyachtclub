@@ -1,15 +1,27 @@
 import React, { useState } from 'react'
 import { TiTick } from "react-icons/ti";
+import CustomAlert from '../components/CustomAlert';
 
 const NewPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [successMsg, setSuccessMsg] = useState(false);
+  const [alertopen, setAlertOpen] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertBody, setAlertBody] = useState('');
   const handleResetReq = () => {
+    if (password !== confirmPassword) {
+      setAlertTitle('Try again');
+      setAlertBody('Please enter you password carefully!')
+      setAlertOpen(true);
+    }
     setSuccessMsg(true);
     setTimeout(() => {
       setSuccessMsg(false);
     }, 3000)
+  }
+  const handleAlertColse = () => {
+    setAlertOpen(false);
   }
   return (
     <div className='flex flex-col justify-center items-center gap-2 py-20'>
@@ -22,14 +34,14 @@ const NewPassword = () => {
         >
           <input
             className="font-plus-jakarta-sans px-3 text-mini [outline:none] bg-steelblue rounded-2xl self-stretch h-10 placeholder-gray-300"
-            type="text"
+            type="password"
             placeholder="Enter New Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
             className="font-plus-jakarta-sans px-3 text-mini [outline:none] bg-steelblue rounded-2xl self-stretch h-10 placeholder-gray-300"
-            type="text"
+            type="password"
             placeholder="Re-Enter New Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -49,6 +61,9 @@ const NewPassword = () => {
           </div>
         )}
       </div>
+
+      {/* Custom Alert Section */}
+      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
     </div>
   )
 }
