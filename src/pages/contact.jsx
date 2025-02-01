@@ -92,7 +92,7 @@ const Contact = () => {
 
     // 4. Submit Form
     try {
-      const response = await fetch("https://api.kokomoyachtclub.vip/visitors/add-visitor", {
+      const response = await fetch("https://api.kokomoyachtclub.vip/vistors/become-a-member", {
         method: "POST",
         headers: {
           accept: "application/json",

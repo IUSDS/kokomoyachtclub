@@ -38,7 +38,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     }
 
     try {
-      const response = await fetch('https://api.kokomoyachtclub.vip/visitors/add-visitor', {
+      const response = await fetch('https://api.kokomoyachtclub.vip/vistors/add-visitors-details', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
