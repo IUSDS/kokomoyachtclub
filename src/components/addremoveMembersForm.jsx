@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { API_URL } from '../constant';
-import { button, div, p } from 'framer-motion/client';
 import useFormStore from '../useFormStore';
-import CustomAlert from '../components/CustomAlert';
 
 const PersonalInfoTab = ({ next }) => {
   const {
@@ -51,6 +48,7 @@ const PersonalInfoTab = ({ next }) => {
   };
 
   const handleValidate = async (field, value) => {
+    console.log(value);
     try {
       let endpoint = "";
       if (field === "Username") {
@@ -66,11 +64,14 @@ const PersonalInfoTab = ({ next }) => {
         console.log(data);
 
         if (data.status === 'success') {
-          setUsernameVerificationMessage(`${field} is available.`);
+          setUsernameVerificationMessage(`${field} is available`);
           setUsernameAvailable(true);
         } else {
-          setUsernameVerificationMessage(`${field} already exists.`);
+          setUsernameVerificationMessage(`${field} already exists`);
           setUsernameAvailable(false);
+          setTimeout(()=>{
+            setUsernameVerificationMessage('');
+          },5000);
         }
       } else if (field === "Email") {
         endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?email=${value}`; const response = await fetch(endpoint, {
@@ -84,11 +85,14 @@ const PersonalInfoTab = ({ next }) => {
         console.log(data);
 
         if (data.status === 'success') {
-          setEmailVerificationMessage(`${field} is available.`);
+          setEmailVerificationMessage(`${field} is available`);
           setEmailAvailable(true);
         } else {
-          setEmailVerificationMessage(`${field} already exists.`);
+          setEmailVerificationMessage(`${field} already exists`);
           setEmailAvailable(false);
+          setTimeout(()=>{
+            setEmailVerificationMessage('');
+          },5000);
         }
       }
     } catch (error) {
@@ -114,7 +118,7 @@ const PersonalInfoTab = ({ next }) => {
         { label: 'Address 2', value: address2, setter: setAddress2, required: false },
         { label: 'City', value: city, setter: setCity, required: true },
         { label: 'State', value: state, setter: setState, required: true },
-        { label: 'Zip', value: zip, setter: setZip, required: true },
+        { label: 'Zip', type: 'number', value: zip, setter: setZip, required: true },
         { label: 'Phone Number', type: 'number', value: phoneNumber, setter: setPhoneNumber, required: true },
         { label: 'Email', value: email, setter: setEmail, type: 'email', required: true, validate: true },
         { label: 'Membership Type', value: membershipType, setter: setMembershipType, isDropdown: true, required: true },
@@ -304,7 +308,7 @@ const FamilyInfoTab = ({ next }) => {
           <div className="flex flex-col px-2 py-2">
             <p className="text-sm">Mobile</p>
             <input
-              type="text"
+              type="number"
               value={children[index].mobile}
               onChange={(e) => handleChildChange(index, 'mobile', e.target.value)}
               placeholder="Enter child's mobile number"
@@ -452,7 +456,7 @@ const EmergencyInfoTab = () => {
 
       if (response.ok) {
         setMessage({ type: "success", text: "Member added successfully!" });
-        // resetForm(); // Reset form on success
+        resetForm(); // Reset form on success
       } else {
         setMessage({ type: "error", text: data.message || "Failed to add member." });
       }
