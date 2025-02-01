@@ -119,7 +119,7 @@ const PersonalInfoTab = ({ next }) => {
         { label: 'Email', value: email, setter: setEmail, type: 'email', required: true, validate: true },
         { label: 'Membership Type', value: membershipType, setter: setMembershipType, isDropdown: true, required: true },
         { label: 'Points', value: points, setter: setPoints, type: 'number', required: true },
-        { label: 'Picture', value: picture, setter: setPicture, isFile: true, required: false },
+        { label: 'Picture', value: picture, setter: setPicture, isFile: true, required: true },
         { label: 'Referral Information', value: referral, setter: setReferral, required: false }
       ].map(({ label, value, setter, type = 'text', isDropdown, isFile, required, validate }) => (
         <div className="flex flex-col px-2 py-2" key={label}>
@@ -347,19 +347,19 @@ const EmergencyInfoTab = () => {
     spouse, spouseMobile, spouseEmail, childNum, children,
 
     // Emergency Contact Info
-    emergencyContactName, emergencyEmail, emergencyPhone,
+    emergencyContactName, emergencyEmail, emergencyPhone, emergencyRelationship, setEmergencyContactName, setEmergencyEmail, setEmergencyPhone, setEmergencyRelationship,
 
     // ACH Info
     depositoryName, branch, achCity, achState, achZip,
     routingNumber, accountNumber, nameOnAccount, accountType,
 
     // Zustand store functions
-    isPersonalInfoComplete, isAchInfoComplete, resetForm
+    isPersonalInfoComplete, isAchInfoComplete, isEmergencyInfoComplete, resetForm
   } = useFormStore();
 
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const isButtonEnabled = isPersonalInfoComplete() && isAchInfoComplete();
+  const isButtonEnabled = isPersonalInfoComplete() && isAchInfoComplete() && isEmergencyInfoComplete();
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -410,6 +410,8 @@ const EmergencyInfoTab = () => {
     formData.append("member_state", state); // API uses "member_state"
     formData.append("member_zip", zip); // API uses "member_zip"
     formData.append("branch", branch);
+    formData.append("city", achCity);
+    formData.append("state", achState);
     formData.append("depository_name", depositoryName);
     formData.append("routing_no", routingNumber);
     formData.append("acc_no", accountNumber);
@@ -434,12 +436,15 @@ const EmergencyInfoTab = () => {
     formData.append("emergency_name", emergencyContactName);
     formData.append("emergency_email", emergencyEmail);
     formData.append("emergency_contact", emergencyPhone);
-    formData.append("emergency_relationship", "friend"); // Static Relationship as per cURL
+    formData.append("emergency_relationship", emergencyRelationship);
 
     try {
-      const response = await fetch("http://api.kokomoyachtclub.vip/add-member/", {
+      const response = await fetch("https://api.kokomoyachtclub.vip/create-member/add-member/", {
         method: "POST",
-        body: formData, // Sending FormData
+        body: formData, 
+        headers: {
+          "Accept": "application/json", 
+        },
       });
 
       const data = await response.json();
@@ -464,7 +469,7 @@ const EmergencyInfoTab = () => {
 
       {/* Emergency Contact Name */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Contact Name</p>
+        <p className="text-sm">Emergency Contact Name*</p>
         <input
           type="text"
           value={emergencyContactName}
@@ -476,7 +481,7 @@ const EmergencyInfoTab = () => {
 
       {/* Emergency Email */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Email</p>
+        <p className="text-sm">Emergency Email*</p>
         <input
           type="email"
           value={emergencyEmail}
@@ -488,12 +493,24 @@ const EmergencyInfoTab = () => {
 
       {/* Emergency Phone */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Phone</p>
+        <p className="text-sm">Emergency Phone*</p>
         <input
           type="text"
           value={emergencyPhone}
           onChange={(e) => setEmergencyPhone(e.target.value)}
           placeholder="Enter emergency contact phone number"
+          className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+        />
+      </div>
+
+      {/* Emergency Relationship */}
+      <div className="flex flex-col px-2 py-2">
+        <p className="text-sm">Emergency Relationship*</p>
+        <input
+          type="text"
+          value={emergencyRelationship}
+          onChange={(e) => setEmergencyRelationship(e.target.value)}
+          placeholder="Enter emergency relationship"
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
       </div>

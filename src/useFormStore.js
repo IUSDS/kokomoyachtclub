@@ -69,6 +69,8 @@ const useFormStore = create(
       setEmergencyEmail: (emergencyEmail) => set({ emergencyEmail }),
       emergencyPhone: "",
       setEmergencyPhone: (emergencyPhone) => set({ emergencyPhone }),
+      emergencyRelationship: "",
+      setEmergencyRelationship: (emergencyRelationship) => set({ emergencyRelationship }),
 
       // ACH Info
       depositoryName: "",
@@ -163,6 +165,17 @@ const useFormStore = create(
           state.accountNumber &&
           state.nameOnAccount &&
           state.accountType
+        );
+      },
+
+      // Derived state: Check if all Emergency info fields are filled
+      isEmergencyInfoComplete: () => {
+        const state = get();
+        return (
+          state.emergencyContactName &&
+          state.emergencyEmail &&
+          state.emergencyPhone &&
+          state.emergencyRelationship 
         );
       },
     }),
