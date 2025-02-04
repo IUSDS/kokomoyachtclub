@@ -13,11 +13,15 @@ const login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/validate-user/validate-user/?username=${user}&password=${password}`, {
+      const formData = new FormData();
+      formData.append("username", user);
+      formData.append("password", password);
+
+      const response = await fetch("https://api.kokomoyachtclub.vip/validate-user/validate-user/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: '',
+        body: formData
       });
+
 
       const data = await response.json();
       console.log(data)

@@ -284,7 +284,7 @@ const FamilyInfoTab = ({ next }) => {
       <div className="flex flex-col px-2 py-2">
         <p className="text-sm">Spouse Mobile</p>
         <input
-          type="text"
+          type="number"
           value={spouseMobile}
           onChange={(e) => setSpouseMobile(e.target.value)}
           placeholder="Enter spouse's mobile number"
