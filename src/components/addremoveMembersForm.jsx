@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import useFormStore from '../useFormStore';
+import CustomAlert from './CustomAlert';
 
 const PersonalInfoTab = ({ next }) => {
   const {
@@ -25,6 +26,9 @@ const PersonalInfoTab = ({ next }) => {
   } = useFormStore();
   const [usernameVerificationMessage, setUsernameVerificationMessage] = useState("");
   const [emailVerificationMessage, setEmailVerificationMessage] = useState("");
+  const [alertopen, setAlertOpen] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertBody, setAlertBody] = useState('');
 
   const handlePictureChange = (e) => setPicture(e.target.files[0]);
 
@@ -43,7 +47,8 @@ const PersonalInfoTab = ({ next }) => {
       membershipType &&
       points &&
       usernameAvailable &&
-      emailAvailable
+      emailAvailable &&
+      picture
     );
   };
 
@@ -54,7 +59,7 @@ const PersonalInfoTab = ({ next }) => {
       if (field === "Username") {
         endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?username=${value}`;
         const response = await fetch(endpoint, {
-          method: "GET", // Use GET since you're passing parameters in the URL
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
@@ -69,13 +74,13 @@ const PersonalInfoTab = ({ next }) => {
         } else {
           setUsernameVerificationMessage(`${field} already exists`);
           setUsernameAvailable(false);
-          setTimeout(()=>{
+          setTimeout(() => {
             setUsernameVerificationMessage('');
-          },5000);
+          }, 5000);
         }
       } else if (field === "Email") {
         endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?email=${value}`; const response = await fetch(endpoint, {
-          method: "GET", // Use GET since you're passing parameters in the URL
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
@@ -90,9 +95,9 @@ const PersonalInfoTab = ({ next }) => {
         } else {
           setEmailVerificationMessage(`${field} already exists`);
           setEmailAvailable(false);
-          setTimeout(()=>{
+          setTimeout(() => {
             setEmailVerificationMessage('');
-          },5000);
+          }, 5000);
         }
       }
     } catch (error) {
@@ -102,8 +107,28 @@ const PersonalInfoTab = ({ next }) => {
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    if (!emailRegex.test(email)) {
+      setAlertTitle("Invalid Email!");
+      setAlertBody("Please enter a valid email address.");
+      setAlertOpen(true);
+      return false;
+    }
+    return true;
   };
+
+  const validateNumber = (phone) => {
+    if (!/^\d{10}$/.test(phone)) {
+      setAlertTitle("Invalid Number!");
+      setAlertBody("Please enter a 10-digit mobile number.");
+      setAlertOpen(true);
+      return false;
+    }
+    return true;
+  };
+
+  const handleAlertColse = () => {
+    setAlertOpen(false);
+  }
 
   return (
     <div>
@@ -185,14 +210,25 @@ const PersonalInfoTab = ({ next }) => {
           )}
         </div>
       ))}
+      <p className='text-sm text-center'>Please validate username and email before clicking next.</p>
       <button
         disabled={!isFormComplete()}
         className={`mt-4 px-4 py-2 rounded-md w-full ${isFormComplete() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
           }`}
-        onClick={next}
+        onClick={() => {
+          const isEmailValid = validateEmail(email);
+          const isPhoneValid = validateNumber(phoneNumber);
+          // console.log('next is clicked!!!')
+
+          // Only proceed to the next tab if both email and phone number are valid
+          if (isEmailValid && isPhoneValid) {
+            next();
+          }
+        }}
       >
         Next
       </button>
+      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
     </div>
   );
 };
@@ -342,130 +378,9 @@ const FamilyInfoTab = ({ next }) => {
 
 const EmergencyInfoTab = () => {
   const {
-    // Personal Info
-    username, firstName, lastName, password, dl, company, referral,
-    address1, address2, city, state, zip, phoneNumber, email, membershipType, points,
-    picture,
-
-    // Family Info
-    spouse, spouseMobile, spouseEmail, childNum, children,
-
     // Emergency Contact Info
     emergencyContactName, emergencyEmail, emergencyPhone, emergencyRelationship, setEmergencyContactName, setEmergencyEmail, setEmergencyPhone, setEmergencyRelationship,
-
-    // ACH Info
-    depositoryName, branch, achCity, achState, achZip,
-    routingNumber, accountNumber, nameOnAccount, accountType,
-
-    // Zustand store functions
-    isPersonalInfoComplete, isAchInfoComplete, isEmergencyInfoComplete, resetForm
   } = useFormStore();
-
-  const [message, setMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const isButtonEnabled = isPersonalInfoComplete() && isAchInfoComplete() && isEmergencyInfoComplete();
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!/^\d{10}$/.test(phoneNumber)) {
-      setAlertTitle("Invalid Number!");
-      setAlertBody("Please enter a 10-digit mobile number.");
-      setAlertOpen(true);
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setAlertTitle("Invalid Email!");
-      setAlertBody("Please enter a valid email.");
-      setAlertOpen(true);
-      return;
-    }
-    if (!isButtonEnabled) {
-      setMessage({ type: "error", text: "Please complete all required fields before submitting." });
-      return;
-    }
-
-    setLoading(true);
-    setMessage(null);
-
-    // Create FormData object for multipart/form-data
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("password", password);
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("phone_number", phoneNumber);
-    formData.append("email_id", email); // API expects "email_id" instead of "email"
-    formData.append("membership_type", membershipType);
-    formData.append("points", points);
-    formData.append("file", picture); // Ensure the file is sent
-    formData.append("dl", dl || ""); // Driver's License
-    formData.append("referral_information", referral || ""); // Referral Info
-    formData.append("company_name", company || ""); // Company Name
-    formData.append("member_address1", address1); // API uses "member_address1"
-    formData.append("member_address2", address2 || ""); // API uses "member_address2"
-    formData.append("member_city", city); // API uses "member_city"
-    formData.append("member_state", state); // API uses "member_state"
-    formData.append("member_zip", zip); // API uses "member_zip"
-    formData.append("branch", branch);
-    formData.append("city", achCity);
-    formData.append("state", achState);
-    formData.append("depository_name", depositoryName);
-    formData.append("routing_no", routingNumber);
-    formData.append("acc_no", accountNumber);
-    formData.append("name_on_acc", nameOnAccount);
-    formData.append("type_of_acc", accountType);
-    formData.append("date_sub", "2025-01-31"); // Static Date for submission
-    formData.append("zip_code", zip);
-
-    // Family Info
-    formData.append("spouse", spouse);
-    formData.append("spouse_phone", spouseMobile);
-    formData.append("spouse_email", spouseEmail);
-    formData.append("child_num", childNum);
-
-    // Append children details dynamically
-    formData.append("child_names", children.map((child) => child.name).join(","));
-    formData.append("child_dobs", children.map((child) => child.dob).join(","));
-    formData.append("child_phone_numbers", children.map((child) => child.mobile).join(","));
-    formData.append("child_emails", children.map((child) => child.email).join(","));
-
-    // Emergency Contact Info
-    formData.append("emergency_name", emergencyContactName);
-    formData.append("emergency_email", emergencyEmail);
-    formData.append("emergency_contact", emergencyPhone);
-    formData.append("emergency_relationship", emergencyRelationship);
-
-    try {
-      const response = await fetch("https://api.kokomoyachtclub.vip/create-member/add-member/", {
-        method: "POST",
-        body: formData, 
-        headers: {
-          "Accept": "application/json", 
-        },
-      });
-
-      const data = await response.json();
-      console.log(data);
-
-      if (response.ok) {
-        setMessage({ type: "success", text: "Member added successfully!" });
-        resetForm(); // Reset form on success
-      } else {
-        setMessage({ type: "error", text: data.message || "Failed to add member." });
-      }
-    } catch (error) {
-      setMessage({ type: "error", text: "Network error. Please try again." });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div>
@@ -478,7 +393,7 @@ const EmergencyInfoTab = () => {
           type="text"
           value={emergencyContactName}
           onChange={(e) => setEmergencyContactName(e.target.value)}
-          placeholder="Enter emergency contact name"
+          placeholder="Enter name"
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
       </div>
@@ -490,19 +405,19 @@ const EmergencyInfoTab = () => {
           type="email"
           value={emergencyEmail}
           onChange={(e) => setEmergencyEmail(e.target.value)}
-          placeholder="Enter emergency contact email"
+          placeholder="Enter email"
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
       </div>
 
       {/* Emergency Phone */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Phone*</p>
+        <p className="text-sm">Emergency Contact Number*</p>
         <input
-          type="text"
+          type="number"
           value={emergencyPhone}
           onChange={(e) => setEmergencyPhone(e.target.value)}
-          placeholder="Enter emergency contact phone number"
+          placeholder="Enter number"
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
       </div>
@@ -514,27 +429,10 @@ const EmergencyInfoTab = () => {
           type="text"
           value={emergencyRelationship}
           onChange={(e) => setEmergencyRelationship(e.target.value)}
-          placeholder="Enter emergency relationship"
+          placeholder="Enter relationship"
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
       </div>
-
-      {/* Success/Error Message */}
-      {message && (
-        <p className={`text-sm mt-2 ${message.type === "success" ? "text-green-500" : "text-red-500"}`}>
-          {message.text}
-        </p>
-      )}
-
-      {/* Submit Button */}
-      <button
-        onClick={handleSubmit}
-        disabled={!isButtonEnabled || loading}
-        className={`mt-4 px-4 py-2 rounded-md w-full ${isButtonEnabled && !loading ? "bg-midnightblue text-white" : "bg-gray-300 text-gray-500 cursor-not-allowed"
-          }`}
-      >
-        {loading ? "Submitting..." : "Add Member"}
-      </button>
     </div>
   );
 };
@@ -622,7 +520,7 @@ const AchInfoTab = ({ next }) => {
       <div className="flex flex-col px-2 py-2">
         <p className="text-sm">Zip*</p>
         <input
-          type="text"
+          type="number"
           value={achZip}
           onChange={(e) => setAchZip(e.target.value)}
           placeholder="Enter zip code"
@@ -634,7 +532,7 @@ const AchInfoTab = ({ next }) => {
       <div className="flex flex-col px-2 py-2">
         <p className="text-sm">Routing Number*</p>
         <input
-          type="text"
+          type="number"
           value={routingNumber}
           onChange={(e) => setRoutingNumber(e.target.value)}
           placeholder="Enter routing number"
@@ -646,7 +544,7 @@ const AchInfoTab = ({ next }) => {
       <div className="flex flex-col px-2 py-2">
         <p className="text-sm">Account Number*</p>
         <input
-          type="text"
+          type="number"
           value={accountNumber}
           onChange={(e) => setAccountNumber(e.target.value)}
           placeholder="Enter account number"
@@ -707,11 +605,136 @@ const AchInfoTab = ({ next }) => {
 };
 
 const AddRemoveMembersForm = () => {
+  const {
+    // Personal Info
+    username, firstName, lastName, password, dl, company, referral,
+    address1, address2, city, state, zip, phoneNumber, email, membershipType, points,
+    picture,
+
+    // Family Info
+    spouse, spouseMobile, spouseEmail, childNum, children,
+
+    // Emergency Contact Info
+    emergencyContactName, emergencyEmail, emergencyPhone, emergencyRelationship,
+
+    // ACH Info
+    depositoryName, branch, achCity, achState, achZip,
+    routingNumber, accountNumber, nameOnAccount, accountType,
+
+    // Zustand store functions
+    isPersonalInfoComplete, isAchInfoComplete, isEmergencyInfoComplete, resetForm
+  } = useFormStore();
+
   const [activeComponent, setActiveComponent] = useState(null);
   const [infoTab, setInfoTab] = useState('personal');
   const [alertopen, setAlertOpen] = useState(false);
   const [alertTitle, setAlertTitle] = useState('');
   const [alertBody, setAlertBody] = useState('');
+  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const isButtonEnabled = isPersonalInfoComplete() && isAchInfoComplete() && isEmergencyInfoComplete();
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!/^\d{10}$/.test(phoneNumber)) {
+      setAlertTitle("Invalid Number!");
+      setAlertBody("Please enter a 10-digit mobile number.");
+      setAlertOpen(true);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setAlertTitle("Invalid Email!");
+      setAlertBody("Please enter a valid email.");
+      setAlertOpen(true);
+      return;
+    }
+    if (!isButtonEnabled) {
+      setMessage({ type: "error", text: "Please complete all required fields before submitting." });
+      return;
+    }
+
+    setLoading(true);
+    setMessage(null);
+
+    // Create FormData object for multipart/form-data
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("password", password);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("phone_number", phoneNumber);
+    formData.append("email_id", email); // API expects "email_id" instead of "email"
+    formData.append("membership_type", membershipType);
+    formData.append("points", points);
+    formData.append("file", picture); // Ensure the file is sent
+    formData.append("dl", dl || ""); // Driver's License
+    formData.append("referral_information", referral || ""); // Referral Info
+    formData.append("company_name", company || ""); // Company Name
+    formData.append("member_address1", address1); // API uses "member_address1"
+    formData.append("member_address2", address2 || ""); // API uses "member_address2"
+    formData.append("member_city", city); // API uses "member_city"
+    formData.append("member_state", state); // API uses "member_state"
+    formData.append("member_zip", zip); // API uses "member_zip"
+    formData.append("branch", branch);
+    formData.append("city", achCity);
+    formData.append("state", achState);
+    formData.append("depository_name", depositoryName);
+    formData.append("routing_no", routingNumber);
+    formData.append("acc_no", accountNumber);
+    formData.append("name_on_acc", nameOnAccount);
+    formData.append("type_of_acc", accountType);
+    formData.append("date_sub", "2025-01-31"); // Static Date for submission
+    formData.append("zip_code", zip);
+
+    // Family Info
+    formData.append("spouse", spouse);
+    formData.append("spouse_phone", spouseMobile);
+    formData.append("spouse_email", spouseEmail);
+    formData.append("child_num", childNum);
+
+    // Append children details dynamically
+    formData.append("child_names", children.map((child) => child.name).join(","));
+    formData.append("child_dobs", children.map((child) => child.dob).join(","));
+    formData.append("child_phone_numbers", children.map((child) => child.mobile).join(","));
+    formData.append("child_emails", children.map((child) => child.email).join(","));
+
+    // Emergency Contact Info
+    formData.append("emergency_name", emergencyContactName);
+    formData.append("emergency_email", emergencyEmail);
+    formData.append("emergency_contact", emergencyPhone);
+    formData.append("emergency_relationship", emergencyRelationship);
+
+    try {
+      const response = await fetch("https://api.kokomoyachtclub.vip/create-member/add-member/", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Accept": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      if (response.ok) {
+        setMessage({ type: "success", text: "Member added successfully!" });
+        // resetForm(); // Reset form on success
+      } else {
+        setMessage({ type: "error", text: data.message || "Failed to add member." });
+      }
+    } catch (error) {
+      setMessage({ type: "error", text: "Network error. Please try again." });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const actions = [
     { label: 'Add Member', type: 'addMember' },
@@ -802,6 +825,23 @@ const AddRemoveMembersForm = () => {
               <EmergencyInfoTab next={handleNext} />
             )}
           </div>
+
+          {/* Success/Error Message */}
+          {message && (
+            <p className={`text-center text-sm mt-2 ${message.type === "success" ? "text-green-500" : "text-red-500"}`}>
+              {message.text}
+            </p>
+          )}
+
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmit}
+            disabled={!isButtonEnabled || loading}
+            className={`mt-4 px-4 py-2 rounded-md w-full ${isButtonEnabled && !loading ? "bg-midnightblue text-white" : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              }`}
+          >
+            {loading ? "Submitting..." : "Add Member"}
+          </button>
         </div>
       )}
 
@@ -834,7 +874,8 @@ const AddRemoveMembersForm = () => {
           </form>
         </div>
       )}
-    </div>  
+      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
+    </div>
   );
 };
 
