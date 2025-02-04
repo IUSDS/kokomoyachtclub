@@ -725,7 +725,7 @@ const AddRemoveMembersForm = () => {
 
       if (response.ok) {
         setMessage({ type: "success", text: "Member added successfully!" });
-        // resetForm(); // Reset form on success
+        resetForm(); // Reset form on success
       } else {
         setMessage({ type: "error", text: data.message || "Failed to add member." });
       }
