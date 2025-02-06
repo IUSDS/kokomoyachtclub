@@ -18,15 +18,19 @@ const ForgotPassword = () => {
       });
 
       if (!response.ok) {
+        setSuccessMsg(false);
         setFailMsg(true);
+        setTimeout(() => {
+          setFailMsg(false);
+        }, 10000);
         throw new Error("Failed to send reset request");
       }
 
+      setFailMsg(false);
       setSuccessMsg(true);
-
-      // setTimeout(() => {
-      //   setSuccessMsg(false);
-      // }, 3000);
+      setTimeout(() => {
+        setSuccessMsg(false);
+      }, 10000);
 
     } catch (error) {
       console.error("Error:", error);
