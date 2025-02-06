@@ -58,7 +58,7 @@ const ExportData = () => {
       // Create a hidden download link
       const a = document.createElement("a");
       a.href = url;
-      a.download = data.filename || "visitors.csv"; // Default filename
+      a.download = data.filename || "visitors.csv";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
