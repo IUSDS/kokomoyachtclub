@@ -2,7 +2,7 @@ import React from "react";
 
 const ExportData = () => {
   const handleExportMember = async () => {
-    console.log("Exporting Member Data...");
+    // console.log("Exporting Member Data...");
     try {
       const response = await fetch("https://api.kokomoyachtclub.vip/export-data/export/members", {
         method: "POST",
@@ -35,7 +35,7 @@ const ExportData = () => {
   };
 
   const handleExportVisitor = async () => {
-    console.log("Exporting Visitor Data...");
+    // console.log("Exporting Visitor Data...");
     try {
       const response = await fetch("https://api.kokomoyachtclub.vip/export-data/export/visitors", {
         method: "POST",
