@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TiTick } from 'react-icons/ti';
 import CustomAlert from '../components/CustomAlert';
+import { useNavigation } from 'react-router-dom';
 
 const NewPassword = () => {
   const { search } = useLocation(); // get query string, e.g. "?token=981d15d2b17e45..."
   const queryParams = new URLSearchParams(search);
   const token = queryParams.get('token');
+  const navigate = useNavigation();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -66,17 +68,18 @@ const NewPassword = () => {
         // Handle error (e.g. invalid token, token expired, etc.)
         const errorData = await response.json();
         setAlertTitle('Error');
-        setAlertBody(errorData.message || 'An error occurred.');
+        setAlertBody(errorData.detail);
         setAlertOpen(true);
         return;
       }
       const data = response.json();
       console.log(data);
-      // If password reset is successful
+      // If password reset is successfull
       setSuccessMsg(true);
       setTimeout(() => {
         setSuccessMsg(false);
-      }, 3000);
+      }, 5000);
+      navigate('/login');
     } catch (error) {
       setAlertTitle('Error');
       setAlertBody(error.message || 'An error occurred.');
