@@ -9,10 +9,18 @@ const UpdateUserDetailsForm = () => {
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('')
   const [lastName, setLastName] = useState('');
-  const [address, setAddress] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
   const [picture, setPicture] = useState(null);
   const [successMessage, setSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [memberCity, setMemberCity] = useState('');
+  const [memberState, setMemberState] = useState('');
+  const [memberZip, setMemberZip] = useState('');
+  const [dl, setDl] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [points, setPoints] = useState('');
+  const [membership, setMembership] = useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -20,29 +28,31 @@ const UpdateUserDetailsForm = () => {
 
   const handleSubmit = async (e) => {
     if (e) e.preventDefault();
+    setErrorMessage('');
     try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/get/user-details/?username=${username}`);
+      const response = await fetch(`https://api.kokomoyachtclub.vip/new-userdetail/user-details/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found!');
       }
       const data = await response.json();
       setUserData(data);
-  
+
       // Sync form state with fetched user data
       setFirstName(data.first_name || '');
       setLastName(data.last_name || '');
       setPhoneNumber('');
-      setAddress(data.address || '');
+      setAddress1(data.address1 || '');
+      setAddress2(data.address2 || '');
       setPassword(''); // Clear password field for security
     } catch (err) {
       console.error("Error fetching user data:", err.message);
       setErrorMessage(err.message);
       setTimeout(() => {
         setErrorMessage('')
-      },3000)
+      }, 5000)
     }
   };
-  
+
 
   const handleSave = async () => {
     try {
@@ -52,14 +62,20 @@ const UpdateUserDetailsForm = () => {
       formData.append('first_name', firstName);
       formData.append('last_name', lastName);
       formData.append('phone_number', phoneNumber);
-      formData.append('address', address);
+      formData.append('member_address1', address1);
+      formData.append('member_address2', address2);
+      formData.append('member_city', memberCity);
+      formData.append('member_state', memberState);
+      formData.append('memberZip', memberZip);
+      formData.append('dl', dl);
+      formData.append('company_name', companyName);
       if (picture) formData.append('file', picture);
-  
+
       const response = await fetch(`https://api.kokomoyachtclub.vip/update/update/user/`, {
         method: 'PUT',
         body: formData,
       });
-  
+
       if (response.ok) {
         setSuccessMessage(true);
         await handleSubmit(); // Refresh data after successful update
@@ -75,13 +91,14 @@ const UpdateUserDetailsForm = () => {
       setErrorMessage('Failed to update member.');
     }
   };
-  
+
 
   const handleCancel = () => {
     setFirstName('');
     setLastName('');
     setPhoneNumber('');
-    setAddress('');
+    setAddress1('');
+    setAddress2('');
   };
 
   const handlePictureChange = (e) => {
@@ -112,12 +129,6 @@ const UpdateUserDetailsForm = () => {
                 className="mt-1 block w-full px-4 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-midnightblue text-gray-600"
               />
             </div>
-            {/* Error message */}
-            {errorMessage && (
-              <div className="self-stretch text-red-500 text-sm mx-auto md:mx-0 md:mt-4">
-                {errorMessage}
-              </div>
-            )}
             {/* Submit Button */}
             <button
               onClick={handleSubmit}
@@ -125,6 +136,12 @@ const UpdateUserDetailsForm = () => {
             >
               Submit
             </button>
+            {/* Error message */}
+            {errorMessage && (
+              <div className="self-stretch text-red-500 text-sm mx-auto md:mx-0 md:mt-4">
+                {errorMessage}
+              </div>
+            )}
           </div>
         </div>
 
@@ -161,13 +178,16 @@ const UpdateUserDetailsForm = () => {
                   <span className="text-sm font-medium text-gray-600">Full Name</span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
-                  <span className="text-sm text-gray-900">{userData.full_name}</span>
+                  <span className="text-sm text-gray-900">{userData.first_name + " " + userData.last_name}</span>
                 </div>
               </div>
 
               <div className="flex hover:bg-gray-50">
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
-                  <span className="text-sm font-medium text-gray-600">Membership Type</span>
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Membership</span>
+                    <span>Type</span>
+                  </span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
                   <span className="text-sm text-gray-900">{userData.membership_type}</span>
@@ -185,7 +205,10 @@ const UpdateUserDetailsForm = () => {
 
               <div className="flex hover:bg-gray-50">
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
-                  <span className="text-sm font-medium text-gray-600">Phone Number</span>
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Phone</span>
+                    <span>Number</span>
+                  </span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
                   <span className="text-sm text-gray-900">{userData.phone_number}</span>
@@ -203,10 +226,154 @@ const UpdateUserDetailsForm = () => {
 
               <div className="flex hover:bg-gray-50">
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
-                  <span className="text-sm font-medium text-gray-600">Address</span>
+                  <span className="text-sm font-medium text-gray-600">Address1</span>
                 </div>
                 <div className="w-1/2 px-6 py-4 whitespace-nowrap">
-                  <span className="text-sm text-gray-900">{userData.address}</span>
+                  <span className="text-sm text-gray-900">{userData.member_address1}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Address2</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.member_address1}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">City</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.member_city}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">State</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.member_state}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Zip</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.member_zip}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Referral</span>
+                    <span>Information</span>
+                  </span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.referral_information}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Emergency </span>
+                    <span>Contact</span>
+                  </span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.emergency_contact}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Emergency </span>
+                    <span>Email</span>
+                  </span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.emergency_email}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Emergency </span>
+                    <span>Relationship</span>
+                  </span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.emergency_relationship}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Emergency</span>
+                    <span>Name</span>
+                  </span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.emergency_name}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">DL</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.dl}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Spouse</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.spouse}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Spouse Email</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.spouse_email}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="text-sm font-medium text-gray-600">Spouse Phone</span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.spouse_phone}</span>
+                </div>
+              </div>
+
+              <div className="flex hover:bg-gray-50">
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap bg-gray-50">
+                  <span className="flex flex-col md:flex-row md:gap-1 text-sm font-medium text-gray-600">
+                    <span>Company</span>
+                    <span>Name</span>
+                  </span>
+                </div>
+                <div className="w-1/2 px-6 py-4 whitespace-nowrap">
+                  <span className="text-sm text-gray-900">{userData.company_name}</span>
                 </div>
               </div>
             </div>
@@ -280,12 +447,78 @@ const UpdateUserDetailsForm = () => {
             </div>
 
             <div className="flex flex-col space-y-1">
-              <label className="font-medium text-midnightblue">Address</label>
+              <label className="font-medium text-midnightblue">Address 1</label>
               <input
                 type="text"
                 placeholder="Enter address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={address1}
+                onChange={(e) => setAddress1(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">Address 2</label>
+              <input
+                type="text"
+                placeholder="Enter address"
+                value={address2}
+                onChange={(e) => setAddress2(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">Member City</label>
+              <input
+                type="text"
+                placeholder="Enter city"
+                value={memberCity}
+                onChange={(e) => setMemberCity(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">Member State</label>
+              <input
+                type="text"
+                placeholder="Enter state"
+                value={memberState}
+                onChange={(e) => setMemberState(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">Member Zip</label>
+              <input
+                type="text"
+                placeholder="Enter zip"
+                value={memberZip}
+                onChange={(e) => setMemberZip(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">DL</label>
+              <input
+                type="text"
+                placeholder="Enter dl"
+                value={dl}
+                onChange={(e) => setDl(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
+              />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-midnightblue">Company Name</label>
+              <input
+                type="text"
+                placeholder="Enter zip"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
               />
             </div>
