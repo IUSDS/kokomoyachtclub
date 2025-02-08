@@ -435,7 +435,7 @@ const UpdateUserDetailsForm = () => {
               />
             </div>
 
-            <div className="flex flex-col space-y-1">
+            {/* <div className="flex flex-col space-y-1">
               <label className="font-medium text-midnightblue">Password</label>
               <input
                 type="text"
@@ -444,7 +444,7 @@ const UpdateUserDetailsForm = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
               />
-            </div>
+            </div> */}
 
             <div className="flex flex-col space-y-1">
               <label className="font-medium text-midnightblue">Address 1</label>
