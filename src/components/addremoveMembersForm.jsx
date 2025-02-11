@@ -19,18 +19,21 @@ const PersonalInfoTab = ({ next }) => {
     email, setEmail,
     membershipType, setMembershipType,
     points, setPoints,
-    picture, setPicture,
     referral, setReferral,
     usernameAvailable, setUsernameAvailable,
     emailAvailable, setEmailAvailable
   } = useFormStore();
+
   const [usernameVerificationMessage, setUsernameVerificationMessage] = useState("");
   const [emailVerificationMessage, setEmailVerificationMessage] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
   const [alertTitle, setAlertTitle] = useState('');
   const [alertBody, setAlertBody] = useState('');
 
-  const handlePictureChange = (e) => setPicture(e.target.files[0]);
+  const [errors, setErrors] = useState({
+    email: "",
+    phoneNumber: "",
+  });
 
   const isFormComplete = () => {
     return (
@@ -48,7 +51,8 @@ const PersonalInfoTab = ({ next }) => {
       points &&
       usernameAvailable &&
       emailAvailable &&
-      picture
+      errors.email === "" && 
+      errors.phoneNumber === ""
     );
   };
 
@@ -132,85 +136,169 @@ const PersonalInfoTab = ({ next }) => {
 
   return (
     <div>
-      {[
-        { label: 'Username', value: username, setter: setUsername, required: true, validate: true },
-        { label: 'First Name', value: firstName, setter: setFirstName, required: true },
-        { label: 'Last Name', value: lastName, setter: setLastName, required: true },
-        { label: 'DL', value: dl, setter: setDl, required: false },
-        { label: 'Company', value: company, setter: setCompany, required: false },
-        { label: 'Password', value: password, setter: setPassword, type: 'password', required: true },
-        { label: 'Address 1', value: address1, setter: setAddress1, required: true },
-        { label: 'Address 2', value: address2, setter: setAddress2, required: false },
-        { label: 'City', value: city, setter: setCity, required: true },
-        { label: 'State', value: state, setter: setState, required: true },
-        { label: 'Zip', type: 'number', value: zip, setter: setZip, required: true },
-        { label: 'Phone Number', type: 'number', value: phoneNumber, setter: setPhoneNumber, required: true },
-        { label: 'Email', value: email, setter: setEmail, type: 'email', required: true, validate: true },
-        { label: 'Membership Type', value: membershipType, setter: setMembershipType, isDropdown: true, required: true },
-        { label: 'Points', value: points, setter: setPoints, type: 'number', required: true },
-        { label: 'Picture', value: picture, setter: setPicture, isFile: true, required: true },
-        { label: 'Referral Information', value: referral, setter: setReferral, required: false }
-      ].map(({ label, value, setter, type = 'text', isDropdown, isFile, required, validate }) => (
-        <div className="flex flex-col px-2 py-2" key={label}>
-          <div className='flex justify-between items-center'>
-            <p className="text-sm">{label}{required ? "*" : ""}</p>
-            {validate && (
-              <span
-                className="text-midnightblue text-sm text-right cursor-pointer hover:text-blue-600 w-fit"
-                onClick={() => handleValidate(label, value)} // Pass label and value
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    handleValidate(label, value); // Pass label and value
-                  }
-                }}
-              >
-                Validate
-              </span>
-            )}
-          </div>
-          {isDropdown ? (
-            <select
-              value={value}
-              onChange={(e) => setter(e.target.value)}
-              className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+      <div>
+        {/* Username */}
+        <div className="flex flex-col px-2 py-2">
+          <div className="flex justify-between items-center">
+            <p className="text-sm">Username*</p>
+            <button
+              className="text-blue-500 text-sm cursor-pointer hover:text-blue-700"
+              onClick={() => handleValidate("Username", username)}
             >
-              <option value="">Select {label}</option>
-              <option value="Silver">Silver</option>
-              <option value="Gold">Gold</option>
-              <option value="Platinum">Platinum</option>
-              <option value="Diamond">Diamond</option>
-            </select>
-          ) : isFile ? (
-            <div>
-              <input
-                type="file"
-                id="picture"
-                accept="image/*"
-                onChange={handlePictureChange}
-                className="file-input"
-              />
-            </div>
-          ) : (
-            <input
-              type={type}
-              value={value}
-              onChange={(e) => setter(e.target.value)}
-              placeholder={`Enter ${label.toLowerCase()}`}
-              className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
-            />
-          )}
-          {/* Display verification message */}
-          {validate && label === "Username" && usernameVerificationMessage && (
-            <p className="text-sm text-gray-600 mt-1">{usernameVerificationMessage}</p>
-          )}
-          {validate && label === "Email" && emailVerificationMessage && (
-            <p className="text-sm text-gray-600 mt-1">{emailVerificationMessage}</p>
-          )}
+              Validate
+            </button>
+          </div>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
+          {usernameVerificationMessage && <p className="text-gray-600 text-sm mt-1">{usernameVerificationMessage}</p>}
         </div>
-      ))}
-      <p className='text-sm text-center'>Please validate username and email before clicking next.</p>
+
+        {/* First Name */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">First Name*</p>
+          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Last Name */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Last Name*</p>
+          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* DL */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">DL</p>
+          <input type="text" value={dl} onChange={(e) => setDl(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Company */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Company</p>
+          <input type="text" value={company} onChange={(e) => setCompany(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Password */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Password*</p>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Address 1 */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Address 1*</p>
+          <input type="text" value={address1} onChange={(e) => setAddress1(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Address 2 */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Address 2</p>
+          <input type="text" value={address2} onChange={(e) => setAddress2(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* City */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">City*</p>
+          <input type="text" value={city} onChange={(e) => setCity(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* State */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">State*</p>
+          <input type="text" value={state} onChange={(e) => setState(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Zip */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Zip*</p>
+          <input type="number" value={zip} onChange={(e) => setZip(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Phone Number */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Phone Number*</p>
+          <input
+            type="tel"
+            value={phoneNumber}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+              setPhoneNumber(val);
+              setErrors((prev) => ({ ...prev, phoneNumber: val.length === 10 ? "" : "Phone number must be exactly 10 digits" }));
+            }}
+            className={`border rounded-md p-2 w-full focus:outline-none focus:ring-2 ${errors.phoneNumber ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
+              }`}
+          />
+          {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
+        </div>
+
+        {/* Email */}
+        <div className="flex flex-col px-2 py-2">
+          <div className="flex justify-between items-center">
+            <p className="text-sm">Email*</p>
+            <button
+              className="text-blue-500 text-sm cursor-pointer hover:text-blue-700"
+              onClick={() => handleValidate("Email", email)}
+            >
+              Validate
+            </button>
+          </div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              setErrors((prev) => ({ ...prev, email: emailRegex.test(e.target.value) ? "" : "Invalid email format" }));
+            }}
+            className={`border rounded-md p-2 w-full focus:outline-none focus:ring-2 ${errors.email ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
+              }`}
+          />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+          {emailVerificationMessage && <p className="text-gray-600 text-sm mt-1">{emailVerificationMessage}</p>}
+        </div>
+
+        {/* Membership Type (Dropdown) */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Membership Type*</p>
+          <select value={membershipType} onChange={(e) => setMembershipType(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue">
+            <option value="">Select Membership Type</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+            <option value="Diamond">Diamond</option>
+          </select>
+        </div>
+
+        {/* Points */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Points*</p>
+          <input type="number" value={points} onChange={(e) => setPoints(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+
+        {/* Referral Information */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Referral Information</p>
+          <input type="text" value={referral} onChange={(e) => setReferral(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+        </div>
+      </div>
+
+      <p className="text-gray-400 text-sm mt-2">Please validate username and email before clicking next.</p>
       <button
         disabled={!isFormComplete()}
         className={`mt-4 px-4 py-2 rounded-md w-full ${isFormComplete() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
@@ -378,9 +466,39 @@ const FamilyInfoTab = ({ next }) => {
 
 const EmergencyInfoTab = () => {
   const {
-    // Emergency Contact Info
-    emergencyContactName, emergencyEmail, emergencyPhone, emergencyRelationship, setEmergencyContactName, setEmergencyEmail, setEmergencyPhone, setEmergencyRelationship,
+    emergencyContactName, setEmergencyContactName,
+    emergencyEmail, setEmergencyEmail,
+    emergencyPhone, setEmergencyPhone,
+    emergencyRelationship, setEmergencyRelationship,
   } = useFormStore();
+
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+  // Validate Email Format
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmergencyEmail(value);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  // Validate Phone Number (Only 10 digits)
+  const handlePhoneChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    setEmergencyPhone(value);
+
+    if (value.length !== 10) {
+      setPhoneError("Phone number must be exactly 10 digits.");
+    } else {
+      setPhoneError("");
+    }
+  };
 
   return (
     <div>
@@ -404,22 +522,26 @@ const EmergencyInfoTab = () => {
         <input
           type="email"
           value={emergencyEmail}
-          onChange={(e) => setEmergencyEmail(e.target.value)}
+          onChange={handleEmailChange}
           placeholder="Enter email"
-          className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${emailError ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
+            }`}
         />
+        {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
       </div>
 
       {/* Emergency Phone */}
       <div className="flex flex-col px-2 py-2">
         <p className="text-sm">Emergency Contact Number*</p>
         <input
-          type="number"
+          type="text"
           value={emergencyPhone}
-          onChange={(e) => setEmergencyPhone(e.target.value)}
+          onChange={handlePhoneChange}
           placeholder="Enter number"
-          className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${phoneError ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
+            }`}
         />
+        {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
       </div>
 
       {/* Emergency Relationship */}
@@ -450,18 +572,29 @@ const AchInfoTab = ({ next }) => {
     accountType, setAccountType
   } = useFormStore();
 
+  const [routingError, setRoutingError] = useState("");
+
   const isFormComplete = () => {
     return (
       depositoryName &&
       branch &&
-      achCity &&
-      achState &&
-      achZip &&
-      routingNumber &&
+      routingNumber.length === 9 &&
       accountNumber &&
       nameOnAccount &&
       accountType
     );
+  };
+
+  // Validate if the routing number is exactly 9 digits
+  const handleRoutingChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    setRoutingNumber(value);
+
+    if (value.length !== 9) {
+      setRoutingError("Routing number must be exactly 9 digits.");
+    } else {
+      setRoutingError("");
+    }
   };
 
   return (
@@ -494,7 +627,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* City */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">City*</p>
+        <p className="text-sm">City</p>
         <input
           type="text"
           value={achCity}
@@ -506,7 +639,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* State */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">State*</p>
+        <p className="text-sm">State</p>
         <input
           type="text"
           value={achState}
@@ -518,7 +651,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Zip */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Zip*</p>
+        <p className="text-sm">Zip</p>
         <input
           type="number"
           value={achZip}
@@ -530,14 +663,16 @@ const AchInfoTab = ({ next }) => {
 
       {/* Routing Number */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Routing Number*</p>
+        <p className="text-sm">Routing Number (9 digits)*</p>
         <input
-          type="number"
+          type="text"
           value={routingNumber}
-          onChange={(e) => setRoutingNumber(e.target.value)}
+          onChange={handleRoutingChange}
           placeholder="Enter routing number"
-          className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
+          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${routingError ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
+            }`}
         />
+        {routingError && <p className="text-red-500 text-sm">{routingError}</p>}
       </div>
 
       {/* Account Number */}
@@ -609,7 +744,7 @@ const AddRemoveMembersForm = () => {
     // Personal Info
     username, firstName, lastName, password, dl, company, referral,
     address1, address2, city, state, zip, phoneNumber, email, membershipType, points,
-    picture,
+    picture, setPicture,
 
     // Family Info
     spouse, spouseMobile, spouseEmail, childNum, children,
@@ -684,6 +819,7 @@ const AddRemoveMembersForm = () => {
     formData.append("member_zip", zip); // API uses "member_zip"
     formData.append("branch", branch);
     formData.append("city", achCity);
+    formData.append("zip_code", achZip);
     formData.append("state", achState);
     formData.append("depository_name", depositoryName);
     formData.append("routing_no", routingNumber);
@@ -725,7 +861,11 @@ const AddRemoveMembersForm = () => {
 
       if (response.ok) {
         setMessage({ type: "success", text: "Member added successfully!" });
+        setTimeout(() => {
+          setMessage(null);
+        }, 4000);
         resetForm(); // Reset form on success
+        setPicture('');
       } else {
         setMessage({ type: "error", text: data.message || "Failed to add member." });
       }
@@ -733,6 +873,13 @@ const AddRemoveMembersForm = () => {
       setMessage({ type: "error", text: "Network error. Please try again." });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPicture(file); // Zustand will convert it to Base64
     }
   };
 
@@ -832,6 +979,37 @@ const AddRemoveMembersForm = () => {
               {message.text}
             </p>
           )}
+
+          {/* Image Upload Section */}
+          <div className="text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-4">
+            <h3 className="text-lg font-medium">Upload Member's Profile Picture</h3>
+
+            <label className="cursor-pointer bg-blue-700 hover:bg-midnightblue text-white font-medium py-2 px-4 rounded-md shadow-sm inline-block">
+              Choose File
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePictureChange}
+                className="hidden"
+              />
+            </label>
+
+            {/* Display Selected File Name */}
+            {picture ? (
+              <p className="text-gray-600 text-sm mt-2">{picture.name || "File selected"}</p>
+            ) : (
+              <p className="text-gray-400 text-sm mt-2">No file chosen</p>
+            )}
+
+            {/* Disclaimer */}
+            <p className="text-gray-400 text-sm mt-2">Only PNG and JPEG image formats are allowed, and the file size must be under 1MB.</p>
+
+            {/* Image Preview */}
+            {/* {picture && (
+              <img src={picture} alt="Uploaded" className="w-32 h-32 object-cover rounded-md shadow-md border border-gray-300 mt-2" />
+            )} */}
+          </div>
+
 
           {/* Submit Button */}
           <button
