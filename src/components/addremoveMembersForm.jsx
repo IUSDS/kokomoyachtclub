@@ -467,26 +467,11 @@ const FamilyInfoTab = ({ next }) => {
 const EmergencyInfoTab = () => {
   const {
     emergencyContactName, setEmergencyContactName,
-    emergencyEmail, setEmergencyEmail,
     emergencyPhone, setEmergencyPhone,
     emergencyRelationship, setEmergencyRelationship,
   } = useFormStore();
 
-  const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
-
-  // Validate Email Format
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmergencyEmail(value);
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(value)) {
-      setEmailError("Please enter a valid email address.");
-    } else {
-      setEmailError("");
-    }
-  };
 
   // Validate Phone Number (Only 10 digits)
   const handlePhoneChange = (e) => {
@@ -514,20 +499,6 @@ const EmergencyInfoTab = () => {
           placeholder="Enter name"
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
-      </div>
-
-      {/* Emergency Email */}
-      <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Email*</p>
-        <input
-          type="email"
-          value={emergencyEmail}
-          onChange={handleEmailChange}
-          placeholder="Enter email"
-          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${emailError ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
-            }`}
-        />
-        {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
       </div>
 
       {/* Emergency Phone */}
