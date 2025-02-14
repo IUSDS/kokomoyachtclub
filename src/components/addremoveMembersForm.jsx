@@ -51,7 +51,7 @@ const PersonalInfoTab = ({ next }) => {
       points &&
       usernameAvailable &&
       emailAvailable &&
-      errors.email === "" && 
+      errors.email === "" &&
       errors.phoneNumber === ""
     );
   };
@@ -464,7 +464,7 @@ const FamilyInfoTab = ({ next }) => {
   );
 };
 
-const EmergencyInfoTab = () => {
+const EmergencyInfoTab = ({ next }) => {
   const {
     emergencyContactName, setEmergencyContactName,
     emergencyPhone, setEmergencyPhone,
@@ -526,6 +526,14 @@ const EmergencyInfoTab = () => {
           className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
         />
       </div>
+
+      {/* Next Button */}
+      <button
+        className={`mt-4 px-4 py-2 rounded-md w-full bg-blue-500 text-white`}
+        onClick={next}
+      >
+        Next
+      </button>
     </div>
   );
 };
@@ -696,16 +704,6 @@ const AchInfoTab = ({ next }) => {
           </label>
         </div>
       </div>
-
-      {/* Next Button */}
-      <button
-        disabled={!isFormComplete()}
-        className={`mt-4 px-4 py-2 rounded-md w-full ${isFormComplete() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
-        onClick={next}
-      >
-        Next
-      </button>
     </div>
   );
 };
@@ -867,7 +865,7 @@ const AddRemoveMembersForm = () => {
   ];
 
   const handleNext = () => {
-    const tabs = ['personal', 'family', 'ach', 'emergency'];
+    const tabs = ['personal', 'family', 'emergency', 'ach'];
     const currentIndex = tabs.indexOf(infoTab);
     if (currentIndex < tabs.length - 1) {
       setInfoTab(tabs[currentIndex + 1]);
