@@ -41,6 +41,7 @@ import L3 from "./L3.webp";
 import founderImg from "./founderImg.webp";
 import foundersKokomo from "./foundersKokomo.webp";
 import wanderlust from "./wanderlust.webp";
+import hero from "./hero.webp";
 
 export {
   foundersKokomo,
@@ -85,5 +86,6 @@ export {
   TS2,
   L1,
   L2,
-  L3
+  L3,
+  hero,
 };
