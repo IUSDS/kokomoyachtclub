@@ -862,8 +862,8 @@ const AddRemoveMembersForm = () => {
   const typeOfInfo = [
     { label: 'Personal', type: 'personal' },
     { label: 'Family', type: 'family' },
-    { label: 'ACH', type: 'ach' },
     { label: 'Emergency Contact', type: 'emergency' },
+    { label: 'ACH', type: 'ach' },
   ];
 
   const handleNext = () => {
