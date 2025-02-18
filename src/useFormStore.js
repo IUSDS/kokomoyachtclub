@@ -175,7 +175,6 @@ const useFormStore = create(
         const state = get();
         return (
           state.emergencyContactName &&
-          state.emergencyEmail &&
           state.emergencyPhone &&
           state.emergencyRelationship
         );

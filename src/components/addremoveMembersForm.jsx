@@ -713,7 +713,7 @@ const AddRemoveMembersForm = () => {
     // Personal Info
     username, firstName, lastName, password, dl, company, referral,
     address1, address2, city, state, zip, phoneNumber, email, membershipType, points,
-    picture, setPicture,
+    picture, setPicture, setUsername,
 
     // Family Info
     spouse, spouseMobile, spouseEmail, childNum, children,
