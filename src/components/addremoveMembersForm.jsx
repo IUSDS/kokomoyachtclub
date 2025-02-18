@@ -21,7 +21,8 @@ const PersonalInfoTab = ({ next }) => {
     points, setPoints,
     referral, setReferral,
     usernameAvailable, setUsernameAvailable,
-    emailAvailable, setEmailAvailable
+    emailAvailable, setEmailAvailable,
+    membershipID, setMembershipID,
   } = useFormStore();
 
   const [usernameVerificationMessage, setUsernameVerificationMessage] = useState("");
@@ -137,6 +138,20 @@ const PersonalInfoTab = ({ next }) => {
   return (
     <div>
       <div>
+        {/* Membership ID */}
+        <div className="flex flex-col px-2 py-2">
+          <p className="text-sm">Membership ID</p>
+          <input
+            type="text" // Keep as text
+            value={membershipID}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+              setMembershipID(val); // Store as string
+            }}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
+        </div>
+
         {/* Username */}
         <div className="flex flex-col px-2 py-2">
           <div className="flex justify-between items-center">
@@ -286,8 +301,15 @@ const PersonalInfoTab = ({ next }) => {
         {/* Points */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Points*</p>
-          <input type="number" value={points} onChange={(e) => setPoints(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text" // Keep as text
+            value={points}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+              setPoints(val);
+            }}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Referral Information */}
@@ -713,7 +735,7 @@ const AddRemoveMembersForm = () => {
     // Personal Info
     username, firstName, lastName, password, dl, company, referral,
     address1, address2, city, state, zip, phoneNumber, email, membershipType, points,
-    picture, setPicture, setUsername,
+    picture, setPicture, setUsername, membershipID,
 
     // Family Info
     spouse, spouseMobile, spouseEmail, childNum, children,
@@ -774,18 +796,22 @@ const AddRemoveMembersForm = () => {
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
     formData.append("phone_number", phoneNumber);
-    formData.append("email_id", email); // API expects "email_id" instead of "email"
+    formData.append("email_id", email);
     formData.append("membership_type", membershipType);
-    formData.append("points", points);
-    formData.append("file", picture); // Ensure the file is sent
-    formData.append("dl", dl || ""); // Driver's License
-    formData.append("referral_information", referral || ""); // Referral Info
-    formData.append("company_name", company || ""); // Company Name
-    formData.append("member_address1", address1); // API uses "member_address1"
-    formData.append("member_address2", address2 || ""); // API uses "member_address2"
-    formData.append("member_city", city); // API uses "member_city"
-    formData.append("member_state", state); // API uses "member_state"
-    formData.append("member_zip", zip); // API uses "member_zip"
+    // formData.append("points", points);
+    // Convert membershipID and points to integers safely before appending
+    formData.append("membershipID", membershipID ? parseInt(membershipID, 10) : 0);
+    formData.append("points", points ? parseInt(points, 10) : 0);
+    formData.append("file", picture);
+    formData.append("dl", dl || "");
+    // formData.append('membershipID', membershipID);
+    formData.append("referral_information", referral || "");
+    formData.append("company_name", company || "");
+    formData.append("member_address1", address1);
+    formData.append("member_address2", address2 || "");
+    formData.append("member_city", city);
+    formData.append("member_state", state);
+    formData.append("member_zip", zip);
     formData.append("branch", branch);
     formData.append("city", achCity);
     formData.append("zip_code", achZip);
@@ -795,7 +821,7 @@ const AddRemoveMembersForm = () => {
     formData.append("acc_no", accountNumber);
     formData.append("name_on_acc", nameOnAccount);
     formData.append("type_of_acc", accountType);
-    formData.append("date_sub", "2025-01-31"); // Static Date for submission
+    // formData.append("date_sub", "2025-01-31");
     formData.append("zip_code", zip);
 
     // Family Info

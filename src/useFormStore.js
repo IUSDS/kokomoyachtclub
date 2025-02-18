@@ -39,6 +39,8 @@ const useFormStore = create(
       setPicture: (picture) => set({ picture }),
       referral: "",
       setReferral: (referral) => set({ referral }),
+      membershipID: "",
+      setMembershipID: (membershipID) => set({ membershipID }),
       usernameAvailable: false,
       setUsernameAvailable: (usernameAvailable) => set({ usernameAvailable }),
       emailAvailable: false,
@@ -113,6 +115,7 @@ const useFormStore = create(
           points: "",
           picture: null,
           referral: "",
+          membershipID: "",
           spouse: "",
           spouseMobile: "",
           spouseEmail: "",
@@ -181,8 +184,8 @@ const useFormStore = create(
       },
     }),
     {
-      name: "user-form-storage", // Local Storage key
-      getStorage: () => localStorage, // Use localStorage for persistence
+      name: "user-form-storage",
+      getStorage: () => localStorage,
     }
   )
 );
