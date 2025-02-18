@@ -880,6 +880,10 @@ const AddRemoveMembersForm = () => {
     // console.log("Current tab:", infoTab);
   }, [infoTab]);
 
+  const handleCancel = () => {
+    setUsername('');
+  }
+
   return (
     <div className='flex flex-col md:flex-row'>
       {/* Left Section */}
