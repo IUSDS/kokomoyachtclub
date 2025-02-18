@@ -201,11 +201,11 @@ const PersonalInfoTab = ({ next }) => {
         </div>
 
         {/* Password */}
-        <div className="flex flex-col px-2 py-2">
+        {/* <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Password*</p>
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
             className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
-        </div>
+        </div> */}
 
         {/* Address 1 */}
         <div className="flex flex-col px-2 py-2">

@@ -148,7 +148,6 @@ const useFormStore = create(
           state.username &&
           state.firstName &&
           state.lastName &&
-          state.password &&
           state.address1 &&
           state.city &&
           state.state &&
