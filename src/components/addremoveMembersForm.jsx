@@ -139,7 +139,7 @@ const PersonalInfoTab = ({ next }) => {
     <div>
       <div>
         {/* Membership ID */}
-        <div className="flex flex-col px-2 py-2">
+        {/* <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Membership ID</p>
           <input
             type="text" // Keep as text
@@ -150,7 +150,7 @@ const PersonalInfoTab = ({ next }) => {
             }}
             className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
           />
-        </div>
+        </div> */}
 
         {/* Username */}
         <div className="flex flex-col px-2 py-2">
@@ -800,7 +800,7 @@ const AddRemoveMembersForm = () => {
     formData.append("membership_type", membershipType);
     // formData.append("points", points);
     // Convert membershipID and points to integers safely before appending
-    formData.append("membershipID", membershipID ? parseInt(membershipID, 10) : 0);
+    // formData.append("membershipID", membershipID ? parseInt(membershipID, 10) : 0);
     formData.append("points", points ? parseInt(points, 10) : 0);
     formData.append("file", picture);
     formData.append("dl", dl || "");
