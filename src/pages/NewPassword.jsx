@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TiTick } from 'react-icons/ti';
 import CustomAlert from '../components/CustomAlert';
-import { useNavigation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const NewPassword = () => {
   const { search } = useLocation(); // get query string, e.g. "?token=981d15d2b17e45..."
   const queryParams = new URLSearchParams(search);
   const token = queryParams.get('token');
-  const navigate = useNavigation();
+  const navigate = useNavigate();
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
