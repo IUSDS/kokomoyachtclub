@@ -39,7 +39,7 @@ const createInvoiceForm = () => {
         
         {outstandingAmount && (
           <div className='flex px-4 py-1'>
-            <span>Outstanding Amount: $</span>
+            {/* <span>Outstanding Amount: $</span> */}
             {outstandingAmount}
           </div>
         )}
