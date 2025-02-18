@@ -41,7 +41,6 @@ const PersonalInfoTab = ({ next }) => {
       username &&
       firstName &&
       lastName &&
-      password &&
       address1 &&
       city &&
       state &&
