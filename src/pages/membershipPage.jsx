@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import ImageCard from '../components/imageCard';
-import { boca, captiva, keywest, marco, memberImg, naples } from '../assets/images';
+import { boca, captiva, keywest, marco, loginImg, naples } from '../assets/images';
 import { API_URL } from '../constant';
 import useAuthStore from '../authStore';
 
 
 const MembershipPage = () => {
-  // const [calenderOpen, setCalenderOpen] = useState(false);
-  // const [selectedDate, setSelectedDate] = useState(null);
   const [memberDetails, setMemberDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
-  // Function to make the API request and get member details
   const fetchMemberDetails = async () => {
     const username = localStorage.getItem("username");
 
@@ -74,7 +71,7 @@ const MembershipPage = () => {
     <div className="flex flex-col justify-center items-center overflow-x-hidden space-y-16">
       {/* Hero Section */}
       <div className="relative">
-        <img className="w-screen h-fit object-cover" src={memberImg} alt="Hero" />
+        <img className="w-screen h-fit object-cover" src={loginImg} alt="Hero" />
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <p className="absolute text-white font-bold top-[45%] text-center text-xl w-full md:text-6xl">
           Member Services
@@ -82,7 +79,7 @@ const MembershipPage = () => {
       </div>
 
       {/* Welcome Section */}
-      <div className="font-semibold md:text-3xl text-xl xl:text-6xl mt-4">Welcome</div>
+      <div className="font-bold text-midnightblue md:text-3xl text-xl xl:text-6xl mt-4">Welcome</div>
 
       {/* User details */}
       <div className='flex flex-col md:flex-row w-full md:justify-evenly items-center '>

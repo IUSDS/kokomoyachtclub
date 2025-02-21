@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {hero} from "../assets/images";
+import { hero,loginImg } from "../assets/images";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../constant";
 import useAuthStore from "../authStore";
@@ -51,7 +51,7 @@ const login = () => {
     <>
       {/* Hero Section */}
       <div className="relative">
-        <img className="w-screen h-fit object-cover" src={hero} alt="Hero" />
+        <img className="w-screen h-fit object-cover" src={loginImg} alt="Hero" />
         <div className="absolute inset-0 bg-black opacity-30"></div>
         <p className="absolute text-white font-bold top-[45%] text-center text-xl w-full md:text-6xl">
           Welcome To Kokomo Yacht Club
