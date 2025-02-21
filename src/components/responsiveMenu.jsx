@@ -38,18 +38,33 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <a
-                  href="/contact"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                >
-                  Become a Member
-                </a>
+                <Link onClick={() => setOpen(false)} to="/membership">Member Services</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/login">Login</Link>
+                <Link onClick={() => setOpen(false)} to="/update-details">Update Details</Link>
               </li>
+              <li className="cursor-pointer hover:text-gray-300">
+                <Link onClick={() => setOpen(false)} to="/booking-history">Booking History</Link>
+              </li>
+              {!isLoggedIn && (
+                <>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <a
+                      href="/contact"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setOpen(false)}
+                    >
+                      Become a Member
+                    </a>
+                  </li>
+                  <li className="cursor-pointer hover:text-gray-300">
+                    <Link onClick={() => setOpen(false)} to="/login">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
               {isLoggedIn && (
                 <li className="cursor-pointer hover:text-gray-300" onClick={handleLogout}>
                   Log out

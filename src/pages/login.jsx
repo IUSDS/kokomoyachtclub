@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { hero,loginImg } from "../assets/images";
+import { hero, loginImg } from "../assets/images";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../constant";
 import useAuthStore from "../authStore";
@@ -50,13 +50,21 @@ const login = () => {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative">
-        <img className="w-screen h-fit object-cover" src={loginImg} alt="Hero" />
+      <div className="relative w-screen h-screen">
+        {/* Background Image */}
+        <img className="w-full h-full object-cover" src={loginImg} alt="Hero" />
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black opacity-30"></div>
-        <p className="absolute text-white font-bold top-[45%] text-center text-xl w-full md:text-6xl">
-          Welcome To Kokomo Yacht Club
-        </p>
+
+        {/* Centered Text */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-white font-bold text-center text-xl w-full md:text-6xl">
+            Welcome To Kokomo Yacht Club
+          </p>
+        </div>
       </div>
+
 
       {/* Form Section */}
       <main
