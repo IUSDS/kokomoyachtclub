@@ -512,7 +512,7 @@ const EmergencyInfoTab = ({ next }) => {
 
       {/* Emergency Contact Name */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Contact Name*</p>
+        <p className="text-sm">Emergency Contact Name</p>
         <input
           type="text"
           value={emergencyContactName}
@@ -524,7 +524,7 @@ const EmergencyInfoTab = ({ next }) => {
 
       {/* Emergency Phone */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Contact Number*</p>
+        <p className="text-sm">Emergency Contact Number</p>
         <input
           type="text"
           value={emergencyPhone}
@@ -538,7 +538,7 @@ const EmergencyInfoTab = ({ next }) => {
 
       {/* Emergency Relationship */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Relationship*</p>
+        <p className="text-sm">Emergency Relationship</p>
         <input
           type="text"
           value={emergencyRelationship}
@@ -587,7 +587,7 @@ const AchInfoTab = ({ next }) => {
 
   // Validate if the routing number is exactly 9 digits
   const handleRoutingChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+    const value = e.target.value.replace(/\D/g, "");
     setRoutingNumber(value);
 
     if (value.length !== 9) {
@@ -603,7 +603,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Depository Name */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Depository Name*</p>
+        <p className="text-sm">Depository Name</p>
         <input
           type="text"
           value={depositoryName}
@@ -615,7 +615,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Branch */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Branch*</p>
+        <p className="text-sm">Branch</p>
         <input
           type="text"
           value={branch}
@@ -663,7 +663,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Routing Number */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Routing Number (9 digits)*</p>
+        <p className="text-sm">Routing Number (9 digits)</p>
         <input
           type="text"
           value={routingNumber}
@@ -677,7 +677,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Account Number */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Account Number*</p>
+        <p className="text-sm">Account Number</p>
         <input
           type="number"
           value={accountNumber}
@@ -689,7 +689,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Name on Account */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Name on Account*</p>
+        <p className="text-sm">Name on Account</p>
         <input
           type="text"
           value={nameOnAccount}
@@ -757,7 +757,7 @@ const AddRemoveMembersForm = () => {
   const [alertBody, setAlertBody] = useState('');
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const isButtonEnabled = isPersonalInfoComplete() && isAchInfoComplete() && isEmergencyInfoComplete();
+  const isButtonEnabled = isPersonalInfoComplete();
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
