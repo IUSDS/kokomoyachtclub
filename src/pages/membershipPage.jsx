@@ -51,7 +51,7 @@ const MembershipPage = () => {
     if (!isLoggedIn) {
       navigate('/login');
     }
-  },[isLoggedIn])
+  }, [isLoggedIn])
 
   useEffect(() => {
     fetchMemberDetails();
@@ -60,7 +60,7 @@ const MembershipPage = () => {
 
   // Render loading state, error, or member details
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='w-full text-center'>Loading...</div>;
   }
 
   if (error) {
@@ -68,55 +68,99 @@ const MembershipPage = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-hidden space-y-16">
+    <div className="flex flex-col justify-center items-center overflow-x-hidden space-y-4">
       {/* Hero Section */}
       <div className="relative">
-        <img className="w-screen h-fit object-cover" src={loginImg} alt="Hero" />
+        <img className="w-screen h-[150px] md:h-fit object-cover" src={loginImg} alt="Hero" />
         <div className="absolute inset-0 bg-black opacity-40"></div>
-        <p className="absolute text-white font-bold top-[45%] text-center text-xl w-full md:text-6xl">
+        <p className="absolute text-white font-bold top-[40%] text-center text-xl w-full md:text-6xl">
           Member Services
         </p>
       </div>
 
       {/* Welcome Section */}
-      <div className="font-bold text-midnightblue md:text-3xl text-xl xl:text-6xl mt-4">Welcome</div>
+      <div className="font-bold text-midnightblue md:text-3xl text-xl xl:text-6xl">Welcome</div>
 
       {/* User details */}
       <div className='flex flex-col md:flex-row w-full md:justify-evenly items-center '>
-        {/* Picture */}
-        {memberDetails.picture_url && (
-          <div className="mt-4">
-            <img
-              src={memberDetails.picture_url}
-              alt="Member"
-              className="w-20 md:w-40 md:h-40 h-20 rounded-full object-cover border-2 border-gray-200"
-            />
-          </div>
-        )}
-
-        {/* Member Info and Date Selection */}
-        <div className="flex flex-col justify-center items-center my-2 md:w-1/2">
+        {/* Member Info */}
+        <div className="flex flex-col justify-center items-center md:w-1/2">
           {/* Member Info Section */}
-          {memberDetails ? (
-            <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">{memberDetails.full_name}</h3>
-                <div className="flex items-center space-x-2 justify-center md:justify-start">
-                  <span className="text-sm text-gray-500">Membership Type:</span>
-                  <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
-                    {memberDetails.membership_type}
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
-                  <p className="text-sm font-medium text-gray-500">Points Balance</p>
-                  <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
-                </div>
+          <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
+            <div className="space-y-4">
+              {/* Profile Picture */}
+              <div className="flex justify-center">
+                <img
+                  src={memberDetails.picture_url}
+                  alt="Profile"
+                  className="w-24 h-24 rounded-full border-2 border-gray-300"
+                />
               </div>
+
+              {/* Full Name */}
+              <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">
+                {memberDetails.first_name} {memberDetails.last_name}
+              </h3>
+
+              {/* Membership Type */}
+              <div className="flex items-center space-x-2 justify-center md:justify-start">
+                <span className="text-sm text-gray-500">Membership Type:</span>
+                <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+                  {memberDetails.membership_type || "N/A"}
+                </span>
+              </div>
+
+              {/* Points Balance */}
+              <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
+                <p className="text-sm font-medium text-gray-500">Points Balance</p>
+                <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
+              </div>
+
+              {/* Contact Info */}
+              <div className="mt-4">
+                <h4 className="text-lg font-semibold text-gray-700">Contact Information</h4>
+                <p className="text-sm text-gray-500">{memberDetails.email_id}</p>
+                <p className="text-sm text-gray-500">{memberDetails.phone_number || "N/A"}</p>
+              </div>
+
+              {/* Address */}
+              <div className="mt-4">
+                <h4 className="text-lg font-semibold text-gray-700">Address</h4>
+                <p className="text-sm text-gray-500">
+                  {memberDetails.member_address1}, {memberDetails.member_address2}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {memberDetails.member_city}, {memberDetails.member_state} {memberDetails.member_zip}
+                </p>
+              </div>
+
+              {/* Emergency Contact (if available) */}
+              {memberDetails.emergency_name && (
+                <div className="mt-4">
+                  <h4 className="text-lg font-semibold text-gray-700">Emergency Contact</h4>
+                  <p className="text-sm text-gray-500">👤 {memberDetails.emergency_name}</p>
+                  <p className="text-sm text-gray-500">📞 {memberDetails.emergency_contact}</p>
+                  <p className="text-sm text-gray-500">Relationship: {memberDetails.emergency_relationship}</p>
+                </div>
+              )}
+
+              {/* Company Name (if applicable) */}
+              {memberDetails.company_name && (
+                <div className="mt-4">
+                  <h4 className="text-lg font-semibold text-gray-700">Company</h4>
+                  <p className="text-sm text-gray-500">{memberDetails.company_name}</p>
+                </div>
+              )}
+
+              {/* Referral Information */}
+              {memberDetails.referral_information && (
+                <div className="mt-4">
+                  <h4 className="text-lg font-semibold text-gray-700">Referral Information</h4>
+                  <p className="text-sm text-gray-500">{memberDetails.referral_information}</p>
+                </div>
+              )}
             </div>
-          ) : (
-            <div>No member data available</div>
-          )}
+          </div>
         </div>
       </div>
 
