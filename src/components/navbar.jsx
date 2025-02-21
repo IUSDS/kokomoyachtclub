@@ -9,10 +9,11 @@ import { div } from 'framer-motion/client';
 
 const Popup = ({ isVisible, closePopup }) => {
   const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); 
+    logout();
     closePopup();
     navigate("/login");
   };
@@ -22,13 +23,28 @@ const Popup = ({ isVisible, closePopup }) => {
   return (
     <div className="fixed top-24 xl:right-12 md:right-24 z-50">
       <div className="flex flex-col bg-midnightblue text-white px-4 py-2 rounded-lg shadow-lg">
-        {/* <Link to="/login" onClick={closePopup}>
-          <p className="cursor-pointer hover:text-blue-200">Go to Login Page</p>
-        </Link> */}
-        <p
-          onClick={handleLogout}
-          className="cursor-pointer hover:text-blue-200"
-        >
+        {user?.user_type === "User" ? (
+          <>
+            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/membership"); closePopup(); }}>
+              Member Services
+            </p>
+            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/update-details"); closePopup(); }}>
+              Update Details
+            </p>
+            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/booking-history"); closePopup(); }}>
+              Booking History
+            </p>
+          </>
+        ) : user?.user_type === "Admin" ? (
+          <>
+            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/admin"); closePopup(); }}>
+              Admin Services
+            </p>
+          </>
+        ) : null}
+
+        {/* Logout Option for Both User and Admin */}
+        <p onClick={handleLogout} className="cursor-pointer hover:text-blue-200">
           Log out
         </p>
       </div>
@@ -38,27 +54,41 @@ const Popup = ({ isVisible, closePopup }) => {
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState('');
+  const [selectedMenu, setSelectedMenu] = useState("");
   const location = useLocation();
   const [popup, setPopup] = useState(false);
 
   useEffect(() => {
-    const path = location.pathname.split('/')[1];
-    setSelectedMenu(path || 'home');
+    const path = location.pathname.split("/")[1];
+    setSelectedMenu(path || "home");
   }, [location]);
 
-  // Tries to get user login info
+  // Get user authentication status
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   const handlePopup = () => {
     setPopup(!popup);
-  }
+  };
+
+  // ✅ Close the popup when the user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      if (popup) {
+        setPopup(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [popup]);
 
   return (
     <>
-      <div className='flex flex-col'>
+      <div className="flex flex-col">
+        {/* Top bar with contact details */}
         <div className="flex py-2 justify-between xl:px-20 text-sm md:px-16 px-10 bg-midnightblue">
-          {/* Address Section */}
           <div className="text-white hidden md:block">
             <p>
               <a
@@ -71,12 +101,9 @@ const Navbar = () => {
             </p>
           </div>
 
-          {/* Contact Section */}
           <div className="text-white text-sm flex gap-4 md:gap-8">
             <p>
-              <a href="tel:+19412592248">
-                (941) 259-2248
-              </a>
+              <a href="tel:+19412592248">(941) 259-2248</a>
             </p>
             <p>
               <a href="mailto:info@KokomoYachtClub.vip">
@@ -85,69 +112,50 @@ const Navbar = () => {
             </p>
           </div>
         </div>
-        <nav className='sticky top-0 z-50'>
-          <div className="w-full flex items-center justify-between py-2 px-10 shadow-lg">
+
+        {/* Navigation Bar */}
+        <nav className="sticky top-0 z-50 bg-white shadow-lg">
+          <div className="w-full flex items-center justify-between py-2 px-10">
             {/* Logo */}
-            <Link to={'/'}>
-              <div className="">
-                <img src={logo} className='w-[150px]' alt="kokomo_logo" />
-              </div>
+            <Link to={"/"}>
+              <img src={logo} className="w-[150px]" alt="kokomo_logo" />
             </Link>
 
-            {/* Menu section */}
+            {/* Menu Section */}
             <div className="hidden xl:block">
               <ul className="flex items-center gap-4 text-midnightblue text-base font-nunito">
-                <li
-                  className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'home' ? 'text-blue-600' : ''}`}
-                >
-                  <Link to="/" onClick={() => setSelectedMenu('home')}>Home</Link>
-                </li>
-                <li
-                  className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'founders' ? 'text-blue-600' : ''}`}
-                >
-                  <Link to="/founders" onClick={() => setSelectedMenu('founders')}>From the Founders</Link>
-                </li>
-                <li
-                  className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'fleet' ? 'text-blue-600' : ''}`}
-                >
-                  <Link to="/fleet" onClick={() => setSelectedMenu('fleet')}>Fleet</Link>
-                </li>
-                <li
-                  className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'members' ? 'text-blue-600' : ''}`}
-                >
-                  <Link to="/members" onClick={() => setSelectedMenu('members')}>Membership</Link>
-                </li>
-                <li
-                  className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'contact' ? 'text-blue-600' : ''}`}
-                >
-                  <Link to="/contact" onClick={() => setSelectedMenu('contact')}>Contact</Link>
-                </li>
+                {["home", "founders", "fleet", "members", "contact"].map(
+                  (menu) => (
+                    <li
+                      key={menu}
+                      className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === menu ? "text-blue-600" : ""
+                        }`}
+                    >
+                      <Link
+                        to={`/${menu}`}
+                        onClick={() => setSelectedMenu(menu)}
+                      >
+                        {menu.charAt(0).toUpperCase() + menu.slice(1)}
+                      </Link>
+                    </li>
+                  )
+                )}
               </ul>
             </div>
 
-            <div className='flex items-center justify-center'>
-              {/* Buttons */}
+            {/* User & Login Section */}
+            <div className="flex items-center justify-center">
               <div className="hidden md:flex justify-between items-center gap-4">
                 <div className="flex items-center space-x-4 px-2 py-1">
-                  {/* <Link
-                    to="/contact"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.open("/contact", "_blank");
-                    }}
-                  >
-                    {!isLoggedIn && (
-                      <button className="bg-midnightblue text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
-                        Become a Member
-                      </button>
-                    )}
-                  </Link> */}
-
                   <div>
                     {isLoggedIn ? (
-                      <div className='text-midnightblue cursor-pointer hidden xl:block' onClick={handlePopup} > <FaUser size={30} /> </div>
+                      <div
+                        className="text-midnightblue cursor-pointer hidden xl:block"
+                        onClick={handlePopup}
+                      >
+                        <FaUser size={30} />
+                      </div>
                     ) : (
-                      // Log in button
                       <Link to="/login">
                         <button className="bg-midnightblue hidden xl:block text-white rounded-full px-4 py-3 cursor-pointer text-sm hover:bg-opacity-80">
                           Login
@@ -158,7 +166,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Mobile hamburger Menu section */}
+              {/* Mobile hamburger menu */}
               <div
                 className="xl:hidden text-3xl text-midnightblue cursor-pointer p-2"
                 onClick={() => setOpen(!open)}
@@ -170,12 +178,155 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {/* Mobile side section */}
+      {/* Mobile Menu */}
       <ResponsiveMenu open={open} setOpen={setOpen} />
 
+      {/* Popup Component */}
       <Popup isVisible={popup} closePopup={() => setPopup(false)} />
     </>
   );
 };
+
+// const Navbar = () => {
+//   const [open, setOpen] = useState(false);
+//   const [selectedMenu, setSelectedMenu] = useState('');
+//   const location = useLocation();
+//   const [popup, setPopup] = useState(false);
+
+//   useEffect(() => {
+//     const path = location.pathname.split('/')[1];
+//     setSelectedMenu(path || 'home');
+//   }, [location]);
+
+//   // Tries to get user login info
+//   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+
+//   const handlePopup = () => {
+//     setPopup(!popup);
+//   }
+
+//   return (
+//     <>
+//       <div className='flex flex-col'>
+//         <div className="flex py-2 justify-between xl:px-20 text-sm md:px-16 px-10 bg-midnightblue">
+//           {/* Address Section */}
+//           <div className="text-white hidden md:block">
+//             <p>
+//               <a
+//                 href="https://www.google.com/maps?q=1000+Boulevard+of+the+Arts,+Sarasota,+FL"
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//               >
+//                 1000 Boulevard of the Arts, Sarasota, FL
+//               </a>
+//             </p>
+//           </div>
+
+//           {/* Contact Section */}
+//           <div className="text-white text-sm flex gap-4 md:gap-8">
+//             <p>
+//               <a href="tel:+19412592248">
+//                 (941) 259-2248
+//               </a>
+//             </p>
+//             <p>
+//               <a href="mailto:info@KokomoYachtClub.vip">
+//                 info@KokomoYachtClub.vip
+//               </a>
+//             </p>
+//           </div>
+//         </div>
+//         <nav className='sticky top-0 z-50'>
+//           <div className="w-full flex items-center justify-between py-2 px-10 shadow-lg">
+//             {/* Logo */}
+//             <Link to={'/'}>
+//               <div className="">
+//                 <img src={logo} className='w-[150px]' alt="kokomo_logo" />
+//               </div>
+//             </Link>
+
+//             {/* Menu section */}
+//             <div className="hidden xl:block">
+//               <ul className="flex items-center gap-4 text-midnightblue text-base font-nunito">
+//                 <li
+//                   className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'home' ? 'text-blue-600' : ''}`}
+//                 >
+//                   <Link to="/" onClick={() => setSelectedMenu('home')}>Home</Link>
+//                 </li>
+//                 <li
+//                   className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'founders' ? 'text-blue-600' : ''}`}
+//                 >
+//                   <Link to="/founders" onClick={() => setSelectedMenu('founders')}>From the Founders</Link>
+//                 </li>
+//                 <li
+//                   className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'fleet' ? 'text-blue-600' : ''}`}
+//                 >
+//                   <Link to="/fleet" onClick={() => setSelectedMenu('fleet')}>Fleet</Link>
+//                 </li>
+//                 <li
+//                   className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'members' ? 'text-blue-600' : ''}`}
+//                 >
+//                   <Link to="/members" onClick={() => setSelectedMenu('members')}>Membership</Link>
+//                 </li>
+//                 <li
+//                   className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === 'contact' ? 'text-blue-600' : ''}`}
+//                 >
+//                   <Link to="/contact" onClick={() => setSelectedMenu('contact')}>Contact</Link>
+//                 </li>
+//               </ul>
+//             </div>
+
+//             <div className='flex items-center justify-center'>
+//               {/* Buttons */}
+//               <div className="hidden md:flex justify-between items-center gap-4">
+//                 <div className="flex items-center space-x-4 px-2 py-1">
+//                   {/* <Link
+//                     to="/contact"
+//                     onClick={(e) => {
+//                       e.preventDefault();
+//                       window.open("/contact", "_blank");
+//                     }}
+//                   >
+//                     {!isLoggedIn && (
+//                       <button className="bg-midnightblue text-white rounded-full px-4 py-3 cursor-pointer font-medium hover:bg-opacity-80">
+//                         Become a Member
+//                       </button>
+//                     )}
+//                   </Link> */}
+
+//                   <div>
+//                     {isLoggedIn ? (
+//                       <div className='text-midnightblue cursor-pointer hidden xl:block' onClick={handlePopup} > <FaUser size={30} /> </div>
+//                     ) : (
+//                       // Log in button
+//                       <Link to="/login">
+//                         <button className="bg-midnightblue hidden xl:block text-white rounded-full px-4 py-3 cursor-pointer text-sm hover:bg-opacity-80">
+//                           Login
+//                         </button>
+//                       </Link>
+//                     )}
+//                   </div>
+//                 </div>
+//               </div>
+
+//               {/* Mobile hamburger Menu section */}
+//               <div
+//                 className="xl:hidden text-3xl text-midnightblue cursor-pointer p-2"
+//                 onClick={() => setOpen(!open)}
+//               >
+//                 <GiHamburgerMenu />
+//               </div>
+//             </div>
+//           </div>
+//         </nav>
+//       </div>
+
+//       {/* Mobile side section */}
+//       <ResponsiveMenu open={open} setOpen={setOpen} />
+
+//       <Popup isVisible={popup} closePopup={() => setPopup(false)} />
+//     </>
+//   );
+// };
 
 export default Navbar;

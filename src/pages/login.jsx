@@ -9,7 +9,7 @@ const login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const login = useAuthStore((state) => state.login);  //login function from store
+  const login = useAuthStore((state) => state.login); // login function from store
 
   const handleLogin = async () => {
     try {
