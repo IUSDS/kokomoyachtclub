@@ -7,6 +7,7 @@ import { li } from "framer-motion/client";
 const ResponsiveMenu = ({ open, setOpen }) => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
   const handleLogout = () => {
     logout();
     setOpen(false)
@@ -37,15 +38,28 @@ const ResponsiveMenu = ({ open, setOpen }) => {
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
               </li>
-              <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/membership">Member Services</Link>
-              </li>
-              <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/update-details">Update Details</Link>
-              </li>
-              <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/booking-history">Booking History</Link>
-              </li>
+              {isLoggedIn && user && ( // Ensure user is not null before accessing user_type
+                user.user_type === "User" ? (
+                  <>
+                    <li className="cursor-pointer hover:text-gray-300">
+                      <Link onClick={() => setOpen(false)} to="/membership">Member Services</Link>
+                    </li>
+                    <li className="cursor-pointer hover:text-gray-300">
+                      <Link onClick={() => setOpen(false)} to="/update-details">Update Details</Link>
+                    </li>
+                    <li className="cursor-pointer hover:text-gray-300">
+                      <Link onClick={() => setOpen(false)} to="/booking-history">Booking History</Link>
+                    </li>
+                  </>
+                ) : user.user_type === "Admin" ? (
+                  <>
+                    <li className="cursor-pointer hover:text-gray-300">
+                      <Link onClick={() => setOpen(false)} to="/admin">Admin Services</Link>
+                    </li>
+                  </>
+                ) : null
+              )}
+
               {!isLoggedIn && (
                 <>
                   <li className="cursor-pointer hover:text-gray-300">

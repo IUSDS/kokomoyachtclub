@@ -68,7 +68,7 @@ const MembershipPage = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center overflow-x-hidden space-y-4">
+    <div className="flex flex-col justify-center items-center overflow-x-hidden space-y-8">
       {/* Hero Section */}
       <div className="relative">
         <img className="w-screen h-[150px] md:h-fit object-cover" src={loginImg} alt="Hero" />
@@ -85,7 +85,6 @@ const MembershipPage = () => {
       <div className='flex flex-col md:flex-row w-full md:justify-evenly items-center '>
         {/* Member Info */}
         <div className="flex flex-col justify-center items-center md:w-1/2">
-          {/* Member Info Section */}
           <div className="bg-white md:w-full p-6 rounded-lg shadow-lg">
             <div className="space-y-4">
               {/* Profile Picture */}
@@ -117,14 +116,14 @@ const MembershipPage = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="mt-4">
+              <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                 <h4 className="text-lg font-semibold text-gray-700">Contact Information</h4>
                 <p className="text-sm text-gray-500">{memberDetails.email_id}</p>
                 <p className="text-sm text-gray-500">{memberDetails.phone_number || "N/A"}</p>
               </div>
 
               {/* Address */}
-              <div className="mt-4">
+              <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                 <h4 className="text-lg font-semibold text-gray-700">Address</h4>
                 <p className="text-sm text-gray-500">
                   {memberDetails.member_address1}, {memberDetails.member_address2}
@@ -136,17 +135,17 @@ const MembershipPage = () => {
 
               {/* Emergency Contact (if available) */}
               {memberDetails.emergency_name && (
-                <div className="mt-4">
+                <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-700">Emergency Contact</h4>
-                  <p className="text-sm text-gray-500">👤 {memberDetails.emergency_name}</p>
-                  <p className="text-sm text-gray-500">📞 {memberDetails.emergency_contact}</p>
+                  <p className="text-sm text-gray-500">{memberDetails.emergency_name}</p>
+                  <p className="text-sm text-gray-500">{memberDetails.emergency_contact}</p>
                   <p className="text-sm text-gray-500">Relationship: {memberDetails.emergency_relationship}</p>
                 </div>
               )}
 
               {/* Company Name (if applicable) */}
               {memberDetails.company_name && (
-                <div className="mt-4">
+                <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-700">Company</h4>
                   <p className="text-sm text-gray-500">{memberDetails.company_name}</p>
                 </div>
@@ -166,7 +165,7 @@ const MembershipPage = () => {
 
       {/* Plan Your Experiences Section */}
       <div className="flex-grow w-full p-4 space-y-8">
-        <h1 className='xl:text-4xl text-center font-semibold'>Plan your Experiences</h1>
+        <h1 className='xl:text-4xl text-center text-midnightblue font-semibold'>Plan your Experiences</h1>
         <iframe
           className="w-full h-[800px] mx-auto"
           src="https://fareharbor.com/embeds/book/kokomocharters/?full-items=yes&flow=1257684"

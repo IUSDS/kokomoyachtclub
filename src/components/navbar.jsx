@@ -22,7 +22,7 @@ const Popup = ({ isVisible, closePopup }) => {
 
   return (
     <div className="fixed top-24 xl:right-12 md:right-24 z-50">
-      <div className="flex flex-col bg-midnightblue text-white px-4 py-2 rounded-lg shadow-lg">
+      <div className="flex flex-col bg-midnightblue text-white p-6 rounded-lg shadow-lg space-y-1">
         {user?.user_type === "User" ? (
           <>
             <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/membership"); closePopup(); }}>
