@@ -10,9 +10,9 @@ const useAuthStore = create(
 
       // ✅ Login function
       login: (userData) => {
-        console.log("🔹 Logging in user:", userData); // ✅ Debug
+        // console.log("🔹 Logging in user:", userData); // ✅ Debug
         set({ isLoggedIn: true, user: userData, sessionChecked: true });
-        console.log("✅ Zustand State after login:", get()); // ✅ Debug Zustand store
+        // console.log("✅ Zustand State after login:", get()); // ✅ Debug Zustand store
       },
 
       // ✅ Logout function (prevents infinite redirect loop)
@@ -20,7 +20,7 @@ const useAuthStore = create(
         if (!get().isLoggedIn) return; // ✅ Prevents multiple logout calls
 
         try {
-          console.log("🔹 Logging out user..."); // ✅ Debug
+          // console.log("🔹 Logging out user..."); // ✅ Debug
           await fetch(`https://api.kokomoyachtclub.vip/validate-user/logout/`, {
             method: "POST",
             credentials: "include",
@@ -30,7 +30,7 @@ const useAuthStore = create(
         }
 
         set({ isLoggedIn: false, user: null, sessionChecked: false });
-        console.log("✅ Zustand State after logout:", get()); // ✅ Debug Zustand store
+        // console.log("✅ Zustand State after logout:", get()); // ✅ Debug Zustand store
         setTimeout(() => (window.location.href = "/login"), 500); // ✅ Prevent race condition
       },
 

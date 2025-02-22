@@ -34,7 +34,7 @@ const login = () => {
 
         if (userResponse.ok) {
           const userData = await userResponse.json();
-          console.log("Login User Data:", data);
+          // console.log("Login User Data:", data);
 
           login(data); // Store user in Zustand state
           setErrorMessage("");

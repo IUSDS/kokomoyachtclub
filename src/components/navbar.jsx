@@ -11,7 +11,7 @@ const Popup = ({ isVisible, closePopup }) => {
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
-  console.log("Popup User Data:", user);
+  // console.log("Popup User Data:", user);
 
   const handleLogout = () => {
     logout();
