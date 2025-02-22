@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { hero, loginImg } from "../assets/images";
 import { useNavigate } from "react-router-dom";
-import { API_URL } from "../constant";
 import useAuthStore from "../authStore";
 
 const login = () => {
@@ -19,21 +18,35 @@ const login = () => {
 
       const response = await fetch("https://api.kokomoyachtclub.vip/validate-user/validate-user/", {
         method: "POST",
-        body: formData
+        body: formData,
+        credentials: "include",
       });
-
 
       const data = await response.json();
       console.log(data)
       if (response.ok && data.status === "SUCCESS") {
-        login(data); // sets user in store
-        localStorage.setItem("username", user);
-        setErrorMessage("");
 
-        if (data.user_type.toLowerCase() === "user") {
-          navigate("/membership");
-        } else if (data.user_type.toLowerCase() === "admin") {
-          navigate("/admin");
+        // Fetch user details after login to confirm session is active
+        const userResponse = await fetch(`https://api.kokomoyachtclub.vip/validate-user/current-user/`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          console.log("User Data:", userData);
+
+          login(userData); // Store user in Zustand state
+          setErrorMessage("");
+
+          // Redirect based on user type
+          if (data.user_type.toLowerCase() === "user") {
+            navigate("/membership");
+          } else if (data.user_type.toLowerCase() === "admin") {
+            navigate("/admin");
+          }
+        } else {
+          setErrorMessage("Session could not be established.");
         }
       } else {
         setErrorMessage("Invalid credentials");
@@ -50,13 +63,13 @@ const login = () => {
   return (
     <>
       {/* Hero Section */}
-            <div className="relative">
-              <img className="w-screen h-[150px] md:h-fit object-cover" src={loginImg} alt="Hero" />
-              <div className="absolute inset-0 bg-black opacity-40"></div>
-              <p className="absolute text-white font-bold top-[40%] text-center text-xl w-full md:text-6xl">
-                Welcome
-              </p>
-            </div>
+      <div className="relative">
+        <img className="w-screen h-[150px] md:h-fit object-cover" src={loginImg} alt="Hero" />
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+        <p className="absolute text-white font-bold top-[40%] text-center text-xl w-full md:text-6xl">
+          Welcome
+        </p>
+      </div>
 
 
       {/* Form Section */}
