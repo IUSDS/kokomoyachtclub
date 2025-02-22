@@ -165,7 +165,7 @@ const MembershipPage = () => {
 
       {/* Plan Your Experiences Section */}
       <div className="flex-grow w-full p-4 space-y-8">
-        <h1 className='xl:text-4xl text-center text-midnightblue font-semibold'>Plan your Experiences</h1>
+        <h1 className='xl:text-4xl text-center text-midnightblue font-bold'>Plan your Experiences</h1>
         <iframe
           className="w-full h-[800px] mx-auto"
           src="https://fareharbor.com/embeds/book/kokomocharters/?full-items=yes&flow=1257684"

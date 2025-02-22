@@ -132,7 +132,7 @@ const Navbar = () => {
                         }`}
                     >
                       <Link
-                        to={`/${menu}`}
+                        to={menu === "home" ? '/':`/${menu}`}
                         onClick={() => setSelectedMenu(menu)}
                       >
                         {menu.charAt(0).toUpperCase() + menu.slice(1)}
