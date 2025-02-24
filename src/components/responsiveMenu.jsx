@@ -51,7 +51,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                       <Link onClick={() => setOpen(false)} to="/booking-history">Booking History</Link>
                     </li>
                   </>
-                ) : user.user_type === "Admin" ? (
+                ) : user.user_type === "ADMIN" ? (
                   <>
                     <li className="cursor-pointer hover:text-gray-300">
                       <Link onClick={() => setOpen(false)} to="/admin">Admin Services</Link>
