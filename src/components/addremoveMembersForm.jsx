@@ -512,7 +512,7 @@ const EmergencyInfoTab = ({ next }) => {
 
       {/* Emergency Contact Name */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Contact Name</p>
+        <p className="text-sm">Emergency Contact Name*</p>
         <input
           type="text"
           value={emergencyContactName}
@@ -524,7 +524,7 @@ const EmergencyInfoTab = ({ next }) => {
 
       {/* Emergency Phone */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Contact Number</p>
+        <p className="text-sm">Emergency Contact Number*</p>
         <input
           type="text"
           value={emergencyPhone}
@@ -538,7 +538,7 @@ const EmergencyInfoTab = ({ next }) => {
 
       {/* Emergency Relationship */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Emergency Relationship</p>
+        <p className="text-sm">Emergency Relationship*</p>
         <input
           type="text"
           value={emergencyRelationship}
@@ -757,7 +757,7 @@ const AddRemoveMembersForm = () => {
   const [alertBody, setAlertBody] = useState('');
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const isButtonEnabled = isPersonalInfoComplete();
+  const isButtonEnabled = isPersonalInfoComplete() && isEmergencyInfoComplete();
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
