@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import imgIcon from '../assets/images/imageIcon.webp';
-import { API_URL } from '../constant';
 
 const UpdateUserDetailsForm = () => {
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState(null);
   const [firstName, setFirstName] = useState('');
   const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState(0)
   const [lastName, setLastName] = useState('');
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
@@ -43,7 +42,7 @@ const UpdateUserDetailsForm = () => {
       setPhoneNumber('');
       setAddress1(data.address1 || '');
       setAddress2(data.address2 || '');
-      setPassword(''); // Clear password field for security
+      setMembership(data.membership || '')
     } catch (err) {
       console.error("Error fetching user data:", err.message);
       setErrorMessage(err.message);
@@ -62,6 +61,7 @@ const UpdateUserDetailsForm = () => {
       formData.append('first_name', firstName);
       formData.append('last_name', lastName);
       formData.append('phone_number', phoneNumber);
+      formData.append('membership_type', membership);
       formData.append('member_address1', address1);
       formData.append('member_address2', address2);
       formData.append('member_city', memberCity);
@@ -433,6 +433,21 @@ const UpdateUserDetailsForm = () => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue"
               />
+            </div>
+
+            <div className="flex flex-col space-y-1">
+              <label className="font-medium text-left md:text-left">Membership Type</label>
+              <select
+                value={membership}
+                onChange={(e) => setMembership(e.target.value)}
+                className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue/80"
+              >
+                <option value="" disabled>Select Membership Type</option>
+                <option value="Silver" disabled={userData.membership_type === "Silver"}>Silver</option>
+                <option value="Gold" disabled={userData.membership_type === "Gold"}>Gold</option>
+                <option value="Platinum" disabled={userData.membership_type === "Platinum"}>Platinum</option>
+                <option value="Premium" disabled={userData.membership_type === "Premium"}>Premium</option>
+              </select>
             </div>
 
             {/* <div className="flex flex-col space-y-1">
