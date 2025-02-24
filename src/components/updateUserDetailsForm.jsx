@@ -37,12 +37,12 @@ const UpdateUserDetailsForm = () => {
       setUserData(data);
 
       // Sync form state with fetched user data
-      setFirstName(data.first_name || '');
-      setLastName(data.last_name || '');
+      setFirstName('');
+      setLastName('');
       setPhoneNumber('');
-      setAddress1(data.address1 || '');
-      setAddress2(data.address2 || '');
-      setMembership(data.membership || '')
+      setAddress1('');
+      setAddress2('');
+      setMembership('')
     } catch (err) {
       console.error("Error fetching user data:", err.message);
       setErrorMessage(err.message);
