@@ -36,7 +36,7 @@ const Popup = ({ isVisible, closePopup }) => {
               Booking History
             </p>
           </>
-        ) : user?.user_type === "Admin" ? (
+        ) : user?.user_type === "ADMIN" ? (
           <>
             <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/admin"); closePopup(); }}>
               Admin Services
