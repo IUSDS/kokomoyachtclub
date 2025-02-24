@@ -701,7 +701,7 @@ const AchInfoTab = ({ next }) => {
 
       {/* Account Type (Radio Buttons) */}
       <div className="flex flex-col px-2 py-2">
-        <p className="text-sm">Account Type*</p>
+        <p className="text-sm">Account Type</p>
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2">
             <input
