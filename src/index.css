@@ -12,4 +12,7 @@
 video {
     will-change: transform;
   }
-  
+
+.clip-bottom-curve {
+    clip-path: ellipse(80% 50% at 50% 100%);
+}

@@ -18,6 +18,7 @@ import Founders from "./pages/founders";
 import Contact from "./pages/contact";
 import ForgotPassword from "./pages/ForgotPassword";
 import NewPassword from "./pages/NewPassword";
+import ListYourYacht from "./pages/ListYourYacht";
 
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
@@ -46,6 +47,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/forgot_password" element={<ForgotPassword />} />
           <Route path="/new_password" element={<NewPassword />} />
+          <Route path="/list-your-yacht" element={<ListYourYacht />} />
         </Routes>
       </div>
       <Footer />

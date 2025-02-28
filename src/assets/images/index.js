@@ -43,6 +43,7 @@ import foundersKokomo from "./foundersKokomo.webp";
 import wanderlust from "./wanderlust.webp";
 import hero from "./hero.webp";
 import loginImg from "./login.webp"
+import list_yacht from "./list_yacht.webp";
 
 export {
   foundersKokomo,
@@ -90,4 +91,5 @@ export {
   L3,
   hero,
   loginImg,
+  list_yacht
 };
