@@ -24,6 +24,7 @@ const ListYourYacht = () => {
           className="w-full h-[500px] object-cover"
           src={list_yacht}
           alt="Hero"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-black opacity-60"></div>
         <div className="absolute top-[10%] xl:top-[30%] flex flex-col items-center gap-6 px-8 md:px-20 w-full">

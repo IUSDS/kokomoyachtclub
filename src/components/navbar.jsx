@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import ResponsiveMenu from "./responsiveMenu";
 import { FaUser } from "react-icons/fa";
 import logo from "../assets/logos/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import useAuthStore from '../authStore';
+import useAuthStore from "../authStore";
 
 const Popup = ({ isVisible, closePopup }) => {
   const logout = useAuthStore((state) => state.logout);
@@ -26,26 +26,53 @@ const Popup = ({ isVisible, closePopup }) => {
       <div className="flex flex-col bg-midnightblue text-white p-6 rounded-lg shadow-lg space-y-1">
         {user?.user_type === "User" ? (
           <>
-            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/membership"); closePopup(); }}>
+            <p
+              className="cursor-pointer hover:text-blue-200"
+              onClick={() => {
+                navigate("/membership");
+                closePopup();
+              }}
+            >
               Member Services
             </p>
-            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/update-details"); closePopup(); }}>
+            <p
+              className="cursor-pointer hover:text-blue-200"
+              onClick={() => {
+                navigate("/update-details");
+                closePopup();
+              }}
+            >
               Update Details
             </p>
-            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/booking-history"); closePopup(); }}>
+            <p
+              className="cursor-pointer hover:text-blue-200"
+              onClick={() => {
+                navigate("/booking-history");
+                closePopup();
+              }}
+            >
               Booking History
             </p>
           </>
         ) : user?.user_type === "ADMIN" ? (
           <>
-            <p className="cursor-pointer hover:text-blue-200" onClick={() => { navigate("/admin"); closePopup(); }}>
+            <p
+              className="cursor-pointer hover:text-blue-200"
+              onClick={() => {
+                navigate("/admin");
+                closePopup();
+              }}
+            >
               Admin Services
             </p>
           </>
         ) : null}
 
         {/* Logout Option for Both User and Admin */}
-        <p onClick={handleLogout} className="cursor-pointer hover:text-blue-200">
+        <p
+          onClick={handleLogout}
+          className="cursor-pointer hover:text-blue-200"
+        >
           Log out
         </p>
       </div>
@@ -125,22 +152,30 @@ const Navbar = () => {
             {/* Menu Section */}
             <div className="hidden xl:block">
               <ul className="flex items-center gap-4 text-midnightblue text-base font-nunito">
-                {["home", "founders", "fleet", "members", "contact"].map(
-                  (menu) => (
-                    <li
-                      key={menu}
-                      className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${selectedMenu === menu ? "text-blue-600" : ""
-                        }`}
+                {[
+                  "home",
+                  "founders",
+                  "fleet",
+                  "members",
+                  "contact",
+                  "list-your-yacht",
+                ].map((menu) => (
+                  <li
+                    key={menu}
+                    className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${
+                      selectedMenu === menu ? "text-blue-600" : ""
+                    }`}
+                  >
+                    <Link
+                      to={menu === "home" ? "/" : `/${menu}`}
+                      onClick={() => setSelectedMenu(menu)}
                     >
-                      <Link
-                        to={menu === "home" ? '/':`/${menu}`}
-                        onClick={() => setSelectedMenu(menu)}
-                      >
-                        {menu.charAt(0).toUpperCase() + menu.slice(1)}
-                      </Link>
-                    </li>
-                  )
-                )}
+                      {menu === "list-your-yacht"
+                        ? "List Your Yacht"
+                        : menu.charAt(0).toUpperCase() + menu.slice(1)}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
