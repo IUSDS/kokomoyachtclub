@@ -1,8 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
 import { Link } from "react-router-dom";
 import useAuthStore from "../authStore";
 import { li } from "framer-motion/client";
+import React, { useEffect } from "react";
 
 const ResponsiveMenu = ({ open, setOpen }) => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
