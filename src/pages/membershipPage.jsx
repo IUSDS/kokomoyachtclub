@@ -5,7 +5,7 @@ import { loginImg } from "../assets/images";
 
 
 const MembershipPage = () => {
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { user, isLoggedIn, checkSession } = useAuthStore();
@@ -21,9 +21,9 @@ const MembershipPage = () => {
   }, [isLoggedIn, user, navigate, checkSession]);
 
   // Render loading state, error, or member details
-  if (loading) {
-    return <div className='w-full text-center'>We are fetching your details</div>;
-  }
+  // if (loading) {
+  //   return <div className='w-full text-center'>We are fetching your details</div>;
+  // }
 
   if (error) {
     return <div>{error}</div>;
@@ -136,34 +136,6 @@ const MembershipPage = () => {
           sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation-by-user-activation"
         />
       </div>
-
-      {/* Buttons Section */}
-      {/* <div className='flex flex-col md:flex-row gap-4 md:gap-8 my-8'>
-        <button
-          onClick={handleExperience}
-          className="py-4 px-6 bg-midnightblue/90 text-white rounded-lg hover:bg-midnightblue shadow-lg"
-        >
-          PLAN YOUR EXPERIENCE
-        </button>
-        <button
-          onClick={handlePreviousBooking}
-          className="py-4 px-6 bg-midnightblue/90 text-white rounded-lg hover:bg-midnightblue shadow-lg"
-        >
-          CHECK PREVIOUS BOOKINGS
-        </button>
-      </div> */}
-
-      {/* Overnight Cruising Adventures */}
-      {/* <div className="flex flex-col justify-center items-center mt-8 gap-4">
-        <p className="font-bold text-lg">Overnight Cruising Adventures</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-4">
-          <ImageCard link={boca} name="BOCA GRANDE - GASPARILLA" />
-          <ImageCard link={naples} name="NAPLES" />
-          <ImageCard link={keywest} name="KEY WEST" />
-          <ImageCard link={captiva} name="CAPTIVA & SANIBEL ISLAND" />
-          <ImageCard link={marco} name="MARCO ISLAND" />
-        </div>
-      </div> */}
     </div>
   );
 };
