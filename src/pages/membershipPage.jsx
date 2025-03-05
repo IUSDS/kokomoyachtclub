@@ -23,7 +23,7 @@ const MembershipPage = () => {
     }
 
     try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/new-userdetail/user-details/?username=${username}`);
+      const response = await fetch(`https://api.kokomoyachtclub.vip/validate-user/current-user/`);
 
       if (response.ok) {
         const data = await response.json();
