@@ -1,66 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import ImageCard from '../components/imageCard';
-import { boca, captiva, keywest, marco, loginImg, naples } from '../assets/images';
-import { API_URL } from '../constant';
-import useAuthStore from '../authStore';
+import useAuthStore from "../authStore";
+import { loginImg } from "../assets/images";
 
 
 const MembershipPage = () => {
-  const [memberDetails, setMemberDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const { user, isLoggedIn, checkSession } = useAuthStore();
 
-  const fetchMemberDetails = async () => {
-    const username = localStorage.getItem("username");
-
-    if (!username) {
-      setError("No username found. Please log in again.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/validate-user/current-user/`);
-      console.log(response);
-      if (response.ok) {
-        const data = await response.json();
-        setMemberDetails(data);
-      } else {
-        setError("Failed to fetch member details");
-      }
-    } catch (error) {
-      setError("An error occurred while fetching member details");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePreviousBooking = () => {
-    navigate("previous_booking");
-  }
-
-  const handleExperience = () => {
-    const url = "/membership/plan_experiences";
-    window.open(url, "_blank");
-  }
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/login');
+      navigate("/login");
+    } else if (!user) {
+      // If the user exists but isn't loaded yet, check session
+      checkSession();
     }
-  }, [isLoggedIn])
-
-  useEffect(() => {
-    fetchMemberDetails();
-    // window.scrollTo(0, 0);
-  }, []);
+  }, [isLoggedIn, user, navigate, checkSession]);
 
   // Render loading state, error, or member details
   if (loading) {
-    return <div className='w-full text-center'>Loading...</div>;
+    return <div className='w-full text-center'>We are fetching your details</div>;
   }
 
   if (error) {
@@ -90,7 +52,7 @@ const MembershipPage = () => {
               {/* Profile Picture */}
               <div className="flex justify-center">
                 <img
-                  src={memberDetails.picture_url}
+                  src={user.picture_url}
                   alt="Profile"
                   className="w-24 h-24 rounded-full border-2 border-gray-300"
                 />
@@ -98,64 +60,64 @@ const MembershipPage = () => {
 
               {/* Full Name */}
               <h3 className="text-xl font-semibold text-gray-800 text-center md:text-start">
-                {memberDetails.first_name} {memberDetails.last_name}
+                {user.first_name} {user.last_name}
               </h3>
 
               {/* Membership Type */}
               <div className="flex items-center space-x-2 justify-center md:justify-start">
                 <span className="text-sm text-gray-500">Membership Type:</span>
                 <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
-                  {memberDetails.membership_type || "N/A"}
+                  {user.membership_type || "N/A"}
                 </span>
               </div>
 
               {/* Points Balance */}
               <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                 <p className="text-sm font-medium text-gray-500">Points Balance</p>
-                <p className="mt-1 text-2xl font-bold text-gray-900">{memberDetails.points}</p>
+                <p className="mt-1 text-2xl font-bold text-gray-900">{user.points}</p>
               </div>
 
               {/* Contact Info */}
               <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                 <h4 className="text-lg font-semibold text-gray-700">Contact Information</h4>
-                <p className="text-sm text-gray-500">{memberDetails.email_id}</p>
-                <p className="text-sm text-gray-500">{memberDetails.phone_number || "N/A"}</p>
+                <p className="text-sm text-gray-500">{user.email_id}</p>
+                <p className="text-sm text-gray-500">{user.phone_number || "N/A"}</p>
               </div>
 
               {/* Address */}
               <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                 <h4 className="text-lg font-semibold text-gray-700">Address</h4>
                 <p className="text-sm text-gray-500">
-                  {memberDetails.member_address1}, {memberDetails.member_address2}
+                  {user.member_address1}, {user.member_address2}
                 </p>
                 <p className="text-sm text-gray-500">
-                  {memberDetails.member_city}, {memberDetails.member_state} {memberDetails.member_zip}
+                  {user.member_city}, {user.member_state} {user.member_zip}
                 </p>
               </div>
 
               {/* Emergency Contact (if available) */}
-              {memberDetails.emergency_name && (
+              {user.emergency_name && (
                 <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-700">Emergency Contact</h4>
-                  <p className="text-sm text-gray-500">{memberDetails.emergency_name}</p>
-                  <p className="text-sm text-gray-500">{memberDetails.emergency_contact}</p>
-                  <p className="text-sm text-gray-500">Relationship: {memberDetails.emergency_relationship}</p>
+                  <p className="text-sm text-gray-500">{user.emergency_name}</p>
+                  <p className="text-sm text-gray-500">{user.emergency_contact}</p>
+                  <p className="text-sm text-gray-500">Relationship: {user.emergency_relationship}</p>
                 </div>
               )}
 
               {/* Company Name (if applicable) */}
-              {memberDetails.company_name && (
+              {user.company_name && (
                 <div className="flex flex-col items-center md:items-start justify-between text-center rounded-lg">
                   <h4 className="text-lg font-semibold text-gray-700">Company</h4>
-                  <p className="text-sm text-gray-500">{memberDetails.company_name}</p>
+                  <p className="text-sm text-gray-500">{user.company_name}</p>
                 </div>
               )}
 
               {/* Referral Information */}
-              {memberDetails.referral_information && (
+              {user.referral_information && (
                 <div className="mt-4">
                   <h4 className="text-lg font-semibold text-gray-700">Referral Information</h4>
-                  <p className="text-sm text-gray-500">{memberDetails.referral_information}</p>
+                  <p className="text-sm text-gray-500">{user.referral_information}</p>
                 </div>
               )}
             </div>

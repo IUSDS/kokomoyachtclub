@@ -73,7 +73,7 @@ const useAuthStore = create(
 
       // Debugging function (View Zustand state in browser console)
       debugStore: () => {
-        console.log("🛠️ Zustand Store:", get());
+        console.log("Zustand Store:", get());
       },
     }),
     {
