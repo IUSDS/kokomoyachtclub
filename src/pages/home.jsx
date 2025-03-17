@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Vid from '../assets/videos/vid.mp4';
-import { home1, home2, home3, home4, home5, home6, home7, home8, home9 } from '../assets/images';
+import { home1, home2, home3, home4, home5, home6, home7, home8, home9, mnd, congetta, outrage, aviara } from '../assets/images';
 import homeicon from '../assets/icons/homeicon.png';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useLocation } from 'react-router-dom';
@@ -100,6 +100,10 @@ const Home = () => {
         { name: "Club Yacht", img: home6 },
         { name: "Wanderlust", img: home7 },
         { name: "The Life", img: home8 },
+        { name: "Memories Not Dreams", img: mnd},
+        { name: "Congetta", img: congetta },
+        { name: "Outrage", img: outrage },
+        { name: "Aviara", img: aviara },
     ];
 
     // For modal
@@ -230,7 +234,7 @@ const Home = () => {
                             <img
                                 src={fleet.img}
                                 alt={fleet.name}
-                                className="w-full h-full object-cover"
+                                className="w-full xl:h-[400px] md:h-[220px] object-cover"
                                 loading="lazy"
                             />
                         </div>

@@ -44,6 +44,34 @@ import wanderlust from "./wanderlust.webp";
 import hero from "./hero.webp";
 import loginImg from "./login.webp"
 import list_yacht from "./list_yacht.webp";
+import congetta from "./congetta.webp";
+import outrage from "./outrage.webp";
+import aviara from "./aviara.webp";
+import mnd from "./mnd.webp";
+import mnd1 from "./mnd1.webp";
+import mnd2 from "./mnd2.webp";
+import mnd3 from "./mnd3.webp";
+import mnd4 from "./mnd4.webp";
+import mnd5 from "./mnd5.webp";
+import mnd6 from "./mnd6.webp";
+import mnd7 from "./mnd7.webp";
+import mnd8 from "./mnd8.webp";
+import mnd9 from "./mnd9.webp";
+import congetta1 from "./congetta1.webp";
+import congetta2 from "./congetta2.webp";
+import congetta3 from "./congetta3.webp";
+import congetta4 from "./congetta4.webp";
+import congetta5 from "./congetta5.webp";
+import outrage1 from "./outrage1.webp";
+import outrage2 from "./outrage2.webp";
+import outrage3 from "./outrage3.webp";
+import outrage4 from "./outrage4.webp";
+import outrage5 from "./outrage5.webp";
+import aviara1 from "./aviara1.webp";
+import aviara2 from "./aviara2.webp";
+import aviara3 from "./aviara3.webp";
+import aviara4 from "./aviara4.webp";
+import aviara5 from "./aviara5.webp";
 
 export {
   foundersKokomo,
@@ -91,5 +119,33 @@ export {
   L3,
   hero,
   loginImg,
-  list_yacht
+  list_yacht,
+  congetta,
+  outrage,
+  aviara,
+  mnd,
+  mnd1,
+  mnd2,
+  mnd3,
+  mnd4,
+  mnd5,
+  mnd6,
+  mnd7,
+  mnd8,
+  mnd9,
+  congetta1,
+  congetta2,
+  congetta3,
+  congetta4,
+  congetta5,
+  outrage1,
+  outrage2,
+  outrage3,
+  outrage4,
+  outrage5,
+  aviara1,
+  aviara2,
+  aviara3,
+  aviara4,
+  aviara5
 };
