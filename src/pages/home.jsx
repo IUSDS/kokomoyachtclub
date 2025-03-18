@@ -94,16 +94,16 @@ const Home = () => {
     };
 
     const fleetImages = [
-        { name: "Memory Maker", img: home3 },
-        { name: "Giddy Up", img: home4 },
-        { name: "Top Shelf", img: home5 },
-        { name: "Club Yacht", img: home6 },
-        { name: "Wanderlust", img: home7 },
-        { name: "The Life", img: home8 },
-        { name: "Memories Not Dreams", img: mnd},
-        { name: "Congetta", img: congetta },
-        { name: "Outrage", img: outrage },
-        { name: "Aviara", img: aviara },
+        { name: "50' Memory Maker", img: home3 },
+        { name: "50' Memories, Not Dreams", img: mnd},
+        { name: "50' Club Yacht", img: home6 },
+        { name: "44' Congetta", img: congetta },
+        { name: "43' Giddy Up", img: home4 },
+        { name: "42' Wanderlust", img: home7 },
+        { name: "42' Outrage", img: outrage },
+        { name: "38' Top Shelf", img: home5 },
+        { name: "35' Aviara", img: aviara },
+        { name: "29' The Life", img: home8 },
     ];
 
     // For modal

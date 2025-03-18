@@ -62,6 +62,7 @@ import { useLocation, Link } from "react-router-dom";
 import MembershipLevels from "../components/MembershipLevels";
 import TestimonialsSection from "../components/TestimonialsSection";
 import ContactForm from "../components/ContactForm";
+import { h6 } from "framer-motion/client";
 
 // Motion variants for smooth animations
 const sectionVariants = {
@@ -82,7 +83,7 @@ const fleetData = [
   },
   {
     title: "50' Club Yacht",
-    points: "200-234 Mariner Points",
+    points: "250-280 Mariner Points",
     id: "clubyacht",
     description:
       "Exclusive to Kokomo Yacht Club, our very own custom built luxury day yacht. Designed to maximize your perfect day on the water. There is nothing like it on the water! The entire vessel opens to the outdoors and provides free flowing indoor/outdoor space. The entire vessel can also or be closed with full air conditioning. The spacious front bow provides a sundeck and couch seating plus outdoor air conditioning. Plenty of conversation spaces in the bow, cockpit and cabin. Next to the helm, the lower level also features an air conditioned lounge with television, full galley and full size bathroom.",
@@ -91,8 +92,8 @@ const fleetData = [
     reverse: true,
   },
   {
-    title: "50' Memories Not Dreams",
-    points: "200-234 Mariner Points",
+    title: "50' Memories, Not Dreams",
+    points: "197-219 Mariner Points",
     id: "memoriesnotdreams",
     description:
       "“Memories, Not Dreams” promises a one-of-a-kind luxury experience in St. Petersburg’s vibrant waters, where every detail caters to an unparalleled voyage. This yacht offers expansive lounge areas, cutting-edge amenities, and agile performance for an unrivaled sea adventure. With luxurious bedrooms, state-of-the-art kitchen facilities, and a plethora of entertainment options, your time at sea is transformed into an exceptional escapade.",
@@ -122,7 +123,7 @@ const fleetData = [
   },
   {
     title: "42' Congetta",
-    points: "163-189 Mariner Points",
+    points: "197-219 Mariner Points",
     id: "congetta",
     description:
       "Set sail on the 42’ Congetta for a luxury day on the water in St. Pete. From cruising along the Gulf Coast to docking at waterfront restaurants or lounging on secluded beaches, this power catamaran is your ticket to a customized and carefree boating experience.",
@@ -132,7 +133,7 @@ const fleetData = [
   },
   {
     title: "42' Outrage",
-    points: "163-189 Mariner Points",
+    points: "148-165 Mariner Points",
     id: "outrage",
     description:
       "Designed for both adventure and relaxation, the 42’ Outrage offers a luxury cruising experience with the option to fish. Explore Anna Maria Island’s pristine sandbars, scenic waterways, and waterfront dining spots, or cast a line in calm coastal waters for an unforgettable day on the water.",
@@ -152,7 +153,7 @@ const fleetData = [
   },
   {
     title: "35' Aviara",
-    points: "131-144 Mariner Points",
+    points: "108-120 Mariner Points",
     id: "aviara",
     description:
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
@@ -199,6 +200,10 @@ const FleetSection = ({
       <h2 className="font-normal text-midnightblue text-3xl md:text-4xl xl:text-6xl lg:text-5xl">
         {title}
       </h2>
+
+      {id==='clubyacht' && (
+        <h6 className="text-lg text-midnightblue">(Coming Spring 2026)</h6>
+      )}
 
       <div className="flex items-center">
         <div className="w-2 h-6 rounded-full mr-2 bg-blue-500"></div>
