@@ -159,7 +159,7 @@ const Home = () => {
   };
 
   return (
-    <div className="space-y-10 md:space-y-16 font-jakarta">
+    <div className="space-y-10 md:space-y-8 font-jakarta">
       {/* Hero Section */}
       <motion.div
         initial="hidden"
@@ -206,7 +206,7 @@ const Home = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         variants={fadeInUpVariant}
-        className="flex flex-col xl:h-[792px] lg:h-[600px] lg:px-20 px-4 md:flex-row"
+        className="flex flex-col md:py-10 lg:px-20 px-4 md:flex-row"
       >
         {/* Image Container */}
         <motion.div
@@ -302,7 +302,7 @@ const Home = () => {
       {/* Fleet Section */}
       <motion.div
         variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 py-20"
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 py-10"
       >
         {fleetImages.map((fleet, index) => {
           const isLastItem = index === fleetImages.length - 1;
