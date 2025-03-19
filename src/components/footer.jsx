@@ -24,6 +24,21 @@ const footer = () => {
                                 </a>
                             </li>
                             <li>
+                                <a href={`/fleet#memoriesnotdreams`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                    50' Memories, Not Dreams
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`/fleet#congetta`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                    44' Congetta
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`/fleet#fountainepajot`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                    44' Fountaine Pajot
+                                </a>
+                            </li>
+                            <li>
                                 <a href={`/fleet#giddyup`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     43' Giddy Up
                                 </a>
@@ -34,8 +49,18 @@ const footer = () => {
                                 </a>
                             </li>
                             <li>
+                                <a href={`/fleet#outrage`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                    42' Outrage
+                                </a>
+                            </li>
+                            <li>
                                 <a href={`/fleet#topshelf`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
                                     38' Top Shelf
+                                </a>
+                            </li>
+                            <li>
+                                <a href={`/fleet#aviara`} target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-blue-600">
+                                    35' Aviara
                                 </a>
                             </li>
                             <li>
