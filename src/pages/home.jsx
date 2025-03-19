@@ -324,7 +324,7 @@ const Home = () => {
                   loading="lazy"
                 />
                 {/* Text Box */}
-                <div className="absolute top-0 left-0 bg-midnightblue text-white text-sm w-[130px] xl:w-[200px] xl:py-8 py-4 text-center">
+                <div className="absolute top-0 left-0 bg-midnightblue text-white text-sm md:text-lg w-[130px] xl:w-[200px] xl:py-8 py-4 text-center">
                   {fleet.location}
                 </div>
               </div>
@@ -334,7 +334,7 @@ const Home = () => {
                 </h3>
                 <a
                   href={`/fleet#${fleet.name
-                    .replace(/\s+/g, "")
+                    .replace(/[,\s]+/g, "") // Removes spaces AND commas
                     .toLowerCase()}`}
                   target="_blank"
                   rel="noopener noreferrer"

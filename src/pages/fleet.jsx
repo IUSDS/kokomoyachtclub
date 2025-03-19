@@ -69,6 +69,7 @@ const sectionVariants = {
 
 const fleetData = [
   {
+    location: "Sarasota",
     title: "50' Memory Maker",
     points: "200-234 Mariner Points",
     id: "memorymaker",
@@ -79,6 +80,7 @@ const fleetData = [
     reverse: false,
   },
   {
+    location: "Sarasota",
     title: "50' Club Yacht",
     points: "250-280 Mariner Points",
     id: "clubyacht",
@@ -89,6 +91,7 @@ const fleetData = [
     reverse: true,
   },
   {
+    location: "St. Petersburg",
     title: "50' Memories, Not Dreams",
     points: "197-219 Mariner Points",
     id: "memoriesnotdreams",
@@ -99,6 +102,7 @@ const fleetData = [
     reverse: false,
   },
   {
+    location: "St. Petersburg",
     title: "44' Congetta",
     points: "197-219 Mariner Points",
     id: "congetta",
@@ -109,6 +113,18 @@ const fleetData = [
     reverse: true,
   },
   {
+    location: "Tampa Bay",
+    title: "44' Fountaine Pajot",
+    points: "197-219 Mariner Points",
+    id: "fountainepajot",
+    description:
+      "The 44’ Fountaine Pajot delivers the perfect blend of performance, comfort, and style for exploring Tampa Bay. Whether you’re island-hopping, relaxing at a sandbar, or enjoying a sunset cruise, this sleek power catamaran provides a smooth, spacious ride with all the amenities for a first-class experience.",
+    images: [congetta1, congetta2, congetta3, congetta4, congetta5],
+    buttonText: "Become a Member to Book",
+    reverse: false,
+  },
+  {
+    location: "Sarasota",
     title: "43' Giddy Up",
     points: "175-207 Mariner Points",
     id: "giddyup",
@@ -119,6 +135,7 @@ const fleetData = [
     reverse: true,
   },
   {
+    location: "Sarasota",
     title: "42' Wanderlust",
     points: "163-189 Mariner Points",
     id: "wanderlust",
@@ -129,6 +146,7 @@ const fleetData = [
     reverse: false,
   },
   {
+    location: "Anna Maria",
     title: "42' Outrage",
     points: "148-165 Mariner Points",
     id: "outrage",
@@ -136,9 +154,10 @@ const fleetData = [
       "Designed for both adventure and relaxation, the 42’ Outrage offers a luxury cruising experience with the option to fish. Explore Anna Maria Island’s pristine sandbars, scenic waterways, and waterfront dining spots, or cast a line in calm coastal waters for an unforgettable day on the water.",
     images: [outrage2, outrage1, outrage3, outrage4, outrage5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
+    location: "Sarasota",
     title: "38' Top Shelf",
     points: "131-144 Mariner Points",
     id: "topshelf",
@@ -146,9 +165,10 @@ const fleetData = [
       "Our 38' Open Bow Day Boat for up to 13 guests. Perfect for day trips to restaurants, sandbars or simply cruising, this open bow day boat offers ultimate comfort with spacious seating, cushioned flooring throughout, mahogany tables, shade for the entire boat, full bathroom, an advanced stereo system, water toys and twin 350’s for plenty of “Get Up and Go”.",
     images: [home5, TS1, TS2],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
+    location: "Sarasota & Anna Maria",
     title: "35' Aviara",
     points: "108-120 Mariner Points",
     id: "aviara",
@@ -156,9 +176,10 @@ const fleetData = [
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
+    location: "Sarasota",
     title: "29' The Life",
     points: "115-125 Mariner Points",
     id: "thelife",
@@ -166,11 +187,12 @@ const fleetData = [
       "Ideal for small gatherings up to 6 people, this spectacular 29' open bow day boat provides luxurious appointments, a marine head and an amazing stereo system. Captain Jeff, who grew up on the waters of Sarasota Bay, always provides a memorable day on the water.",
     images: [L1, home2, L2, L3],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
 ];
 
 const FleetSection = ({
+  location,
   title,
   points,
   id,
@@ -201,6 +223,8 @@ const FleetSection = ({
       {id==='clubyacht' && (
         <h6 className="text-lg text-midnightblue">(Coming Spring 2026)</h6>
       )}
+
+      <div className="bg-midnightblue text-white w-fit px-4 py-2 rounded-lg text-2xl font-bold">{location}</div>
 
       <div className="flex items-center">
         <div className="w-2 h-6 rounded-full mr-2 bg-blue-500"></div>
