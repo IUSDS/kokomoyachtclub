@@ -94,16 +94,16 @@ const Home = () => {
     };
 
     const fleetImages = [
-        { name: "50' Memory Maker", img: home3 },
-        { name: "50' Memories, Not Dreams", img: mnd},
-        { name: "50' Club Yacht", img: home6 },
-        { name: "44' Congetta", img: congetta },
-        { name: "43' Giddy Up", img: home4 },
-        { name: "42' Wanderlust", img: home7 },
-        { name: "42' Outrage", img: outrage },
-        { name: "38' Top Shelf", img: home5 },
-        { name: "35' Aviara", img: aviara },
-        { name: "29' The Life", img: home8 },
+        { name: "Memory Maker", size: "50'", img: home3 },
+        { name: "Memories, Not Dreams", size: "50'", img: mnd},
+        { name: "Club Yacht", size: "50'", img: home6 },
+        { name: "Congetta", size: "44'", img: congetta },
+        { name: "Giddy Up", size: "43'", img: home4 },
+        { name: "Wanderlust", size: "42'", img: home7 },
+        { name: "Outrage", size: "42'", img: outrage },
+        { name: "Top Shelf", size: "38'", img: home5 },
+        { name: "Aviara", size: "35'", img: aviara },
+        { name: "The Life", size: "29'", img: home8 },
     ];
 
     // For modal
@@ -239,7 +239,7 @@ const Home = () => {
                             />
                         </div>
                         <div className="p-6">
-                            <h3 className="font-veryLight text-2xl text-midnightblue mb-4">{fleet.name}</h3>
+                            <h3 className="font-veryLight text-2xl text-midnightblue mb-4">{fleet.size} {fleet.name}</h3>
                             <a
                                 href={`/fleet#${fleet.name.replace(/\s+/g, '').toLowerCase()}`}
                                 target="_blank"

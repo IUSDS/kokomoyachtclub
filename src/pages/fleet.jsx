@@ -56,13 +56,10 @@ import {
   aviara4,
   aviara5,
 } from "../assets/images";
-import { FaRegCheckCircle } from "react-icons/fa";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useLocation, Link } from "react-router-dom";
 import MembershipLevels from "../components/MembershipLevels";
 import TestimonialsSection from "../components/TestimonialsSection";
 import ContactForm from "../components/ContactForm";
-import { h6 } from "framer-motion/client";
 
 // Motion variants for smooth animations
 const sectionVariants = {
@@ -102,7 +99,17 @@ const fleetData = [
     reverse: false,
   },
   {
-    title: "47' Giddy Up",
+    title: "44' Congetta",
+    points: "197-219 Mariner Points",
+    id: "congetta",
+    description:
+      "Set sail on the 44’ Congetta for a luxury day on the water in St. Pete. From cruising along the Gulf Coast to docking at waterfront restaurants or lounging on secluded beaches, this power catamaran is your ticket to a customized and carefree boating experience.",
+    images: [congetta1, congetta2, congetta3, congetta4, congetta5],
+    buttonText: "Become a Member to Book",
+    reverse: true,
+  },
+  {
+    title: "43' Giddy Up",
     points: "175-207 Mariner Points",
     id: "giddyup",
     description:
@@ -120,16 +127,6 @@ const fleetData = [
     images: [home7, wl2, wl3, wl4, wl5, wl6, wl7],
     buttonText: "Become a Member to Book",
     reverse: false,
-  },
-  {
-    title: "42' Congetta",
-    points: "197-219 Mariner Points",
-    id: "congetta",
-    description:
-      "Set sail on the 42’ Congetta for a luxury day on the water in St. Pete. From cruising along the Gulf Coast to docking at waterfront restaurants or lounging on secluded beaches, this power catamaran is your ticket to a customized and carefree boating experience.",
-    images: [congetta1, congetta2, congetta3, congetta4, congetta5],
-    buttonText: "Become a Member to Book",
-    reverse: true,
   },
   {
     title: "42' Outrage",
