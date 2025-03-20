@@ -188,8 +188,7 @@ const Home = () => {
             The Pure Joy of Luxury Boating Without the Hassle
           </h1>
           <p className="text-sm font-normal md:text-xl mb-6">
-            Welcome to Sarasota’s luxury private boat club offering our members
-            a world-class fleet of USCG captained vessels.
+          Welcome to Gulf Coast’s luxury private boat club, offering our members access to a world-class fleet of USCG-captained vessels.
           </p>
           <button
             onClick={handleInquireButton}
