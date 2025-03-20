@@ -103,6 +103,11 @@ const footer = () => {
                                     Contact
                                 </a>
                             </li>
+                            <li>
+                                <a href="/list-your-yacht" className="cursor-pointer hover:text-blue-600">
+                                    List Your Yacht
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div className='text-center md:text-left '>
