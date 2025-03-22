@@ -4,16 +4,316 @@ import { RiCloseLine } from "react-icons/ri";
 
 const ListYourYacht = () => {
   const [formOpen, setFormOpen] = useState(false);
-  const [phone, setPhone] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    countryCode: "+1",
+    phone: "",
+    model: "",
+    year: "",
+    size: "",
+    message: ""
+  });
 
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    
+    // Map form field IDs to the formData state object keys
+    const fieldMap = {
+      first_name: "firstName",
+      last_name: "lastName",
+      email: "email",
+      phone: "phone",
+      model: "model",
+      year: "year",
+      size: "size",
+      message: "message"
+    };
+    
+    setFormData({
+      ...formData,
+      [fieldMap[id] || id]: value
+    });
+  };
+  
+  // Handle country code selection
+  const handleCountryCodeChange = (e) => {
+    setFormData({
+      ...formData,
+      countryCode: e.target.value
+    });
+  };
+
+  // Toggle form modal
   const handleForm = () => {
     setFormOpen(!formOpen);
   };
 
+  // Close form modal when clicking outside
   const closeForm = (e) => {
     if (e.target.id === "formOverlay") {
       setFormOpen(false);
     }
+  };
+  
+  // Reset form after submission
+  const resetForm = () => {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      countryCode: "+1",
+      phone: "",
+      model: "",
+      year: "",
+      size: "",
+      message: ""
+    });
+  };
+
+  // Submit form to backend
+  const submitForm = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+    
+    try {
+      // Prepare data for API according to the provided curl command
+      const submissionData = {
+        visitor_first_name: formData.firstName,
+        visitor_last_name: formData.lastName,
+        visitor_email: formData.email,
+        visitor_phone_number: `${formData.countryCode}${formData.phone}`,
+        yatch_model: formData.model,
+        yatch_manufacture_year: parseInt(formData.year),
+        yatch_size: parseInt(formData.size),
+        visitor_message: formData.message || ""
+      };
+      
+      // Send data to API
+      const response = await fetch("https://api.kokomoyachtclub.vip/vistors/add-yacht-visitor", {
+        method: "POST",
+        headers: {
+          "accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(submissionData)
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(
+          errorData?.detail || `Submission failed: ${response.status}`
+        );
+      }
+      
+      // Handle successful submission
+      const data = await response.json();
+      console.log("Submission successful:", data);
+      setSubmitSuccess(true);
+      resetForm();
+      
+      // Close the form modal after 2 seconds on success
+      setTimeout(() => {
+        if (formOpen) {
+          setFormOpen(false);
+          setSubmitSuccess(false);
+        }
+      }, 2000);
+      
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitError(error.message || "Failed to submit. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Validate form before submission
+  const validateForm = () => {
+    return (
+      formData.firstName.trim() !== "" &&
+      formData.lastName.trim() !== "" &&
+      formData.email.trim() !== "" &&
+      formData.phone.trim() !== "" &&
+      formData.model.trim() !== "" &&
+      formData.year.trim() !== "" &&
+      formData.size.trim() !== ""
+    );
+  };
+
+  // Render form fields for both popup and main form
+  const renderFormFields = (formType) => {
+    const bgClass = formType === "popup" ? "" : "bg-blue-100";
+    
+    return (
+      <>
+        <div className="grid grid-cols-2 gap-1">
+          <div className="mb-4">
+            <label htmlFor="first_name" className="block text-sm font-medium">
+              First Name*
+            </label>
+            <input
+              type="text"
+              id="first_name"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+              placeholder="Enter your first name"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="last_name" className="block text-sm font-medium">
+              Last Name*
+            </label>
+            <input
+              type="text"
+              id="last_name"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+              placeholder="Enter your last name"
+              required
+            />
+          </div>
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium">
+            Email*
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="phone" className="block text-sm font-medium">
+            Phone*
+          </label>
+          <div className="flex gap-2">
+            <select 
+              className={`p-2 rounded-md text-black ${bgClass}`}
+              value={formData.countryCode}
+              onChange={handleCountryCodeChange}
+            >
+              <option value="+1">+1 (USA)</option>
+              {/* <option value="+44">+44 (UK)</option>
+              <option value="+33">+33 (France)</option>
+              <option value="+39">+39 (Italy)</option>
+              <option value="+34">+34 (Spain)</option>
+              <option value="+49">+49 (Germany)</option> */}
+              {/* Add more countries as needed */}
+            </select>
+            <input
+              type="number"
+              id="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className={`p-2 w-full rounded-md text-black ${bgClass}`}
+              placeholder="Enter your number"
+              required
+            />
+          </div>
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="model" className="block text-sm font-medium">
+            Model*
+          </label>
+          <input
+            type="text"
+            id="model"
+            value={formData.model}
+            onChange={handleInputChange}
+            className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+            placeholder="Enter your yacht model"
+            required
+          />
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="year" className="block text-sm font-medium">
+            Year*
+          </label>
+          <input
+            type="number"
+            id="year"
+            value={formData.year}
+            onChange={handleInputChange}
+            className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+            placeholder="Enter year of manufacture"
+            required
+          />
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="size" className="block text-sm font-medium">
+            Size*
+          </label>
+          <input
+            type="number"
+            id="size"
+            value={formData.size}
+            onChange={handleInputChange}
+            className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+            placeholder="Enter your yacht's size"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="message" className="block text-sm font-medium">
+            Message
+          </label>
+          <input
+            type="text"
+            id="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            className={`mt-1 p-2 w-full rounded-md text-black ${bgClass}`}
+            placeholder=""
+          />
+        </div>
+        
+        <button
+          type="submit"
+          disabled={isSubmitting || !validateForm()}
+          className={`${formType === "popup" ? "w-full" : "w-1/3 mx-auto"} 
+            bg-white text-midnightblue py-2 rounded-md font-bold 
+            hover:bg-gray-200 transition-all duration-300
+            ${(isSubmitting || !validateForm()) ? "opacity-70 cursor-not-allowed" : ""}`}
+        >
+          {isSubmitting ? "Submitting..." : "Submit"}
+        </button>
+        
+        {submitSuccess && (
+          <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-md text-center">
+            Your yacht details have been successfully submitted! We'll be in touch soon.
+          </div>
+        )}
+        
+        {submitError && (
+          <div className="mt-4 p-3 bg-red-100 text-red-800 rounded-md text-center">
+            {submitError}
+          </div>
+        )}
+      </>
+    );
   };
 
   return (
@@ -64,115 +364,9 @@ const ListYourYacht = () => {
               <RiCloseLine />
             </button>
             <h2 className="text-2xl font-bold mb-4">Partner With Us</h2>
-            <div className="grid grid-cols-2 gap-1">
-              <div className="mb-4">
-                <label
-                  htmlFor="first_name"
-                  className="block text-sm font-medium"
-                >
-                  First Name*
-                </label>
-                <input
-                  type="text"
-                  id="first_name"
-                  className="mt-1 p-2 w-full rounded-md text-black"
-                  placeholder="Enter your first name"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  htmlFor="last_name"
-                  className="block text-sm font-medium"
-                >
-                  Last Name*
-                </label>
-                <input
-                  type="text"
-                  id="last_name"
-                  className="mt-1 p-2 w-full rounded-md text-black"
-                  placeholder="Enter your last name"
-                />
-              </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium">
-                Email*
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="mt-1 p-2 w-full rounded-md text-black"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="phone" className="block text-sm font-medium">
-                Phone*
-              </label>
-              <div className="flex gap-2">
-                <select className="p-2 rounded-md text-black">
-                  <option value="+1">+1 (USA)</option>
-                  {/* Add more countries as needed */}
-                </select>
-                <input
-                  type="number"
-                  id="phone"
-                  className="p-2 w-full rounded-md text-black"
-                  placeholder="Enter your number"
-                />
-              </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="model" className="block text-sm font-medium">
-                Model*
-              </label>
-              <input
-                type="text"
-                id="model"
-                className="mt-1 p-2 w-full rounded-md text-black"
-                placeholder="Enter your yacht model"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="year" className="block text-sm font-medium">
-                Year*
-              </label>
-              <input
-                type="number"
-                id="year"
-                className="mt-1 p-2 w-full rounded-md text-black"
-                placeholder="Enter year of manufacture"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="size" className="block text-sm font-medium">
-                Size*
-              </label>
-              <input
-                type="number"
-                id="size"
-                className="mt-1 p-2 w-full rounded-md text-black"
-                placeholder="Enter your yacht's size"
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="message" className="block text-sm font-medium">
-                Message
-              </label>
-              <input
-                type="text"
-                id="message"
-                className="mt-1 p-2 w-full rounded-md text-black"
-                placeholder=""
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-white text-midnightblue py-2 rounded-md font-bold hover:bg-gray-200 transition-all duration-300"
-            >
-              Submit
-            </button>
+            <form onSubmit={submitForm}>
+              {renderFormFields("popup")}
+            </form>
           </div>
         </div>
       )}
@@ -205,109 +399,9 @@ const ListYourYacht = () => {
         <h1 className="text-midnightblue text-3xl md:text-5xl xl:text-6xl font-semibold">Ready to Get Started?</h1>
         <div className="flex flex-col bg-midnightblue mx-4 xl:w-1/2 p-8 rounded-md">
           <h2 className="text-2xl font-bold mb-4">Partner With Us</h2>
-          <div className="grid grid-cols-2 gap-1">
-            <div className="mb-4">
-              <label htmlFor="first_name" className="block text-sm font-medium">
-                First Name*
-              </label>
-              <input
-                type="text"
-                id="first_name"
-                className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-                placeholder="Enter your first name"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="last_name" className="block text-sm font-medium">
-                Last Name*
-              </label>
-              <input
-                type="text"
-                id="last_name"
-                className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-                placeholder="Enter your last name"
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium">
-              Email*
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="phone" className="block text-sm font-medium">
-              Phone*
-            </label>
-            <div className="flex gap-2">
-              <select className="p-2 rounded-md text-black bg-blue-100">
-                <option value="+1">+1 (USA)</option>
-                {/* Add more countries as needed */}
-              </select>
-              <input
-                type="number"
-                id="phone"
-                className="p-2 w-full rounded-md text-black bg-blue-100"
-                placeholder="Enter your number"
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="model" className="block text-sm font-medium">
-              Model*
-            </label>
-            <input
-              type="text"
-              id="model"
-              className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-              placeholder="Enter your yacht model"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="year" className="block text-sm font-medium">
-              Year*
-            </label>
-            <input
-              type="number"
-              id="year"
-              className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-              placeholder="Enter year of manufacture"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="size" className="block text-sm font-medium">
-              Size*
-            </label>
-            <input
-              type="number"
-              id="size"
-              className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-              placeholder="Enter your yacht's size"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-sm font-medium">
-              Message
-            </label>
-            <input
-              type="text"
-              id="message"
-              className="mt-1 p-2 w-full rounded-md text-black bg-blue-100"
-              placeholder=""
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-1/3 mx-auto bg-white text-midnightblue py-2 rounded-md font-bold hover:bg-gray-200 transition-all duration-300"
-          >
-            Submit
-          </button>
+          <form onSubmit={submitForm}>
+            {renderFormFields("main")}
+          </form>
         </div>
       </div>
 
