@@ -9,220 +9,242 @@ const footer = () => {
     <>
       <div className="flex flex-col lg:flex-row-reverse items-center justify-center gap-4 mx-10 my-8 lg:my-16">
         {/* links section */}
-        <div className="flex flex-col md:flex-row gap-6 text-gray-600 lg:w-2/3">
-          <div className="text-center md:text-left">
+        <div className="flex flex-col md:flex-row md:gap-x-4 xl:gap-x-6 text-gray-600 lg:w-2/3 gap-y-2">
+          {/* Fleet */}
+          <div className="text-left">
             <p className="text-midnightblue">Fleet</p>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-              <li>
-                <a
-                  href={`/fleet#memorymaker`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  50' Memory Maker
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#clubyacht`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  50' Club Yacht
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#memoriesnotdreams`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  50' Memories, Not Dreams
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#congetta`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  44' Congetta
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#fountainepajot`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  44' Fountaine Pajot
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#giddyup`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  43' Giddy Up
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#wnaderlust`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  42' Wanderlust
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#outrage`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  42' Outrage
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#topshelf`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  38' Top Shelf
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#aviara`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  35' Aviara
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/fleet#thelife`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  29' The Life
-                </a>
-              </li>
+            <ul className="flex gap-x-4 xl:gap-x-6">
+              <div className="w-1/2 md:max-w-1/2">
+                <li>
+                  <a
+                    href={`/fleet#peace`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    63' Peace
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#memorymaker`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    50' Memory Maker
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#clubyacht`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    50' Club Yacht
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#memoriesnotdreams`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    50' Memories, Not Dreams
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#congetta`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    44' Congetta
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#fountainepajot`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    44' Fountaine Pajot
+                  </a>
+                </li>
+              </div>
+              <div className="w-1/2 md:max-w-1/2">
+                <li>
+                  <a
+                    href={`/fleet#giddyup`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    43' Giddy Up
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#wnaderlust`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    42' Wanderlust
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#outrage`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    42' Outrage
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#topshelf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    38' Top Shelf
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#aviara`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    35' Aviara
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#thelife`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    29' The Life
+                  </a>
+                </li>
+              </div>
             </ul>
           </div>
-
-          <div className="text-center md:text-left">
-            <p className="text-midnightblue">Helpful Links</p>
-            <ul>
-              <li>
-                <a
-                  href="/contact"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  Become a Member
-                </a>
-              </li>
-              <li>
-                <a href="/" className="cursor-pointer hover:text-blue-600">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/founders"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  From the Founders
-                </a>
-              </li>
-              <li>
-                <a href="/fleet" className="cursor-pointer hover:text-blue-600">
-                  Fleet
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/members"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  Membership
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/contact"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/list-your-yacht"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  List Your Yacht
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="text-center md:text-left ">
-            <p className="text-midnightblue">Contact</p>
-            <ul>
-              <li>
-                <a
-                  href="tel:+194125YACHT"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  (941) 25-YACHT
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+19412592248"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  (941) 259-2248
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:info@kokomoyachtclub.vip"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  info@kokomoyachtclub.vip
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://maps.google.com/?q=1000 Boulevard of the Arts, Sarasota, FL"
-                  target="_blank"
-                  className="cursor-pointer hover:text-blue-600"
-                >
-                  1000 Boulevard of the Arts, Sarasota, FL
-                </a>
-              </li>
-            </ul>
+ 
+          <div className="flex xl:gap-x-6 gap-x-4">
+            {/* Helpful Links */}
+            <div className="text-left w-1/2 md:max-w-1/2">
+              <p className="text-midnightblue">Helpful Links</p>
+              <ul>
+                <li>
+                  <a
+                    href="/contact"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Become a Member
+                  </a>
+                </li>
+                <li>
+                  <a href="/" className="cursor-pointer hover:text-blue-600">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/founders"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    From the Founders
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/fleet"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Fleet
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/members"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Membership
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/contact"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/list-your-yacht"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    List Your Yacht
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {/* Contact Links */}
+            <div className="text-left w-1/2 md:max-w-1/2">
+              <p className="text-midnightblue">Contact</p>
+              <ul>
+                <li>
+                  <a
+                    href="tel:+194125YACHT"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    (941) 25-YACHT
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="tel:+19412592248"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    (941) 259-2248
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:info@kokomoyachtclub.vip"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    info@kokomoyachtclub.vip
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.google.com/?q=1000 Boulevard of the Arts, Sarasota, FL"
+                    target="_blank"
+                    className="cursor-pointer hover:text-blue-600 "
+                  >
+                    1000 Boulevard of the Arts, Sarasota, FL
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
         {/* logo section */}
-        <div className="flex flex-col items-start gap-4 lg:items-start lg:w-1/3">
+        <div className="flex flex-col items-center xl:items-start gap-4 lg:items-start lg:w-1/3">
           <img
             className="w-[249px] h-[110.1px] object-cover"
             width={249}
