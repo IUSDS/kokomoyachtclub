@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import useAuthStore from "./authStore";
 
@@ -19,16 +19,17 @@ import Contact from "./pages/contact";
 import ForgotPassword from "./pages/ForgotPassword";
 import NewPassword from "./pages/NewPassword";
 import ListYourYacht from "./pages/ListYourYacht";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
-  const sessionChecked = useAuthStore((state) => state.sessionChecked); // Get sessionChecked state
+  const sessionChecked = useAuthStore((state) => state.sessionChecked);
 
   useEffect(() => {
     if (!sessionChecked) {
       checkSession();
     }
-  }, [sessionChecked, checkSession]); // ✅ Only runs once if session is unchecked
+  }, [sessionChecked, checkSession]);
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden font-jakarta">
@@ -41,10 +42,42 @@ function App() {
           <Route path="/fleet" element={<Fleet />} />
           <Route path="/members" element={<Membership />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/membership" element={<MembershipPage />} />
-          <Route path="/membership/plan_experiences" element={<PlanYourExpriences />} />
-          <Route path="/membership/previous_booking" element={<PreviousBookings />} />
-          <Route path="/admin" element={<AdminPage />} />
+          
+          {/* Protected Routes */}
+          <Route
+            path="/membership"
+            element={
+              <ProtectedRoute requiredRole="user">
+                <MembershipPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/membership/plan_experiences"
+            element={
+              <ProtectedRoute requiredRole="user">
+                <PlanYourExpriences />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/membership/previous_booking"
+            element={
+              <ProtectedRoute requiredRole="user">
+                <PreviousBookings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          />
+          
+          {/* Other Pages */}
           <Route path="/forgot_password" element={<ForgotPassword />} />
           <Route path="/new_password" element={<NewPassword />} />
           <Route path="/list-your-yacht" element={<ListYourYacht />} />
