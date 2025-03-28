@@ -36,7 +36,7 @@ const login = () => {
           const userData = await userResponse.json();
           console.log("Login User Data:", userData);
 
-          login(userData); // Store user in Zustand state
+          login(userData,data.user_type); // Store user in Zustand state
           setErrorMessage("");
 
           // Redirect based on user type

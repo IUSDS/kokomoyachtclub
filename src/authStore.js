@@ -7,12 +7,13 @@ const useAuthStore = create(
     (set, get) => ({
       isLoggedIn: false,
       user: null,
+      user_type: null,
       sessionChecked: false,
 
       // Login function (resets form on new login)
       login: (userData) => {
         // console.log("🔹 Logging in user:", userData);
-        set({ isLoggedIn: true, user: userData, sessionChecked: true });
+        set({ isLoggedIn: true, user: userData, user_type: userData.membership_type, sessionChecked: true });
 
         // Reset form on login to ensure a fresh start
         useFormStore.getState().resetForm();
@@ -33,7 +34,7 @@ const useAuthStore = create(
           console.error("❌ Logout Error:", error);
         }
 
-        set({ isLoggedIn: false, user: null, sessionChecked: false });
+        set({ isLoggedIn: false, user: null, user_type: null, sessionChecked: false });
 
         // Reset form on logout
         useFormStore.getState().resetForm();
@@ -56,7 +57,7 @@ const useAuthStore = create(
           if (response.ok) {
             const userData = await response.json();
             console.log("Session Valid:", userData);
-            set({ isLoggedIn: true, user: userData, sessionChecked: true });
+            set({ isLoggedIn: true, user: userData, user_type: userData.membership_type, sessionChecked: true });
 
             // Reset form when a new session is detected
             useFormStore.getState().resetForm();
