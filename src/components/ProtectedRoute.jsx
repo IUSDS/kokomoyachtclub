@@ -9,9 +9,9 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return <Navigate to="/login" />;
   }
 
-  if (requiredRole && user.user_type.toLowerCase() !== requiredRole.toLowerCase()) {
-    return <Navigate to={user.user_type.toLowerCase() === "user" ? "/membership" : "/login"} />;
-  }
+  if (requiredRole && user?.user_type?.toLowerCase() !== requiredRole.toLowerCase()) {
+    return <Navigate to={user?.user_type?.toLowerCase() === "user" ? "/membership" : "/login"} />;
+  }  
 
   return children;
 };
