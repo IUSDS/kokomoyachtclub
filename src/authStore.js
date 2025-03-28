@@ -11,12 +11,11 @@ const useAuthStore = create(
 
       // Login function (resets form on new login)
       login: (userData) => {
-        console.log("🔹 Logging in user:", userData);
+        // console.log("🔹 Logging in user:", userData);
         set({ isLoggedIn: true, user: userData, sessionChecked: true });
 
         // Reset form on login to ensure a fresh start
         useFormStore.getState().resetForm();
-
         console.log("Zustand State after login:", get());
       },
 
