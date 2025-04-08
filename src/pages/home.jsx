@@ -16,6 +16,7 @@ import {
   congetta,
   outrage,
   aviara,
+  peace1,
 } from "../assets/images";
 import homeicon from "../assets/icons/homeicon.png";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -112,6 +113,7 @@ const Home = () => {
   };
 
   const fleetImages = [
+    { name: "Peace", size: "63'", location: "Sarasota", img: peace1 },
     { name: "Memory Maker", size: "50'", location: "Sarasota", img: home3 },
     {
       name: "Memories, Not Dreams",
