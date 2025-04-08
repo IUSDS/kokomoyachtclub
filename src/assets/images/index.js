@@ -42,7 +42,7 @@ import founderImg from "./founderImg.webp";
 import foundersKokomo from "./foundersKokomo.webp";
 import wanderlust from "./wanderlust.webp";
 import hero from "./hero.webp";
-import loginImg from "./login.webp"
+import loginImg from "./login.webp";
 import list_yacht from "./list_yacht.webp";
 import congetta from "./congetta.webp";
 import outrage from "./outrage.webp";
@@ -72,6 +72,11 @@ import aviara2 from "./aviara2.webp";
 import aviara3 from "./aviara3.webp";
 import aviara4 from "./aviara4.webp";
 import aviara5 from "./aviara5.webp";
+import peace1 from "./peace1.jpg";
+import peace2 from "./peace2.jpg";
+import peace3 from "./peace3.jpg";
+import peace4 from "./peace4.jpg";
+import peace5 from "./peace5.jpg";
 
 export {
   foundersKokomo,
@@ -147,5 +152,10 @@ export {
   aviara2,
   aviara3,
   aviara4,
-  aviara5
+  aviara5,
+  peace1,
+  peace2,
+  peace3,
+  peace4,
+  peace5,
 };

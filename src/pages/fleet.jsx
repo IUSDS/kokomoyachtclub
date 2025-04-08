@@ -55,6 +55,11 @@ import {
   aviara3,
   aviara4,
   aviara5,
+  peace1,
+  peace2,
+  peace3,
+  peace4,
+  peace5,
 } from "../assets/images";
 import { useLocation, Link } from "react-router-dom";
 import MembershipLevels from "../components/MembershipLevels";
@@ -68,6 +73,17 @@ const sectionVariants = {
 };
 
 const fleetData = [
+  {
+    location: "Sarasota",
+    title: "63' Peace",
+    points: "333-370 Mariner Points",
+    id: "peace",
+    description:
+      "The 63’ Peace redefines luxury yachting with its perfect blend of innovation, comfort, and style. Designed for effortless cruising, this Prestige 630 boasts sleek lines, a spacious flybridge, and an elegantly appointed interior, making it ideal for entertaining, relaxing, or embarking on extended voyages. With its cutting-edge design, seamless indoor-outdoor flow, and state-of-the-art performance, this yacht elevates every journey into an unforgettable experience.",
+    images: [peace1,peace1,peace3,peace4,peace5],
+    buttonText: "Become a Member to Book",
+    reverse: true,
+  },
   {
     location: "Sarasota",
     title: "50' Memory Maker",
