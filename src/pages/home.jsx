@@ -121,13 +121,13 @@ const Home = () => {
       location: "St. Petersburg",
       img: mnd,
     },
-    { name: "Club Yacht", size: "50'", location: "Sarasota", img: home6 },
-    {
-      name: "Congetta",
-      size: "44'",
-      location: "St. Petersburg",
-      img: congetta,
-    },
+    // { name: "Club Yacht", size: "50'", location: "Sarasota", img: home6 },
+    // {
+    //   name: "Congetta",
+    //   size: "44'",
+    //   location: "St. Petersburg",
+    //   img: congetta,
+    // },
     {
       name: "Fountaine Pajot",
       size: "44'",

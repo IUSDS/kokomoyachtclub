@@ -95,17 +95,17 @@ const fleetData = [
     buttonText: "Become a Member to Book",
     reverse: false,
   },
-  {
-    location: "Sarasota",
-    title: "50' Club Yacht",
-    points: "250-280 Mariner Points",
-    id: "clubyacht",
-    description:
-      "Exclusive to Kokomo Yacht Club, our very own custom built luxury day yacht. Designed to maximize your perfect day on the water. There is nothing like it on the water! The entire vessel opens to the outdoors and provides free flowing indoor/outdoor space. The entire vessel can also or be closed with full air conditioning. The spacious front bow provides a sundeck and couch seating plus outdoor air conditioning. Plenty of conversation spaces in the bow, cockpit and cabin. Next to the helm, the lower level also features an air conditioned lounge with television, full galley and full size bathroom.",
-    images: [CY1, CY2, CY3, club_yacht],
-    buttonText: "Become a Member to Book",
-    reverse: true,
-  },
+  // {
+  //   location: "Sarasota",
+  //   title: "50' Club Yacht",
+  //   points: "250-280 Mariner Points",
+  //   id: "clubyacht",
+  //   description:
+  //     "Exclusive to Kokomo Yacht Club, our very own custom built luxury day yacht. Designed to maximize your perfect day on the water. There is nothing like it on the water! The entire vessel opens to the outdoors and provides free flowing indoor/outdoor space. The entire vessel can also or be closed with full air conditioning. The spacious front bow provides a sundeck and couch seating plus outdoor air conditioning. Plenty of conversation spaces in the bow, cockpit and cabin. Next to the helm, the lower level also features an air conditioned lounge with television, full galley and full size bathroom.",
+  //   images: [CY1, CY2, CY3, club_yacht],
+  //   buttonText: "Become a Member to Book",
+  //   reverse: true,
+  // },
   {
     location: "St. Petersburg",
     title: "50' Memories, Not Dreams",
