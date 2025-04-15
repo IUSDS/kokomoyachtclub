@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 const ResponsiveMenu = ({ open, setOpen }) => {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
   const logout = useAuthStore((state) => state.logout);
-  const user = useAuthStore((state) => state.user);
+  const user_type = useAuthStore((state) => state.user_type);
   const handleLogout = () => {
     logout();
     setOpen(false)
@@ -38,8 +38,8 @@ const ResponsiveMenu = ({ open, setOpen }) => {
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
               </li>
-              {isLoggedIn && user && ( // Ensure user is not null before accessing user_type
-                user.user_type === "User" ? (
+              {isLoggedIn && user_type && ( // Ensure user_type is not null before accessing user_type
+                user_type.toLowerCase() === "user" ? (
                   <>
                     <li className="cursor-pointer hover:text-gray-300">
                       <Link onClick={() => setOpen(false)} to="/membership">Member Services</Link>
@@ -51,7 +51,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                       <Link onClick={() => setOpen(false)} to="/booking-history">Booking History</Link>
                     </li>
                   </>
-                ) : user.user_type === "ADMIN" ? (
+                ) : user_type.toLowerCase() === "admin" ? (
                   <>
                     <li className="cursor-pointer hover:text-gray-300">
                       <Link onClick={() => setOpen(false)} to="/admin">Admin Services</Link>
