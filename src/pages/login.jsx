@@ -23,7 +23,7 @@ const login = () => {
       });
 
       const data = await response.json();
-      console.log(data)
+      // console.log(data)
       if (response.ok && data.status === "SUCCESS") {
 
         // Fetch user details after login to confirm session is active
@@ -34,8 +34,8 @@ const login = () => {
 
         if (userResponse.ok) {
           const userData = await userResponse.json();
-          console.log("Login User Data:", userData);
-
+          // console.log("Login User Data:", userData);
+          console.log('Usertype: ',data.user_type);
           login(userData,data.user_type); // Store user in Zustand state
           setErrorMessage("");
 

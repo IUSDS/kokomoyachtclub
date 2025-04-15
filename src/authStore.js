@@ -17,7 +17,7 @@ const useAuthStore = create(
 
         // Reset form on login to ensure a fresh start
         useFormStore.getState().resetForm();
-        console.log("Zustand State after login:", get());
+        // console.log("Zustand State after login:", get());
       },
 
       // Logout function (prevents infinite redirect loop)
