@@ -8,7 +8,7 @@ import useAuthStore from "../authStore";
 
 const Popup = ({ isVisible, closePopup }) => {
   const logout = useAuthStore((state) => state.logout);
-  const user = useAuthStore((state) => state.user);
+  const user_type = useAuthStore((state) => state.user_type);
   const navigate = useNavigate();
 
   // console.log("Popup User Data:", user);
@@ -24,7 +24,7 @@ const Popup = ({ isVisible, closePopup }) => {
   return (
     <div className="fixed top-24 xl:right-12 md:right-24 z-50">
       <div className="flex flex-col bg-midnightblue text-white p-6 rounded-lg shadow-lg space-y-1">
-        {user?.user_type === "user" ? (
+        {user_type.toLowerCase() === "user" ? (
           <>
             <p
               className="cursor-pointer hover:text-blue-200"
@@ -54,7 +54,7 @@ const Popup = ({ isVisible, closePopup }) => {
               Booking History
             </p>
           </>
-        ) : user?.user_type === "ADMIN" ? (
+        ) : user_type.toLowerCase() === "admin" ? (
           <>
             <p
               className="cursor-pointer hover:text-blue-200"
