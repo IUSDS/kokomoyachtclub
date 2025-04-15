@@ -62,11 +62,11 @@ const useAuthStore = create(
             // Reset form when a new session is detected
             useFormStore.getState().resetForm();
           } else {
-            console.log("❌ Session expired. Logging out...");
+            console.log("Session expired. Logging out...");
             get().logout();
           }
         } catch (error) {
-          console.error("❌ Session Check Error:", error);
+          console.error("Session Check Error:", error);
           get().logout();
         }
       },
