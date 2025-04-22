@@ -37,16 +37,6 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href={`/fleet#clubyacht`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer hover:text-blue-600"
-                  >
-                    50' Club Yacht
-                  </a>
-                </li>
-                <li>
-                  <a
                     href={`/fleet#memoriesnotdreams`}
                     target="_blank"
                     rel="noopener noreferrer"
