@@ -83,7 +83,8 @@ const PersonalInfoTab = ({ next }) => {
           }, 5000);
         }
       } else if (field === "Email") {
-        endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?email=${value}`; const response = await fetch(endpoint, {
+        endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?email=${value}`; 
+        const response = await fetch(endpoint, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

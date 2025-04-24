@@ -17,7 +17,7 @@ const AddPointsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/get/points/?username=${username}`);
+      const response = await fetch(`https://api.kokomoyachtclub.vip/points/points/?username=${username}`);
       if (response.status === 401) {
         setErrorMessage("Invalid credentials");
         return;
@@ -45,7 +45,7 @@ const AddPointsForm = () => {
       formData.append('username', username);
       formData.append('update_points', Number(points));
 
-      const response = await fetch(`https://api.kokomoyachtclub.vip/update/update-points/`, {
+      const response = await fetch(`https://api.kokomoyachtclub.vip/points/update-points/`, {
         method: 'PUT',
         headers: {
           'accept': 'application/json',

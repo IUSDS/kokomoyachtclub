@@ -17,7 +17,7 @@ const UpdateMembershipForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/get/membership/?username=${username}`);
+      const response = await fetch(`https://api.kokomoyachtclub.vip/get-membership/get-membership/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found!');
       }
@@ -41,7 +41,7 @@ const UpdateMembershipForm = () => {
       formData.append('username', username);
       formData.append('membership_type', membershipType);
 
-      const response = await fetch(`https://api.kokomoyachtclub.vip/update/membership/`, {
+      const response = await fetch(`https://api.kokomoyachtclub.vip/get-membership/update-membership/`, {
         method: 'PUT',
         headers: {
           'accept': 'application/json',

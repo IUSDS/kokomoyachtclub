@@ -78,7 +78,7 @@ const UpdateUserDetailsForm = () => {
 
       if (response.ok) {
         setSuccessMessage(true);
-        await handleSubmit(); // Refresh data after successful update
+        await handleSubmit();
         setTimeout(() => {
           setSuccessMessage(false);
           handleCancel();
@@ -91,7 +91,6 @@ const UpdateUserDetailsForm = () => {
       setErrorMessage('Failed to update member.');
     }
   };
-
 
   const handleCancel = () => {
     setFirstName('');
