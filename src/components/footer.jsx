@@ -189,6 +189,14 @@ const footer = () => {
                     List Your Yacht
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/privacy-policy"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
               </ul>
             </div>
             {/* Contact Links */}

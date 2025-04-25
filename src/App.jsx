@@ -20,6 +20,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import NewPassword from "./pages/NewPassword";
 import ListYourYacht from "./pages/ListYourYacht";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
@@ -42,6 +43,7 @@ function App() {
           <Route path="/fleet" element={<Fleet />} />
           <Route path="/members" element={<Membership />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           
           {/* Protected Routes */}
           <Route
