@@ -116,7 +116,7 @@ const NewMemberPortal = () => {
           </div>
 
           {/* Member Info */}
-          <div className="bg-blue-800 text-white p-4 rounded-lg">
+          <div className="bg-midnightblue text-white p-4 rounded-lg">
             <h3 className="text-xl font-bold mb-4">Member Information</h3>
 
             <div className="mb-4">
@@ -148,7 +148,7 @@ const NewMemberPortal = () => {
           </div>
 
           {/* Helpful Links */}
-          <div className="hidden md:block bg-blue-800 text-white p-4 rounded-lg">
+          <div className="hidden md:block bg-midnightblue text-white p-4 rounded-lg">
             <h3 className="text-xl font-bold mb-4">Helpful Links</h3>
             <ul className="space-y-2">
               <li>
