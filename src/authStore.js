@@ -48,7 +48,7 @@ const useAuthStore = create(
         if (get().sessionChecked) return; // Prevents multiple calls
 
         try {
-          console.log("🔹 Checking session..."); 
+          // console.log("🔹 Checking session..."); 
           const response = await fetch(`https://api.kokomoyachtclub.vip/validate-user/current-user/`, {
             method: "GET",
             credentials: "include",
@@ -57,7 +57,7 @@ const useAuthStore = create(
           if (response.ok) {
             const userData = await response.json();
             console.log("Session Valid:", userData);
-            set({ isLoggedIn: true, user: userData, user_type: userData.membership_type, sessionChecked: true });
+            set({ isLoggedIn: true, user: userData, user_type: user_type, sessionChecked: true });
 
             // Reset form when a new session is detected
             useFormStore.getState().resetForm();
