@@ -21,6 +21,7 @@ import NewPassword from "./pages/NewPassword";
 import ListYourYacht from "./pages/ListYourYacht";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import NewMemberPortal from "./pages/NewMemberPortal";
 
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
@@ -44,6 +45,7 @@ function App() {
           <Route path="/members" element={<Membership />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/new-member-portal" element={<NewMemberPortal />} />
           
           {/* Protected Routes */}
           <Route

@@ -2,675 +2,716 @@ import React from "react";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-white text-midnightblue p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-        <p className="text-sm text-gray-600 mb-6">
-          Last updated: April 24, 2025
-        </p>
-        <p className="mb-4">
+    <div className="px-20">
+      {/* Introduction */}
+      <div className="text-midnightblue p-6">
+        <h1 className="text-3xl font-bold">Privacy Policy</h1>
+        <p className="mt-2 text-sm">Last updated: April 24, 2025</p>
+        <p className="mt-4">
           This Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your information when You use the
           Service and tells You about Your privacy rights and how the law
           protects You.
         </p>
-        <p>
+        <p className="mt-2">
           We use Your Personal data to provide and improve the Service. By using
           the Service, You agree to the collection and use of information in
           accordance with this Privacy Policy.
         </p>
+      </div>
 
-        <div className="my-8">
-          <h2 className="text-2xl font-bold">Interpretation and Definitions</h2>
+      {/* Interpretation and Definition */}
+      <div className=" text-midnightblue p-6">
+        <h2 className="text-2xl font-semibold">Interpretation</h2>
+        <p className="mt-2">
+          The words of which the initial letter is capitalized have meanings
+          defined under the following conditions. The following definitions
+          shall have the same meaning regardless of whether they appear in
+          singular or in plural.
+        </p>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Interpretation</h3>
-            <p>
-              The words of which the initial letter is capitalized have meanings
-              defined under the following conditions. The following definitions
-              shall have the same meaning regardless of whether they appear in
-              singular or in plural.
-            </p>
-          </div>
+        <h3 className="text-xl font-semibold mt-4">Definitions</h3>
+        <p className="mt-2">For the purposes of this Privacy Policy:</p>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Definitions</h3>
-            <p className="mb-2">For the purposes of this Privacy Policy:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                <strong>Account</strong> means a unique account created for You
-                to access our Service or parts of our Service.
-              </li>
-              <li>
-                <strong>Affiliate</strong> means an entity that controls, is
-                controlled by or is under common control with a party, where
-                "control" means ownership of 50% or more of the shares, equity
-                interest or other securities entitled to vote for election of
-                directors or other managing authority.
-              </li>
-              <li>
-                <strong>Company</strong> (referred to as either "the Company",
-                "We", "Us" or "Our" in this Agreement) refers to SRQ Yacht
-                Management, LLC, 6075 Worsham Lane, Suite 102 Lakewood Ranch, FL
-                34211.
-              </li>
-              <li>
-                <strong>Cookies</strong> are small files that are placed on Your
-                computer, mobile device or any other device by a website,
-                containing the details of Your browsing history on that website
-                among its many uses.
-              </li>
-              <li>
-                <strong>Country</strong> refers to: Florida, United States
-              </li>
-              <li>
-                <strong>Device</strong> means any device that can access the
-                Service such as a computer, a cellphone or a digital tablet.
-              </li>
-              <li>
-                <strong>Personal Data</strong> is any information that relates
-                to an identified or identifiable individual.
-              </li>
-              <li>
-                <strong>Service</strong> refers to the Website.
-              </li>
-              <li>
-                <strong>Service Provider</strong> means any natural or legal
-                person who processes the data on behalf of the Company. It
-                refers to third-party companies or individuals employed by the
-                Company to facilitate the Service, to provide the Service on
-                behalf of the Company, to perform services related to the
-                Service or to assist the Company in analyzing how the Service is
-                used.
-              </li>
-              <li>
-                <strong>Usage Data</strong> refers to data collected
-                automatically, either generated by the use of the Service or
-                from the Service infrastructure itself (for example, the
-                duration of a page visit).
-              </li>
-              <li>
-                <strong>Website</strong> refers to Kokomo Yacht Club, accessible
-                from{" "}
-                <a
-                  href="https://kokomoyachtclub.vip"
-                  className="text-blue-700 hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  https://kokomoyachtclub.vip
-                </a>
-              </li>
-              <li>
-                <strong>You</strong> means the individual accessing or using the
-                Service, or the company, or other legal entity on behalf of
-                which such individual is accessing or using the Service, as
-                applicable.
-              </li>
-            </ul>
-          </div>
+        <ul className="list-disc list-inside mt-2 space-y-1">
+          <li>
+            <strong>Account</strong> means a unique account created for You to
+            access our Service or parts of our Service.
+          </li>
+          <li>
+            <strong>Affiliate</strong> means an entity that controls, is
+            controlled by or is under common control with a party, where
+            “control” means ownership of 50% or more of the shares, equity
+            interest or other securities entitled to vote for election of
+            directors or other managing authority.
+          </li>
+          <li>
+            <strong>Company</strong> (referred to as either “the Company”, “We”,
+            “Us” or “Our” in this Agreement) refers to SRQ Yacht Management,
+            LLC, 6075 Worsham Lane, Suite 102 Lakewood Ranch, FL 34211.
+          </li>
+          <li>
+            <strong>Cookies</strong> are small files that are placed on Your
+            computer, mobile device or any other device by a website, containing
+            the details of Your browsing history on that website among its many
+            uses.
+          </li>
+          <li>
+            <strong>Country</strong> refers to: Florida, United States.
+          </li>
+          <li>
+            <strong>Device</strong> means any device that can access the Service
+            such as a computer, a cellphone or a digital tablet.
+          </li>
+          <li>
+            <strong>Personal Data</strong> is any information that relates to an
+            identified or identifiable individual.
+          </li>
+          <li>
+            <strong>Service</strong> refers to the Website.
+          </li>
+          <li>
+            <strong>Service Provider</strong> means any natural or legal person
+            who processes the data on behalf of the Company. It refers to
+            third-party companies or individuals employed by the Company to
+            facilitate the Service, to provide the Service on behalf of the
+            Company, to perform services related to the Service or to assist the
+            Company in analyzing how the Service is used.
+          </li>
+          <li>
+            <strong>Usage Data</strong> refers to data collected automatically,
+            either generated by the use of the Service or from the Service
+            infrastructure itself (for example, the duration of a page visit).
+          </li>
+          <li>
+            <strong>Website</strong> refers to Kokomo Yacht Club, accessible
+            from https://kokomoyachtclub.vip.
+          </li>
+          <li>
+            <strong>You</strong> means the individual accessing or using the
+            Service, or the company, or other legal entity on behalf of which
+            such individual is accessing or using the Service, as applicable.
+          </li>
+        </ul>
+      </div>
 
-          <div className="my-8">
-            <h2 className="text-2xl font-bold">
-              Collecting and Using Your Personal Data
-            </h2>
+      {/* Collecting and Using Your Personal Data */}
+      <div className="text-midnightblue p-6">
+        <h2 className="text-2xl font-semibold mb-2">
+          Collecting and Using Your Personal Data
+        </h2>
 
-            <div>
-              <h3 className="text-xl font-semibold">Types of Data Collected</h3>
+        <h3 className="text-xl font-semibold mt-4 mb-1">
+          Types of Data Collected
+        </h3>
 
-              <h4 className="text-lg font-medium mt-4">Personal Data</h4>
-              <p>
-                While using Our Service, We may ask You to provide Us with
-                certain personally identifiable information that can be used to
-                contact or identify You. Personally identifiable information may
-                include, but is not limited to:
-              </p>
-              <ul className="list-disc list-inside space-y-1 mt-2">
-                <li>Email address</li>
-                <li>First name and last name</li>
-                <li>Phone number</li>
-                <li>Address, State, Province, ZIP/Postal code, City</li>
-              </ul>
+        <h4 className="text-lg font-semibold mt-3 mb-1">Personal Data</h4>
+        <p className="mb-2">
+          While using Our Service, We may ask You to provide Us with certain
+          personally identifiable information that can be used to contact or
+          identify You. Personally identifiable information may include, but is
+          not limited to:
+        </p>
+        <ul className="list-disc list-inside mb-4">
+          <li>Email address</li>
+          <li>First name and last name</li>
+          <li>Phone number</li>
+          <li>Address, State, Province, ZIP/Postal code, City</li>
+        </ul>
 
-              <h4 className="text-lg font-medium mt-6">Usage Data</h4>
-              <p>
-                Usage Data is collected automatically when using the Service. It
-                may include information such as Your Device's IP address,
-                browser type/version, pages visited, time and date of visit,
-                time spent on pages, unique device identifiers, and other
-                diagnostic data.
-              </p>
-              <p className="mt-2">
-                When You access the Service by or through a mobile device, we
-                may also collect info like device type, unique ID, IP, OS,
-                browser type, and other diagnostic data. We may also collect
-                data your browser sends during access.
-              </p>
+        <h4 className="text-lg font-semibold mt-3 mb-1">Usage Data</h4>
+        <p className="mb-2">
+          Usage Data is collected automatically when using the Service.
+        </p>
+        <p className="mb-2">
+          Usage Data may include information such as Your Device's Internet
+          Protocol address (e.g. IP address), browser type, browser version, the
+          pages of our Service that You visit, the time and date of Your visit,
+          the time spent on those pages, unique device identifiers and other
+          diagnostic data.
+        </p>
+        <p className="mb-2">
+          When You access the Service by or through a mobile device, We may
+          collect certain information automatically, including, but not limited
+          to, the type of mobile device You use, Your mobile device unique ID,
+          the IP address of Your mobile device, Your mobile operating system,
+          the type of mobile Internet browser You use, unique device identifiers
+          and other diagnostic data.
+        </p>
+        <p className="mb-4">
+          We may also collect information that Your browser sends whenever You
+          visit our Service or when You access the Service by or through a
+          mobile device.
+        </p>
 
-              <h4 className="text-lg font-medium mt-6">
-                Tracking Technologies and Cookies
-              </h4>
-              <p>
-                We use Cookies and similar technologies (like beacons, tags,
-                scripts) to track activity and store certain information. These
-                include:
-              </p>
-              <ul className="list-disc list-inside space-y-2 mt-2">
-                <li>
-                  <strong>Cookies or Browser Cookies:</strong> Small files
-                  stored on your device. You can refuse them via browser
-                  settings, but some parts of the Service may not work.
-                </li>
-                <li>
-                  <strong>Web Beacons:</strong> Small electronic files in emails
-                  and webpages used to count users or verify server integrity.
-                </li>
-              </ul>
+        <h3 className="text-xl font-semibold mt-6 mb-2">
+          Tracking Technologies and Cookies
+        </h3>
+        <p className="mb-2">
+          We use Cookies and similar tracking technologies to track the activity
+          on Our Service and store certain information. Tracking technologies
+          used are beacons, tags, and scripts to collect and track information
+          and to improve and analyze Our Service. The technologies We use may
+          include:
+        </p>
+        <ul className="list-disc list-inside mb-4">
+          <li>
+            <strong>Cookies or Browser Cookies.</strong> A cookie is a small
+            file placed on Your Device. You can instruct Your browser to refuse
+            all Cookies or to indicate when a Cookie is being sent. However, if
+            You do not accept Cookies, You may not be able to use some parts of
+            our Service. Unless you have adjusted Your browser setting so that
+            it will refuse Cookies, our Service may use Cookies.
+          </li>
+          <li>
+            <strong>Web Beacons.</strong> Certain sections of our Service and
+            our emails may contain small electronic files known as web beacons
+            (also referred to as clear gifs, pixel tags, and single-pixel gifs)
+            that permit the Company, for example, to count users who have
+            visited those pages or opened an email and for other related website
+            statistics (for example, recording the popularity of a certain
+            section and verifying system and server integrity).
+          </li>
+        </ul>
+        <p className="mb-2">
+          Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies
+          remain on Your personal computer or mobile device when You go offline,
+          while Session Cookies are deleted as soon as You close Your web
+          browser. You can learn more about cookies on TermsFeed website
+          article.
+        </p>
+        <p className="mb-4">
+          We use both Session and Persistent Cookies for the purposes set out
+          below:
+        </p>
 
-              <p className="mt-4">
-                Cookies can be "Persistent" (stay after you go offline) or
-                "Session" (deleted when browser closes). We use both:
-              </p>
+        <ul className="list-disc list-inside space-y-3 mb-4">
+          <li>
+            <strong>Necessary / Essential Cookies</strong>
+            <br />
+            <em>Type:</em> Session Cookies
+            <br />
+            <em>Administered by:</em> Us
+            <br />
+            <em>Purpose:</em> These Cookies are essential to provide You with
+            services available through the Website and to enable You to use some
+            of its features. They help to authenticate users and prevent
+            fraudulent use of user accounts. Without these Cookies, the services
+            that You have asked for cannot be provided, and We only use these
+            Cookies to provide You with those services.
+          </li>
+          <li>
+            <strong>Cookies Policy / Notice Acceptance Cookies</strong>
+            <br />
+            <em>Type:</em> Persistent Cookies
+            <br />
+            <em>Administered by:</em> Us
+            <br />
+            <em>Purpose:</em> These Cookies identify if users have accepted the
+            use of cookies on the Website.
+          </li>
+          <li>
+            <strong>Functionality Cookies</strong>
+            <br />
+            <em>Type:</em> Persistent Cookies
+            <br />
+            <em>Administered by:</em> Us
+            <br />
+            <em>Purpose:</em> These Cookies allow us to remember choices You
+            make when You use the Website, such as remembering your login
+            details or language preference. The purpose of these Cookies is to
+            provide You with a more personal experience and to avoid You having
+            to re-enter your preferences every time You use the Website.
+          </li>
+        </ul>
 
-              <ul className="list-disc list-inside space-y-2 mt-2">
-                <li>
-                  <strong>Necessary / Essential Cookies</strong>
-                  <br />
-                  <span className="block pl-4">
-                    <em>Type:</em> Session Cookies
-                    <br />
-                    <em>Administered by:</em> Us
-                    <br />
-                    <em>Purpose:</em> Allow use of core services, prevent fraud,
-                    and authenticate users.
-                  </span>
-                </li>
-                <li>
-                  <strong>Cookies Policy / Notice Acceptance Cookies</strong>
-                  <br />
-                  <span className="block pl-4">
-                    <em>Type:</em> Persistent Cookies
-                    <br />
-                    <em>Administered by:</em> Us
-                    <br />
-                    <em>Purpose:</em> Remember user consent regarding cookie
-                    usage.
-                  </span>
-                </li>
-                <li>
-                  <strong>Functionality Cookies</strong>
-                  <br />
-                  <span className="block pl-4">
-                    <em>Type:</em> Persistent Cookies
-                    <br />
-                    <em>Administered by:</em> Us
-                    <br />
-                    <em>Purpose:</em> Remember choices like login or language
-                    for a more personal experience.
-                  </span>
-                </li>
-              </ul>
+        <p>
+          For more information about the cookies we use and your choices
+          regarding cookies, please visit our Cookies Policy or the Cookies
+          section of our Privacy Policy.
+        </p>
+      </div>
 
-              <p className="mt-4">
-                For more information, see our Cookies Policy or the Cookies
-                section of this Privacy Policy.
-              </p>
-            </div>
-          </div>
+      <div className="text-midnightblue p-6">
+        {/* Use of Personal Data */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Use of Your Personal Data
+        </h2>
+        <p className="mb-2">
+          The Company may use Personal Data for the following purposes:
+        </p>
+        <ul className="list-disc list-inside mb-4 space-y-1">
+          <li>
+            To provide and maintain our Service, including to monitor the usage
+            of our Service.
+          </li>
+          <li>
+            To manage Your Account: to manage Your registration as a user of the
+            Service. The Personal Data You provide can give You access to
+            different functionalities of the Service that are available to You
+            as a registered user.
+          </li>
+          <li>
+            For the performance of a contract: the development, compliance and
+            undertaking of the purchase contract for the products, items or
+            services You have purchased or of any other contract with Us through
+            the Service.
+          </li>
+          <li>
+            To contact You: to contact You by email, telephone calls, SMS, or
+            other equivalent forms of electronic communication, such as a mobile
+            application's push notifications regarding updates or informative
+            communications related to the functionalities, products or
+            contracted services, including security updates when necessary or
+            reasonable for their implementation.
+          </li>
+          <li>
+            To provide You with news, special offers and general information
+            about other goods, services and events which we offer that are
+            similar to those that you have already purchased or enquired about
+            unless You have opted not to receive such information.
+          </li>
+          <li>
+            To manage Your requests: to attend and manage Your requests to Us.
+          </li>
+          <li>
+            For business transfers: We may use Your information to evaluate or
+            conduct a merger, divestiture, restructuring, reorganization,
+            dissolution, or other sale or transfer of some or all of Our assets,
+            whether as a going concern or as part of bankruptcy, liquidation, or
+            similar proceeding, in which Personal Data held by Us about our
+            Service users is among the assets transferred.
+          </li>
+          <li>
+            For other purposes: We may use Your information for other purposes,
+            such as data analysis, identifying usage trends, determining the
+            effectiveness of our promotional campaigns and to evaluate and
+            improve our Service, products, services, marketing and your
+            experience.
+          </li>
+        </ul>
 
-          <div className="my-8">
-            <h2 className="text-2xl font-bold">Use of Your Personal Data</h2>
+        {/* Sharing Personal Information */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Sharing Your Personal Information
+        </h2>
+        <p className="mb-2">
+          We may share Your personal information in the following situations:
+        </p>
+        <ul className="list-disc list-inside mb-4 space-y-1">
+          <li>
+            With Service Providers: We may share Your personal information with
+            Service Providers to monitor and analyze the use of our Service, to
+            contact You.
+          </li>
+          <li>
+            For business transfers: We may share or transfer Your personal
+            information in connection with, or during negotiations of, any
+            merger, sale of Company assets, financing, or acquisition of all or
+            a portion of Our business to another company.
+          </li>
+          <li>
+            With Affiliates: We may share Your information with Our affiliates,
+            in which case we will require those affiliates to honor this Privacy
+            Policy. Affiliates include Our parent company and any other
+            subsidiaries, joint venture partners or other companies that We
+            control or that are under common control with Us.
+          </li>
+          <li>
+            With business partners: We may share Your information with Our
+            business partners to offer You certain products, services or
+            promotions.
+          </li>
+          <li>
+            With other users: when You share personal information or otherwise
+            interact in the public areas with other users, such information may
+            be viewed by all users and may be publicly distributed outside.
+          </li>
+          <li>
+            With Your consent: We may disclose Your personal information for any
+            other purpose with Your consent.
+          </li>
+        </ul>
 
-            <p>The Company may use Personal Data for the following purposes:</p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                <strong>To provide and maintain our Service:</strong> Including
-                monitoring usage.
-              </li>
-              <li>
-                <strong>To manage Your Account:</strong> Enabling access to
-                functionalities as a registered user.
-              </li>
-              <li>
-                <strong>For the performance of a contract:</strong> Handling any
-                contracts or purchases made through the Service.
-              </li>
-              <li>
-                <strong>To contact You:</strong> Via email, calls, SMS, or app
-                notifications about updates and services.
-              </li>
-              <li>
-                <strong>To provide promotional content:</strong> News, offers,
-                or info related to services unless opted out.
-              </li>
-              <li>
-                <strong>To manage Your requests:</strong> Handling and
-                responding to your communications.
-              </li>
-              <li>
-                <strong>For business transfers:</strong> In case of merger,
-                acquisition, or asset sale.
-              </li>
-              <li>
-                <strong>For other purposes:</strong> Like analytics, trend
-                spotting, campaign effectiveness, and experience improvement.
-              </li>
-            </ul>
+        {/* Data Retention */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Retention of Your Personal Data
+        </h2>
+        <p className="mb-4">
+          The Company will retain Your Personal Data only for as long as is
+          necessary for the purposes set out in this Privacy Policy. We will
+          retain and use Your Personal Data to the extent necessary to comply
+          with our legal obligations (for example, if we are required to retain
+          your data to comply with applicable laws), resolve disputes, and
+          enforce our legal agreements and policies.
+        </p>
+        <p className="mb-4">
+          The Company will also retain Usage Data for internal analysis
+          purposes. Usage Data is generally retained for a shorter period of
+          time, except when this data is used to strengthen the security or to
+          improve the functionality of Our Service, or We are legally obligated
+          to retain this data for longer time periods.
+        </p>
 
-            <h3 className="text-xl font-semibold mt-8">
-              We may share Your personal information in the following
-              situations:
-            </h3>
-            <ul className="list-disc list-inside space-y-2 mt-2">
-              <li>
-                <strong>With Service Providers:</strong> For monitoring and
-                communications.
-              </li>
-              <li>
-                <strong>For business transfers:</strong> During or in
-                negotiation of company-related sales or changes.
-              </li>
-              <li>
-                <strong>With Affiliates:</strong> Including parent and
-                subsidiary companies under the same control.
-              </li>
-              <li>
-                <strong>With Business Partners:</strong> To offer specific
-                products, services, or deals.
-              </li>
-              <li>
-                <strong>With other users:</strong> When you interact publicly
-                within the Service.
-              </li>
-              <li>
-                <strong>With Your consent:</strong> For any other purpose
-                explicitly approved by you.
-              </li>
-            </ul>
-          </div>
+        {/* Data Transfer */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Transfer of Your Personal Data
+        </h2>
+        <p className="mb-4">
+          Your information, including Personal Data, is processed at the
+          Company's operating offices and in any other places where the parties
+          involved in the processing are located. It means that this information
+          may be transferred to — and maintained on — computers located outside
+          of Your state, province, country or other governmental jurisdiction
+          where the data protection laws may differ than those from Your
+          jurisdiction.
+        </p>
+        <p className="mb-4">
+          Your consent to this Privacy Policy followed by Your submission of
+          such information represents Your agreement to that transfer.
+        </p>
+        <p className="mb-4">
+          The Company will take all steps reasonably necessary to ensure that
+          Your data is treated securely and in accordance with this Privacy
+          Policy and no transfer of Your Personal Data will take place to an
+          organization or a country unless there are adequate controls in place
+          including the security of Your data and other personal information.
+        </p>
 
-          <div className="my-8">
-            <h2 className="text-2xl font-bold">
-              Retention of Your Personal Data
-            </h2>
-            <p>
-              The Company will retain Your Personal Data only for as long as is
-              necessary for the purposes set out in this Privacy Policy. We will
-              retain and use Your Personal Data as needed to:
-            </p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>Comply with legal obligations (e.g., required by law).</li>
-              <li>Resolve disputes.</li>
-              <li>Enforce our legal agreements and policies.</li>
-            </ul>
-            <p className="mt-2">
-              Usage Data is retained for a shorter duration unless:
-            </p>
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                It's used to enhance security or improve Service functionality.
-              </li>
-              <li>We're legally required to retain it for longer periods.</li>
-            </ul>
-          </div>
+        {/* Data Deletion */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Delete Your Personal Data
+        </h2>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            You have the right to delete or request that We assist in deleting
+            the Personal Data that We have collected about You.
+          </li>
+          <li>
+            Our Service may give You the ability to delete certain information
+            about You from within the Service.
+          </li>
+          <li>
+            You may update, amend, or delete Your information at any time by
+            signing in to Your Account, if you have one, and visiting the
+            account settings section that allows you to manage Your personal
+            information. You may also contact Us to request access to, correct,
+            or delete any personal information that You have provided to Us.
+          </li>
+          <li>
+            Please note, however, that We may need to retain certain information
+            when we have a legal obligation or lawful basis to do so.
+          </li>
+        </ul>
+      </div>
 
-          <div className="my-8">
-            <h2 className="text-2xl font-bold">Delete Your Personal Data</h2>
-            <p>
-              You have the right to delete or request our help in deleting the
-              Personal Data we’ve collected about you.
-            </p>
-            <p>
-              Our Service may allow you to delete certain personal information
-              directly from within your account settings.
-            </p>
-            <p>
-              You can update, amend, or delete your information anytime by
-              logging into your Account and visiting the settings section. You
-              may also contact us for access to, correction of, or deletion of
-              any information you provided.
-            </p>
-            <p>
-              Please note that we may retain some information when required by
-              law or when we have a legitimate legal reason to do so.
-            </p>
-          </div>
+      <div className="text-midnightblue p-6">
+        {/* Disclosure of Personal Data */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Disclosure of Your Personal Data
+        </h2>
 
-          <div className="my-8">
-            <section>
-              <h2 className="text-2xl font-bold">
-                Disclosure of Your Personal Data
-              </h2>
-              <h3 className="text-xl font-semibold mt-4">
-                Business Transactions
-              </h3>
-              <p>
-                If the Company is involved in a merger, acquisition, or asset
-                sale, your personal data may be transferred. You will be
-                notified before your data becomes subject to a different Privacy
-                Policy.
-              </p>
-              <h3 className="text-xl font-semibold mt-4">Law Enforcement</h3>
-              <p>
-                We may disclose your personal data when required by law or in
-                response to valid requests by public authorities.
-              </p>
-              <h3 className="text-xl font-semibold mt-4">
-                Other Legal Requirements
-              </h3>
-              <p>The Company may disclose your data in good faith to:</p>
-              <ul className="list-disc list-inside ml-4 space-y-1">
-                <li>Comply with legal obligations</li>
-                <li>Protect and defend our rights or property</li>
-                <li>Investigate possible misconduct related to the Service</li>
-                <li>Protect the safety of users or the public</li>
-                <li>Protect against legal liability</li>
-              </ul>
-            </section>
+        {/* Business Transactions */}
+        <h3 className="text-xl font-semibold mt-4 mb-1">
+          Business Transactions
+        </h3>
+        <p className="mb-2">
+          If the Company is involved in a merger, acquisition or asset sale,
+          Your Personal Data may be transferred. We will provide notice before
+          Your Personal Data is transferred and becomes subject to a different
+          Privacy Policy.
+        </p>
 
-            <section>
-              <h3 className="text-xl mt-4 font-bold">
-                Security of Your Personal Data
-              </h3>
-              <p>
-                We take data security seriously, but no internet or storage
-                method is 100% secure. While we try to use commercially
-                acceptable means to protect your Personal Data, we cannot
-                guarantee its absolute security.
-              </p>
-            </section>
+        {/* Law Enforcement */}
+        <h3 className="text-xl font-semibold mt-4 mb-1">Law enforcement</h3>
+        <p className="mb-2">
+          Under certain circumstances, the Company may be required to disclose
+          Your Personal Data if required to do so by law or in response to valid
+          requests by public authorities (e.g. a court or a government agency).
+        </p>
 
-            <section>
-              <h3 className="text-xl mt-4 font-bold">Children's Privacy</h3>
-              <p>
-                Our Service is not intended for anyone under the age of 13. We
-                do not knowingly collect personal data from children. If you are
-                a parent and become aware that your child has provided us
-                personal data, please contact us.
-              </p>
-              <p>
-                If we confirm that we’ve collected data from a child under 13
-                without parental consent, we will delete it promptly. In some
-                countries, we may need parental consent to process personal
-                data.
-              </p>
-            </section>
-          </div>
+        {/* Other Legal Requirements */}
+        <h3 className="text-xl font-semibold mt-4 mb-1">
+          Other legal requirements
+        </h3>
+        <p className="mb-2">
+          The Company may disclose Your Personal Data in the good faith belief
+          that such action is necessary to:
+        </p>
+        <ul className="list-disc list-inside mb-4 space-y-1">
+          <li>Comply with a legal obligation</li>
+          <li>Protect and defend the rights or property of the Company</li>
+          <li>
+            Prevent or investigate possible wrongdoing in connection with the
+            Service
+          </li>
+          <li>
+            Protect the personal safety of Users of the Service or the public
+          </li>
+          <li>Protect against legal liability</li>
+        </ul>
 
-          <div className="my-8">
-            <h1 className="text-2xl font-bold">
-              Telephone Consumer Protection Act (47 U.S.C. § 227)
-            </h1>
+        {/* Security of Personal Data */}
+        <h2 className="text-2xl font-semibold mt-6 mb-2">
+          Security of Your Personal Data
+        </h2>
+        <p className="mb-4">
+          The security of Your Personal Data is important to Us, but remember
+          that no method of transmission over the Internet, or method of
+          electronic storage is 100% secure. While We strive to use commercially
+          acceptable means to protect Your Personal Data, We cannot guarantee
+          its absolute security.
+        </p>
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">Links to Other Websites</h2>
-              <p>
-                Our Service may contain links to other websites that are not
-                operated by Us. If You click on a third party link, You will be
-                directed to that third party's site. We strongly advise You to
-                review the Privacy Policy of every site You visit.
-              </p>
-              <p>
-                We have no control over and assume no responsibility for the
-                content, privacy policies or practices of any third party sites
-                or services.
-              </p>
-            </section>
+        {/* Children's Privacy */}
+        <h2 className="text-2xl font-semibold mt-6 mb-2">Children's Privacy</h2>
+        <p className="mb-2">
+          Our Service does not address anyone under the age of 13. We do not
+          knowingly collect personally identifiable information from anyone
+          under the age of 13. If You are a parent or guardian and You are aware
+          that Your child has provided Us with Personal Data, please contact Us.
+          If We become aware that We have collected Personal Data from anyone
+          under the age of 13 without verification of parental consent, We take
+          steps to remove that information from Our servers.
+        </p>
+        <p>
+          If We need to rely on consent as a legal basis for processing Your
+          information and Your country requires consent from a parent, We may
+          require Your parent's consent before We collect and use that
+          information.
+        </p>
+      </div>
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">Summary</h2>
-              <p>
-                This summary of the Telephone Consumer Protection Act (47 U.S.C.
-                § 227) is provided for convenience only. Individuals should also
-                refer to the United States Code at{" "}
-                <a
-                  className="text-blue-600 underline"
-                  href="http://www.gpoaccess.gov"
-                >
-                  http://www.gpoaccess.gov
-                </a>
-                .
-              </p>
-            </section>
+      <div className="text-midnightblue p-6">
+        {/* Links to Other Websites */}
+        <h2 className="text-2xl font-semibold mb-2">Links to Other Websites</h2>
+        <p className="mb-2">
+          Our Service may contain links to other websites that are not operated
+          by Us. If You click on a third party link, You will be directed to
+          that third party's site. We strongly advise You to review the Privacy
+          Policy of every site You visit.
+        </p>
+        <p className="mb-4">
+          We have no control over and assume no responsibility for the content,
+          privacy policies or practices of any third party sites or services.
+        </p>
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">Definitions</h2>
-              <ol className="list-decimal pl-6 space-y-2">
-                <li>
-                  "Automatic telephone dialing system" means equipment which has
-                  the capacity:
-                  <ul className="list-disc pl-6">
-                    <li>
-                      to store or produce telephone numbers to be called, using
-                      a random or sequential number generator; and
-                    </li>
-                    <li>to dial such numbers.</li>
-                  </ul>
-                </li>
-                <li>
-                  "Established business relationship" as per section 64.1200 of
-                  title 47, Code of Federal Regulations (as of Jan 1, 2003),
-                  also includes relationships with business subscribers under
-                  the same terms as residential.
-                </li>
-                <li>
-                  "Telephone facsimile machine" means equipment capable of:
-                  <ul className="list-disc pl-6">
-                    <li>
-                      transcribing text/images from paper to an electronic
-                      signal to transmit over a telephone line, or
-                    </li>
-                    <li>
-                      receiving an electronic signal over a phone line and
-                      transcribing it onto paper.
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  "Telephone solicitation" refers to calls/messages to promote
-                  goods/services, excluding calls:
-                  <ul className="list-disc pl-6">
-                    <li>with prior express consent,</li>
-                    <li>
-                      to individuals with an established business relationship,
-                      or
-                    </li>
-                    <li>by a tax-exempt nonprofit organization.</li>
-                  </ul>
-                </li>
-                <li>
-                  "Unsolicited advertisement" refers to any promotional material
-                  sent without the recipient's prior consent.
-                </li>
-              </ol>
-            </section>
+        {/* Telephone Consumer Protection Act */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Telephone Consumer Protection Act 47 U.S.C. § 227
+        </h2>
+        <pre className="whitespace-pre-wrap text-sm">
+          {`SEC. 227. [47 U.S.C. 227] RESTRICTIONS ON THE USE OF TELEPHONE EQUIPMENT
+(a) DEFINITIONS.—As used in this section—
+(1) The term “automatic telephone dialing system” means equipment which has the capacity—
+    (A) to store or produce telephone numbers to be called, using a random or sequential number generator; and
+    (B) to dial such numbers.
+(2) The term “established business relationship”, for purposes only of subsection (b)(1)(C)(i), shall have the meaning given the term in section 64.1200 of title 47, Code of Federal Regulations, as in effect on January 1, 2003, except that—
+    (A) such term shall include a relationship between a person or entity and a business subscriber subject to the same terms applicable under such section to a relationship between a person or entity and a residential subscriber; and
+    B) an established business relationship shall be subject to any time limitation established pursuant to paragraph (2)(G)).
+(3) The term “telephone facsimile machine” means equipment which has the capacity
+    (A) to transcribe text or images, or both, from paper into an electronic signal and to transmit that signal over a regular telephone line, or
+    (B) to transcribe text or images (or both) from an electronic signal received over a regular telephone line onto paper.
+(4) The term “telephone solicitation” means the initiation of a telephone call or message for the purpose of encouraging the purchase or rental of, or investment in, property, goods, or services, which is transmitted to any person, but such term does not include a call or message
+    (A) to any person with that person's prior express invitation or permission,
+    (B) to any person with whom the caller has an established business relationship, or
+    (C) by a tax exempt nonprofit organization.
+(5) The term “unsolicited advertisement” means any material advertising the commercial availability or quality of any property, goods, or services which is transmitted to any person without that person's prior express invitation or permission, in writing or otherwise.
 
-            {/* More Sections */}
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">
-                Restrictions on Use of Automated Telephone Equipment
-              </h2>
-              <p className="font-semibold">Prohibitions (b)(1):</p>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>
-                  No auto-dialed or prerecorded calls to emergency lines or
-                  hospitals, or to any service the recipient is charged for.
-                </li>
-                <li>
-                  No artificial/prerecorded messages to residential lines
-                  without prior express consent (except emergencies).
-                </li>
-                <li>No unsolicited faxes unless within exceptions stated.</li>
-                <li>
-                  No autodialers tying up multiple business lines
-                  simultaneously.
-                </li>
-              </ul>
-              <p className="font-semibold">Regulations (b)(2):</p>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>
-                  FCC shall create regulations, allow businesses to opt-out of
-                  robocalls, exempt non-commercial messages, etc.
-                </li>
-                <li>
-                  Fax senders must provide clear opt-out info, contact details,
-                  and mechanisms for opt-out.
-                </li>
-                <li>
-                  Exemptions for tax-exempt nonprofits and small businesses are
-                  available under certain conditions.
-                </li>
-              </ul>
-              <p className="font-semibold">Private Right of Action (b)(3):</p>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>
-                  Individuals can sue for actual damages or $500 per violation,
-                  whichever is greater.
-                </li>
-                <li>
-                  Damages can be tripled if the violation is willful or knowing.
-                </li>
-              </ul>
-            </section>
+(b) RESTRICTIONS ON THE USE OF AUTOMATED TELEPHONE EQUIPMENT.—
+(1) PROHIBITIONS.—It shall be unlawful for any person within the United States, or any person outside the United States if the recipient is within the United States—
+    (A) to make any call (other than a call made for emergency purposes or made with the prior express consent of the called party) using any automatic telephone dialing system or an artificial or prerecorded voice—
+        (i) to any emergency telephone line (including any “911” line and any emergency line of a hospital, medical physician or service office, health care facility, poison control center, or fire protection or law enforcement agency);
+        (ii) to the telephone line of any guest room or patient room of a hospital, health care facility, elderly home, or similar establishment; or
+        (iii) to any telephone number assigned to a paging service, cellular telephone service, specialized mobile radio service, or other radio common carrier service, or any service for which the called party is charged for the call;
+    (B) to initiate any telephone call to any residential telephone line using an artificial or prerecorded voice to deliver a message without the prior express consent of the called party, unless the call is initiated for emergency purposes or is exempted by rule or order by the Commission under paragraph (2)(B);
+    (C) to use any telephone facsimile machine, computer, or other device to send, to a telephone facsimile machine, an unsolicited advertisement to a telephone facsimile machine, unless—
+        (i) the unsolicited advertisement is from a sender with an established business relationship with the recipient;
+        (ii) the sender obtained the number of the telephone facsimile machine through—
+            (I) the voluntary communication of such number, within the context of such established business relationship, from the recipient of the unsolicited advertisement, or
+            (II) a directory, advertisement, or site on the Internet to which the recipient voluntarily agreed to make available its facsimile number for public distribution,
+        except that this clause shall not apply in the case of an unsolicited advertisement that is sent based on an established business relationship with the recipient that was in existence before July 9, 2005, if the sender possessed the facsimile machine number of the recipient before such date of enactment; and
+        (iii) the unsolicited advertisement contains a notice meeting the requirements under paragraph (2)(D),
+        except that the exception under clauses (i) and (ii) shall not apply with respect to an unsolicited advertisement sent to a telephone facsimile machine by a sender to whom a request has been made not to send future unsolicited advertisements to such telephone facsimile machine that complies with the requirements under paragraph (2)(E); or
+    (D) to use an automatic telephone dialing system in such a way that two or more telephone lines of a multi-line business are engaged simultaneously.
+(b)(2) REGULATIONS; EXEMPTIONS AND OTHER PROVISIONS.—The Commission shall prescribe regulations to implement the requirements of this subsection. In implementing the requirements of this subsection, the Commission—
+    (A) shall consider prescribing regulations to allow businesses to avoid receiving calls made using an artificial or prerecorded voice to which they have not given their prior express consent;
+    (B) may, by rule or order, exempt from the requirements of paragraph (1)(B) of this subsection, subject to such conditions as the Commission may prescribe—
+        (i) calls that are not made for a commercial purpose; and
+        (ii) such classes or categories of calls made for commercial purposes as the Commission determines—
+            (I) will not adversely affect the privacy rights that this section is intended to protect; and
+            (II) do not include the transmission of any unsolicited advertisement;`}
+        </pre>
+        <pre className="whitespace-pre-wrap text-sm">
+          {`(C) may, by rule or order, exempt from the requirements of paragraph (1)(A)(iii) of this subsection calls to a telephone number assigned to a cellular telephone service that are not charged to the called party, subject to such conditions as the Commission may prescribe as necessary in the interest of the privacy rights this section is intended to protect;
+(D) shall provide that a notice contained in an unsolicited advertisement complies with the requirements under this subparagraph only if—
+    (i) the notice is clear and conspicuous and on the first page of the unsolicited advertisement;
+    (ii) the notice states that the recipient may make a request to the sender of the unsolicited advertisement not to send any future unsolicited advertisements to a telephone facsimile machine or machines and that failure to comply, within the shortest reasonable time, as determined by the Commission, with such a request meeting the requirements under subparagraph (E) is unlawful;
+    (iii) the notice sets forth the requirements for a request under subparagraph (E);
+    (iv) the notice includes—
+        (I) a domestic contact telephone and facsimile machine number for the recipient to transmit such a request to the sender; and
+        (II) a cost-free mechanism for a recipient to transmit a request pursuant to such notice to the sender of the unsolicited advertisement; the Commission shall by rule require the sender to provide such a mechanism and may, in the discretion of the Commission and subject to such conditions as the Commission may prescribe, exempt certain classes of small business senders, but only if the Commission determines that the costs to such class are unduly burdensome given the revenue generated by such small businesses;
+    (v) the telephone and facsimile machine numbers and the cost-free mechanism set forth pursuant to clause (iv) permit an individual or business to make such a request at any time on any day of the week; and
+    (vi) the notice complies with the requirements of subsection (d);
+(E) shall provide, by rule, that a request not to send future unsolicited advertisements to a telephone facsimile machine complies with the requirements under this subparagraph only if—
+    (i) the request identifies the telephone number or numbers of the telephone facsimile machine or machines to which the request relates;
+    (ii) the request is made to the telephone or facsimile number of the sender of such an unsolicited advertisement provided pursuant to subparagraph (D)(iv) or by any other method of communication as determined by the Commission; and
+    (iii) the person making the request has not, subsequent to such request, provided express invitation or permission to the sender, in writing or otherwise, to send such advertisements to such telephone facsimile machine;
+(F) may, in the discretion of the Commission and subject to such conditions as the Commission may prescribe, allow professional or trade associations that are tax-exempt nonprofit organizations to send unsolicited advertisements to their members in furtherance of the association’s tax-exempt purpose that do not contain the notice required by paragraph (1)(C)(iii), except that the Commission may take action under this subparagraph only—
+    (i) by regulation issued after public notice and opportunity for public comment; and
+    (ii) if the Commission determines that such notice required by paragraph (1)(C)(iii) is not necessary to protect the ability of the members of such associations to stop such associations from sending any future unsolicited advertisements; and
+(G)(i) may, consistent with clause (ii), limit the duration of the existence of an established business relationship, however, before establishing any such limits, the Commission shall—
+        (I) determine whether the existence of the exception under paragraph (1)(C) relating to an established business relationship has resulted in a significant number of complaints to the Commission regarding the sending of unsolicited advertisements to telephone facsimile machines;
+        (II) determine whether a significant number of any such complaints involve unsolicited advertisements that were sent on the basis of an established business relationship that was longer in duration than the Commission believes is consistent with the reasonable expectations of consumers;
+        (III) evaluate the costs to senders of demonstrating the existence of an established business relationship within a specified period of time and the benefits to recipients of establishing a limitation on such established business relationship; and
+        (IV) determine whether with respect to small businesses, the costs would not be unduly burdensome; and
+    (ii) may not commence a proceeding to determine whether to limit the duration of the existence of an established business relationship before the expiration of the 3-month period that begins on July 9, 2005.
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">
-                Privacy Rights & National Do Not Call List
-              </h2>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>
-                  FCC required to create rules to protect residential users from
-                  unwanted calls.
-                </li>
-                <li>
-                  Implementation of a national database (Do Not Call Registry).
-                </li>
-                <li>
-                  Carriers must inform customers of their right to opt out.
-                </li>
-                <li>
-                  Telemarketers must access this list and avoid calling
-                  registered numbers.
-                </li>
-                <li>States may not override the national database.</li>
-                <li>Penalties for violations and consumer rights to sue.</li>
-              </ul>
-            </section>
+(3) PRIVATE RIGHT OF ACTION.—A person or entity may, if otherwise permitted by the laws or rules of court of a State, bring in an appropriate court of that State—
+    (A) an action based on a violation of this subsection or the regulations prescribed under this subsection to enjoin such violation,
+    (B) an action to recover for actual monetary loss from such a violation, or to receive $500 in damages for each such violation, whichever is greater, or
+    (C) both such actions.
+If the court finds that the defendant willfully or knowingly violated this subsection or the regulations prescribed under this subsection, the court may, in its discretion, increase the amount of the award to an amount equal to not more than 3 times the amount available under subparagraph (B) of this paragraph.
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">
-                Enforcement and State Involvement
-              </h2>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>States can sue violators on behalf of residents.</li>
-                <li>Federal courts have exclusive jurisdiction.</li>
-                <li>States must notify FCC before filing.</li>
-                <li>
-                  States can use their own legal powers for investigation.
-                </li>
-              </ul>
-            </section>
+(c) PROTECTION OF SUBSCRIBER PRIVACY RIGHTS.—
+(1) RULEMAKING PROCEEDING REQUIRED.—Within 120 days after December 20, 1991, the Commission shall initiate a rulemaking proceeding concerning the need to protect residential telephone subscribers’ privacy rights to avoid receiving telephone solicitations to which they object. The proceeding shall—
+    (A) compare and evaluate alternative methods and procedures (including the use of electronic databases, telephone network technologies, special directory markings, industry-based or company-specific “do not call” systems, and any other alternatives, individually or in combination) for their effectiveness in protecting such privacy rights, and in terms of their cost and other advantages and disadvantages;
+    (B) evaluate the categories of public and private entities that would have the capacity to establish and administer such methods and procedures;
+    (C) consider whether different methods and procedures may apply for local telephone solicitations, such as local telephone solicitations of small businesses or holders of second class mail permits;
+    (D) consider whether there is a need for additional Commission authority to further restrict telephone solicitations, including those calls exempted under subsection (a)(3) of this section, and, if such a finding is made and supported by the record, propose specific restrictions to the Congress; and
+    (E) develop proposed regulations to implement the methods and procedures that the Commission determines are most effective and efficient to accomplish the purposes of this section.
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">
-                Technical & Procedural Standards
-              </h2>
-              <ul className="list-disc pl-6 space-y-1">
-                <li>
-                  Fax transmissions must include sender identity, date/time, and
-                  phone number.
-                </li>
-                <li>
-                  Voice systems must identify the caller at the beginning and
-                  allow line release within 5 seconds of hang-up.
-                </li>
-              </ul>
-            </section>
+(2) REGULATIONS.—Not later than 9 months after December 20, 1991, the Commission shall conclude the rulemaking proceeding initiated under paragraph (1) and shall prescribe regulations to implement methods and procedures for protecting the privacy rights described in such paragraph in an efficient, effective, and economic manner and without the imposition of any additional charge to telephone subscribers.
 
-            <section className="space-y-4 mt-4">
-              <h2 className="text-xl font-semibold">
-                Annual Junk Fax Enforcement Report
-              </h2>
-              <p>
-                The FCC must submit yearly reports to Congress detailing
-                complaints, enforcement actions, penalties, and recovery of
-                penalties related to junk faxes.
-              </p>
-            </section>
+(3) USE OF DATABASE PERMITTED.—The regulations required by paragraph (2) may require the establishment and operation of a single national database to compile a list of telephone numbers of residential subscribers who object to receiving telephone solicitations, and to make that compiled list and parts thereof available for purchase. If the Commission determines to require such a database, such regulations shall—
+    (A) specify a method by which the Commission will select an entity to administer such database;
+    (B) require each common carrier providing telephone exchange service, in accordance with regulations prescribed by the Commission, to inform subscribers for telephone exchange service of the opportunity to provide notification, in accordance with regulations established under this paragraph, that such subscriber objects to receiving telephone solicitations;
+    (C) specify the methods by which each telephone subscriber shall be informed, by the common carrier that provides local exchange service to that subscriber, of (i) the subscriber’s right to give or revoke a notification of an objection under subparagraph (A), and (ii) the methods by which such right may be exercised by the subscriber;
+    (D) specify the methods by which such objections shall be collected and added to the database;
+    (E) prohibit any residential subscriber from being charged for giving or revoking such notification or for being included in a database compiled under this section;
+    (F) prohibit any person from making or transmitting a telephone solicitation to the telephone number of any subscriber included in such database;
+    (G) specify (i) the methods by which any person desiring to make or transmit telephone solicitations will obtain access to the database, by area code or local exchange prefix, as required to avoid calling the telephone numbers of subscribers included in such database; and (ii) the costs to be recovered from such persons;
+    (H) specify the methods for recovering, from persons accessing such database, the costs involved in identifying, collecting, updating, disseminating, and selling, and other activities relating to, the operations of the database that are incurred by the entities carrying out those activities;
+    (I) specify the frequency with which such database will be updated and specify the method by which such updating will take effect for purposes of compliance with the regulations prescribed under this subsection;
+    (J) be designed to enable States to use the database mechanism selected by the Commission for purposes of administering or enforcing State law;
+    (K) prohibit the use of such database for any purpose other than compliance with the requirements of this section and any such State law and specify methods for protection of the privacy rights of persons whose numbers are included in such database; and
+    (L) require each common carrier providing services to any person for the purpose of making telephone solicitations to notify such person of the requirements of this section and the regulations thereunder;`}
+        </pre>
+        <pre className="whitespace-pre-wrap text-sm">
+          {`(4) CONSIDERATIONS REQUIRED FOR USE OF DATABASE METHOD.—If the Commission determines to require the database mechanism described in paragraph (3), the Commission shall—
+    (A) in developing procedures for gaining access to the database, consider the different needs of telemarketers conducting business on a national, regional, State, or local level;
+    (B) develop a fee schedule or price structure for recouping the cost of such database that recognizes such differences and—
+        (i) reflect the relative costs of providing a national, regional, State, or local list of phone numbers of subscribers who object to receiving telephone solicitations;
+        (ii) reflect the relative costs of providing such lists on paper or electronic media; and
+        (iii) not place an unreasonable financial burden on small businesses; and
+    (C) consider (i) whether the needs of telemarketers operating on a local basis could be met through special markings of area white pages directories, and (ii) if such directories are needed as an adjunct to database lists prepared by area code and local exchange prefix.
 
-            <footer className="mt-10 text-sm text-gray-600">
-              <p>
-                This summary of the Telephone Consumer Protection Act (47 U.S.C.
-                § 227) is provided for convenience only. For the official
-                source, visit{" "}
-                <a
-                  className="text-blue-600 underline"
-                  href="http://www.gpoaccess.gov"
-                >
-                  gpoaccess.gov
-                </a>
-                .
-              </p>
-            </footer>
-          </div>
+(5) PRIVATE RIGHT OF ACTION.—A person who has received more than one telephone call within any 12-month period by or on behalf of the same entity in violation of the regulations prescribed under this subsection may, if otherwise permitted by the laws or rules of court of a State bring in an appropriate court of that State—
+    (A) an action based on a violation of the regulations prescribed under this subsection to enjoin such violation,
+    (B) an action to recover for actual monetary loss from such a violation, or to receive up to $500 in damages for each such violation, whichever is greater, or
+    (C) both such actions.
+It shall be an affirmative defense in any action brought under this paragraph that the defendant has established and implemented, with due care, reasonable practices and procedures to effectively prevent telephone solicitations in violation of the regulations prescribed under this subsection. If the court finds that the defendant willfully or knowingly violated the regulations prescribed under this subsection, the court may, in its discretion, increase the amount of the award to an amount equal to not more than 3 times the amount available under subparagraph (B) of this paragraph.
 
-          <div className="my-8">
-            <section>
-              <h2 className="text-xl font-bold mb-4">
-                Changes to this Privacy Policy
-              </h2>
-              <p className="mb-4">
-                We may update our Privacy Policy from time to time. We will
-                notify you of any changes by posting the new Privacy Policy on
-                this page.
-              </p>
-              <p className="mb-4">
-                We will let you know via email and/or a prominent notice on our
-                Service prior to the change becoming effective and update the
-                "Last updated" date at the top of this Privacy Policy.
-              </p>
-              <p>
-                You are advised to review this Privacy Policy periodically for
-                any changes. Changes to this Privacy Policy are effective when
-                they are posted on this page.
-              </p>
-            </section>
-          </div>
+(6) RELATION TO SUBSECTION (b).—The provisions of this subsection shall not be construed to permit a communication prohibited by subsection (b).
 
-          <div className="my-8">
-            <section>
-              <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-              <p className="mb-4">
-                If you have any questions about this Privacy Policy, You can
-                contact us:
-              </p>
-              <ul className="list-disc list-inside space-y-2">
-                <li>
-                  By email:{" "}
-                  <a
-                    href="mailto:brian@kokomoyachtclub.vip"
-                    className="text-blue-600 underline"
-                  >
-                    brian@kokomoyachtclub.vip
-                  </a>
-                </li>
-                <li>
-                  By visiting this page on our website:{" "}
-                  <a
-                    href="https://kokomoyachtclub.vip/contact"
-                    className="text-blue-600 underline"
-                  >
-                    kokomoyachtclub.vip/contact
-                  </a>
-                </li>
-                <li>
-                  By phone number:{" "}
-                  <span className="text-gray-700">(941) 259-2248</span>
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
+(d) TECHNICAL AND PROCEDURAL STANDARDS.—
+(1) PROHIBITION.—It shall be unlawful for any person within the United States—
+    (A) to initiate any communication using a telephone facsimile machine, or to make any telephone call using any automatic telephone dialing system, that does not comply with the technical and procedural standards prescribed under this subsection, or to use any telephone facsimile machine or automatic telephone dialing system in a manner that does not comply with such standards; or
+    (B) to use a computer or other electronic device to send any message via a telephone facsimile machine unless such person clearly marks, in a margin at the top or bottom of each transmitted page of the message or on the first page of the transmission, the date and time it is sent and an identification of the business, other entity, or individual sending the message and the telephone number of the sending machine or of such business, other entity, or individual.
+(2) TELEPHONE FACSIMILE MACHINES.—The Commission shall revise the regulations setting technical and procedural standards for telephone facsimile machines to require that any such machine which is manufactured after one year after December 20, 1991 clearly marks, in a margin at the top or bottom of each transmitted page or on the first page of each transmission, the date and time sent, an identification of the business, other entity, or individual sending the message, and the telephone number of the sending machine or of such business, other entity, or individual.
+(3) ARTIFICIAL OR PRERECORDED VOICE SYSTEMS.—The Commission shall prescribe technical and procedural standards for systems that are used to transmit any artificial or prerecorded voice message via telephone. Such standards shall require that—
+    (A) all artificial or prerecorded telephone messages (i) shall, at the beginning of the message, state clearly the identity of the business, individual, or other entity initiating the call, and (ii) shall, during or after the message, state clearly the telephone number or address of such business, other entity, or individual; and
+    (B) any such system will automatically release the called party's line within 5 seconds of the time notification is transmitted to the system that the called party has hung up, to allow the called party's line to be used to make or receive other calls.
+
+(e) EFFECT ON STATE LAW.—
+(1) STATE LAW NOT PREEMPTED.—Except for the standards prescribed under subsection (d) and subject to paragraph (2) of this subsection, nothing in this section or in the regulations prescribed under this section shall preempt any State law that imposes more restrictive intrastate requirements or regulations on, or which prohibits—
+    (A) the use of telephone facsimile machines or other electronic devices to send unsolicited advertisements;
+    (B) the use of automatic telephone dialing systems;
+    (C) the use of artificial or prerecorded voice messages; or
+    (D) the making of telephone solicitations.
+(2) STATE USE OF DATABASES.—If, pursuant to subsection (c)(3), the Commission requires the establishment of a single national database of telephone numbers of subscribers who object to receiving telephone solicitations, a State or local authority may not, in its regulation of telephone solicitations, require the use of any database, list, or listing system that does not include the part of such single national database that relates to such State.`}
+        </pre>
+        <pre className="whitespace-pre-wrap text-sm">
+          {`(f) ACTIONS BY STATES.—
+(1) AUTHORITY OF STATES.—Whenever the attorney general of a State, or an official or agency designated by a State, has reason to believe that any person has engaged or is engaging in a pattern or practice of telephone calls or other transmissions to residents of that State in violation of this section or the regulations prescribed under this section, the State may bring a civil action on behalf of its residents to enjoin such calls, an action to recover for actual monetary loss or receive $500 in damages for each violation, or both such actions. If the court finds the defendant willfully or knowingly violated such regulations, the court may, in its discretion, increase the amount of the award to an amount equal to not more than 3 times the amount available under the preceding sentence.
+(2) EXCLUSIVE JURISDICTION OF FEDERAL COURTS.—The district courts of the United States, the United States courts of any territory, and the District Court of the United States for the District of Columbia shall have exclusive jurisdiction over all civil actions brought under this subsection. Upon proper application, such courts shall also have jurisdiction to issue writs of mandamus, or orders affording like relief, commanding the defendant to comply with the provisions of this section or regulations prescribed under this section, including the requirement that the defendant take such action as is necessary to remove the danger of such violation. Upon a proper showing, a permanent or temporary injunction or restraining order shall be granted without bond.
+(3) RIGHTS OF COMMISSION.—The State shall serve prior written notice of any such civil action upon the Commission and provide the Commission with a copy of its complaint, except in any case where such prior notice is not feasible, in which case the State shall serve such notice immediately upon instituting such action. The Commission shall have the right (A) to intervene in the action, (B) upon so intervening, to be heard on all matters arising therein, and (C) to file petitions for appeal.
+(4) VENUE; SERVICE OF PROCESS.—Any civil action brought under this subsection in a district court of the United States may be brought in the district wherein the defendant is found or is an inhabitant or transacts business or wherein the violation occurred or is occurring, and process in such cases may be served in any district in which the defendant is an inhabitant or where the defendant may be found.
+(5) INVESTIGATORY POWERS.—For purposes of bringing any civil action under this subsection, nothing in this section shall prevent the attorney general of a State, or an official or agency designated by a State, from exercising the powers conferred on the attorney general or such official by the laws of such State to conduct investigations or to administer oaths or affirmations or to compel the attendance of witnesses or the production of documentary and other evidence.
+(6) EFFECT ON STATE COURT PROCEEDINGS.—Nothing contained in this subsection shall be construed to prohibit an authorized State official from proceeding in State court on the basis of an alleged violation of any general civil or criminal statute of such State.
+(7) LIMITATION.—Whenever the Commission has instituted a civil action for violation of regulations prescribed under this section, no State may, during the pendency of such action instituted by the Commission, subsequently institute a civil action against any defendant named in the Commission's complaint for any violation as alleged in the Commission's complaint.`}
+        </pre>
+        <pre className="whitespace-pre-wrap text-sm">
+          {`(8) DEFINITION.—As used in this subsection, the term “attorney general” means the chief legal officer of a State.
+This summary of the Telephone Consumer Protection Act (47 U.S.C. § 227) is provided for convenience only. Individuals should also refer to the United States Code at http://www.gpoaccess.gov.
+
+(g) JUNK FAX ENFORCEMENT REPORT.—The Commission shall submit an annual report to Congress regarding the enforcement during the past year of the provisions of this section relating to the sending of unsolicited advertisements to telephone facsimile machines, which report shall include—
+(1) the number of complaints received by the Commission during such year alleging that a consumer received an unsolicited advertisement via telephone facsimile machine in violation of the Commission’s rules;
+(2) the number of citations issued by the Commission pursuant to section 503 during the year to enforce any law, regulation, or policy relating to sending of unsolicited advertisements to telephone facsimile machines;
+(3) the number of notices of apparent liability issued by the Commission pursuant to section 503 during the year to enforce any law, regulation, or policy relating to sending of unsolicited advertisements to telephone facsimile machines;
+(4) for each notice referred to in paragraph (3)—
+    (A) the amount of the proposed forfeiture penalty involved;
+    (B) the person to whom the notice was issued;
+    (C) the length of time between the date on which the complaint was filed and the date on which the notice was issued; and
+    (D) the status of the proceeding;
+(5) the number of final orders imposing forfeiture penalties issued pursuant to section 503 during the year to enforce any law, regulation, or policy relating to sending of unsolicited advertisements to telephone facsimile machines;
+(6) for each forfeiture order referred to in paragraph (5)—
+    (A) the amount of the penalty imposed by the order;
+    (B) the person to whom the order was issued;
+    (C) whether the forfeiture penalty has been paid; and
+    (D) the amount paid;
+(7) for each case in which a person has failed to pay a forfeiture penalty imposed by such a final order, whether the Commission referred such matter for recovery of the penalty; and
+(8) for each case in which the Commission referred such an order for recovery—
+    (A) the number of days from the date the Commission issued such order to the date of such referral;
+    (B) whether an action has been commenced to recover the penalty, and if so, the number of days from the date the Commission referred such order for recovery to the date of such commencement; and
+    (C) whether the recovery action resulted in collection of any amount, and if so, the amount collected.
+
+This summary of the Telephone Consumer Protection Act (47 U.S.C. § 227) is provided for convenience only. Individuals should also refer to the United States Code at http://www.gpoaccess.gov.`}
+        </pre>
+      </div>
+      <div className="text-midnightblue p-6">
+        {/* Changes to Privacy Policy */}
+        <h2 className="text-2xl font-semibold mb-2">
+          Changes to this Privacy Policy
+        </h2>
+        <p className="mb-2">
+          We may update Our Privacy Policy from time to time. We will notify You
+          of any changes by posting the new Privacy Policy on this page.
+        </p>
+        <p className="mb-2">
+          We will let You know via email and/or a prominent notice on Our
+          Service, prior to the change becoming effective and update the "Last
+          updated" date at the top of this Privacy Policy.
+        </p>
+        <p className="mb-4">
+          You are advised to review this Privacy Policy periodically for any
+          changes. Changes to this Privacy Policy are effective when they are
+          posted on this page.
+        </p>
+
+        {/* Contact Us */}
+        <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
+        <p className="mb-2">
+          If you have any questions about this Privacy Policy, You can contact
+          us:
+        </p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>
+            <strong>Email:</strong> brian@kokomoyachtclub.vip
+          </li>
+          <li>
+            <strong>Website:</strong>{" "}
+            <a
+              href="https://kokomoyachtclub.vip/contact"
+              className="text-blue-700 underline"
+            >
+              kokomoyachtclub.vip/contact
+            </a>
+          </li>
+          <li>
+            <strong>Phone:</strong> (941) 259-2248
+          </li>
+        </ul>
       </div>
     </div>
   );
