@@ -30,6 +30,8 @@ const PersonalInfoTab = ({ next }) => {
   const [alertopen, setAlertOpen] = useState(false);
   const [alertTitle, setAlertTitle] = useState('');
   const [alertBody, setAlertBody] = useState('');
+  const API_LOCAL_URL = "http://localhost:8000";
+  const API_PROD_URL = "https://api.kokomoyachtclub.vip";
 
   const [errors, setErrors] = useState({
     email: "",
@@ -61,7 +63,7 @@ const PersonalInfoTab = ({ next }) => {
     try {
       let endpoint = "";
       if (field === "Username") {
-        endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?username=${value}`;
+        endpoint = `${API_PROD_URL}/create-member/add-member/?username=${value}`;
         const response = await fetch(endpoint, {
           method: "GET",
           headers: {
@@ -83,7 +85,7 @@ const PersonalInfoTab = ({ next }) => {
           }, 5000);
         }
       } else if (field === "Email") {
-        endpoint = `https://api.kokomoyachtclub.vip/create-member/validate-member/?email=${value}`; const response = await fetch(endpoint, {
+        endpoint = `${API_PROD_URL}/create-member/validate-member/?email=${value}`; const response = await fetch(endpoint, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
