@@ -8,30 +8,81 @@ import MemberDetails from "../components/MemberDetails";
 const NewMemberPortal = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const { user, isLoggedIn, checkSession } = useAuthStore();
   const [imageError, setImageError] = useState(false);
+  const navigate = useNavigate();
 
+  const { user, isLoggedIn, checkSession } = useAuthStore();
+  const username = user.username;
+  const API_BASE =
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://api.kokomoyachtclub.vip";
+  // on mount, verify session
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
     } else if (!user) {
-      // If the user exists but isn't loaded yet, check session
       checkSession();
     }
   }, [isLoggedIn, user, navigate, checkSession]);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  if (error) return <div className="p-4 text-red-600">{error}</div>;
 
-  const handleImageError = () => {
-    setImageError(true);
+  const handleImageError = () => setImageError(true);
+
+  // helper to reload user into the store
+  const refreshUser = async () => {
+    try {
+      const resp = await fetch(
+        `${API_BASE}/new-userdetail/user-details/?username=${encodeURIComponent(
+          user.username
+        )}`
+      );
+      if (!resp.ok) {
+        const text = await resp.text();
+        throw new Error(`HTTP ${resp.status}: ${text}`);
+      }
+      const fresh = await resp.json();
+      // overwrite the store’s user
+      useAuthStore.setState({ user: fresh });
+    } catch (err) {
+      console.error("Refresh user failed:", err);
+      setError("Could not reload profile.");
+    }
   };
 
-  const handleSave = (updatedValues) => {
-    // call your API / context update
-    console.log("Saving", updatedValues);
+  const handleSave = async (values) => {
+    const formData = new FormData();
+    formData.append("username", user.username);
+    formData.append("first_name", values.firstName);
+    formData.append("last_name", values.lastName);
+    formData.append("phone_number", values.phoneNumber);
+    formData.append("member_address1", values.address1);
+    formData.append("member_address2", values.address2);
+    formData.append("member_city", values.city);
+    formData.append("member_state", values.state);
+    formData.append("member_zip", values.zip);
+    formData.append("dl", values.dl);
+    formData.append("company_name", values.companyName);
+    if (values.picture) formData.append("picture", values.picture);
+
+    try {
+      const res = await fetch(
+        "https://api.kokomoyachtclub.vip/update/update/user/",
+        { method: "PUT", body: formData }
+      );
+      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(`Update failed: ${res.status} ${txt}`);
+      }
+
+      // GET fresh user and store it
+      await refreshUser();
+      setActiveTab("dashboard");
+    } catch (err) {
+      console.error(err);
+      setError("Could not save changes. Please try again.");
+    }
   };
 
   return (
@@ -84,10 +135,7 @@ const NewMemberPortal = () => {
                   <h2 className="text-2xl font-bold text-midnightblue mb-4">
                     Update Your Details
                   </h2>
-                  <MemberDetails
-                    userData={user}
-                    onSave={handleSave}
-                  />
+                  <MemberDetails userData={user} onSave={handleSave} />
                 </div>
               )}
 
@@ -245,7 +293,7 @@ const NewMemberPortal = () => {
                       activeTab === "bookings" ? "text-amber-300" : "text-white"
                     }`}
                   >
-                    Booking Details
+                    Booking History
                   </button>
                 </li>
               </ul>

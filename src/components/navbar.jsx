@@ -29,13 +29,13 @@ const Popup = ({ isVisible, closePopup }) => {
             <p
               className="cursor-pointer hover:text-blue-200"
               onClick={() => {
-                navigate("/membership");
+                navigate("/new-member-portal");
                 closePopup();
               }}
             >
-              Member Services
+              Dashboard
             </p>
-            <p
+            {/* <p
               className="cursor-pointer hover:text-blue-200"
               onClick={() => {
                 navigate("/update-details");
@@ -52,7 +52,7 @@ const Popup = ({ isVisible, closePopup }) => {
               }}
             >
               Booking History
-            </p>
+            </p> */}
           </>
         ) : user_type.toLowerCase() === "admin" ? (
           <>

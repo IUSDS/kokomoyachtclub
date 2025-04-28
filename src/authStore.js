@@ -31,7 +31,7 @@ const useAuthStore = create(
             credentials: "include",
           });
         } catch (error) {
-          console.error("❌ Logout Error:", error);
+          console.error("Logout Error:", error);
         }
 
         set({ isLoggedIn: false, user: null, user_type: null, sessionChecked: false });

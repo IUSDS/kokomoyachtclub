@@ -63,7 +63,7 @@ const PersonalInfoTab = ({ next }) => {
     try {
       let endpoint = "";
       if (field === "Username") {
-        endpoint = `${API_PROD_URL}/create-member/add-member/?username=${value}`;
+        endpoint = `${API_PROD_URL}/create-member/validate-member/?username=${value}`;
         const response = await fetch(endpoint, {
           method: "GET",
           headers: {
