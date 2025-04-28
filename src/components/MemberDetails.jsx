@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const MemberUpdateDetailsForm = ({ userData }) => {
+const MemberDetails = ({ userData,onSave }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -51,48 +51,6 @@ const MemberUpdateDetailsForm = ({ userData }) => {
       companyName,
       picture,
     });
-  };
-
-  const onSave = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("phone_number", phoneNumber);
-    formData.append("member_address1", address1);
-    formData.append("member_address2", address2);
-    formData.append("member_city", city);
-    formData.append("member_state", state);
-    formData.append("member_zip", zip);
-    formData.append("dl", dl);
-    formData.append("company_name", companyName);
-    // membershipType is read-only, no need to append
-    if (picture) {
-      formData.append("picture", picture);
-    }
-
-    try {
-      const response = await fetch(
-        "https://api.kokomoyachtclub.vip/update/update/user/",
-        {
-          method: "PUT",
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Server responded ${response.status}: ${errorText}`);
-      }
-
-      const result = await response.json();
-      console.log("Update successful:", result);
-      // TODO: show success toast / refresh data / exit edit mode
-    } catch (err) {
-      console.error("Failed to update user:", err);
-      // TODO: show error notification
-    }
   };
 
   return (
@@ -242,4 +200,4 @@ const MemberUpdateDetailsForm = ({ userData }) => {
   );
 };
 
-export default MemberUpdateDetailsForm;
+export default MemberDetails;
