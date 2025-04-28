@@ -20,6 +20,8 @@ const UpdateUserDetailsForm = () => {
   const [companyName, setCompanyName] = useState('');
   const [points, setPoints] = useState('');
   const [membership, setMembership] = useState('');
+  const API_LOCAL_URL = "http://localhost:8000";
+  const API_PROD_URL = "https://api.kokomoyachtclub.vip";
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -29,7 +31,7 @@ const UpdateUserDetailsForm = () => {
     if (e) e.preventDefault();
     setErrorMessage('');
     try {
-      const response = await fetch(`https://api.kokomoyachtclub.vip/new-userdetail/user-details/?username=${username}`);
+      const response = await fetch(`${API_PROD_URL}/new-userdetail/user-details/?username=${username}`);
       if (!response.ok) {
         throw new Error('User not found!');
       }
@@ -71,7 +73,7 @@ const UpdateUserDetailsForm = () => {
       formData.append('company_name', companyName);
       if (picture) formData.append('file', picture);
 
-      const response = await fetch(`https://api.kokomoyachtclub.vip/update/update/user/`, {
+      const response = await fetch(`${API_PROD_URL}/update/update/user/`, {
         method: 'PUT',
         body: formData,
       });
