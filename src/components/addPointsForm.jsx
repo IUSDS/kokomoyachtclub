@@ -19,7 +19,7 @@ const AddPointsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_LOCAL_URL}/points/points/?username=${username}`);
+      const response = await fetch(`${API_PROD_URL}/points/points/?username=${username}`);
       if (response.status === 401) {
         setErrorMessage("Invalid credentials");
         return;
