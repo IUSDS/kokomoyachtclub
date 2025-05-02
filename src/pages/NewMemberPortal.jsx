@@ -4,6 +4,7 @@ import useAuthStore from "../authStore";
 import { useNavigate } from "react-router-dom";
 import { cert, coins, dp, user_icon } from "../assets/icons/index";
 import MemberDetails from "../components/MemberDetails";
+import BookingHistoryTable from "../components/BookingHistoryTable";
 
 const NewMemberPortal = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -14,9 +15,9 @@ const NewMemberPortal = () => {
   const { user, isLoggedIn, checkSession } = useAuthStore();
   const username = user.username;
   const API_BASE =
-  window.location.hostname === "localhost"
-    ? "http://127.0.0.1:8000"
-    : "https://api.kokomoyachtclub.vip";
+    window.location.hostname === "localhost"
+      ? "http://127.0.0.1:8000"
+      : "https://api.kokomoyachtclub.vip";
   // on mount, verify session
   useEffect(() => {
     if (!isLoggedIn) {
@@ -144,37 +145,46 @@ const NewMemberPortal = () => {
                   <h2 className="text-2xl font-bold text-midnightblue mb-4">
                     Your Previous Bookings
                   </h2>
-                  {/* Table here */}
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead>
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Booking ID
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Trip
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {/* Dummy row */}
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          April 24, 2025
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          #12345
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Sunset Cruise
-                        </td>
-                      </tr>
-                      {/* Map real bookings here later */}
-                    </tbody>
-                  </table>
+
+                  <BookingHistoryTable
+                    openingBalance={1850}
+                    bonusPoints={185}
+                    transactions={[
+                      {
+                        availability: "12/16/24 at 2:15 PM – 6:45 PM",
+                        bookingId: "#260846736",
+                        item: "KYC - Top Shelf",
+                        contact: "Kathi Leiden",
+                        debit: 134,
+                        totalPoints: 1901,
+                      },
+                      {
+                        availability: "2/8/25 at 2:30 PM – 7:15 PM",
+                        bookingId: "#264311270",
+                        item: "KYC - Top Shelf",
+                        contact: "Kathi Leiden",
+                        debit: 134,
+                        totalPoints: 1767,
+                      },
+                      {
+                        availability: "3/23/25 - Polo and Sunset",
+                        bookingId: "#272345678",
+                        item: "KYC - Polo Sunset - 8 Guests",
+                        contact: "Kathi Leiden",
+                        debit: 80,
+                        totalPoints: 1687,
+                      },
+                      {
+                        availability: "4/5/25 at 12:00 PM – 4:00 PM",
+                        bookingId: "#276190709",
+                        item: "KYC - The Life",
+                        contact: "Kathi Leiden",
+                        debit: 125,
+                        totalPoints: 1562,
+                      },
+                    ]}
+                    currentPoints={1562}
+                  />
                 </div>
               )}
             </div>
