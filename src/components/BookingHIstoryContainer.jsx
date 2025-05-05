@@ -5,9 +5,11 @@ const isLocal =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1";
 
-const API_BASE = isLocal
+  const API_BASE = isLocal
   ? "http://127.0.0.1:8000"
   : "https://api.kokomoyachtclub.vip";
+
+  console.log("API_BASE =", API_BASE);
 
 function formatAvailability(isoRange) {
   const [start, end] = isoRange.split(" – ");
