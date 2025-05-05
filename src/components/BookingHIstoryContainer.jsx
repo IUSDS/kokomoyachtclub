@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import BookingHistoryTable from "./BookingHistoryTable";
 
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+const API_BASE = isLocal
+  ? "http://127.0.0.1:8000"
+  : "https://api.kokomoyachtclub.vip";
+
 function formatAvailability(isoRange) {
   const [start, end] = isoRange.split(" – ");
   const parse = (s) => new Date(s.split("-")[0]);
-  const d1 = parse(start),
-    d2 = parse(end);
+  const d1 = parse(start), d2 = parse(end);
   const optsDate = { month: "numeric", day: "numeric", year: "2-digit" };
   const optsTime = { hour: "numeric", minute: "2-digit" };
   return (
@@ -22,13 +29,13 @@ export default function BookingHistoryContainer({ memberId }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // build the correct URL
-  const url = `${url}/booking/member/${memberId}/`;
-
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(url, { credentials: "include" });
+        // ✅ use API_BASE here (fixed)
+        const requestUrl = `${API_BASE}/booking/member/${memberId}/`;
+
+        const res = await fetch(requestUrl, { credentials: "include" });
         if (!res.ok) throw new Error(`Failed to load bookings (${res.status})`);
         const data = await res.json();
 
