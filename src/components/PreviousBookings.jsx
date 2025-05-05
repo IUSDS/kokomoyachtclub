@@ -1,47 +1,92 @@
-import React, { useState } from 'react'
-import BookingTable from './bookingTable';
+// AdminBookingFhTable.jsx
+import React, { useState, useEffect } from "react";
 
-const PreviousBookings = () => {
-    const [username, setUsername] = useState('');
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
+// determine API base URL
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+const API_BASE = isLocal
+  ? "http://127.0.0.1:8000"
+  : "https://api.kokomoyachtclub.vip";
+
+export default function PreviousBookings() {
+  const [rows, setRows]     = useState([]);
+  const [loading, setLoad]  = useState(true);
+  const [error, setError]   = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch(`${API_BASE}/booking/admin/`, {
+          credentials: "include",
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        setRows(data);
+      } catch (err) {
+        console.error(err);
+        setError(err.message);
+      } finally {
+        setLoad(false);
+      }
     }
-    const handleCheck = () => {
+    fetchData();
+  }, []);
 
-    }
-    return (
-        <div className='flex flex-col items-center md:items-start space-y-4'>
-            {/* Username Section */}
-            <div className='flex flex-col md:flex-row items-center gap-4'>
-                {/* Booking input field */}
-                <div className='flex items-center justify-center gap-4 border border-midnightblue py-2 rounded-xl text-sm w-fit px-4'>
-                    <span>Enter Username: </span>
-                    <div className="">
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={handleUsernameChange}
-                            className=" block w-full rounded-lg bg-gray-100 px-2 py-1 border border-midnightblue focus:outline-none text-midnightblue"
-                        />
-                    </div>
-                </div>
-                {/* Button */}
-                <div className='w-full flex justify-center md:w-fit'>
-                    <button
-                        className="py-2 px-4 w-full bg-midnightblue/90 text-white rounded-lg hover:bg-midnightblue"
-                        onClick={handleCheck}>
-                        Check
-                    </button>
-                </div>
-            </div>
+  if (loading) return <p>Loading bookings…</p>;
+  if (error)   return <p style={{ color: "red" }}>Error: {error}</p>;
+  if (!rows.length) return <p>No bookings found.</p>;
 
-            {/* Table Section */}
-            <div className=''>
-                <BookingTable />
-            </div>
-        </div>
-    )
+  // derive table columns from keys of the first row
+  const columns = Object.keys(rows[0]);
+
+  return (
+    <div className="overflow-auto">
+      <table className="min-w-full divide-y divide-gray-200 bg-white rounded-md shadow">
+        <thead className="bg-gray-50">
+          <tr>
+            {columns.map((col) => (
+              <th
+                key={col}
+                className="px-4 py-2 text-left text-sm font-semibold text-midnightblue whitespace-nowrap"
+              >
+                {col
+                  .split("_")
+                  .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                  .join(" ")}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          {rows.map((row, i) => (
+            <tr key={i}>
+              {columns.map((col) => (
+                <td
+                  key={col}
+                  className="px-4 py-2 text-sm whitespace-nowrap"
+                >
+                  {row[col] === null
+                    ? "—"
+                    : // make URLs clickable
+                      (col === "dashboard_url"
+                        ? (
+                          <a
+                            href={row[col]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 hover:underline"
+                          >
+                            View
+                          </a>
+                        )
+                        : String(row[col]))}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
-
-export default PreviousBookings

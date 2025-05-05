@@ -4,7 +4,7 @@ import useAuthStore from "../authStore";
 import { useNavigate } from "react-router-dom";
 import { cert, coins, dp, user_icon } from "../assets/icons/index";
 import MemberDetails from "../components/MemberDetails";
-import BookingHistoryTable from "../components/BookingHistoryTable";
+import BookingHistoryContainer from "../components/BookingHIstoryContainer";
 
 const NewMemberPortal = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -146,45 +146,7 @@ const NewMemberPortal = () => {
                     Your Previous Bookings
                   </h2>
 
-                  <BookingHistoryTable
-                    openingBalance={1850}
-                    bonusPoints={185}
-                    transactions={[
-                      {
-                        availability: "12/16/24 at 2:15 PM – 6:45 PM",
-                        bookingId: "#260846736",
-                        item: "KYC - Top Shelf",
-                        contact: "Kathi Leiden",
-                        debit: 134,
-                        totalPoints: 1901,
-                      },
-                      {
-                        availability: "2/8/25 at 2:30 PM – 7:15 PM",
-                        bookingId: "#264311270",
-                        item: "KYC - Top Shelf",
-                        contact: "Kathi Leiden",
-                        debit: 134,
-                        totalPoints: 1767,
-                      },
-                      {
-                        availability: "3/23/25 - Polo and Sunset",
-                        bookingId: "#272345678",
-                        item: "KYC - Polo Sunset - 8 Guests",
-                        contact: "Kathi Leiden",
-                        debit: 80,
-                        totalPoints: 1687,
-                      },
-                      {
-                        availability: "4/5/25 at 12:00 PM – 4:00 PM",
-                        bookingId: "#276190709",
-                        item: "KYC - The Life",
-                        contact: "Kathi Leiden",
-                        debit: 125,
-                        totalPoints: 1562,
-                      },
-                    ]}
-                    currentPoints={1562}
-                  />
+                  <BookingHistoryContainer memberId={user.member_id} />
                 </div>
               )}
             </div>

@@ -1,8 +1,8 @@
 import React from "react";
 
 export default function BookingHistoryTable({
-  openingBalance,
-  bonusPoints,
+  // openingBalance,
+  // bonusPoints,
   transactions,
   currentPoints,
 }) {
@@ -36,7 +36,7 @@ export default function BookingHistoryTable({
 
       <tbody className="divide-y divide-gray-200">
         {/* Opening Balance */}
-        <tr className="">
+        {/* <tr className="">
           <td className="px-4 py-2 text-sm">Opening Balance</td>
           <td className="px-4 py-2" />
           <td className="px-4 py-2" />
@@ -44,10 +44,10 @@ export default function BookingHistoryTable({
           <td className="px-4 py-2" />
           <td className="px-4 py-2" />
           <td className="px-4 py-2 text-right text-sm">{openingBalance}</td>
-        </tr>
+        </tr> */}
 
         {/* Bonus Points */}
-        <tr>
+        {/* <tr>
           <td className="px-4 py-2 text-sm">Bonus Points</td>
           <td className="px-4 py-2" />
           <td className="px-4 py-2" />
@@ -55,7 +55,7 @@ export default function BookingHistoryTable({
           <td className="px-4 py-2" />
           <td className="px-4 py-2 text-right text-sm">{bonusPoints}</td>
           <td className="px-4 py-2" />
-        </tr>
+        </tr> */}
 
         {/* Actual bookings */}
         {transactions.map((tx) => (
