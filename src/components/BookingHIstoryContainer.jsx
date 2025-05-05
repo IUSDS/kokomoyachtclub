@@ -5,9 +5,7 @@ const isLocal =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1";
 
-const API_BASE = isLocal
-  ? "http://127.0.0.1:8000"
-  : "https://api.kokomoyachtclub.vip";
+const url = "https://api.kokomoyachtclub.vip";
 
 function formatAvailability(isoRange) {
   const [start, end] = isoRange.split(" – ");
@@ -33,7 +31,7 @@ export default function BookingHistoryContainer({ memberId }) {
     async function load() {
       try {
         // build the correct URL
-        const url = `${API_BASE}/booking/member/${memberId}/`;
+        const url = `${url}/booking/member/${memberId}/`;
 
         const res = await fetch(url, { credentials: "include" });
         if (!res.ok) throw new Error(`Failed to load bookings (${res.status})`);
