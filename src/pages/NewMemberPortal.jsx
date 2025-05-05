@@ -4,6 +4,7 @@ import useAuthStore from "../authStore";
 import { useNavigate } from "react-router-dom";
 import { cert, coins, dp, user_icon } from "../assets/icons/index";
 import MemberDetails from "../components/MemberDetails";
+import BillingDetails from "../components/BillingDetails";
 
 const NewMemberPortal = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -14,9 +15,9 @@ const NewMemberPortal = () => {
   const { user, isLoggedIn, checkSession } = useAuthStore();
   const username = user.username;
   const API_BASE =
-  window.location.hostname === "localhost"
-    ? "http://127.0.0.1:8000"
-    : "https://api.kokomoyachtclub.vip";
+    window.location.hostname === "localhost"
+      ? "http://127.0.0.1:8000"
+      : "https://api.kokomoyachtclub.vip";
   // on mount, verify session
   useEffect(() => {
     if (!isLoggedIn) {
@@ -177,6 +178,19 @@ const NewMemberPortal = () => {
                   </table>
                 </div>
               )}
+
+              {activeTab === "billings" && (
+                <div className="p-4 bg-white rounded shadow-md">
+                  <h2 className="text-2xl font-bold text-midnightblue mb-4">
+                    Billing Details
+                  </h2>
+                  <BillingDetails
+                    contractStart="01/01/2024"
+                    nextBilling="01/06/2025"
+                    duration="18 months"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -294,6 +308,16 @@ const NewMemberPortal = () => {
                     }`}
                   >
                     Booking History
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setActiveTab("billings")}
+                    className={`text-sm hover:text-amber-300 text-left w-full ${
+                      activeTab === "billings" ? "text-amber-300" : "text-white"
+                    }`}
+                  >
+                    Billing Details
                   </button>
                 </li>
               </ul>
