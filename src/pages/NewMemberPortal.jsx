@@ -4,6 +4,7 @@ import useAuthStore from "../authStore";
 import { useNavigate } from "react-router-dom";
 import { cert, coins, dp, user_icon } from "../assets/icons/index";
 import MemberDetails from "../components/MemberDetails";
+import BillingDetails from "../components/BillingDetails";
 import BookingHistoryContainer from "../components/BookingHIstoryContainer";
 
 const NewMemberPortal = () => {
@@ -18,6 +19,9 @@ const NewMemberPortal = () => {
     window.location.hostname === "localhost"
       ? "http://127.0.0.1:8000"
       : "https://api.kokomoyachtclub.vip";
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://api.kokomoyachtclub.vip";
   // on mount, verify session
   useEffect(() => {
     if (!isLoggedIn) {
@@ -266,6 +270,16 @@ const NewMemberPortal = () => {
                     }`}
                   >
                     Booking History
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setActiveTab("billings")}
+                    className={`text-sm hover:text-amber-300 text-left w-full ${
+                      activeTab === "billings" ? "text-amber-300" : "text-white"
+                    }`}
+                  >
+                    Billing Details
                   </button>
                 </li>
               </ul>
