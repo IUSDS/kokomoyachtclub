@@ -23,7 +23,7 @@ const Admin = () => {
 
   // Buttons
   const actions = [
-    { label: 'Add Points', type: 'addPoints' },
+    { label: 'Adjust Points', type: 'addPoints' },
     // { label: 'Update Membership', type: 'updateMembership' },
     { label: 'Update User Details', type: 'updateUserDetails' },
     { label: 'Add/Remove Members', type: 'addRemoveMembers' },
