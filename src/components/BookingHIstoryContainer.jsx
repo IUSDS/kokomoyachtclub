@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import BookingHistoryTable from "./BookingHistoryTable";
 
-const isLocal =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1";
-
-const url = "https://api.kokomoyachtclub.vip";
-
 function formatAvailability(isoRange) {
   const [start, end] = isoRange.split(" – ");
   const parse = (s) => new Date(s.split("-")[0]);
-  const d1 = parse(start), d2 = parse(end);
+  const d1 = parse(start),
+    d2 = parse(end);
   const optsDate = { month: "numeric", day: "numeric", year: "2-digit" };
   const optsTime = { hour: "numeric", minute: "2-digit" };
   return (
@@ -24,15 +19,15 @@ function formatAvailability(isoRange) {
 
 export default function BookingHistoryContainer({ memberId }) {
   const [transactions, setTransactions] = useState([]);
-  const [loading, setLoading]           = useState(true);
-  const [error, setError]               = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // build the correct URL
+  const url = `${url}/booking/member/${memberId}/`;
 
   useEffect(() => {
     async function load() {
       try {
-        // build the correct URL
-        const url = `${url}/booking/member/${memberId}/`;
-
         const res = await fetch(url, { credentials: "include" });
         if (!res.ok) throw new Error(`Failed to load bookings (${res.status})`);
         const data = await res.json();
@@ -40,12 +35,12 @@ export default function BookingHistoryContainer({ memberId }) {
         // map server response into the shape your table expects
         const txs = data.map((b) => ({
           availability: formatAvailability(b.availability),
-          bookingId:    b.booking_id,
-          item:         b.item,
-          contact:      b.contact,
-          debit:        b.debit,
-          credit:       b.credit,
-          totalPoints:  b.total_points ?? 0,
+          bookingId: b.booking_id,
+          item: b.item,
+          contact: b.contact,
+          debit: b.debit,
+          credit: b.credit,
+          totalPoints: b.total_points ?? 0,
         }));
 
         setTransactions(txs);
@@ -60,7 +55,7 @@ export default function BookingHistoryContainer({ memberId }) {
   }, [memberId]);
 
   if (loading) return <p>Loading booking history…</p>;
-  if (error)   return <p style={{ color: "red" }}>Error: {error}</p>;
+  if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 
   return (
     <BookingHistoryTable
