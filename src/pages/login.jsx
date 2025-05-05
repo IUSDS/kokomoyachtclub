@@ -9,8 +9,13 @@ const login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login); // login function from store
-  const API_LOCAL_URL = "http://localhost:8000";
-  const API_PROD_URL = "https://api.kokomoyachtclub.vip";
+  const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+const API_BASE = isLocal
+  ? "http://127.0.0.1:8000"
+  : "https://api.kokomoyachtclub.vip";
 
   const handleLogin = async () => {
     try {
@@ -18,7 +23,7 @@ const login = () => {
       formData.append("username", user);
       formData.append("password", password);
 
-      const response = await fetch(`${API_PROD_URL}/validate-user/validate-user/`, {
+      const response = await fetch(`${API_BASE}/validate-user/validate-user/`, {
         method: "POST",
         body: formData,
         credentials: "include",
@@ -29,7 +34,7 @@ const login = () => {
       if (response.ok && data.status === "SUCCESS") {
 
         // Fetch user details after login to confirm session is active
-        const userResponse = await fetch(`${API_PROD_URL}/validate-user/current-user/`, {
+        const userResponse = await fetch(`${API_BASE}/validate-user/current-user/`, {
           method: "GET",
           credentials: "include",
         });

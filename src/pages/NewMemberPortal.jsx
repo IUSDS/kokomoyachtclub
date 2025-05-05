@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { cert, coins, dp, user_icon } from "../assets/icons/index";
 import MemberDetails from "../components/MemberDetails";
 import BillingDetails from "../components/BillingDetails";
+import BookingHistoryContainer from "../components/BookingHIstoryContainer";
 
 const NewMemberPortal = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -18,6 +19,9 @@ const NewMemberPortal = () => {
     window.location.hostname === "localhost"
       ? "http://127.0.0.1:8000"
       : "https://api.kokomoyachtclub.vip";
+  window.location.hostname === "localhost"
+    ? "http://127.0.0.1:8000"
+    : "https://api.kokomoyachtclub.vip";
   // on mount, verify session
   useEffect(() => {
     if (!isLoggedIn) {
@@ -145,50 +149,8 @@ const NewMemberPortal = () => {
                   <h2 className="text-2xl font-bold text-midnightblue mb-4">
                     Your Previous Bookings
                   </h2>
-                  {/* Table here */}
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead>
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Booking ID
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Trip
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {/* Dummy row */}
-                      <tr>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          April 24, 2025
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          #12345
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          Sunset Cruise
-                        </td>
-                      </tr>
-                      {/* Map real bookings here later */}
-                    </tbody>
-                  </table>
-                </div>
-              )}
 
-              {activeTab === "billings" && (
-                <div className="p-4 bg-white rounded shadow-md">
-                  <h2 className="text-2xl font-bold text-midnightblue mb-4">
-                    Billing Details
-                  </h2>
-                  <BillingDetails
-                    contractStart="01/01/2024"
-                    nextBilling="01/06/2025"
-                    duration="18 months"
-                  />
+                  <BookingHistoryContainer memberId={user.member_id} />
                 </div>
               )}
             </div>
