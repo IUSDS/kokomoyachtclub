@@ -149,7 +149,6 @@ const NewMemberPortal = () => {
                   <h2 className="text-2xl font-bold text-midnightblue mb-4">
                     Your Previous Bookings
                   </h2>
-
                   <BookingHistoryContainer memberId={user.member_id} />
                 </div>
               )}
