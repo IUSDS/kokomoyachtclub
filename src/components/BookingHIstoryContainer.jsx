@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import BookingHistoryTable from "./BookingHistoryTable";
 
-// Simple base URL detection
-const isLocal = window.location.hostname === "localhost";
+// Determine API base: localhost for dev, same protocol + domain for prod
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
 const API_BASE = isLocal
   ? "http://localhost:8000"
-  : "https://api.kokomoyachtclub.vip";
+  : `${window.location.protocol}//api.kokomoyachtclub.vip`;
 
 export default function BookingHistoryContainer({ memberId }) {
   const [transactions, setTransactions] = useState([]);
@@ -16,7 +18,7 @@ export default function BookingHistoryContainer({ memberId }) {
     setLoading(true);
     setError("");
 
-    fetch(`${API_BASE}/booking/member/${memberId}/`, {
+    fetch(`${API_BASE}/booking/member/${memberId}`, {
       credentials: "include",
     })
       .then((res) => {
