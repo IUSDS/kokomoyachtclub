@@ -152,6 +152,15 @@ const NewMemberPortal = () => {
                   <BookingHistoryContainer memberId={user.member_id} />
                 </div>
               )}
+
+              {activeTab === "billings" && (
+                <div className="p-4 bg-white rounded shadow-md">
+                  <h2 className="text-2xl font-bold text-midnightblue mb-4">
+                    Your Previous Bookings
+                  </h2>
+                  <BillingDetails contractStart={"13/12/2024"} nextBilling={"05/36/2025"} duration={"5 months"} />
+                </div>
+              )}
             </div>
           </div>
         </div>

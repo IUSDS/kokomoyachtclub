@@ -9,8 +9,6 @@ const isLocal =
   ? "http://127.0.0.1:8000"
   : "https://api.kokomoyachtclub.vip";
 
-  console.log("API_BASE =", API_BASE);
-
 function formatAvailability(isoRange) {
   const [start, end] = isoRange.split(" – ");
   const parse = (s) => new Date(s.split("-")[0]);
