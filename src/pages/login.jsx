@@ -67,7 +67,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col space-y-10">
       {/* Hero */}
       <div className="relative h-80 w-full">
         <img src={loginImg} alt="Hero" className="object-cover w-full h-full" />
