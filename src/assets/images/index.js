@@ -77,6 +77,26 @@ import peace2 from "./peace2.jpg";
 import peace3 from "./peace3.jpg";
 import peace4 from "./peace4.jpg";
 import peace5 from "./peace5.jpg";
+import thirst_trap_1 from "./thirst_trap_1.jpeg";
+import thirst_trap_2 from "./thirst_trap_2.jpg";
+import thirst_trap_3 from "./thirst_trap_3.jpeg";
+import thirst_trap_4 from "./thirst_trap_4.jpg";
+import thirst_trap_5 from "./thirst_trap_5.jpeg";
+import thirst_trap_6 from "./thirst_trap_6.jpg";
+import lib1 from "./lib1.jpeg";
+import lib2 from "./lib2.jpeg";
+import lib3 from "./lib3.jpeg";
+import lib4 from "./lib4.jpeg";
+import lib5 from "./lib5.jpeg";
+import lib6 from "./lib6.jpeg";
+import hh1 from "./hh1.jpg";
+import hh2 from "./hh2.jpg";
+import hh3 from "./hh3.jpg";
+import hh4 from "./hh4.jpg";
+import hh5 from "./hh5.jpg";
+import hh6 from "./hh6.jpg";
+import hh7 from "./hh7.jpg";
+import hh8 from "./hh8.jpg";
 
 export {
   foundersKokomo,
@@ -158,4 +178,24 @@ export {
   peace3,
   peace4,
   peace5,
+  thirst_trap_1,
+  thirst_trap_2,
+  thirst_trap_3,
+  thirst_trap_4,
+  thirst_trap_5,
+  thirst_trap_6,
+  lib1,
+  lib2,
+  lib3,
+  lib4,
+  lib5,
+  lib6,
+  hh1,
+  hh2,
+  hh3,
+  hh4,
+  hh5,
+  hh6,
+  hh7,
+  hh8,
 };
