@@ -132,7 +132,7 @@ const fleetData = [
       "“Memories, Not Dreams” promises a one-of-a-kind luxury experience in St. Petersburg’s vibrant waters, where every detail caters to an unparalleled voyage. This yacht offers expansive lounge areas, cutting-edge amenities, and agile performance for an unrivaled sea adventure. With luxurious bedrooms, state-of-the-art kitchen facilities, and a plethora of entertainment options, your time at sea is transformed into an exceptional escapade.",
     images: [mnd1, mnd6, mnd2, mnd4, mnd5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Bradenton",
@@ -143,7 +143,7 @@ const fleetData = [
       "The 50’ Lil’ Bit Nauti brings a fresh take on luxury cruising, combining modern design, stability, and wide-open comfort. This Aquila 44 power catamaran is built for those who love smooth sailing, panoramic views, and versatile indoor-outdoor living. With a spacious flybridge, expansive lounging areas, and a sleek, stylish layout, it’s the perfect vessel for sunset cruises, island-hopping, or relaxing day trips along Florida’s beautiful coastline.",
     images: [lib1,lib2,lib3,lib4,lib5,lib6],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "St. Petersburg",
@@ -220,7 +220,7 @@ const fleetData = [
       "The 40’ Thirst Trap seamlessly blends modern design with luxurious comfort, offering an unparalleled experience on the water. This Aviara AV36 Cruiser boasts bold lines and a spacious layout, making it ideal for sun-drenched sandbar days, waterfront dining, or sunset cruising. With premium finishes and powerful performance, it ensures both style and comfort for those seeking a memorable day on the water.",
     images: [thirst_trap_6,thirst_trap_5,thirst_trap_1,thirst_trap_2,thirst_trap_3,thirst_trap_4],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota",
@@ -231,7 +231,7 @@ const fleetData = [
       "Our 38' Open Bow Day Boat for up to 13 guests. Perfect for day trips to restaurants, sandbars or simply cruising, this open bow day boat offers ultimate comfort with spacious seating, cushioned flooring throughout, mahogany tables, shade for the entire boat, full bathroom, an advanced stereo system, water toys and twin 350’s for plenty of “Get Up and Go”.",
     images: [home5, TS1, TS2],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota & Anna Maria",
@@ -242,7 +242,7 @@ const fleetData = [
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota",
@@ -253,7 +253,7 @@ const fleetData = [
       "Ideal for small gatherings up to 6 people, this spectacular 29' open bow day boat provides luxurious appointments, a marine head and an amazing stereo system. Captain Jeff, who grew up on the waters of Sarasota Bay, always provides a memorable day on the water.",
     images: [L1, home2, L2, L3],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
 ];
 
