@@ -17,6 +17,9 @@ import {
   outrage,
   aviara,
   peace1,
+  thirst_trap_6,
+  lib3,
+  hh7,
 } from "../assets/images";
 import homeicon from "../assets/icons/homeicon.png";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -115,35 +118,18 @@ const Home = () => {
   const fleetImages = [
     { name: "Peace", size: "63'", location: "Sarasota", img: peace1 },
     { name: "Memory Maker", size: "50'", location: "Sarasota", img: home3 },
-    {
-      name: "Memories, Not Dreams",
-      size: "50'",
-      location: "St. Petersburg",
-      img: mnd,
-    },
+    { name: "Memories, Not Dreams", size: "50'", location: "St. Petersburg", img: mnd },
+    { name: "Lil' Bit Nauti", size: "50'", location: "Bradenton", img: lib3 },
     // { name: "Club Yacht", size: "50'", location: "Sarasota", img: home6 },
-    // {
-    //   name: "Congetta",
-    //   size: "44'",
-    //   location: "St. Petersburg",
-    //   img: congetta,
-    // },
-    {
-      name: "Fountaine Pajot",
-      size: "44'",
-      location: "Tampa Bay",
-      img: congetta,
-    },
+    {name: "Congetta", size: "44'", location: "St. Petersburg", img: congetta},
+    { name: "Fountaine Pajot", size: "44'", location: "Tampa Bay", img: congetta },
     { name: "Giddy Up", size: "43'", location: "Sarasota", img: home4 },
     { name: "Wanderlust", size: "42'", location: "Sarasota", img: home7 },
     { name: "Outrage", size: "42'", location: "Anna Maria", img: outrage },
+    { name: "Happy Hour", size: "40'", location: "Sarasota & St. Petersburg", img: hh7},
+    { name: "Thirst Trap", size: "40'", location: "Venice", img: thirst_trap_6},
     { name: "Top Shelf", size: "38'", location: "Sarasota", img: home5 },
-    {
-      name: "Aviara",
-      size: "35'",
-      location: "Sarasota & Anna Maria",
-      img: aviara,
-    },
+    { name: "Ocean Rode", size: "35'", location: "Sarasota & Anna Maria", img: aviara },
     { name: "The Life", size: "29'", location: "Sarasota", img: home8 },
   ];
 
@@ -190,7 +176,8 @@ const Home = () => {
             The Pure Joy of Luxury Boating Without the Hassle
           </h1>
           <p className="text-sm font-normal md:text-xl mb-6">
-          Welcome to Gulf Coast’s luxury private boat club, offering our members access to a world-class fleet of USCG-captained vessels.
+            Welcome to Gulf Coast’s luxury private boat club, offering our
+            members access to a world-class fleet of USCG-captained vessels.
           </p>
           <button
             onClick={handleInquireButton}
