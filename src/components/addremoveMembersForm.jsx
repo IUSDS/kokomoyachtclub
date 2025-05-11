@@ -1,35 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import useFormStore from '../useFormStore';
-import CustomAlert from './CustomAlert';
+import React, { useState, useEffect } from "react";
+import useFormStore from "../useFormStore";
+import CustomAlert from "./CustomAlert";
 
 const PersonalInfoTab = ({ next }) => {
   const {
-    username, setUsername,
-    firstName, setFirstName,
-    lastName, setLastName,
-    dl, setDl,
-    company, setCompany,
-    password, setPassword,
-    address1, setAddress1,
-    address2, setAddress2,
-    city, setCity,
-    state, setState,
-    zip, setZip,
-    phoneNumber, setPhoneNumber,
-    email, setEmail,
-    membershipType, setMembershipType,
-    points, setPoints,
-    referral, setReferral,
-    usernameAvailable, setUsernameAvailable,
-    emailAvailable, setEmailAvailable,
-    membershipID, setMembershipID,
+    username,
+    setUsername,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    dl,
+    setDl,
+    company,
+    setCompany,
+    password,
+    setPassword,
+    address1,
+    setAddress1,
+    address2,
+    setAddress2,
+    city,
+    setCity,
+    state,
+    setState,
+    zip,
+    setZip,
+    phoneNumber,
+    setPhoneNumber,
+    email,
+    setEmail,
+    membershipType,
+    setMembershipType,
+    points,
+    setPoints,
+    referral,
+    setReferral,
+    usernameAvailable,
+    setUsernameAvailable,
+    emailAvailable,
+    setEmailAvailable,
+    membershipID,
+    setMembershipID,
   } = useFormStore();
 
-  const [usernameVerificationMessage, setUsernameVerificationMessage] = useState("");
+  const [usernameVerificationMessage, setUsernameVerificationMessage] =
+    useState("");
   const [emailVerificationMessage, setEmailVerificationMessage] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [alertBody, setAlertBody] = useState('');
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
   const API_LOCAL_URL = "http://localhost:8000";
   const API_PROD_URL = "https://api.kokomoyachtclub.vip";
 
@@ -74,18 +94,19 @@ const PersonalInfoTab = ({ next }) => {
         const data = await response.json();
         console.log(data);
 
-        if (data.status === 'success') {
+        if (data.status === "success") {
           setUsernameVerificationMessage(`${field} is available`);
           setUsernameAvailable(true);
         } else {
           setUsernameVerificationMessage(`${field} already exists`);
           setUsernameAvailable(false);
           setTimeout(() => {
-            setUsernameVerificationMessage('');
+            setUsernameVerificationMessage("");
           }, 5000);
         }
       } else if (field === "Email") {
-        endpoint = `${API_PROD_URL}/create-member/validate-member/?email=${value}`; const response = await fetch(endpoint, {
+        endpoint = `${API_PROD_URL}/create-member/validate-member/?email=${value}`;
+        const response = await fetch(endpoint, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -95,14 +116,14 @@ const PersonalInfoTab = ({ next }) => {
         const data = await response.json();
         console.log(data);
 
-        if (data.status === 'success') {
+        if (data.status === "success") {
           setEmailVerificationMessage(`${field} is available`);
           setEmailAvailable(true);
         } else {
           setEmailVerificationMessage(`${field} already exists`);
           setEmailAvailable(false);
           setTimeout(() => {
-            setEmailVerificationMessage('');
+            setEmailVerificationMessage("");
           }, 5000);
         }
       }
@@ -134,7 +155,7 @@ const PersonalInfoTab = ({ next }) => {
 
   const handleAlertColse = () => {
     setAlertOpen(false);
-  }
+  };
 
   return (
     <div>
@@ -170,35 +191,55 @@ const PersonalInfoTab = ({ next }) => {
             onChange={(e) => setUsername(e.target.value)}
             className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
           />
-          {usernameVerificationMessage && <p className="text-gray-600 text-sm mt-1">{usernameVerificationMessage}</p>}
+          {usernameVerificationMessage && (
+            <p className="text-gray-600 text-sm mt-1">
+              {usernameVerificationMessage}
+            </p>
+          )}
         </div>
 
         {/* First Name */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">First Name*</p>
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Last Name */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Last Name*</p>
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* DL */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">DL</p>
-          <input type="text" value={dl} onChange={(e) => setDl(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={dl}
+            onChange={(e) => setDl(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Company */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Company</p>
-          <input type="text" value={company} onChange={(e) => setCompany(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Password */}
@@ -211,36 +252,56 @@ const PersonalInfoTab = ({ next }) => {
         {/* Address 1 */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Address 1*</p>
-          <input type="text" value={address1} onChange={(e) => setAddress1(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={address1}
+            onChange={(e) => setAddress1(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Address 2 */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Address 2</p>
-          <input type="text" value={address2} onChange={(e) => setAddress2(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={address2}
+            onChange={(e) => setAddress2(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* City */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">City*</p>
-          <input type="text" value={city} onChange={(e) => setCity(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* State */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">State*</p>
-          <input type="text" value={state} onChange={(e) => setState(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Zip */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Zip*</p>
-          <input type="number" value={zip} onChange={(e) => setZip(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="number"
+            value={zip}
+            onChange={(e) => setZip(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
 
         {/* Phone Number */}
@@ -252,12 +313,23 @@ const PersonalInfoTab = ({ next }) => {
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
               setPhoneNumber(val);
-              setErrors((prev) => ({ ...prev, phoneNumber: val.length === 10 ? "" : "Phone number must be exactly 10 digits" }));
+              setErrors((prev) => ({
+                ...prev,
+                phoneNumber:
+                  val.length === 10
+                    ? ""
+                    : "Phone number must be exactly 10 digits",
+              }));
             }}
-            className={`border rounded-md p-2 w-full focus:outline-none focus:ring-2 ${errors.phoneNumber ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
-              }`}
+            className={`border rounded-md p-2 w-full focus:outline-none focus:ring-2 ${
+              errors.phoneNumber
+                ? "border-red-500 focus:ring-red-500"
+                : "focus:ring-midnightblue"
+            }`}
           />
-          {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
+          {errors.phoneNumber && (
+            <p className="text-red-500 text-sm">{errors.phoneNumber}</p>
+          )}
         </div>
 
         {/* Email */}
@@ -277,20 +349,37 @@ const PersonalInfoTab = ({ next }) => {
             onChange={(e) => {
               setEmail(e.target.value);
               const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-              setErrors((prev) => ({ ...prev, email: emailRegex.test(e.target.value) ? "" : "Invalid email format" }));
+              setErrors((prev) => ({
+                ...prev,
+                email: emailRegex.test(e.target.value)
+                  ? ""
+                  : "Invalid email format",
+              }));
             }}
-            className={`border rounded-md p-2 w-full focus:outline-none focus:ring-2 ${errors.email ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
-              }`}
+            className={`border rounded-md p-2 w-full focus:outline-none focus:ring-2 ${
+              errors.email
+                ? "border-red-500 focus:ring-red-500"
+                : "focus:ring-midnightblue"
+            }`}
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-          {emailVerificationMessage && <p className="text-gray-600 text-sm mt-1">{emailVerificationMessage}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email}</p>
+          )}
+          {emailVerificationMessage && (
+            <p className="text-gray-600 text-sm mt-1">
+              {emailVerificationMessage}
+            </p>
+          )}
         </div>
 
         {/* Membership Type (Dropdown) */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Membership Type*</p>
-          <select value={membershipType} onChange={(e) => setMembershipType(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue">
+          <select
+            value={membershipType}
+            onChange={(e) => setMembershipType(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          >
             <option value="">Select Membership Type</option>
             <option value="Silver">Silver</option>
             <option value="Gold">Gold</option>
@@ -316,16 +405,25 @@ const PersonalInfoTab = ({ next }) => {
         {/* Referral Information */}
         <div className="flex flex-col px-2 py-2">
           <p className="text-sm">Referral Information</p>
-          <input type="text" value={referral} onChange={(e) => setReferral(e.target.value)}
-            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue" />
+          <input
+            type="text"
+            value={referral}
+            onChange={(e) => setReferral(e.target.value)}
+            className="border rounded-md p-2 w-full focus:outline-none focus:ring-2 focus:ring-midnightblue"
+          />
         </div>
       </div>
 
-      <p className="text-gray-400 text-sm mt-2">Please validate username and email before clicking next.</p>
+      <p className="text-gray-400 text-sm mt-2">
+        Please validate username and email before clicking next.
+      </p>
       <button
         disabled={!isFormComplete()}
-        className={`mt-4 px-4 py-2 rounded-md w-full ${isFormComplete() ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-          }`}
+        className={`mt-4 px-4 py-2 rounded-md w-full ${
+          isFormComplete()
+            ? "bg-blue-500 text-white"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        }`}
         onClick={() => {
           const isEmailValid = validateEmail(email);
           const isPhoneValid = validateNumber(phoneNumber);
@@ -339,18 +437,28 @@ const PersonalInfoTab = ({ next }) => {
       >
         Next
       </button>
-      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
+      <CustomAlert
+        onClose={handleAlertColse}
+        isVisible={alertopen}
+        title={alertTitle}
+        body={alertBody}
+      />
     </div>
   );
 };
 
 const FamilyInfoTab = ({ next }) => {
   const {
-    spouse, setSpouse,
-    spouseMobile, setSpouseMobile,
-    spouseEmail, setSpouseEmail,
-    childNum, setChildNum,
-    children, setChildren
+    spouse,
+    setSpouse,
+    spouseMobile,
+    setSpouseMobile,
+    spouseEmail,
+    setSpouseEmail,
+    childNum,
+    setChildNum,
+    children,
+    setChildren,
   } = useFormStore();
 
   // Handle changes in the number of children
@@ -438,7 +546,7 @@ const FamilyInfoTab = ({ next }) => {
             <input
               type="text"
               value={children[index].name}
-              onChange={(e) => handleChildChange(index, 'name', e.target.value)}
+              onChange={(e) => handleChildChange(index, "name", e.target.value)}
               placeholder="Enter child's name"
               className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
             />
@@ -448,7 +556,7 @@ const FamilyInfoTab = ({ next }) => {
             <input
               type="date"
               value={children[index].dob}
-              onChange={(e) => handleChildChange(index, 'dob', e.target.value)}
+              onChange={(e) => handleChildChange(index, "dob", e.target.value)}
               className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
             />
           </div>
@@ -457,7 +565,9 @@ const FamilyInfoTab = ({ next }) => {
             <input
               type="number"
               value={children[index].mobile}
-              onChange={(e) => handleChildChange(index, 'mobile', e.target.value)}
+              onChange={(e) =>
+                handleChildChange(index, "mobile", e.target.value)
+              }
               placeholder="Enter child's mobile number"
               className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
             />
@@ -467,7 +577,9 @@ const FamilyInfoTab = ({ next }) => {
             <input
               type="email"
               value={children[index].email}
-              onChange={(e) => handleChildChange(index, 'email', e.target.value)}
+              onChange={(e) =>
+                handleChildChange(index, "email", e.target.value)
+              }
               placeholder="Enter child's email"
               className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
             />
@@ -489,9 +601,12 @@ const FamilyInfoTab = ({ next }) => {
 
 const EmergencyInfoTab = ({ next }) => {
   const {
-    emergencyContactName, setEmergencyContactName,
-    emergencyPhone, setEmergencyPhone,
-    emergencyRelationship, setEmergencyRelationship,
+    emergencyContactName,
+    setEmergencyContactName,
+    emergencyPhone,
+    setEmergencyPhone,
+    emergencyRelationship,
+    setEmergencyRelationship,
   } = useFormStore();
 
   const [phoneError, setPhoneError] = useState("");
@@ -532,8 +647,11 @@ const EmergencyInfoTab = ({ next }) => {
           value={emergencyPhone}
           onChange={handlePhoneChange}
           placeholder="Enter number"
-          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${phoneError ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
-            }`}
+          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${
+            phoneError
+              ? "border-red-500 focus:ring-red-500"
+              : "focus:ring-midnightblue"
+          }`}
         />
         {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
       </div>
@@ -563,15 +681,24 @@ const EmergencyInfoTab = ({ next }) => {
 
 const AchInfoTab = ({ next }) => {
   const {
-    depositoryName, setDepositoryName,
-    branch, setBranch,
-    achCity, setAchCity,
-    achState, setAchState,
-    achZip, setAchZip,
-    routingNumber, setRoutingNumber,
-    accountNumber, setAccountNumber,
-    nameOnAccount, setNameOnAccount,
-    accountType, setAccountType
+    depositoryName,
+    setDepositoryName,
+    branch,
+    setBranch,
+    achCity,
+    setAchCity,
+    achState,
+    setAchState,
+    achZip,
+    setAchZip,
+    routingNumber,
+    setRoutingNumber,
+    accountNumber,
+    setAccountNumber,
+    nameOnAccount,
+    setNameOnAccount,
+    accountType,
+    setAccountType,
   } = useFormStore();
 
   const [routingError, setRoutingError] = useState("");
@@ -671,8 +798,11 @@ const AchInfoTab = ({ next }) => {
           value={routingNumber}
           onChange={handleRoutingChange}
           placeholder="Enter routing number"
-          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${routingError ? "border-red-500 focus:ring-red-500" : "focus:ring-midnightblue"
-            }`}
+          className={`border rounded-md p-2 focus:outline-none focus:ring-2 w-full ${
+            routingError
+              ? "border-red-500 focus:ring-red-500"
+              : "focus:ring-midnightblue"
+          }`}
         />
         {routingError && <p className="text-red-500 text-sm">{routingError}</p>}
       </div>
@@ -709,7 +839,7 @@ const AchInfoTab = ({ next }) => {
             <input
               type="radio"
               value="Checking"
-              checked={accountType === 'Checking'}
+              checked={accountType === "Checking"}
               onChange={(e) => setAccountType(e.target.value)}
               className="focus:ring-midnightblue"
             />
@@ -719,7 +849,7 @@ const AchInfoTab = ({ next }) => {
             <input
               type="radio"
               value="Savings"
-              checked={accountType === 'Savings'}
+              checked={accountType === "Savings"}
               onChange={(e) => setAccountType(e.target.value)}
               className="focus:ring-midnightblue"
             />
@@ -734,32 +864,67 @@ const AchInfoTab = ({ next }) => {
 const AddRemoveMembersForm = () => {
   const {
     // Personal Info
-    username, firstName, lastName, password, dl, company, referral,
-    address1, address2, city, state, zip, phoneNumber, email, membershipType, points,
-    picture, setPicture, setUsername, membershipID,
+    username,
+    firstName,
+    lastName,
+    password,
+    dl,
+    company,
+    referral,
+    address1,
+    address2,
+    city,
+    state,
+    zip,
+    phoneNumber,
+    email,
+    membershipType,
+    points,
+    picture,
+    setPicture,
+    setUsername,
+    membershipID,
 
     // Family Info
-    spouse, spouseMobile, spouseEmail, childNum, children,
+    spouse,
+    spouseMobile,
+    spouseEmail,
+    childNum,
+    children,
 
     // Emergency Contact Info
-    emergencyContactName, emergencyEmail, emergencyPhone, emergencyRelationship,
+    emergencyContactName,
+    emergencyEmail,
+    emergencyPhone,
+    emergencyRelationship,
 
     // ACH Info
-    depositoryName, branch, achCity, achState, achZip,
-    routingNumber, accountNumber, nameOnAccount, accountType,
+    depositoryName,
+    branch,
+    achCity,
+    achState,
+    achZip,
+    routingNumber,
+    accountNumber,
+    nameOnAccount,
+    accountType,
 
     // Zustand store functions
-    isPersonalInfoComplete, isAchInfoComplete, isEmergencyInfoComplete, resetForm
+    isPersonalInfoComplete,
+    isAchInfoComplete,
+    isEmergencyInfoComplete,
+    resetForm,
   } = useFormStore();
 
   const [activeComponent, setActiveComponent] = useState(null);
-  const [infoTab, setInfoTab] = useState('personal');
+  const [infoTab, setInfoTab] = useState("personal");
   const [alertopen, setAlertOpen] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [alertBody, setAlertBody] = useState('');
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const isButtonEnabled = isPersonalInfoComplete() && isEmergencyInfoComplete();
+  const [statusMessage, setStatusMessage] = useState(null);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -783,7 +948,10 @@ const AddRemoveMembersForm = () => {
       return;
     }
     if (!isButtonEnabled) {
-      setMessage({ type: "error", text: "Please complete all required fields before submitting." });
+      setMessage({
+        type: "error",
+        text: "Please complete all required fields before submitting.",
+      });
       return;
     }
 
@@ -832,10 +1000,19 @@ const AddRemoveMembersForm = () => {
     formData.append("child_num", childNum);
 
     // Append children details dynamically
-    formData.append("child_names", children.map((child) => child.name).join(","));
+    formData.append(
+      "child_names",
+      children.map((child) => child.name).join(",")
+    );
     formData.append("child_dobs", children.map((child) => child.dob).join(","));
-    formData.append("child_phone_numbers", children.map((child) => child.mobile).join(","));
-    formData.append("child_emails", children.map((child) => child.email).join(","));
+    formData.append(
+      "child_phone_numbers",
+      children.map((child) => child.mobile).join(",")
+    );
+    formData.append(
+      "child_emails",
+      children.map((child) => child.email).join(",")
+    );
 
     // Emergency Contact Info
     formData.append("emergency_name", emergencyContactName);
@@ -844,13 +1021,16 @@ const AddRemoveMembersForm = () => {
     formData.append("emergency_relationship", emergencyRelationship);
 
     try {
-      const response = await fetch("https://api.kokomoyachtclub.vip/create-member/add-member/", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "Accept": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://api.kokomoyachtclub.vip/create-member/add-member/",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       console.log(data);
@@ -861,9 +1041,12 @@ const AddRemoveMembersForm = () => {
           setMessage(null);
         }, 4000);
         resetForm(); // Reset form on success
-        setPicture('');
+        setPicture("");
       } else {
-        setMessage({ type: "error", text: data.message || "Failed to add member." });
+        setMessage({
+          type: "error",
+          text: data.message || "Failed to add member.",
+        });
       }
     } catch (error) {
       setMessage({ type: "error", text: "Network error. Please try again." });
@@ -880,19 +1063,19 @@ const AddRemoveMembersForm = () => {
   };
 
   const actions = [
-    { label: 'Add Member', type: 'addMember' },
-    { label: 'Remove Member', type: 'removeMember' },
+    { label: "Add Member", type: "addMember" },
+    { label: "Remove Member", type: "removeMember" },
   ];
 
   const typeOfInfo = [
-    { label: 'Personal', type: 'personal' },
-    { label: 'Family', type: 'family' },
-    { label: 'Emergency Contact', type: 'emergency' },
-    { label: 'ACH', type: 'ach' },
+    { label: "Personal", type: "personal" },
+    { label: "Family", type: "family" },
+    { label: "Emergency Contact", type: "emergency" },
+    { label: "ACH", type: "ach" },
   ];
 
   const handleNext = () => {
-    const tabs = ['personal', 'family', 'emergency', 'ach'];
+    const tabs = ["personal", "family", "emergency", "ach"];
     const currentIndex = tabs.indexOf(infoTab);
     if (currentIndex < tabs.length - 1) {
       setInfoTab(tabs[currentIndex + 1]);
@@ -901,20 +1084,62 @@ const AddRemoveMembersForm = () => {
 
   const handleAlertColse = () => {
     setAlertOpen(false);
-  }
+  };
 
   useEffect(() => {
     // console.log("Current tab:", infoTab);
   }, [infoTab]);
 
   const handleCancel = () => {
-    setUsername('');
-  }
+    setUsername("");
+    setStatusMessage(null);
+    setActiveComponent(null);
+  };
+
+  // pick your API base from env (Vite / CRA)
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
+
+  const handleRemoveMember = async () => {
+    if (!username.trim()) {
+      setStatusMessage({ type: "error", text: "Please enter a username." });
+      return;
+    }
+    setStatusMessage(null);
+
+    // build real FormData
+    const formData = new FormData();
+    formData.append("username", username);
+
+    try {
+      const response = await fetch(`${API_BASE}/update/delete/`, {
+        method: "PUT",
+        // NOTE: do NOT set Content-Type here; the browser will add the correct
+        // multipart/form-data; boundary=… header for FormData.
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || `Status ${response.status}`);
+      }
+
+      const result = await response.json();
+      setStatusMessage({ type: "success", text: result.message });
+      setUsername("");
+    } catch (err) {
+      setStatusMessage({ type: "error", text: err.message });
+    }
+  };
 
   return (
-    <div className='flex flex-col md:flex-row'>
+    <div className="flex flex-col md:flex-row">
       {/* Left Section */}
-      <div className='flex flex-col gap-2 md:w-1/2 md:mx-2 md:my-2'>
+      <div className="flex flex-col gap-2 md:w-1/2 md:mx-2 md:my-2">
         {/* Select action */}
         <div className="h-fit text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
           <h2 className="text-xl font-semibold flex text-center md:text-left items-center">
@@ -925,9 +1150,10 @@ const AddRemoveMembersForm = () => {
               <button
                 key={action.type}
                 className={`p-4 border rounded-lg transition-colors duration-200
-                  ${activeComponent === action.type
-                    ? 'bg-midnightblue text-white border-midnightblue'
-                    : 'bg-midnightblue/10 hover:bg-midnightblue/20 border-midnightblue'
+                  ${
+                    activeComponent === action.type
+                      ? "bg-midnightblue text-white border-midnightblue"
+                      : "bg-midnightblue/10 hover:bg-midnightblue/20 border-midnightblue"
                   }`}
                 onClick={() => setActiveComponent(action.type)}
               >
@@ -939,17 +1165,18 @@ const AddRemoveMembersForm = () => {
       </div>
 
       {/* Right Section */}
-      {activeComponent === 'addMember' && (
-        <div className='flex flex-col md:w-1/2'>
+      {activeComponent === "addMember" && (
+        <div className="flex flex-col md:w-1/2">
           {/* Information Type */}
-          <div className='flex gap-2 flex-col md:flex-row h-fit text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl'>
+          <div className="flex gap-2 flex-col md:flex-row h-fit text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl">
             {typeOfInfo.map((item, index) => (
               <button
                 key={index}
-                className={`px-4 py-2 border rounded-lg transition-colors duration-200 border-midnightblue ${infoTab === item.type
-                  ? 'bg-midnightblue text-white'
-                  : 'bg-midnightblue/10 hover:bg-midnightblue/20'
-                  }`}
+                className={`px-4 py-2 border rounded-lg transition-colors duration-200 border-midnightblue ${
+                  infoTab === item.type
+                    ? "bg-midnightblue text-white"
+                    : "bg-midnightblue/10 hover:bg-midnightblue/20"
+                }`}
                 onClick={() => setInfoTab(item.type)}
               >
                 {item.label}
@@ -959,30 +1186,28 @@ const AddRemoveMembersForm = () => {
 
           {/* Form Section */}
           <div className="md:my-2 my-4 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
-            {infoTab === 'personal' && (
-              <PersonalInfoTab next={handleNext} />
-            )}
-            {infoTab === 'family' && (
-              <FamilyInfoTab next={handleNext} />
-            )}
-            {infoTab === 'ach' && (
-              <AchInfoTab next={handleNext} />
-            )}
-            {infoTab === 'emergency' && (
-              <EmergencyInfoTab next={handleNext} />
-            )}
+            {infoTab === "personal" && <PersonalInfoTab next={handleNext} />}
+            {infoTab === "family" && <FamilyInfoTab next={handleNext} />}
+            {infoTab === "ach" && <AchInfoTab next={handleNext} />}
+            {infoTab === "emergency" && <EmergencyInfoTab next={handleNext} />}
           </div>
 
           {/* Success/Error Message */}
           {message && (
-            <p className={`text-center text-sm mt-2 ${message.type === "success" ? "text-green-500" : "text-red-500"}`}>
+            <p
+              className={`text-center text-sm mt-2 ${
+                message.type === "success" ? "text-green-500" : "text-red-500"
+              }`}
+            >
               {message.text}
             </p>
           )}
 
           {/* Image Upload Section */}
           <div className="text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-4">
-            <h3 className="text-lg font-medium">Upload Member's Profile Picture</h3>
+            <h3 className="text-lg font-medium">
+              Upload Member's Profile Picture
+            </h3>
 
             <label className="cursor-pointer bg-blue-700 hover:bg-midnightblue text-white font-medium py-2 px-4 rounded-md shadow-sm inline-block">
               Choose File
@@ -996,13 +1221,18 @@ const AddRemoveMembersForm = () => {
 
             {/* Display Selected File Name */}
             {picture ? (
-              <p className="text-gray-600 text-sm mt-2">{picture.name || "File selected"}</p>
+              <p className="text-gray-600 text-sm mt-2">
+                {picture.name || "File selected"}
+              </p>
             ) : (
               <p className="text-gray-400 text-sm mt-2">No file chosen</p>
             )}
 
             {/* Disclaimer */}
-            <p className="text-gray-400 text-sm mt-2">Only PNG and JPEG image formats are allowed, and the file size must be under 1MB.</p>
+            <p className="text-gray-400 text-sm mt-2">
+              Only PNG and JPEG image formats are allowed, and the file size
+              must be under 1MB.
+            </p>
 
             {/* Image Preview */}
             {/* {picture && (
@@ -1010,23 +1240,26 @@ const AddRemoveMembersForm = () => {
             )} */}
           </div>
 
-
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
             disabled={!isButtonEnabled || loading}
-            className={`mt-4 px-4 py-2 rounded-md w-full ${isButtonEnabled && !loading ? "bg-midnightblue text-white" : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
+            className={`mt-4 px-4 py-2 rounded-md w-full ${
+              isButtonEnabled && !loading
+                ? "bg-midnightblue text-white"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            }`}
           >
             {loading ? "Submitting..." : "Add Member"}
           </button>
         </div>
       )}
 
-      {activeComponent === 'removeMember' && (
-        <div className='md:w-1/2 Nmd:mx-2 md:my-2 my-4 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-6'>
+      {activeComponent === "removeMember" && (
+        <div className="md:w-1/2 Nmd:mx-2 md:my-2 my-4 text-midnightblue mx-auto w-full bg-white p-6 rounded-2xl shadow-xl space-y-4">
           <h3 className="text-lg font-medium">Remove a Member</h3>
-          <form onSubmit={handleSubmit}>
+
+          <div>
             <input
               type="text"
               value={username}
@@ -1034,6 +1267,19 @@ const AddRemoveMembersForm = () => {
               placeholder="Enter username"
               className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-midnightblue w-full"
             />
+
+            {statusMessage && (
+              <p
+                className={
+                  statusMessage.type === "error"
+                    ? "text-red-500 mt-2"
+                    : "text-green-600 mt-2"
+                }
+              >
+                {statusMessage.text}
+              </p>
+            )}
+
             <div className="flex justify-end space-x-2 mt-4">
               <button
                 type="button"
@@ -1043,16 +1289,22 @@ const AddRemoveMembersForm = () => {
                 Cancel
               </button>
               <button
-                type="submit"
-                className="p-3 bg-red-600 text-white rounded-md"
+                type="button"
+                className="p-3 bg-red-500 text-white rounded-md"
+                onClick={handleRemoveMember} // ← drive via onClick
               >
                 Remove Member
               </button>
             </div>
-          </form>
+          </div>
         </div>
       )}
-      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
+      <CustomAlert
+        onClose={handleAlertColse}
+        isVisible={alertopen}
+        title={alertTitle}
+        body={alertBody}
+      />
     </div>
   );
 };
