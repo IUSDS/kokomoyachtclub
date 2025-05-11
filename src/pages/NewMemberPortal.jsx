@@ -90,6 +90,11 @@ const NewMemberPortal = () => {
     }
   };
 
+  const handleProvClick = async () => {
+    setActiveTab('prov_menu');
+    window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+Menu.pdf","_blank");
+  };
+
   return (
     <div className="bg-midnightblue p-4">
       <div className="flex md:flex-row flex-col-reverse bg-gray-100 rounded-lg shadow-lg">
@@ -158,7 +163,11 @@ const NewMemberPortal = () => {
                   <h2 className="text-2xl font-bold text-midnightblue mb-4">
                     Your Previous Bookings
                   </h2>
-                  <BillingDetails contractStart={"13/12/2024"} nextBilling={"05/36/2025"} duration={"5 months"} />
+                  <BillingDetails
+                    contractStart={"13/12/2024"}
+                    nextBilling={"05/36/2025"}
+                    duration={"5 months"}
+                  />
                 </div>
               )}
             </div>
@@ -288,6 +297,14 @@ const NewMemberPortal = () => {
                     }`}
                   >
                     Billing Details
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleProvClick}
+                    className={`text-sm hover:text-amber-300 text-left w-full ${activeTab === "prov_menu" ? "text-amber-300" : "text-white"}`}
+                  >
+                    Provisioning Menu
                   </button>
                 </li>
               </ul>
