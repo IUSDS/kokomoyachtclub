@@ -160,7 +160,7 @@ const AddPointsForm = () => {
               className="w-full border rounded-md p-2 focus:ring-2 focus:ring-midnightblue"
             />
             {/* Descriptor */}
-            <label className="block font-medium mb-1">Descriptor</label>
+            <label className="block font-medium mb-1">Description</label>
             <input
               type="text"
               value={description}
