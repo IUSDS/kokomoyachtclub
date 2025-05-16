@@ -1,7 +1,12 @@
+// App.jsx
 import "./App.css";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import useAuthStore from "./authStore";
+
+// Toastify imports
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Pages & Components
 import LoginPage from "./pages/login";
@@ -46,7 +51,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/new-member-portal" element={<NewMemberPortal />} />
-          
+
           {/* Protected Routes */}
           <Route
             path="/membership"
@@ -80,7 +85,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
+
           {/* Other Pages */}
           <Route path="/forgot_password" element={<ForgotPassword />} />
           <Route path="/new_password" element={<NewPassword />} />
@@ -88,6 +93,19 @@ function App() {
         </Routes>
       </div>
       <Footer />
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

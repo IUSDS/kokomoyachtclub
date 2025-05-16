@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import yacht_club_logo from "../assets/logos/favicon2.png";
 import useAuthStore from "../authStore";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { cert, coins, dp, user_icon } from "../assets/icons/index";
 import MemberDetails from "../components/MemberDetails";
 import BillingDetails from "../components/BillingDetails";
 import BookingHistoryContainer from "../components/BookingHIstoryContainer";
+import { toast } from "react-toastify";
 
 const NewMemberPortal = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -30,6 +31,47 @@ const NewMemberPortal = () => {
       checkSession();
     }
   }, [isLoggedIn, user, navigate, checkSession]);
+
+  const socketRef = useRef(null);
+
+  useEffect(() => {
+    // Once we know who the member is, open the socket
+    if (isLoggedIn && user?.member_id) {
+      const ws = new WebSocket(
+        `ws://127.0.0.1:8000/web_socket/ws/${user.member_id}`
+      );
+      socketRef.current = ws;
+
+      ws.onopen = () => console.log("WebSocket connected");
+      ws.onmessage = (evt) => {
+        let data;
+        try {
+          data = JSON.parse(evt.data);
+        } catch {
+          return; // ignore non-JSON messages
+        }
+        if (data.event === "booking_success") {
+          toast.success(
+            <>
+              Booking successful!
+              <br />
+              Points used: {data.point_used}
+              <br />
+              Balance: {data.current_points}
+            </>
+          );
+        }
+      };
+      ws.onerror = (err) => console.error("WebSocket error:", err);
+      ws.onclose = () => console.log("WebSocket disconnected");
+
+      // clean up on unmount or user change
+      return () => {
+        ws.close();
+        socketRef.current = null;
+      };
+    }
+  }, [isLoggedIn, user?.member_id]);
 
   if (error) return <div className="p-4 text-red-600">{error}</div>;
 
@@ -91,8 +133,11 @@ const NewMemberPortal = () => {
   };
 
   const handleProvClick = async () => {
-    setActiveTab('prov_menu');
-    window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+Menu.pdf","_blank");
+    setActiveTab("prov_menu");
+    window.open(
+      "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+Menu.pdf",
+      "_blank"
+    );
   };
 
   return (
@@ -302,7 +347,11 @@ const NewMemberPortal = () => {
                 <li>
                   <button
                     onClick={handleProvClick}
-                    className={`text-sm hover:text-amber-300 text-left w-full ${activeTab === "prov_menu" ? "text-amber-300" : "text-white"}`}
+                    className={`text-sm hover:text-amber-300 text-left w-full ${
+                      activeTab === "prov_menu"
+                        ? "text-amber-300"
+                        : "text-white"
+                    }`}
                   >
                     Provisioning Menu
                   </button>
