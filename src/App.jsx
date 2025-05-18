@@ -96,7 +96,6 @@ function App() {
 
       {/* Toast Container */}
       <ToastContainer
-        position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -105,6 +104,20 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "600px",
+          height: '200px',
+          maxWidth: "100%",
+          zIndex: 9999,
+        }}
+        toastStyle={{
+          width: "100%",
+          maxWidth: "100%",
+        }}
       />
     </div>
   );
