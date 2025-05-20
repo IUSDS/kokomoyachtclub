@@ -189,17 +189,17 @@ const fleetData = [
     buttonText: "Become a Member to Book",
     reverse: false,
   },
-  {
-    location: "Anna Maria",
-    title: "42' Outrage",
-    points: "148-165 Mariner Points",
-    id: "outrage",
-    description:
-      "Designed for both adventure and relaxation, the 42’ Outrage offers a luxury cruising experience with the option to fish. Explore Anna Maria Island’s pristine sandbars, scenic waterways, and waterfront dining spots, or cast a line in calm coastal waters for an unforgettable day on the water.",
-    images: [outrage2, outrage1, outrage3, outrage4, outrage5],
-    buttonText: "Become a Member to Book",
-    reverse: true,
-  },
+  // {
+  //   location: "Anna Maria",
+  //   title: "42' Outrage",
+  //   points: "148-165 Mariner Points",
+  //   id: "outrage",
+  //   description:
+  //     "Designed for both adventure and relaxation, the 42’ Outrage offers a luxury cruising experience with the option to fish. Explore Anna Maria Island’s pristine sandbars, scenic waterways, and waterfront dining spots, or cast a line in calm coastal waters for an unforgettable day on the water.",
+  //   images: [outrage2, outrage1, outrage3, outrage4, outrage5],
+  //   buttonText: "Become a Member to Book",
+  //   reverse: true,
+  // },
   {
     location: "Sarasota & St. Petersburg",
     title: "40' Happy Hour",
@@ -209,7 +209,7 @@ const fleetData = [
       "Happy Hour is the perfect blend of elegance and relaxation on the water. Her sleek lines and spacious layout make her ideal for everything from casual day cruising to unforgettable sunset celebrations. With an open bow sunpad, shaded aft deck, and generous interior salon, she’s designed for effortless entertaining. Onboard, you’ll enjoy a modern galley, plush lounge seating, and seamless indoor-outdoor flow. Whether you're hosting a private gathering or enjoying a quiet escape, Happy Hour offers smooth cruising and upscale comfort.",
     images: [hh7,hh4,hh5,hh6,hh8],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Venice",
@@ -220,7 +220,7 @@ const fleetData = [
       "The 40’ Thirst Trap seamlessly blends modern design with luxurious comfort, offering an unparalleled experience on the water. This Aviara AV36 Cruiser boasts bold lines and a spacious layout, making it ideal for sun-drenched sandbar days, waterfront dining, or sunset cruising. With premium finishes and powerful performance, it ensures both style and comfort for those seeking a memorable day on the water.",
     images: [thirst_trap_6,thirst_trap_5,thirst_trap_1,thirst_trap_2,thirst_trap_3,thirst_trap_4],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota",
@@ -231,7 +231,7 @@ const fleetData = [
       "Our 38' Open Bow Day Boat for up to 13 guests. Perfect for day trips to restaurants, sandbars or simply cruising, this open bow day boat offers ultimate comfort with spacious seating, cushioned flooring throughout, mahogany tables, shade for the entire boat, full bathroom, an advanced stereo system, water toys and twin 350’s for plenty of “Get Up and Go”.",
     images: [home5, TS1, TS2],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota & Anna Maria",
@@ -242,7 +242,7 @@ const fleetData = [
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota",
@@ -253,7 +253,7 @@ const fleetData = [
       "Ideal for small gatherings up to 6 people, this spectacular 29' open bow day boat provides luxurious appointments, a marine head and an amazing stereo system. Captain Jeff, who grew up on the waters of Sarasota Bay, always provides a memorable day on the water.",
     images: [L1, home2, L2, L3],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
 ];
 
