@@ -27,8 +27,8 @@ const Admin = () => {
     // { label: 'Update Membership', type: 'updateMembership' },
     { label: 'Update User Details', type: 'updateUserDetails' },
     { label: 'Add/Remove Members', type: 'addRemoveMembers' },
-    { label: 'Create Invoice', type: 'createInvoice' },
-    { label: 'Previous Bookings', type: 'previousBookings' },
+    // { label: 'Create Invoice', type: 'createInvoice' },
+    { label: 'Bookings', type: 'previousBookings' },
     { label: 'Export Data', type: 'exportData' },
   ];
 
