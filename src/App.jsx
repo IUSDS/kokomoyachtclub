@@ -99,18 +99,17 @@ function App() {
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
-        closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         style={{
           position: "fixed",
-          top: "50%",
+          top: "60%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "600px",
-          height: '200px',
+          width: "500px",
+          height: "150px",
           maxWidth: "100%",
           zIndex: 9999,
         }}
@@ -118,6 +117,7 @@ function App() {
           width: "100%",
           maxWidth: "100%",
         }}
+        closeOnClick={false}
       />
     </div>
   );
