@@ -16,13 +16,14 @@ const NewMemberPortal = () => {
 
   const { user, isLoggedIn, checkSession } = useAuthStore();
   const username = user.username;
-  const API_BASE =
-    window.location.hostname === "localhost"
-      ? "http://127.0.0.1:8000"
-      : "https://api.kokomoyachtclub.vip";
-  window.location.hostname === "localhost"
-    ? "http://127.0.0.1:8000"
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
     : "https://api.kokomoyachtclub.vip";
+
+  const WS_BASE = import.meta.env.DEV
+    ? "ws://localhost:8000"
+    : "ws://api.kokomoyachtclub.vip";
+
   // on mount, verify session
   useEffect(() => {
     if (!isLoggedIn) {
@@ -37,9 +38,7 @@ const NewMemberPortal = () => {
   useEffect(() => {
     // Once we know who the member is, open the socket
     if (isLoggedIn && user?.member_id) {
-      const ws = new WebSocket(
-        `ws://127.0.0.1:8000/web_socket/ws/${user.member_id}`
-      );
+      const ws = new WebSocket(`${WS_BASE}/web_socket/ws/${user.member_id}`);
       socketRef.current = ws;
 
       ws.onopen = () => console.log("WebSocket connected");
@@ -51,13 +50,13 @@ const NewMemberPortal = () => {
           return; // ignore non-JSON messages
         }
         if (data.event === "booking_success") {
-          toast.success(
+          toast(
             <>
-              Booking successful!
-              <br />
-              Points used: {data.point_used}
-              <br />
-              Balance: {data.current_points}
+            Booking successful!
+            <br />
+            Points used: {data.point_used}
+            <br />
+            Remaining balance: {data.current_points}
             </>
           );
         }
