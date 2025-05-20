@@ -47,6 +47,16 @@ const footer = () => {
                 </li>
                 <li>
                   <a
+                    href={`/fleet#lil'bitnauti`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    50' Lil' Bit Nauti
+                  </a>
+                </li>
+                <li>
+                  <a
                     href={`/fleet#congetta`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -87,7 +97,7 @@ const footer = () => {
                     42' Wanderlust
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href={`/fleet#outrage`}
                     target="_blank"
@@ -95,6 +105,26 @@ const footer = () => {
                     className="cursor-pointer hover:text-blue-600"
                   >
                     42' Outrage
+                  </a>
+                </li> */}
+                <li>
+                  <a
+                    href={`/fleet#happyhour`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    40' Happy Hour
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#thirsttrap`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    40' Thirst Trap
                   </a>
                 </li>
                 <li>
@@ -109,12 +139,12 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href={`/fleet#aviara`}
+                    href={`/fleet#oceanrode`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer hover:text-blue-600"
                   >
-                    35' Aviara
+                    35' Ocean Rode
                   </a>
                 </li>
                 <li>
