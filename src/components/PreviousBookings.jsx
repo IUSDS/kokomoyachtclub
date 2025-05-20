@@ -9,9 +9,12 @@ export default function AdminBookingFhTable() {
     ? "http://127.0.0.1:8000"
     : "https://api.kokomoyachtclub.vip";
 
-  // Columns we want to render as a tiny “view” link
+  // Columns rendered as a tiny “view” link
   const actionCols = new Set(["dashboard_url", "modify_view"]);
-  const columnLabels = { dashboard_url: "Action", modify_view: "Action" };
+  const columnLabels = {
+    dashboard_url: "Modify/View",
+    modify_view: "Modify/View",
+  };
 
   // State
   const [usernamesList, setUsernamesList] = useState([]);
@@ -58,7 +61,8 @@ export default function AdminBookingFhTable() {
       );
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      setRows(data);
+      // show newest first
+      setRows(Array.isArray(data) ? data.slice().reverse() : []);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -66,7 +70,7 @@ export default function AdminBookingFhTable() {
     }
   };
 
-  // Derive columns from first row
+  // Derive columns from the first row
   const columns = rows.length > 0 ? Object.keys(rows[0]) : [];
 
   return (
@@ -76,15 +80,13 @@ export default function AdminBookingFhTable() {
         onSubmit={handleSubmit}
         className="flex flex-col items-center md:w-1/2 gap-4 p-6 bg-white rounded-2xl shadow-lg"
       >
-        <h2 className="text-lg font-semibold w-full">
-          View User Bookings
-        </h2>
+        <h2 className="text-lg font-semibold w-full">View User Bookings</h2>
         <div className="flex space-x-4 justify-evenly w-full">
           <select
             value={username}
             onChange={(e) => {
               setUsername(e.target.value);
-              setHasSearched(false); // reset if they pick a different user
+              setHasSearched(false);
               setError("");
               setRows([]);
             }}
@@ -109,25 +111,23 @@ export default function AdminBookingFhTable() {
       </form>
 
       {/* ─── Messages ───────────────────────────────────────────────── */}
-      {error && (
-        <p className="text-sm text-red-500 text-center">{error}</p>
-      )}
+      {error && <p className="text-sm text-red-500 text-center">{error}</p>}
 
-      {/* ─── Bookings Table ─────────────────────────────────────────── */}
+      {/* ─── Scrollable Bookings Table ───────────────────────────────── */}
       {!loadingBookings && rows.length > 0 && (
-        <div className="overflow-auto">
-          <table className="min-w-full divide-y divide-gray-200 bg-white rounded-md shadow">
+        <div className="max-h-[80vh] overflow-y-auto rounded-md shadow">
+          <table className="min-w-full divide-y divide-gray-200 bg-white">
             <thead className="bg-gray-50">
               <tr>
                 {columns.map((col) => (
                   <th
                     key={col}
-                    className="px-4 py-2 text-left text-sm font-semibold text-midnightblue whitespace-nowrap"
+                    className="sticky top-0 z-10 px-4 py-2 text-left text-sm font-semibold text-midnightblue whitespace-nowrap bg-gray-50"
                   >
                     {columnLabels[col] ||
                       col
                         .split("_")
-                        .map((w) => w[0].toUpperCase() + w.slice(1))
+                        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
                         .join(" ")}
                   </th>
                 ))}
