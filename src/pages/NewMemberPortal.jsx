@@ -52,11 +52,11 @@ const NewMemberPortal = () => {
         if (data.event === "booking_success") {
           toast(
             <>
-            Booking successful!
-            <br />
-            Points used: {data.point_used}
-            <br />
-            Remaining balance: {data.current_points}
+              Booking successful!
+              <br />
+              Points used: {data.point_used}
+              <br />
+              Remaining balance: {data.current_points}
             </>
           );
         }
@@ -96,6 +96,13 @@ const NewMemberPortal = () => {
       setError("Could not reload profile.");
     }
   };
+
+  // run it on mount / when user changes
+  useEffect(() => {
+    if (isLoggedIn && user?.username) {
+      refreshUser();
+    }
+  }, [isLoggedIn, user?.username]);
 
   const handleSave = async (values) => {
     const formData = new FormData();
@@ -202,7 +209,7 @@ const NewMemberPortal = () => {
                 </div>
               )}
 
-              {activeTab === "billings" && (
+              {/* {activeTab === "billings" && (
                 <div className="p-4 bg-white rounded shadow-md">
                   <h2 className="text-2xl font-bold text-midnightblue mb-4">
                     Your Previous Bookings
@@ -213,7 +220,7 @@ const NewMemberPortal = () => {
                     duration={"5 months"}
                   />
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -333,7 +340,7 @@ const NewMemberPortal = () => {
                     Booking History
                   </button>
                 </li>
-                <li>
+                {/* <li>
                   <button
                     onClick={() => setActiveTab("billings")}
                     className={`text-sm hover:text-amber-300 text-left w-full ${
@@ -342,7 +349,7 @@ const NewMemberPortal = () => {
                   >
                     Billing Details
                   </button>
-                </li>
+                </li> */}
                 <li>
                   <button
                     onClick={handleProvClick}
