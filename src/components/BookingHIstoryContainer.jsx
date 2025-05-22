@@ -40,11 +40,16 @@ export default function BookingHistoryContainer({ memberId }) {
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 
   return (
-    <BookingHistoryTable
-      transactions={transactions}
-      openingBalance={0}
-      bonusPoints={0}
-      currentPoints={0}
-    />
+    <>
+      {/* <p className="text-2xl font-bold text-midnightblue mb-4">
+        Opening Balance: {transactions.opening_balance}
+      </p> */}
+      <BookingHistoryTable
+        transactions={transactions}
+        openingBalance={0}
+        bonusPoints={0}
+        currentPoints={0}
+      />
+    </>
   );
 }
