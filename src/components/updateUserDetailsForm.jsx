@@ -232,7 +232,7 @@ const UpdateUserDetailsForm = () => {
                 <option value="Silver">Silver</option>
                 <option value="Gold">Gold</option>
                 <option value="Platinum">Platinum</option>
-                <option value="Premium">Premium</option>
+                <option value="Diamond">Diamond</option>
               </select>
             </div>
 

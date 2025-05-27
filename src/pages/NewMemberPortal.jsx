@@ -21,7 +21,7 @@ const NewMemberPortal = () => {
     : "https://api.kokomoyachtclub.vip";
 
   const WS_BASE = import.meta.env.DEV
-    ? "wss://localhost:8000"
+    ? "ws://localhost:8000"
     : "wss://api.kokomoyachtclub.vip";
 
   // on mount, verify session

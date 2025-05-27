@@ -8,7 +8,7 @@ import {
   home3,
   home4,
   home5,
-  home6,
+  fleet,
   home7,
   home8,
   home9,
@@ -344,7 +344,7 @@ const Home = () => {
         viewport={{ once: true, amount: 0.3 }}
         variants={slideInLeftVariant}
         className="flex flex-col px-6 lg:px-20 relative w-full bg-cover bg-center py-16 lg:h-[600px] justify-center"
-        style={{ backgroundImage: `url(${home6})` }}
+        style={{ backgroundImage: `url(${fleet})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-midnightblue to-transparent bg-opacity-90"></div>
         <div className="z-10 flex flex-col text-white items-start gap-4 md:w-1/2 lg:w-1/3">

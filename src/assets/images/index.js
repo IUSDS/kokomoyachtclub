@@ -97,6 +97,7 @@ import hh5 from "./hh5.jpg";
 import hh6 from "./hh6.jpg";
 import hh7 from "./hh7.jpg";
 import hh8 from "./hh8.jpg";
+import fleet from "./fleet.jpg";
 
 export {
   foundersKokomo,
@@ -198,4 +199,5 @@ export {
   hh6,
   hh7,
   hh8,
+  fleet,
 };
