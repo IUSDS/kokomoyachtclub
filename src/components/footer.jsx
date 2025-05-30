@@ -263,7 +263,7 @@ const footer = () => {
                     target="_blank"
                     className="cursor-pointer hover:text-blue-600 "
                   >
-                    1000 Boulevard of the Arts, Sarasota, FL
+                    601 Quay Commons, Sarasota, FL 32436
                   </a>
                 </li>
               </ul>

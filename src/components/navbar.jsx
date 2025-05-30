@@ -124,7 +124,7 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                1000 Boulevard of the Arts, Sarasota, FL
+                601 Quay Commons, Sarasota, FL 32436
               </a>
             </p>
           </div>
