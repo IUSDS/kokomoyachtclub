@@ -141,7 +141,7 @@ const NewMemberPortal = () => {
   const handleProvClick = async () => {
     setActiveTab("prov_menu");
     window.open(
-      "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+Menu.pdf",
+      "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+and+chef+menus.pdf",
       "_blank"
     );
   };

@@ -61,7 +61,7 @@ const Membership = () => {
   };
 
   const downloadProvMenu = () => {
-    window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+Menu.pdf","_blank");
+    window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+and+chef+menus.pdf","_blank");
   };
   return (
     <div>
