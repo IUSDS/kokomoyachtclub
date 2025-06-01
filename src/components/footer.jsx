@@ -263,7 +263,7 @@ const footer = () => {
                     target="_blank"
                     className="cursor-pointer hover:text-blue-600 "
                   >
-                    601 Quay Commons, Sarasota, FL 32436
+                    601 Quay Commons, Sarasota, FL 34236
                   </a>
                 </li>
               </ul>

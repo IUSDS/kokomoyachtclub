@@ -124,7 +124,7 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                601 Quay Commons, Sarasota, FL 32436
+                601 Quay Commons, Sarasota, FL 34236
               </a>
             </p>
           </div>
