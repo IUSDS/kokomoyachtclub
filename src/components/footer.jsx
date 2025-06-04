@@ -147,16 +147,6 @@ const footer = () => {
                     35' Ocean Rode
                   </a>
                 </li>
-                <li>
-                  <a
-                    href={`/fleet#thelife`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer hover:text-blue-600"
-                  >
-                    29' The Life
-                  </a>
-                </li>
               </div>
             </ul>
           </div>

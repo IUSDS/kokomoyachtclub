@@ -189,17 +189,6 @@ const fleetData = [
     buttonText: "Become a Member to Book",
     reverse: false,
   },
-  // {
-  //   location: "Anna Maria",
-  //   title: "42' Outrage",
-  //   points: "148-165 Mariner Points",
-  //   id: "outrage",
-  //   description:
-  //     "Designed for both adventure and relaxation, the 42’ Outrage offers a luxury cruising experience with the option to fish. Explore Anna Maria Island’s pristine sandbars, scenic waterways, and waterfront dining spots, or cast a line in calm coastal waters for an unforgettable day on the water.",
-  //   images: [outrage2, outrage1, outrage3, outrage4, outrage5],
-  //   buttonText: "Become a Member to Book",
-  //   reverse: true,
-  // },
   {
     location: "Sarasota & St. Petersburg",
     title: "40' Happy Hour",
@@ -243,17 +232,6 @@ const fleetData = [
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
     reverse: false,
-  },
-  {
-    location: "Sarasota",
-    title: "29' The Life",
-    points: "115-125 Mariner Points",
-    id: "thelife",
-    description:
-      "Ideal for small gatherings up to 6 people, this spectacular 29' open bow day boat provides luxurious appointments, a marine head and an amazing stereo system. Captain Jeff, who grew up on the waters of Sarasota Bay, always provides a memorable day on the water.",
-    images: [L1, home2, L2, L3],
-    buttonText: "Become a Member to Book",
-    reverse: true,
   },
 ];
 

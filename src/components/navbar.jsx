@@ -154,11 +154,11 @@ const Navbar = () => {
               <ul className="flex items-center gap-4 text-midnightblue text-base font-nunito">
                 {[
                   "home",
-                  "founders",
                   "fleet",
                   "members",
-                  "contact",
                   "list-your-yacht",
+                  "founders",
+                  "contact",
                 ].map((menu) => (
                   <li
                     key={menu}
