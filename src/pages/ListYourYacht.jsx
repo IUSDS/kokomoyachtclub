@@ -83,6 +83,10 @@ const ListYourYacht = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError(null);
+
+    const API_BASE = import.meta.env.DEV
+  ? "http://localhost:8000"
+  : "https://api.kokomoyachtclub.vip";
     
     try {
       // Prepare data for API according to the provided curl command
@@ -91,14 +95,14 @@ const ListYourYacht = () => {
         visitor_last_name: formData.lastName,
         visitor_email: formData.email,
         visitor_phone_number: `${formData.countryCode}${formData.phone}`,
-        yatch_model: formData.model,
-        yatch_manufacture_year: parseInt(formData.year),
-        yatch_size: parseInt(formData.size),
+        yacht_model: formData.model,
+        yacht_manufacture_year: parseInt(formData.year),
+        yacht_size: parseInt(formData.size),
         visitor_message: formData.message || ""
       };
       
       // Send data to API
-      const response = await fetch("https://api.kokomoyachtclub.vip/vistors/add-yacht-visitor", {
+      const response = await fetch(`${API_BASE}/visitors/add-yacht-visitor`, {
         method: "POST",
         headers: {
           "accept": "application/json",
