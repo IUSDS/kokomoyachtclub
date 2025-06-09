@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-const DEFAULT_IMAGE = 'https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/social_preview.jpg';
+const DEFAULT_IMAGE = 'https://images/social-preview.jpg';
 const SITE_NAME     = 'Kokomo Yacht Club';
 const SITE_DESC     = "Luxury yacht charters & membership on Florida's Gulf Coast.";
 
