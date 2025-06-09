@@ -187,7 +187,7 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/members"
+                    href="/membership"
                     className="cursor-pointer hover:text-blue-600"
                   >
                     Membership

@@ -60,9 +60,6 @@ const Membership = () => {
     setIsModalOpen(false);
   };
 
-  const downloadProvMenu = () => {
-    window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+and+chef+menus.pdf","_blank");
-  };
   return (
     <div>
       {/* Hero Section */}
@@ -93,12 +90,6 @@ const Membership = () => {
               className="px-6 py-3 text-sm bg-midnightblue hover:bg-midnightblue text-white  rounded-full"
             >
               Download Membership Brochure
-            </button>
-            <button
-              onClick={downloadProvMenu}
-              className="px-6 py-3 text-sm bg-midnightblue hover:bg-midnightblue text-white  rounded-full"
-            >
-              Download Provisioning Menu
             </button>
           </div>
         </div>

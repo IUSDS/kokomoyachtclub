@@ -18,6 +18,9 @@ const PrivacyPolicy = () => {
           the Service, You agree to the collection and use of information in
           accordance with this Privacy Policy.
         </p>
+        <p className="mt-2">
+          Mobile information will not be shared with third parties or affiliates for marketing or promotional purposes.
+        </p>
       </div>
 
       {/* Interpretation and Definition */}

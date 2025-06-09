@@ -27,6 +27,7 @@ import ListYourYacht from "./pages/ListYourYacht";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NewMemberPortal from "./pages/NewMemberPortal";
+import Seo from "./components/Seo";
 
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden font-jakarta">
+      <Seo /> 
       <Navbar />
       <div className="flex-grow">
         <Routes>
@@ -47,36 +49,21 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/founders" element={<Founders />} />
           <Route path="/fleet" element={<Fleet />} />
-          <Route path="/members" element={<Membership />} />
+          <Route path="/membership" element={<Membership />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/new-member-portal" element={<NewMemberPortal />} />
 
           {/* Protected Routes */}
-          <Route
-            path="/membership"
+          <Route 
+            path="/member-portal"
             element={
               <ProtectedRoute requiredRole="user">
-                <MembershipPage />
+                <NewMemberPortal />
               </ProtectedRoute>
-            }
+          } 
           />
-          <Route
-            path="/membership/plan_experiences"
-            element={
-              <ProtectedRoute requiredRole="user">
-                <PlanYourExpriences />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/membership/previous_booking"
-            element={
-              <ProtectedRoute requiredRole="user">
-                <PreviousBookings />
-              </ProtectedRoute>
-            }
-          />
+
           <Route
             path="/admin"
             element={

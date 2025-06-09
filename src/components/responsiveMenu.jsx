@@ -33,7 +33,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                 <Link onClick={() => setOpen(false)} to="/fleet">Fleet</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/members">Membership</Link>
+                <Link onClick={() => setOpen(false)} to="/membership">Membership</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
@@ -42,7 +42,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                 user_type.toLowerCase() === "user" ? (
                   <>
                     <li className="cursor-pointer hover:text-gray-300">
-                      <Link onClick={() => setOpen(false)} to="/new-member-portal">Dashboard</Link>
+                      <Link onClick={() => setOpen(false)} to="/member-portal">Dashboard</Link>
                     </li>
                     {/* <li className="cursor-pointer hover:text-gray-300">
                       <Link onClick={() => setOpen(false)} to="/update-details">Update Details</Link>

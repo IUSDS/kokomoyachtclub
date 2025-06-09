@@ -57,7 +57,7 @@ export default function Login() {
       const route =
         data.user_type.toLowerCase() === "admin"
           ? "/admin"
-          : "/new-member-portal";
+          : "/member-portal";
       navigate(route);
     } catch (err) {
       setError(err.message);

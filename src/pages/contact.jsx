@@ -315,7 +315,10 @@ const Contact = () => {
                     className="mt-1 mr-2"
                   />
                   <label htmlFor="smsConsent" className="text-sm text-gray-700">
-                    I agree to receive text messages from Kokomo Yacht Club
+                    <p className="text-md">Yes, please text me!</p>
+                    <p className="text-sm">
+                      By signing up for text messages you agree to receive messages from Kokomo Yacht Club at the number provided, including automated reminders and marketing messages. Message frequency varies. Msg & data rates may apply. Reply STOP to unsubscribe. View our Privacy Policy.
+                    </p>
                   </label>
                 </div>
 

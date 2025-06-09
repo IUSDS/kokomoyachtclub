@@ -14,6 +14,7 @@ import {
   home9,
   mnd,
   congetta,
+  congetta1,
   outrage,
   aviara,
   peace1,
@@ -118,16 +119,38 @@ const Home = () => {
   const fleetImages = [
     { name: "Peace", size: "63'", location: "Sarasota", img: peace1 },
     { name: "Memory Maker", size: "50'", location: "Sarasota", img: home3 },
-    { name: "Memories, Not Dreams", size: "50'", location: "St. Petersburg", img: mnd },
-    { name: "Lil' Bit Nauti", size: "50'", location: "Bradenton", img: lib3 },
-    { name: "Congetta", size: "44'", location: "St. Petersburg", img: congetta},
-    { name: "Fountaine Pajot", size: "44'", location: "Tampa Bay", img: congetta },
     { name: "Giddy Up", size: "43'", location: "Sarasota", img: home4 },
     { name: "Wanderlust", size: "42'", location: "Sarasota", img: home7 },
-    { name: "Happy Hour", size: "40'", location: "Sarasota & St. Petersburg", img: hh7},
-    { name: "Thirst Trap", size: "40'", location: "Venice", img: thirst_trap_6},
+    { name: "Happy Hour", size: "40'", location: "Sarasota", img: hh7 },
     { name: "Top Shelf", size: "38'", location: "Sarasota", img: home5 },
-    { name: "Ocean Rode", size: "35'", location: "Sarasota & Anna Maria", img: aviara },
+    { name: "Ocean Rode", size: "35'", location: "Sarasota", img: aviara },
+    {
+      name: "Memories, Not Dreams",
+      size: "50'",
+      location: "St. Petersburg",
+      img: mnd,
+    },
+    {
+      name: "Congetta",
+      size: "44'",
+      location: "St. Petersburg",
+      img: congetta,
+    },
+    { name: "Happy Hour", size: "40'", location: "St. Petersburg", img: hh7 },
+    { name: "Lil' Bit Nauti", size: "50'", location: "Anna Maria", img: lib3 },
+    { name: "Ocean Rode", size: "35'", location: "Anna Maria", img: aviara },
+    {
+      name: "Fountaine Pajot",
+      size: "44'",
+      location: "Tampa Bay",
+      img: congetta1,
+    },
+    {
+      name: "Thirst Trap",
+      size: "40'",
+      location: "Venice",
+      img: thirst_trap_6,
+    },
   ];
 
   // For modal
@@ -142,6 +165,14 @@ const Home = () => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  const fleetByLocation = fleetImages.reduce((acc, boat) => {
+    if (!acc[boat.location]) {
+      acc[boat.location] = [];
+    }
+    acc[boat.location].push(boat);
+    return acc;
+  }, {});
 
   return (
     <div className="space-y-10 md:space-y-8 font-jakarta">
@@ -165,7 +196,7 @@ const Home = () => {
         </video>
 
         {/* Dark overlay */}
-        {/* <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-20"></div> */}
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30 z-20"></div>
 
         {/* Content on top of overlay */}
         <div className="xl:w-2/3 absolute inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white z-30">
@@ -285,54 +316,77 @@ const Home = () => {
       </motion.div>
 
       {/* Fleet Section */}
-      <motion.div
-        variants={containerVariants}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 py-10"
-      >
-        {fleetImages.map((fleet, index) => {
-          const isLastItem = index === fleetImages.length - 1;
-          const isOdd = fleetImages.length % 2 !== 0;
+      <section>
+        {(() => {
+          // Group fleet by location
+          const fleetByLocation = fleetImages.reduce((acc, boat) => {
+            if (!acc[boat.location]) acc[boat.location] = [];
+            acc[boat.location].push(boat);
+            return acc;
+          }, {});
 
-          return (
-            <motion.div
-              key={index}
-              variants={fleetItemVariants}
-              className={`bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ${
-                isOdd && isLastItem ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
-              }`}
-            >
-              <div className="relative">
-                <img
-                  src={fleet.img}
-                  alt={fleet.name}
-                  className="w-full xl:h-[400px] md:h-[220px] object-cover"
-                  loading="lazy"
-                />
-                {/* Text Box */}
-                <div className="absolute top-0 left-0 bg-midnightblue text-white text-sm md:text-lg w-[130px] xl:w-[200px] xl:py-8 py-4 text-center">
-                  {fleet.location}
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-veryLight text-2xl text-midnightblue mb-4">
-                  {fleet.size} {fleet.name}
-                </h3>
-                <a
-                  href={`/fleet#${fleet.name
-                    .replace(/[,\s]+/g, "") // Removes spaces AND commas
-                    .toLowerCase()}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="w-full px-6 py-3 bg-midnightblue hover:bg-blue-700 text-white font-light rounded-full transition-colors duration-300">
-                    View Vessel
-                  </button>
-                </a>
-              </div>
-            </motion.div>
-          );
-        })}
-      </motion.div>
+          return Object.entries(fleetByLocation).map(([location, boats]) => (
+            <div key={location} className="mb-12">
+              {/* Location Heading */}
+              <p className="text-2xl font-semibold bg-midnightblue text-white w-full text-center py-6 mb-10">
+                {location}
+              </p>
+              {/* Grid for this location */}
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10"
+              >
+                {boats.map((fleet, idx) => {
+                  const isLast = idx === boats.length - 1;
+                  const oddCount = boats.length % 2 !== 0;
+
+                  return (
+                    <motion.div
+                      key={idx}
+                      variants={fleetItemVariants}
+                      className={`bg-white rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 ${
+                        oddCount && isLast
+                          ? "md:col-span-2 md:w-1/2 md:mx-auto"
+                          : ""
+                      }`}
+                    >
+                      <div className="relative">
+                        <img
+                          src={fleet.img}
+                          alt={fleet.name}
+                          className="w-full xl:h-[400px] md:h-[220px] object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute top-0 left-0 bg-midnightblue text-white text-sm md:text-lg w-[130px] xl:w-[200px] xl:py-8 py-4 text-center">
+                          {fleet.location}
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h3 className="font-veryLight text-2xl text-midnightblue mb-4">
+                          {fleet.size} {fleet.name}
+                        </h3>
+                        <a
+                          href={`/fleet#${fleet.name
+                            .replace(/[,\\s]+/g, "")
+                            .toLowerCase()}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <button className="w-full px-6 py-3 bg-midnightblue hover:bg-blue-700 text-white font-light rounded-full transition-colors duration-300">
+                            View Vessel
+                          </button>
+                        </a>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </div>
+          ));
+        })()}
+      </section>
 
       {/* Experience Freedom Section */}
       <motion.div
