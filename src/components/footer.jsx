@@ -97,16 +97,6 @@ const footer = () => {
                     42' Wanderlust
                   </a>
                 </li>
-                {/* <li>
-                  <a
-                    href={`/fleet#outrage`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cursor-pointer hover:text-blue-600"
-                  >
-                    42' Outrage
-                  </a>
-                </li> */}
                 <li>
                   <a
                     href={`/fleet#happyhour`}
@@ -253,7 +243,7 @@ const footer = () => {
                     target="_blank"
                     className="cursor-pointer hover:text-blue-600 "
                   >
-                    601 Quay Commons, Sarasota, FL 34236
+                    505 Quay Commons, Sarasota, FL 34236
                   </a>
                 </li>
               </ul>
