@@ -98,8 +98,16 @@ import hh6 from "./hh6.jpg";
 import hh7 from "./hh7.jpg";
 import hh8 from "./hh8.jpg";
 import fleet from "./fleet.jpg";
+import events_hero from "./events_hero.png";
+import img0 from "./img0.png";
+import img1 from "./img1.png";
+import img2 from "./img2.png";
 
 export {
+  img0,
+  img1,
+  img2,
+  events_hero,
   foundersKokomo,
   wanderlust,
   founderImg,
