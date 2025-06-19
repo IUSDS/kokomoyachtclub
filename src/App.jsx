@@ -28,6 +28,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NewMemberPortal from "./pages/NewMemberPortal";
 import Seo from "./components/Seo";
+import Event from "./pages/Event";
 
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
@@ -53,7 +54,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/new-member-portal" element={<NewMemberPortal />} />
-
+          <Route path="/events" element={<Event />} />
           {/* Protected Routes */}
           <Route 
             path="/member-portal"

@@ -98,8 +98,34 @@ import hh6 from "./hh6.jpg";
 import hh7 from "./hh7.jpg";
 import hh8 from "./hh8.jpg";
 import fleet from "./fleet.jpg";
+import events_hero from "./events_hero.png";
+import img0 from "./img0.png";
+import img1 from "./img1.png";
+import img2 from "./img2.png";
+import quay_401 from "./quay_401.png";
+import fleet_desk from "./fleet_desk.png";
+import building from "./building.png";
+import top_right from "./top_right.png";
+import bottom_left from "./bottom_left.png";
+import boat from "./boat.png";
+import sky from "./sky.png"
+import boat2 from "./boat2.png";
+import ocean from "./ocean.png";
+import image from "./image.png";
 
 export {
+  image,
+  boat2, ocean,
+  boat, sky,
+  fleet_desk,
+  top_right,
+  bottom_left,
+  building,
+  quay_401,
+  img0,
+  img1,
+  img2,
+  events_hero,
   foundersKokomo,
   wanderlust,
   founderImg,

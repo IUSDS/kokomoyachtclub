@@ -161,10 +161,10 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/founders"
+                    href="/events"
                     className="cursor-pointer hover:text-blue-600"
                   >
-                    From the Founders
+                    Events
                   </a>
                 </li>
                 <li>
@@ -185,18 +185,26 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/contact"
-                    className="cursor-pointer hover:text-blue-600"
-                  >
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="/list-your-yacht"
                     className="cursor-pointer hover:text-blue-600"
                   >
                     List Your Yacht
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/founders"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Founders
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/contact"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    Contact
                   </a>
                 </li>
                 <li>

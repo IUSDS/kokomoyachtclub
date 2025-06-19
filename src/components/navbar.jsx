@@ -136,6 +136,7 @@ const Navbar = () => {
               <ul className="flex items-center gap-4 text-midnightblue text-base font-nunito">
                 {[
                   "home",
+                  "events",
                   "fleet",
                   "membership",
                   "list-your-yacht",
