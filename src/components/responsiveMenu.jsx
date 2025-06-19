@@ -27,13 +27,19 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                 <Link onClick={() => setOpen(false)} to="/">Home</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/founders">From the Founder</Link>
+                <Link onClick={() => setOpen(false)} to="/events">Events</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/fleet">Fleet</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/membership">Membership</Link>
+              </li>
+              <li className="cursor-pointer hover:text-gray-300">
+                <Link onClick={() => setOpen(false)} to="/list-your-yacht">List Your Yacht</Link>
+              </li>
+              <li className="cursor-pointer hover:text-gray-300">
+                <Link onClick={() => setOpen(false)} to="/founders">Founder</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
