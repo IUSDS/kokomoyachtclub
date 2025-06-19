@@ -111,7 +111,7 @@ import boat from "./boat.png";
 import sky from "./sky.png"
 import boat2 from "./boat2.png";
 import ocean from "./ocean.png";
-import image from "./image.png";
+import image from "./fleet2.png";
 
 export {
   image,
