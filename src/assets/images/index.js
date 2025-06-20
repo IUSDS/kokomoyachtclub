@@ -108,15 +108,23 @@ import building from "./building.png";
 import top_right from "./top_right.png";
 import bottom_left from "./bottom_left.png";
 import boat from "./boat.png";
-import sky from "./sky.png"
+import sky from "./sky.png";
 import boat2 from "./boat2.png";
 import ocean from "./ocean.png";
-import image from "./fleet2.png";
+import image from "./fleet3.png";
+import section_3_whole from "./section_3_whole.webp";
+import group from "./group.png";
+import section_two from "./section_two.png";
 
 export {
+  section_two,
+  section_3_whole,
   image,
-  boat2, ocean,
-  boat, sky,
+  group,
+  boat2,
+  ocean,
+  boat,
+  sky,
   fleet_desk,
   top_right,
   bottom_left,
