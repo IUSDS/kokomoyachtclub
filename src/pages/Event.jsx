@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   events_hero,
   quay_401,
@@ -22,10 +22,130 @@ import {
   calendar2,
 } from "../assets/icons";
 
-import logo_nav from "../assets/logos/logo_nav.png";
 import op_logo from "../assets/logos/op_logo.png";
 
+const Form = ({ onClose }) => {
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState({ type: "", text: "" });
+
+  const validate = () => {
+    let temp = {};
+    temp.name = formData.name ? "" : "Name is required.";
+    temp.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+      ? ""
+      : "Invalid email.";
+    temp.phone = /^\d{10}$/.test(formData.phone)
+      ? ""
+      : "Enter 10-digit US phone number.";
+    setErrors(temp);
+    return Object.values(temp).every((x) => x === "");
+  };
+
+  // pick your API base from env (Vite / CRA)
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage({ type: "", text: "" });
+    if (!validate()) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/visitors/add-rsvp-details`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error();
+
+      setMessage({ type: "success", text: "RSVP submitted successfully!" });
+      setFormData({ name: "", email: "", phone: "" });
+      setTimeout(() => onClose(), 3000);
+    } catch (err) {
+      setMessage({ type: "error", text: "Error submitting the form." });
+    }
+  };
+
+  return (
+    <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] h-fit p-8 bg-midnightblue text-white rounded-lg shadow-xl relative">
+      <button
+        onClick={onClose}
+        className="absolute top-3 right-4 text-white text-xl font-bold"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl mb-6 text-center font-semibold">RSVP FORM</h2>
+
+      {message.text && (
+        <div
+          className={`text-sm mb-4 p-2 rounded ${
+            message.type === "success" ? "bg-green-600" : "bg-red-500"
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label>Name</label>
+          <input
+            type="text"
+            className="block w-full mt-1 p-2 rounded text-black"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          />
+          {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
+        </div>
+
+        <div>
+          <label>Email</label>
+          <input
+            type="email"
+            className="block w-full mt-1 p-2 rounded text-black"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+          {errors.email && (
+            <p className="text-red-400 text-sm">{errors.email}</p>
+          )}
+        </div>
+
+        <div>
+          <label>Phone</label>
+          <input
+            type="number"
+            className="block w-full mt-1 p-2 rounded text-black"
+            value={formData.phone}
+            onChange={(e) =>
+              setFormData({ ...formData, phone: e.target.value })
+            }
+            maxLength={10}
+          />
+          {errors.phone && (
+            <p className="text-red-400 text-sm">{errors.phone}</p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="bg-white text-midnightblue font-semibold px-6 py-2 rounded-full hover:bg-gray-100"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
 const Event = () => {
+  const [showForm, setShowForm] = useState(false);
   return (
     <div className="space-y-12">
       {/* Hero section */}
@@ -39,7 +159,10 @@ const Event = () => {
         </p>
 
         {/* Button */}
-        <button className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg">
+        <button
+          onClick={() => setShowForm(true)}
+          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg"
+        >
           RSVP NOW
         </button>
 
@@ -90,13 +213,13 @@ const Event = () => {
       {/* Section 2 */}
       <div className="bg-midnightblue h-20 flex justify-center items-center">
         <p className="text-white text-sm md:text-xl lg:text-3xl px-4 text-center font-semibold">
-          THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOUFUL AND
+          THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOYFUL AND
           HASSLE-FREE
         </p>
       </div>
 
       {/* KYCxOceanPrime */}
-      <div className="flex flex-col gap-6 items-center justify-center py-10">
+      <div className="flex flex-col gap-6 items-center justify-center">
         <div className="flex items-center font-bold text-midnightblue text-2xl xl:text-3xl">
           <p>In Collaboration With</p>
         </div>
@@ -148,7 +271,8 @@ const Event = () => {
             </p>
           </div>
           <p className="text-midnightblue text-center">
-            Kokomo Yacht Club cordially invites you to the unveiling of their new waterfront home at Sarasota's most prestigious address.
+            Kokomo Yacht Club cordially invites you to the unveiling of their
+            new waterfront home at Sarasota's most prestigious address.
           </p>
           <div className="flex flex-col items-center justify-center">
             <img src={location} alt="location icon" className="w-12" />
@@ -178,7 +302,10 @@ const Event = () => {
           WE LOOK FORWARD TO SEEING YOU JULY 10 - KINDLY RESERVE YOUR SPOT BY
           JULY 7.
         </p>
-        <button className="text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg">
+        <button
+          onClick={() => setShowForm(true)}
+          className="text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg"
+        >
           RSVP NOW
         </button>
       </div>
@@ -197,7 +324,7 @@ const Event = () => {
           <div className="border-2 border-white rounded-xl w-fit py-4 sm:py-6 md:py-8 px-3 sm:px-6 md:px-8 text-white text-sm md:text-lg bg-gradient-to-r from-midnightblue via-[#5456A1] to-transparent">
             <ul className="list-disc list-inside space-y-2">
               <li>
-                CRAFT COCKTAILS AND PREMIUM COASTAL CUISINE BY OCEAN PRIME
+                HANDCRAFTED COCKTAILS & SIGNATURE APPETIZERS BY OCEAN PRIME
               </li>
               <li>LIVE MUSIC FEATURING BRI RIVIERA BAND</li>
               <li>A FIRST LOOK AT THE NEWLY EXPANDED LUXURY FLEET</li>
@@ -296,15 +423,29 @@ const Event = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row md:flex-col gap-4 w-full items-center md:items-start">
-            <button className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%] ">
+            <button
+              onClick={() => (window.location.href = "/membership")}
+              className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%]"
+            >
               Explore Membership
             </button>
-            <button className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%] ">
+
+            <button
+              onClick={() => (window.location.href = "/contact")}
+              className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%]"
+            >
               Schedule a Private Tour
             </button>
           </div>
         </div>
       </div>
+
+      {/* Form */}
+      {showForm && (
+        <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
+          <Form onClose={() => setShowForm(false)} />
+        </div>
+      )}
     </div>
   );
 };
