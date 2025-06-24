@@ -447,7 +447,7 @@ const Event = () => {
       )}
       {showEmailSignupForm && (
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
-          <Form onClose={() => setShowForm(false)} event={"Email Marketing"} title={"Join Our Guest List"} />
+          <Form onClose={() => setShowEmailSignupForm(false)} event={"Email Marketing"} title={"Join Our Guest List"} />
         </div>
       )}
     </div>
