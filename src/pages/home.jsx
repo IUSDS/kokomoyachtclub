@@ -405,7 +405,7 @@ const Home = () => {
             closing your boat and managing all the maintenance and unexpected
             costs. View our membership options and get in touch to get started.
           </p>
-          <Link to={"/members"}>
+          <Link to={"/membership"}>
             <button className="px-4 py-2 bg-blue-600 rounded-full">
               View Memberships
             </button>

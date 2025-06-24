@@ -19,7 +19,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          className="absolute top-[120px] left-0 w-full h-screen bg-black/70 z-40"
+          className="absolute top-[120px] left-0 w-full h-screen z-40"
         >
           <div className="texl-xl uppercase font-semibold text-white bg-midnightblue py-8 m-6 rounded-3xl">
             <ul className="flex flex-col items-center justify-center gap-10">
@@ -81,11 +81,6 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                   <li className="cursor-pointer hover:text-gray-300">
                     <Link onClick={() => setOpen(false)} to="/login">
                       Login
-                    </Link>
-                  </li>
-                  <li className="cursor-pointer hover:text-gray-300">
-                    <Link onClick={() => setOpen(false)} to="/list-your-yacht">
-                      List Your Yacht
                     </Link>
                   </li>
                 </>

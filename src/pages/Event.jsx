@@ -9,12 +9,10 @@ import {
   section_two,
   image,
   section_3_whole,
-  group,
   ocean,
   boat2,
 } from "../assets/images";
 import {
-  banner,
   calender,
   champagne,
   vector,
@@ -24,8 +22,8 @@ import {
 
 import op_logo from "../assets/logos/op_logo.png";
 
-const Form = ({ onClose }) => {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
+const Form = ({ onClose, event, title}) => {
+  const [formData, setFormData] = useState({ name: "", email: "", phone_no: "", event_name: event });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({ type: "", text: "" });
 
@@ -35,7 +33,7 @@ const Form = ({ onClose }) => {
     temp.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
       ? ""
       : "Invalid email.";
-    temp.phone = /^\d{10}$/.test(formData.phone)
+    temp.phone_no = /^\d{10}$/.test(formData.phone_no)
       ? ""
       : "Enter 10-digit US phone number.";
     setErrors(temp);
@@ -53,7 +51,7 @@ const Form = ({ onClose }) => {
     if (!validate()) return;
 
     try {
-      const res = await fetch(`${API_BASE}/visitors/add-rsvp-details`, {
+      const res = await fetch(`${API_BASE}/visitors/add-event-details`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -61,8 +59,8 @@ const Form = ({ onClose }) => {
 
       if (!res.ok) throw new Error();
 
-      setMessage({ type: "success", text: "RSVP submitted successfully!" });
-      setFormData({ name: "", email: "", phone: "" });
+      setMessage({ type: "success", text: "Submitted successfully!" });
+      setFormData({ name: "", email: "", phone_no: "" });
       setTimeout(() => onClose(), 3000);
     } catch (err) {
       setMessage({ type: "error", text: "Error submitting the form." });
@@ -70,7 +68,7 @@ const Form = ({ onClose }) => {
   };
 
   return (
-    <div className="w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] h-fit p-8 bg-midnightblue text-white rounded-lg shadow-xl relative">
+    <div className="w-[90%] md:w-[90%] lg:w-[80%] xl:w-[50%] h-fit p-8 bg-midnightblue text-white rounded-lg shadow-xl relative">
       <button
         onClick={onClose}
         className="absolute top-3 right-4 text-white text-xl font-bold"
@@ -78,7 +76,7 @@ const Form = ({ onClose }) => {
         ✕
       </button>
 
-      <h2 className="text-2xl mb-6 text-center font-semibold">RSVP FORM</h2>
+      <h2 className="text-2xl mb-6 text-center font-semibold">{title}</h2>
 
       {message.text && (
         <div
@@ -103,7 +101,7 @@ const Form = ({ onClose }) => {
         </div>
 
         <div>
-          <label>Email</label>
+          <label>Email Address</label>
           <input
             type="email"
             className="block w-full mt-1 p-2 rounded text-black"
@@ -118,18 +116,18 @@ const Form = ({ onClose }) => {
         </div>
 
         <div>
-          <label>Phone</label>
+          <label>Phone Number</label>
           <input
             type="number"
             className="block w-full mt-1 p-2 rounded text-black"
-            value={formData.phone}
+            value={formData.phone_no}
             onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
+              setFormData({ ...formData, phone_no: e.target.value })
             }
             maxLength={10}
           />
-          {errors.phone && (
-            <p className="text-red-400 text-sm">{errors.phone}</p>
+          {errors.phone_no && (
+            <p className="text-red-400 text-sm">{errors.phone_no}</p>
           )}
         </div>
 
@@ -146,6 +144,7 @@ const Form = ({ onClose }) => {
 
 const Event = () => {
   const [showForm, setShowForm] = useState(false);
+  const [showEmailSignupForm, setShowEmailSignupForm] = useState(false);
   return (
     <div className="space-y-12">
       {/* Hero section */}
@@ -161,7 +160,7 @@ const Event = () => {
         {/* Button */}
         <button
           onClick={() => setShowForm(true)}
-          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg"
+          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
           RSVP NOW
         </button>
@@ -295,16 +294,16 @@ const Event = () => {
       </div>
 
       {/* Section 4 */}
-      <div className="text-midnightblue md:py-16 text-center font-bold text-lg md:text-xl md:gap-4 px-8 flex flex-col items-center justify-center space-y-4">
+      <div className="text-midnightblue md:py-16 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
         <p>
-          ENJOY A FIRST LOOK AT OUR NEWLY EXPANDED LUXURY FLEET WHILE IMMERSING
-          YOURSELF IN THE CHARM OF SARASOTA'S MOST UNIQUE LUXURY BOATING CLUB.
-          WE LOOK FORWARD TO SEEING YOU JULY 10 - KINDLY RESERVE YOUR SPOT BY
-          JULY 7.
+          ENJOY A FIRST LOOK AT OUR NEWLY EXPANDED LUXURY FLEET WHILE IMMERSING YOURSELF IN THE CHARM OF SARASOTA'S MOST UNIQUE LUXURY BOATING CLUB. 
+        </p>
+        <p>
+          KINDLY RSVP BY JULY 7 TO RESERVE YOUR SPOT—AND JOIN US FOR AN EXCLUSIVE POST-EVENT SUNSET CRUISE.
         </p>
         <button
           onClick={() => setShowForm(true)}
-          className="text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg"
+          className="text-white font-semibold mt-4 w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
           RSVP NOW
         </button>
@@ -367,7 +366,7 @@ const Event = () => {
       </div>
 
       {/* spacer */}
-      <div className="hidden md:block w-full h-10 xl:h-28"></div>
+      <div className="hidden md:block w-full h-10 xl:h-56"></div>
 
       {/* Section 7 */}
       <div
@@ -381,7 +380,7 @@ const Event = () => {
         <img
           src={boat2}
           alt="Boat"
-          className="absolute left-1/2 md:left-[65%] lg:left-[60%] top-52 md:top-40 transform -translate-x-1/2 -translate-y-1/2 w-64 md:w-[400px] xl:w-[600px]"
+          className="absolute left-1/2 md:left-[65%] lg:left-[60%] xl:left-[50%] top-52 md:top-40 xl:top-36 transform -translate-x-1/2 -translate-y-1/2 w-64 md:w-[400px] xl:w-[750px]"
         />
 
         {/* Top-left Heading */}
@@ -395,13 +394,13 @@ const Event = () => {
         </div>
 
         {/* Bottom-right CTA */}
-        <div className="absolute bottom-6 right-4 md:right-10 w-[60%] md:w-[40%] flex flex-col items-end text-right gap-2 md:gap-4">
-          <p className="text-xs md:text-base lg:text-lg xl:text-xl leading-snug">
+        <div className="absolute bottom-6 xl:bottom-10 right-4 md:right-10 w-[60%] md:w-[40%] flex flex-col items-end text-right gap-2 md:gap-4">
+          <p className="text-xs md:text-base lg:text-lg xl:text-2xl leading-snug">
             Our invitation list is limited and intentional. Sign up to receive
             early access to private events, seasonal gatherings, and yacht
             previews.
           </p>
-          <button className="text-white border border-white md:text-xl rounded-full px-4 md:px-6 py-1 bg-white/10 hover:bg-white hover:text-midnightblue transition">
+          <button onClick={() => setShowEmailSignupForm(true)} className="text-white border border-white md:text-xl lg:text-2xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/10 hover:bg-white hover:text-midnightblue transition">
             Join Our Guest List
           </button>
         </div>
@@ -425,14 +424,14 @@ const Event = () => {
           <div className="flex flex-col sm:flex-row md:flex-col gap-4 w-full items-center md:items-start">
             <button
               onClick={() => (window.location.href = "/membership")}
-              className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%]"
+              className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%] hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Explore Membership
             </button>
 
             <button
               onClick={() => (window.location.href = "/contact")}
-              className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%]"
+              className="bg-midnightblue text-white font-bold px-6 py-3 rounded-full w-[80%] hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Schedule a Private Tour
             </button>
@@ -440,10 +439,15 @@ const Event = () => {
         </div>
       </div>
 
-      {/* Form */}
+      {/* Forms */}
       {showForm && (
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
-          <Form onClose={() => setShowForm(false)} />
+          <Form onClose={() => setShowForm(false)} event={"Grand Opening at The Quay"} title={"The Inner Circle RSVP"} />
+        </div>
+      )}
+      {showEmailSignupForm && (
+        <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
+          <Form onClose={() => setShowForm(false)} event={"Email Marketing"} title={"Join Our Guest List"} />
         </div>
       )}
     </div>

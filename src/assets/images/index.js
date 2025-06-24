@@ -72,62 +72,56 @@ import aviara2 from "./aviara2.webp";
 import aviara3 from "./aviara3.webp";
 import aviara4 from "./aviara4.webp";
 import aviara5 from "./aviara5.webp";
-import peace1 from "./peace1.jpg";
-import peace2 from "./peace2.jpg";
-import peace3 from "./peace3.jpg";
-import peace4 from "./peace4.jpg";
-import peace5 from "./peace5.jpg";
-import thirst_trap_1 from "./thirst_trap_1.jpeg";
-import thirst_trap_2 from "./thirst_trap_2.jpg";
-import thirst_trap_3 from "./thirst_trap_3.jpeg";
-import thirst_trap_4 from "./thirst_trap_4.jpg";
-import thirst_trap_5 from "./thirst_trap_5.jpeg";
-import thirst_trap_6 from "./thirst_trap_6.jpg";
-import lib1 from "./lib1.jpeg";
-import lib2 from "./lib2.jpeg";
-import lib3 from "./lib3.jpeg";
-import lib4 from "./lib4.jpeg";
-import lib5 from "./lib5.jpeg";
-import lib6 from "./lib6.jpeg";
-import hh1 from "./hh1.jpg";
-import hh2 from "./hh2.jpg";
-import hh3 from "./hh3.jpg";
-import hh4 from "./hh4.jpg";
-import hh5 from "./hh5.jpg";
-import hh6 from "./hh6.jpg";
-import hh7 from "./hh7.jpg";
-import hh8 from "./hh8.jpg";
-import fleet from "./fleet.jpg";
-import events_hero from "./events_hero.png";
-import img0 from "./img0.png";
-import img1 from "./img1.png";
-import img2 from "./img2.png";
-import quay_401 from "./quay_401.png";
-import fleet_desk from "./fleet_desk.png";
-import building from "./building.png";
-import top_right from "./top_right.png";
-import bottom_left from "./bottom_left.png";
-import boat from "./boat.png";
-import sky from "./sky.png";
-import boat2 from "./boat2.png";
-import ocean from "./ocean.png";
-import image from "./fleet3.png";
+import peace1 from "./peace1.webp";
+import peace2 from "./peace2.webp";
+import peace3 from "./peace3.webp";
+import peace4 from "./peace4.webp";
+import peace5 from "./peace5.webp";
+import thirst_trap_1 from "./thirst_trap_1.webp";
+import thirst_trap_2 from "./thirst_trap_2.webp";
+import thirst_trap_3 from "./thirst_trap_3.webp";
+import thirst_trap_4 from "./thirst_trap_4.webp";
+import thirst_trap_5 from "./thirst_trap_5.webp";
+import thirst_trap_6 from "./thirst_trap_6.webp";
+import lib1 from "./lib1.webp";
+import lib2 from "./lib2.webp";
+import lib3 from "./lib3.webp";
+import lib4 from "./lib4.webp";
+import lib5 from "./lib5.webp";
+import lib6 from "./lib6.webp";
+import hh1 from "./hh1.webp";
+import hh2 from "./hh2.webp";
+import hh3 from "./hh3.webp";
+import hh4 from "./hh4.webp";
+import hh5 from "./hh5.webp";
+import hh6 from "./hh6.webp";
+import hh7 from "./hh7.webp";
+import hh8 from "./hh8.webp";
+import fleet from "./fleet.webp";
+import events_hero from "./events_hero.webp";
+import img0 from "./img0.webp";
+import img1 from "./img1.webp";
+import img2 from "./img2.webp";
+import quay_401 from "./quay_401.webp";
+import fleet_desk from "./fleet_desk.webp";
+import building from "./building.webp";
+import boat from "./boat.webp";
+import sky from "./sky.webp";
+import boat2 from "./boat2.webp";
+import ocean from "./ocean.webp";
+import image from "./fleet3.webp";
 import section_3_whole from "./section_3_whole.webp";
-import group from "./group.png";
-import section_two from "./section_two.png";
+import section_two from "./section_two.webp";
 
 export {
   section_two,
   section_3_whole,
   image,
-  group,
   boat2,
   ocean,
   boat,
   sky,
   fleet_desk,
-  top_right,
-  bottom_left,
   building,
   quay_401,
   img0,
