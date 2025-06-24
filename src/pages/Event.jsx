@@ -252,7 +252,7 @@ const Event = () => {
 
         <div className="bg-midnightblue h-16 w-full rounded-md flex items-center justify-center gap-2 text-white">
           <img src={champagne} alt="Champagne icon" className="w-10 h-10" />
-          <p className="font-bold">Grand Opening At The Ocean Prime</p>
+          <p className="font-bold">GRAND OPENING AT THE QUAY COMMONS</p>
           <img src={champagne} alt="Champagne icon" className="w-10 h-10" />
         </div>
 
