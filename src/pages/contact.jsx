@@ -65,6 +65,10 @@ const Contact = () => {
     setAlertOpen(false);
   };
 
+  const API_BASE = import.meta.env.DEV
+  ? "http://localhost:8000"
+  : "https://api.kokomoyachtclub.vip";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -95,7 +99,7 @@ const Contact = () => {
     // 4. Submit Form
     try {
       const response = await fetch(
-        "https://api.kokomoyachtclub.vip/visitors/become-a-member",
+        `${API_BASE}/visitors/become-a-member`,
         {
           method: "POST",
           headers: {

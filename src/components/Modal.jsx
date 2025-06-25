@@ -10,6 +10,10 @@ const Modal = ({ isModalOpen, closeModal }) => {
   const [alertTitle, setAlertTitle] = useState('');
   const [alertBody, setAlertBody] = useState('');
 
+  const API_BASE = import.meta.env.DEV
+  ? "http://localhost:8000"
+  : "https://api.kokomoyachtclub.vip";
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -38,7 +42,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
     }
 
     try {
-      const response = await fetch('https://api.kokomoyachtclub.vip/visitors/add-visitors-details', {
+      const response = await fetch(`${API_BASE}/visitors/add-visitors-details`, {
         method: 'POST',
         headers: {
           'accept': 'application/json',
