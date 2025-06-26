@@ -23,7 +23,7 @@ import {
 import op_logo from "../assets/logos/op_logo.png";
 
 const Form = ({ onClose, event, title}) => {
-  const [formData, setFormData] = useState({ name: "", email: "", phone_no: "", event_name: event });
+  const [formData, setFormData] = useState({ name: "", email: "", phone_no: "", event_name: event, attendees: 0 });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({ type: "", text: "" });
 
@@ -119,7 +119,7 @@ const Form = ({ onClose, event, title}) => {
           <label>Phone Number</label>
           <input
             type="number"
-            className="block w-full mt-1 p-2 rounded text-black"
+            className="block w-full mt-1 p-2 rounded text-midnightblue"
             value={formData.phone_no}
             onChange={(e) =>
               setFormData({ ...formData, phone_no: e.target.value })
@@ -128,6 +128,22 @@ const Form = ({ onClose, event, title}) => {
           />
           {errors.phone_no && (
             <p className="text-red-400 text-sm">{errors.phone_no}</p>
+          )}
+        </div>
+
+        <div>
+          <label>No. of Attendees</label>
+          <input
+            type="number"
+            className="block w-full mt-1 p-2 rounded text-black"
+            value={formData.attendees}
+            onChange={(e) =>
+              setFormData({ ...formData, attendees: e.target.value })
+            }
+            maxLength={3}
+          />
+          {errors.attendees && (
+            <p className="text-red-400 text-sm">{errors.attendees}</p>
           )}
         </div>
 
