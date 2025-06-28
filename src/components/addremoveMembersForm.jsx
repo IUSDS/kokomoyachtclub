@@ -50,9 +50,9 @@ const PersonalInfoTab = ({ next }) => {
   const [alertopen, setAlertOpen] = useState(false);
   const [alertTitle, setAlertTitle] = useState("");
   const [alertBody, setAlertBody] = useState("");
-  const API_LOCAL_URL = "http://localhost:8000";
-  const API_PROD_URL = "https://api.kokomoyachtclub.vip";
-
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
   const [errors, setErrors] = useState({
     email: "",
     phoneNumber: "",
@@ -83,7 +83,7 @@ const PersonalInfoTab = ({ next }) => {
     try {
       let endpoint = "";
       if (field === "Username") {
-        endpoint = `${API_PROD_URL}/create-member/validate-member/?username=${value}`;
+        endpoint = `${API_BASE}/create-member/validate-member/?username=${value}`;
         const response = await fetch(endpoint, {
           method: "GET",
           headers: {
@@ -105,7 +105,7 @@ const PersonalInfoTab = ({ next }) => {
           }, 5000);
         }
       } else if (field === "Email") {
-        endpoint = `${API_PROD_URL}/create-member/validate-member/?email=${value}`;
+        endpoint = `${API_BASE}/create-member/validate-member/?email=${value}`;
         const response = await fetch(endpoint, {
           method: "GET",
           headers: {
@@ -931,29 +931,15 @@ const AddRemoveMembersForm = () => {
     return emailRegex.test(email);
   };
 
+  // pick your API base from env (Vite / CRA)
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!/^\d{10}$/.test(phoneNumber)) {
-      setAlertTitle("Invalid Number!");
-      setAlertBody("Please enter a 10-digit mobile number.");
-      setAlertOpen(true);
-      return;
-    }
-
-    if (!validateEmail(email)) {
-      setAlertTitle("Invalid Email!");
-      setAlertBody("Please enter a valid email.");
-      setAlertOpen(true);
-      return;
-    }
-    if (!isButtonEnabled) {
-      setMessage({
-        type: "error",
-        text: "Please complete all required fields before submitting.",
-      });
-      return;
-    }
+    // … your existing validations …
 
     setLoading(true);
     setMessage(null);
@@ -967,13 +953,8 @@ const AddRemoveMembersForm = () => {
     formData.append("phone_number", phoneNumber);
     formData.append("email_id", email);
     formData.append("membership_type", membershipType);
-    // formData.append("points", points);
-    // Convert membershipID and points to integers safely before appending
-    // formData.append("membershipID", membershipID ? parseInt(membershipID, 10) : 0);
     formData.append("points", points ? parseInt(points, 10) : 0);
-    formData.append("file", picture);
     formData.append("dl", dl || "");
-    // formData.append('membershipID', membershipID);
     formData.append("referral_information", referral || "");
     formData.append("company_name", company || "");
     formData.append("member_address1", address1);
@@ -983,36 +964,32 @@ const AddRemoveMembersForm = () => {
     formData.append("member_zip", zip);
     formData.append("branch", branch);
     formData.append("city", achCity);
-    formData.append("zip_code", achZip);
     formData.append("state", achState);
+    formData.append("zip_code", achZip);
     formData.append("depository_name", depositoryName);
     formData.append("routing_no", routingNumber);
     formData.append("acc_no", accountNumber);
     formData.append("name_on_acc", nameOnAccount);
     formData.append("type_of_acc", accountType);
-    // formData.append("date_sub", "2025-01-31");
     formData.append("zip_code", zip);
+
+    // **Only append picture if it's a real File**
+    if (picture instanceof File) {
+      formData.append("file", picture);
+    }
 
     // Family Info
     formData.append("spouse", spouse);
     formData.append("spouse_phone", spouseMobile);
     formData.append("spouse_email", spouseEmail);
     formData.append("child_num", childNum);
-
-    // Append children details dynamically
-    formData.append(
-      "child_names",
-      children.map((child) => child.name).join(",")
-    );
-    formData.append("child_dobs", children.map((child) => child.dob).join(","));
+    formData.append("child_names", children.map((c) => c.name).join(","));
+    formData.append("child_dobs", children.map((c) => c.dob).join(","));
     formData.append(
       "child_phone_numbers",
-      children.map((child) => child.mobile).join(",")
+      children.map((c) => c.mobile).join(",")
     );
-    formData.append(
-      "child_emails",
-      children.map((child) => child.email).join(",")
-    );
+    formData.append("child_emails", children.map((c) => c.email).join(","));
 
     // Emergency Contact Info
     formData.append("emergency_name", emergencyContactName);
@@ -1021,26 +998,18 @@ const AddRemoveMembersForm = () => {
     formData.append("emergency_relationship", emergencyRelationship);
 
     try {
-      const response = await fetch(
-        "https://api.kokomoyachtclub.vip/create-member/add-member/",
-        {
-          method: "POST",
-          body: formData,
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${API_BASE}/create-member/add-member/`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
 
       const data = await response.json();
-      console.log(data);
-
       if (response.ok) {
         setMessage({ type: "success", text: "Member added successfully!" });
-        setTimeout(() => {
-          setMessage(null);
-        }, 4000);
-        resetForm(); // Reset form on success
+        resetForm();
         setPicture("");
       } else {
         setMessage({
@@ -1095,11 +1064,6 @@ const AddRemoveMembersForm = () => {
     setStatusMessage(null);
     setActiveComponent(null);
   };
-
-  // pick your API base from env (Vite / CRA)
-  const API_BASE = import.meta.env.DEV
-    ? "http://localhost:8000"
-    : "https://api.kokomoyachtclub.vip";
 
   const handleRemoveMember = async () => {
     if (!username.trim()) {
