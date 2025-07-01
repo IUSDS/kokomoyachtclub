@@ -112,8 +112,17 @@ import ocean from "./ocean.webp";
 import image from "./fleet3.webp";
 import section_3_whole from "./section_3_whole.webp";
 import section_two from "./section_two.webp";
+import gt1 from "./gt1.webp";
+import gt2 from "./gt2.webp";
+import gt3 from "./gt3.webp";
+import gt4 from "./gt4.webp";
+import gt5 from "./gt5.webp";
+import gt6 from "./gt6.webp";
+import gt7 from "./gt7.webp";
+import gt8 from "./gt8.webp";
 
 export {
+  gt1, gt2, gt3, gt4, gt5, gt6, gt7, gt8,
   section_two,
   section_3_whole,
   image,
