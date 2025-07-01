@@ -77,6 +77,13 @@ import {
   hh8,
   hh4,
   hh5,
+  gt1,
+  gt3,
+  gt4,
+  gt5,
+  gt6,
+  gt7,
+  gt8,
 } from "../assets/images";
 import { useLocation, Link } from "react-router-dom";
 import MembershipLevels from "../components/MembershipLevels";
@@ -134,6 +141,17 @@ const fleetData = [
     images: [home7, wl2, wl3, wl4, wl5, wl6, wl7],
     buttonText: "Become a Member to Book",
     reverse: false,
+  },
+  {
+    location: "Sarasota",
+    title: "40' Golden Ticket",
+    points: "149 Mariner Points",
+    id: "goldenticket",
+    description:
+      "A sleek 40-foot luxury yacht designed for both relaxation and celebration. Golden Ticket offers spacious seating, shaded lounge areas, and a top-tier sound system—perfect for sunset cruises, private gatherings, or laid-back days exploring Sarasota’s waters in style. Step aboard and enjoy smooth cruising with a professional captain and crew who make every moment feel effortless. Whether you're sipping champagne under the sun or dancing to your favorite playlist, Golden Ticket delivers the perfect blend of comfort and coastal charm.",
+    images: [gt1, gt3, gt4, gt5, gt6, gt7, gt8],
+    buttonText: "Become a Member to Book",
+    reverse: true,
   },
   {
     location: "Sarasota",

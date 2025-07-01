@@ -15,15 +15,13 @@ import {
   mnd,
   congetta,
   congetta1,
-  outrage,
   aviara,
   peace1,
   thirst_trap_6,
   lib3,
-  hh7,
+  hh7,gt1
 } from "../assets/images";
 import homeicon from "../assets/icons/homeicon.png";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useLocation } from "react-router-dom";
 import TestimonialsSection from "../components/TestimonialsSection";
 import ContactForm from "../components/ContactForm";
@@ -121,36 +119,17 @@ const Home = () => {
     { name: "Memory Maker", size: "50'", location: "Sarasota", img: home3 },
     { name: "Giddy Up", size: "43'", location: "Sarasota", img: home4 },
     { name: "Wanderlust", size: "42'", location: "Sarasota", img: home7 },
+    { name: "Golden Ticket", size: "40'", location: "Sarasota", img: gt1 },
     { name: "Happy Hour", size: "40'", location: "Sarasota", img: hh7 },
     { name: "Top Shelf", size: "38'", location: "Sarasota", img: home5 },
     { name: "Ocean Rode", size: "35'", location: "Sarasota", img: aviara },
-    {
-      name: "Memories, Not Dreams",
-      size: "50'",
-      location: "St. Petersburg",
-      img: mnd,
-    },
-    {
-      name: "Congetta",
-      size: "44'",
-      location: "St. Petersburg",
-      img: congetta,
-    },
+    { name: "Memories, Not Dreams", size: "50'", location: "St. Petersburg", img: mnd, },
+    { name: "Congetta", size: "44'", location: "St. Petersburg", img: congetta,},
     { name: "Happy Hour", size: "40'", location: "St. Petersburg", img: hh7 },
     { name: "Lil' Bit Nauti", size: "50'", location: "Anna Maria", img: lib3 },
     { name: "Ocean Rode", size: "35'", location: "Anna Maria", img: aviara },
-    {
-      name: "Fountaine Pajot",
-      size: "44'",
-      location: "Tampa Bay",
-      img: congetta1,
-    },
-    {
-      name: "Thirst Trap",
-      size: "40'",
-      location: "Venice",
-      img: thirst_trap_6,
-    },
+    { name: "Fountaine Pajot", size: "44'", location: "Tampa Bay", img: congetta1, },
+    { name: "Thirst Trap", size: "40'", location: "Venice", img: thirst_trap_6, },
   ];
 
   // For modal
@@ -369,7 +348,7 @@ const Home = () => {
                         </h3>
                         <a
                           href={`/fleet#${fleet.name
-                            .replace(/[,\\s]+/g, "")
+                            .replace(/[, \s]+/g, "")
                             .toLowerCase()}`}
                           target="_blank"
                           rel="noopener noreferrer"
