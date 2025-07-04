@@ -162,7 +162,7 @@ const fleetData = [
       "Happy Hour is the perfect blend of elegance and relaxation on the water. Her sleek lines and spacious layout make her ideal for everything from casual day cruising to unforgettable sunset celebrations. With an open bow sunpad, shaded aft deck, and generous interior salon, she’s designed for effortless entertaining. Onboard, you’ll enjoy a modern galley, plush lounge seating, and seamless indoor-outdoor flow. Whether you're hosting a private gathering or enjoying a quiet escape, Happy Hour offers smooth cruising and upscale comfort.",
     images: [hh7, hh4, hh5, hh6, hh8],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota",
@@ -173,7 +173,7 @@ const fleetData = [
       "Our 38' Open Bow Day Boat for up to 13 guests. Perfect for day trips to restaurants, sandbars or simply cruising, this open bow day boat offers ultimate comfort with spacious seating, cushioned flooring throughout, mahogany tables, shade for the entire boat, full bathroom, an advanced stereo system, water toys and twin 350’s for plenty of “Get Up and Go”.",
     images: [home5, TS1, TS2],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota",
@@ -184,7 +184,7 @@ const fleetData = [
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
 
   // ───── St. Petersburg ─────
@@ -209,17 +209,6 @@ const fleetData = [
     images: [congetta1, congetta2, congetta3, congetta4, congetta5],
     buttonText: "Become a Member to Book",
     reverse: false,
-  },
-  {
-    location: "St. Petersburg",
-    title: "40' Happy Hour",
-    points: "163 Mariner Points",
-    id: "happyhour-spb",
-    description:
-      "Happy Hour is the perfect blend of elegance and relaxation on the water. Her sleek lines and spacious layout make her ideal for everything from casual day cruising to unforgettable sunset celebrations. With an open bow sunpad, shaded aft deck, and generous interior salon, she’s designed for effortless entertaining. Onboard, you’ll enjoy a modern galley, plush lounge seating, and seamless indoor-outdoor flow. Whether you're hosting a private gathering or enjoying a quiet escape, Happy Hour offers smooth cruising and upscale comfort.",
-    images: [hh7, hh4, hh5, hh6, hh8],
-    buttonText: "Become a Member to Book",
-    reverse: true,
   },
 
   // ───── Anna Maria ─────

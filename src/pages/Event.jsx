@@ -22,10 +22,16 @@ import {
 
 import op_logo from "../assets/logos/op_logo.png";
 
-const Form = ({ onClose, event, title}) => {
-  const [formData, setFormData] = useState({ name: "", email: "", phone_no: "", event_name: event, attendees: 0 });
+const Form = ({ onClose, event, title }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone_no: "",
+    event_name: event,
+  });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     let temp = {};
@@ -40,15 +46,16 @@ const Form = ({ onClose, event, title}) => {
     return Object.values(temp).every((x) => x === "");
   };
 
-  // pick your API base from env (Vite / CRA)
   const API_BASE = import.meta.env.DEV
     ? "http://localhost:8000"
     : "https://api.kokomoyachtclub.vip";
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e?.preventDefault) e.preventDefault();
     setMessage({ type: "", text: "" });
     if (!validate()) return;
+
+    setIsSubmitting(true);
 
     try {
       const res = await fetch(`${API_BASE}/visitors/add-event-details`, {
@@ -60,100 +67,398 @@ const Form = ({ onClose, event, title}) => {
       if (!res.ok) throw new Error();
 
       setMessage({ type: "success", text: "Submitted successfully!" });
-      setFormData({ name: "", email: "", phone_no: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone_no: "",
+        event_name: event,
+      });
       setTimeout(() => onClose(), 3000);
     } catch (err) {
       setMessage({ type: "error", text: "Error submitting the form." });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="w-[90%] md:w-[90%] lg:w-[80%] xl:w-[50%] h-fit p-8 bg-midnightblue text-white rounded-lg shadow-xl relative">
-      <button
-        onClick={onClose}
-        className="absolute top-3 right-4 text-white text-xl font-bold"
-      >
-        ✕
-      </button>
+    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full opacity-5 blur-3xl"></div>
 
-      <h2 className="text-2xl mb-6 text-center font-semibold">{title}</h2>
-
-      {message.text && (
-        <div
-          className={`text-sm mb-4 p-2 rounded ${
-            message.type === "success" ? "bg-green-600" : "bg-red-500"
-          }`}
-        >
-          {message.text}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            className="block w-full mt-1 p-2 rounded text-black"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          />
-          {errors.name && <p className="text-red-400 text-sm">{errors.name}</p>}
-        </div>
-
-        <div>
-          <label>Email Address</label>
-          <input
-            type="email"
-            className="block w-full mt-1 p-2 rounded text-black"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
-          />
-          {errors.email && (
-            <p className="text-red-400 text-sm">{errors.email}</p>
-          )}
-        </div>
-
-        <div>
-          <label>Phone Number</label>
-          <input
-            type="number"
-            className="block w-full mt-1 p-2 rounded text-midnightblue"
-            value={formData.phone_no}
-            onChange={(e) =>
-              setFormData({ ...formData, phone_no: e.target.value })
-            }
-            maxLength={10}
-          />
-          {errors.phone_no && (
-            <p className="text-red-400 text-sm">{errors.phone_no}</p>
-          )}
-        </div>
-
-        <div>
-          <label>No. of Attendees</label>
-          <input
-            type="number"
-            className="block w-full mt-1 p-2 rounded text-black"
-            value={formData.attendees}
-            onChange={(e) =>
-              setFormData({ ...formData, attendees: e.target.value })
-            }
-            maxLength={3}
-          />
-          {errors.attendees && (
-            <p className="text-red-400 text-sm">{errors.attendees}</p>
-          )}
-        </div>
-
+        {/* Close button */}
         <button
-          type="submit"
-          className="bg-white text-midnightblue font-semibold px-6 py-2 rounded-full hover:bg-gray-100"
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-all duration-200 group"
         >
-          Submit
+          <span className="text-white text-xl group-hover:rotate-90 transition-transform duration-200">
+            ×
+          </span>
         </button>
-      </form>
+
+        <div className="p-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-2">
+              {title}
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-white mx-auto rounded-full"></div>
+          </div>
+
+          {message.text && (
+            <div
+              className={`text-sm mb-6 p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
+                message.type === "success"
+                  ? "bg-emerald-500 bg-opacity-20 border-emerald-400 text-emerald-100"
+                  : "bg-red-500 bg-opacity-20 border-red-400 text-red-100"
+              }`}
+            >
+              <div className="flex items-center">
+                <div
+                  className={`w-2 h-2 rounded-full mr-3 ${
+                    message.type === "success" ? "bg-emerald-400" : "bg-red-400"
+                  }`}
+                ></div>
+                {message.text}
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-6">
+            <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Name
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.name && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.name}
+                </p>
+              )}
+            </div>
+
+            <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.email && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+            <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Phone Number
+              </label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="(555) 123-4567"
+                  value={formData.phone_no}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone_no: e.target.value })
+                  }
+                  maxLength={10}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.phone_no && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.phone_no}
+                </p>
+              )}
+            </div>
+
+            {/* <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Number of Attendees
+              </label>
+              <div className="relative">
+                <input
+                  type="number"
+                  min="1"
+                  max="999"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="How many people will attend?"
+                  value={formData.attendees}
+                  onChange={(e) => setFormData({ ...formData, attendees: parseInt(e.target.value) || 0 })}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.attendees && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.attendees}
+                </p>
+              )}
+            </div> */}
+
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-white to-blue-100 text-slate-900 font-semibold py-4 rounded-xl hover:from-blue-50 hover:to-white transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              <div className="relative flex items-center justify-center">
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin mr-3"></div>
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    Submit Registration
+                    <div className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
+                      →
+                    </div>
+                  </>
+                )}
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const EmailMarketingForm = ({ onClose, event, title }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone_no: "",
+    event_name: event,
+  });
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validate = () => {
+    let temp = {};
+    temp.name = formData.name ? "" : "Name is required.";
+    temp.email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+      ? ""
+      : "Invalid email.";
+    temp.phone_no = /^\d{10}$/.test(formData.phone_no)
+      ? ""
+      : "Enter 10-digit US phone number.";
+    setErrors(temp);
+    return Object.values(temp).every((x) => x === "");
+  };
+
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
+
+  const handleSubmit = async (e) => {
+    if (e?.preventDefault) e.preventDefault();
+    setMessage({ type: "", text: "" });
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch(`${API_BASE}/visitors/add-event-details`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error();
+
+      setMessage({ type: "success", text: "Submitted successfully!" });
+      setFormData({
+        name: "",
+        email: "",
+        phone_no: "",
+        event_name: event,
+        attendees: 1,
+      });
+      setTimeout(() => onClose(), 3000);
+    } catch (err) {
+      setMessage({ type: "error", text: "Error submitting the form." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="w-full max-w-md mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full opacity-5 blur-3xl"></div>
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-all duration-200 group"
+        >
+          <span className="text-white text-xl group-hover:rotate-90 transition-transform duration-200">
+            ×
+          </span>
+        </button>
+
+        <div className="p-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-2">
+              {title}
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-white mx-auto rounded-full"></div>
+          </div>
+
+          {message.text && (
+            <div
+              className={`text-sm mb-6 p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
+                message.type === "success"
+                  ? "bg-emerald-500 bg-opacity-20 border-emerald-400 text-emerald-100"
+                  : "bg-red-500 bg-opacity-20 border-red-400 text-red-100"
+              }`}
+            >
+              <div className="flex items-center">
+                <div
+                  className={`w-2 h-2 rounded-full mr-3 ${
+                    message.type === "success" ? "bg-emerald-400" : "bg-red-400"
+                  }`}
+                ></div>
+                {message.text}
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-6">
+            <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Name
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.name && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.name}
+                </p>
+              )}
+            </div>
+
+            <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Email Address
+              </label>
+              <div className="relative">
+                <input
+                  type="email"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="your@email.com"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.email && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+            <div className="group">
+              <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
+                Phone Number
+              </label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  className="w-full p-4 rounded-xl bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-opacity-15"
+                  placeholder="(555) 123-4567"
+                  value={formData.phone_no}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone_no: e.target.value })
+                  }
+                  maxLength={10}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-400 to-white scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300"></div>
+              </div>
+              {errors.phone_no && (
+                <p className="text-red-300 text-sm mt-2 flex items-center animate-in slide-in-from-left-1 duration-200">
+                  <span className="w-1 h-1 bg-red-400 rounded-full mr-2"></span>
+                  {errors.phone_no}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-white to-blue-100 text-slate-900 font-semibold py-4 rounded-xl hover:from-blue-50 hover:to-white transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl relative overflow-hidden group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+              <div className="relative flex items-center justify-center">
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin mr-3"></div>
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    Submit
+                    <div className="ml-2 transform group-hover:translate-x-1 transition-transform duration-200">
+                      →
+                    </div>
+                  </>
+                )}
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -178,7 +483,7 @@ const Event = () => {
           onClick={() => setShowForm(true)}
           className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
-          RSVP NOW
+          Join Our Waitlist
         </button>
 
         {/* Bottom Shape */}
@@ -312,16 +617,18 @@ const Event = () => {
       {/* Section 4 */}
       <div className="text-midnightblue md:py-16 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
         <p>
-          ENJOY A FIRST LOOK AT OUR NEWLY EXPANDED LUXURY FLEET WHILE IMMERSING YOURSELF IN THE CHARM OF SARASOTA'S MOST UNIQUE LUXURY BOATING CLUB. 
+          ENJOY A FIRST LOOK AT OUR NEWLY EXPANDED LUXURY FLEET WHILE IMMERSING
+          YOURSELF IN THE CHARM OF SARASOTA'S MOST UNIQUE LUXURY BOATING CLUB.
         </p>
         <p>
-          KINDLY RSVP BY JULY 7 TO RESERVE YOUR SPOT—AND JOIN US FOR AN EXCLUSIVE POST-EVENT SUNSET CRUISE.
+          KINDLY RSVP BY JULY 7 TO RESERVE YOUR SPOT—AND JOIN US FOR AN
+          EXCLUSIVE POST-EVENT SUNSET CRUISE.
         </p>
         <button
           onClick={() => setShowForm(true)}
           className="text-white font-semibold mt-4 w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
-          RSVP NOW
+          Join Our Waitlist
         </button>
       </div>
 
@@ -402,7 +709,7 @@ const Event = () => {
         {/* Top-left Heading */}
         <div className="absolute top-[2%] md:top-[8%] left-4 md:left-10 flex flex-col md:gap-2 w-2/3 md:w-1/2">
           <p className="font-semibold text-2xl md:text-4xl lg:text-4xl xl:text-6xl">
-            Get On the List
+            Join Our Waitlist
           </p>
           <p className="text-sm md:text-lg lg:text-lg xl:text-xl max-w-xs md:max-w-xs">
             Because exclusivity starts with access
@@ -416,8 +723,11 @@ const Event = () => {
             early access to private events, seasonal gatherings, and yacht
             previews.
           </p>
-          <button onClick={() => setShowEmailSignupForm(true)} className="text-white border border-white md:text-xl lg:text-2xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/10 hover:bg-white hover:text-midnightblue transition">
-            Join Our Guest List
+          <button
+            onClick={() => setShowEmailSignupForm(true)}
+            className="text-white border border-white md:text-xl lg:text-2xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/10 hover:bg-white hover:text-midnightblue transition"
+          >
+            Join Our Waitlist
           </button>
         </div>
       </div>
@@ -458,12 +768,20 @@ const Event = () => {
       {/* Forms */}
       {showForm && (
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
-          <Form onClose={() => setShowForm(false)} event={"Grand Opening at The Quay"} title={"The Inner Circle RSVP"} />
+          <Form
+            onClose={() => setShowForm(false)}
+            event={"Waitlist"}
+            title={"Join Our Waitlist"}
+          />
         </div>
       )}
       {showEmailSignupForm && (
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
-          <Form onClose={() => setShowEmailSignupForm(false)} event={"Email Marketing"} title={"Join Our Guest List"} />
+          <EmailMarketingForm
+            onClose={() => setShowEmailSignupForm(false)}
+            event={"Waitlist"}
+            title={"Join Our Waitlist"}
+          />
         </div>
       )}
     </div>
