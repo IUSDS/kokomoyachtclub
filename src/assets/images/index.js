@@ -89,14 +89,6 @@ import lib3 from "./lib3.webp";
 import lib4 from "./lib4.webp";
 import lib5 from "./lib5.webp";
 import lib6 from "./lib6.webp";
-import hh1 from "./hh1.webp";
-import hh2 from "./hh2.webp";
-import hh3 from "./hh3.webp";
-import hh4 from "./hh4.webp";
-import hh5 from "./hh5.webp";
-import hh6 from "./hh6.webp";
-import hh7 from "./hh7.webp";
-import hh8 from "./hh8.webp";
 import fleet from "./fleet.webp";
 import events_hero from "./events_hero.webp";
 import img0 from "./img0.webp";
@@ -120,9 +112,30 @@ import gt5 from "./gt5.webp";
 import gt6 from "./gt6.webp";
 import gt7 from "./gt7.webp";
 import gt8 from "./gt8.webp";
+import hh1 from "./hh1.webp";
+import hh2 from "./hh2.webp";
+import hh3 from "./hh3.webp";
+import hh4 from "./hh4.webp";
+import hh5 from "./hh5.webp";
+import hh6 from "./hh6.webp";
+import hh7 from "./hh7.webp";
 
 export {
-  gt1, gt2, gt3, gt4, gt5, gt6, gt7, gt8,
+  hh1,
+  hh2,
+  hh3,
+  hh4,
+  hh5,
+  hh6,
+  hh7,
+  gt1,
+  gt2,
+  gt3,
+  gt4,
+  gt5,
+  gt6,
+  gt7,
+  gt8,
   section_two,
   section_3_whole,
   image,
@@ -228,13 +241,5 @@ export {
   lib4,
   lib5,
   lib6,
-  hh1,
-  hh2,
-  hh3,
-  hh4,
-  hh5,
-  hh6,
-  hh7,
-  hh8,
   fleet,
 };
