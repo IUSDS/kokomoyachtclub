@@ -139,9 +139,16 @@ const NewMemberPortal = () => {
   };
 
   const handleProvClick = async () => {
-    setActiveTab("prov_menu");
+    // setActiveTab("prov_menu");
     window.open(
       "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Provisioning+and+chef+menus.pdf",
+      "_blank"
+    );
+  };
+
+  const handleManualClick = async () => {
+    window.open(
+      "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_member_portal_user_manual.pdf",
       "_blank"
     );
   };
@@ -360,6 +367,18 @@ const NewMemberPortal = () => {
                     }`}
                   >
                     Provisioning Menu
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleManualClick}
+                    className={`text-sm hover:text-amber-300 text-left w-full ${
+                      activeTab === "prov_menu"
+                        ? "text-amber-300"
+                        : "text-white"
+                    }`}
+                  >
+                    User Manual
                   </button>
                 </li>
               </ul>
