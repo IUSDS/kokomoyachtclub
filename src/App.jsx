@@ -10,10 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Pages & Components
 import LoginPage from "./pages/login";
-import MembershipPage from "./pages/membershipPage";
 import AdminPage from "./pages/admin";
-import PlanYourExpriences from "./pages/planExperience";
-import PreviousBookings from "./pages/previousBooking";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import Home from "./pages/home";

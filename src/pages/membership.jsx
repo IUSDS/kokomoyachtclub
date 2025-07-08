@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Vid from "../assets/videos/vid.mp4";
-import { FaRegCheckCircle } from "react-icons/fa";
-import ReCAPTCHA from "react-google-recaptcha";
-import { home5 } from "../assets/images";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import MembershipLevels from "../components/MembershipLevels";
@@ -31,21 +28,6 @@ const Membership = () => {
   }, [location]);
 
   const [isVerified, setIsVerified] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState("right");
-
-  const handleCaptcha = (value) => {
-    setIsVerified(true);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!isVerified) {
-      alert("Please verify that you are not a robot!");
-      return;
-    }
-    alert("Form submitted successfully!");
-  };
 
   // For modal
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -76,20 +58,34 @@ const Membership = () => {
           Your browser does not support the video tag.
         </video>
         {/* <div className="absolute top-0 left-0 w-full h-full bg-blue-900 bg-opacity-50 z-20 pointer-events-none"></div> */}
-        <div className="absolute xl:w-2/3 inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white z-30">
-          <h1 className="text-3xl md:text-6xl font-medium mb-4">Membership</h1>
+        <div className="absolute xl:w-2/3 inset-0 flex flex-col items-start lg:px-48 md:px-32 px-12 justify-center text-left text-white z-30 gap-4">
+          <h1 className="text-3xl md:text-6xl font-medium md:font-bold mb-4">
+            Membership
+          </h1>
           <p className="text-base font-normal md:text-xl mb-6">
             Whether you are a Snowflake, Snowbird, Full Time Resident or a Water
             Warrior, we have the right membership for you. Members book half
             day, full day or multi-day outings using their Mariner Points
             associated with their membership level.
           </p>
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-col md:flex-row gap-3">
             <button
               onClick={openModal}
-              className="px-6 py-3 text-sm bg-midnightblue hover:bg-midnightblue text-white  rounded-full"
+              className="px-6 py-3 font-semibold bg-midnightblue hover:bg-midnightblue text-white hover:scale-105 rounded-full transform duration-300"
             >
-              Download Membership Brochure
+              Membership Brochure
+            </button>
+
+            <button
+              onClick={() =>
+                window.open(
+                  "https://us.services.docusign.net/webforms-ux/v1.0/forms/690282cb4272b0df7605b26ae28788f2",
+                  "_blank"
+                )
+              }
+              className="px-6 py-3 font-semibold bg-midnightblue hover:bg-midnightblue text-white hover:scale-105 rounded-full transform duration-300"
+            >
+              Apply for Membership
             </button>
           </div>
         </div>
