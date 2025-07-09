@@ -1,7 +1,7 @@
 // App.jsx
 import "./App.css";
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,Navigate } from "react-router-dom";
 import useAuthStore from "./authStore";
 
 // Toastify imports
@@ -27,6 +27,14 @@ import NewMemberPortal from "./pages/NewMemberPortal";
 import Seo from "./components/Seo";
 import Event from "./pages/Event";
 
+function ExternalRedirect({ url }) {
+  useEffect(() => {
+    
+    window.location.replace(url);
+  }, [url]);
+  return null;
+}
+
 function App() {
   const checkSession = useAuthStore((state) => state.checkSession);
   const sessionChecked = useAuthStore((state) => state.sessionChecked);
@@ -36,6 +44,8 @@ function App() {
       checkSession();
     }
   }, [sessionChecked, checkSession]);
+
+  const DOCUSIGN_URL = "https://us.services.docusign.net/webforms-ux/v1.0/forms/690282cb4272b0df7605b26ae28788f2";
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden font-jakarta">
@@ -60,6 +70,13 @@ function App() {
                 <NewMemberPortal />
               </ProtectedRoute>
           } 
+          />
+
+          <Route
+            path="/apply-for-membership"
+            element={
+              <ExternalRedirect url={DOCUSIGN_URL} />
+            }
           />
 
           <Route
