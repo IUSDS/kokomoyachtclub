@@ -46,9 +46,6 @@ export default function BookingHistoryContainer({ memberId }) {
       </p> */}
       <BookingHistoryTable
         transactions={transactions}
-        openingBalance={0}
-        bonusPoints={0}
-        currentPoints={0}
       />
     </>
   );

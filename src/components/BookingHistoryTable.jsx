@@ -32,16 +32,21 @@ export default function BookingHistoryTable({ transactions }) {
         <table className="min-w-full divide-y divide-gray-200 bg-white rounded-md shadow">
           <thead className="bg-gray-50">
             <tr>
-              {["Item", "Booking ID", "Date", "Points", "Balance"].map(
-                (heading) => (
-                  <th
-                    key={heading}
-                    className="px-4 py-2 text-left text-sm font-semibold text-midnightblue"
-                  >
-                    {heading}
-                  </th>
-                )
-              )}
+              {[
+                "Item",
+                "Booking ID",
+                "Date",
+                "Status",
+                "Points",
+                "Balance",
+              ].map((heading) => (
+                <th
+                  key={heading}
+                  className="px-4 py-2 text-left text-sm font-semibold text-midnightblue"
+                >
+                  {heading}
+                </th>
+              ))}
             </tr>
           </thead>
 
@@ -52,20 +57,40 @@ export default function BookingHistoryTable({ transactions }) {
               </td>
               <td className="px-4 py-2 text-sm"></td>
               <td className="px-4 py-2 text-sm"></td>
+              <td className="px-4 py-2 text-sm"></td>
               <td className="px-4 py-2 text-sm text-right"></td>
               <td className="px-4 py-2 text-sm text-right font-semibold">
                 {transactions.opening_balance}
               </td>
             </tr>
-            {transactions.booking_data.map((tx) => (
-              <tr key={tx.booking_id}>
-                <td className="px-4 py-2 text-sm">{tx.item}</td>
-                <td className="px-4 py-2 text-sm">{tx.booking_id}</td>
-                <td className="px-4 py-2 text-sm">{tx.date}</td>
-                <td className="px-4 py-2 text-sm text-right">{tx.points}</td>
-                <td className="px-4 py-2 text-sm text-right">{tx.balance}</td>
-              </tr>
-            ))}
+
+            {transactions.booking_data.map((tx, index) => {
+              if (tx.source === "adjustment") {
+                return (
+                  <tr key={index}>
+                    <td className="px-4 py-2 text-sm">{tx.description}</td>
+                    <td className="px-4 py-2 text-sm" colSpan="3"></td>
+                    <td className="px-4 py-2 text-sm text-right">
+                      {tx.points}
+                    </td>
+                    <td className="px-4 py-2 text-sm text-right">
+                      {tx.balance}
+                    </td>
+                  </tr>
+                );
+              }
+
+              return (
+                <tr key={tx.booking_id}>
+                  <td className="px-4 py-2 text-sm">{tx.item}</td>
+                  <td className="px-4 py-2 text-sm">{tx.booking_id}</td>
+                  <td className="px-4 py-2 text-sm">{tx.date}</td>
+                  <td className="px-4 py-2 text-sm">{tx.status}</td>
+                  <td className="px-4 py-2 text-sm text-right">{tx.points}</td>
+                  <td className="px-4 py-2 text-sm text-right">{tx.balance}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       )}
