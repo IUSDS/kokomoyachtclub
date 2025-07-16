@@ -8,7 +8,7 @@ import {
   image,
   ocean,
   boat2,
-  go
+  go,
 } from "../assets/images";
 
 import op_logo from "../assets/logos/op_logo.png";
@@ -530,66 +530,51 @@ const Event = () => {
       </div>
 
       {/* Section 4 */}
-      <div className="text-midnightblue md:py-16 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
-        <p>
+      <div className="text-midnightblue md:py-8 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
+        {/* <p>
           ENJOY A FIRST LOOK AT OUR NEWLY EXPANDED LUXURY FLEET WHILE IMMERSING
           YOURSELF IN THE CHARM OF SARASOTA'S MOST UNIQUE LUXURY BOATING CLUB.
         </p>
         <p>
           KINDLY RSVP BY JULY 7 TO RESERVE YOUR SPOT—AND JOIN US FOR AN
           EXCLUSIVE POST-EVENT SUNSET CRUISE.
-        </p>
+        </p> */}
         <button
           onClick={() => setShowForm(true)}
-          className="text-white font-semibold mt-4 w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+          className="text-white font-semibold w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
           Sign Up For Future Events
         </button>
       </div>
 
-      {/* Events Highlight Section */}
-      <div
-        className="relative w-full bg-cover bg-center  xl:h-[80vh] md:h-[60vh] h-[50vh] shadow-midnight"
-        style={{ backgroundImage: `url(${quay_401})` }}
-      >
-        <div className="flex flex-col space-y-6 justify-between h-full py-10 px-10 items-start w-fit">
-          {/* Heading Card */}
-          <div className="border-2 border-white rounded-xl w-full py-4 sm:py-6 md:py-8 px-3 sm:px-6 md:px-8 text-white font-bold text-lg sm:text-xl md:text-2xl bg-gradient-to-r from-midnightblue via-[#5456A1] to-transparent">
-            EVENT HIGHLIGHTS INCLUDE
-          </div>
-          {/* List Card */}
-          <div className="border-2 border-white rounded-xl w-fit py-4 sm:py-6 md:py-8 px-3 sm:px-6 md:px-8 text-white text-sm md:text-lg bg-gradient-to-r from-midnightblue via-[#5456A1] to-transparent">
-            <ul className="list-disc list-inside space-y-2">
-              <li>
-                HANDCRAFTED COCKTAILS & SIGNATURE APPETIZERS BY OCEAN PRIME
-              </li>
-              <li>LIVE MUSIC FEATURING BRI RIVIERA BAND</li>
-              <li>A FIRST LOOK AT THE NEWLY EXPANDED LUXURY FLEET</li>
-              <li>ELEGANT PARK-LIKE SURROUNDINGS</li>
-              <li>EXCLUSIVE MEMBERSHIP INCENTIVES</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
       {/* Past Events */}
-      <div className="grid grid-cols-1 md:grid-cols-2 md:pt-20 px-6 md:px-10 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 px-6 md:px-10 gap-8">
         <div>
-          <img src={go} alt="Fleet at Grand Opening" className="rounded-lg shadow-lg" />
+          <img
+            src={go}
+            alt="Fleet at Grand Opening"
+            className="rounded-lg shadow-lg"
+          />
         </div>
-        <div className="grid grid-cols-1 text-midnightblue text-center md:text-left h-fit gap-2">
-          <p className="text-xl md:text-3xl xl:text-5xl font-semibold">Inside Past Events</p>
-          <p className="md:text-xl">
-            Kokomo events are private by nature, but here’s a glimpse for those with the right kind of curiosity.
+        <div className="grid grid-cols-1 text-midnightblue text-left h-fit gap-2">
+          <p className="text-xl md:text-3xl xl:text-5xl font-semibold">
+            Inside Past Events
           </p>
-          <p className="font-semibold md:text-xl">
+          <p className="md:text-xl">
+            Kokomo events are private by nature, but here’s a glimpse for those
+            with the right kind of curiosity.
+          </p>
+          <p className="font-semibold md:text-xl xl:mt-4">
             Previous Highlights Include:
           </p>
           <ul className="md:text-xl">
-            <li>Sunday Polo & Brunch – A Members-Only Outing</li>
-            <li>Meet the Fleet – Private Yacht Showcase</li>
-            <li>Grand Opening at Quay Commons</li>
+            <li> - Grand Opening at Quay Commons</li>
           </ul>
+          <button
+            className="text-white w-fit md:text-lg bg-midnightblue px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-all duration-300 xl:mt-4"
+          >
+            View Private Gallery
+          </button>
         </div>
       </div>
 
@@ -603,23 +588,27 @@ const Event = () => {
           style={{ backgroundImage: `url(${sky})` }}
         >
           {/* Text block */}
-          <p className="absolute top-[30%] left-5 text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold">
-            Crafted for Those Who Belong
+          <p className="absolute top-[10%] xl:top-[30%] left-5 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
+            Luxury Boating Club
+          </p>
+          <p className="absolute top-[18%] xl:top-[40%] md:top-[20%] w-2/3 left-5 text-lg md:text-xl lg:text-2xl xl:text-3xl font-semibold">
+            Designed for Those Who Want Boating to Be a Part of Their Lifestyle
           </p>
 
-          <p className=" absolute top-[50%] left-5 max-w-xl md:w-1/2 lg:max-w-2xl xl:text-xl">
-            True luxury isn’t crowded, it’s curated. At Kokomo Yacht Club, each
-            gathering is an intentional experience that blends fine hospitality
-            with organic connection. You’re not just attending— you’re arriving
-            among peers, innovators, and tastemakers who understand the quiet
-            power of access.
+          <p className=" absolute top-[40%] xl:top-[50%] left-5 max-w-xl md:w-1/2 lg:max-w-2xl xl:text-xl">
+            At Kokomo Yacht Club, we believe true luxury is about curation, not
+            crowds. Each of our gatherings is designed to be an intentional
+            experience, blending exceptional hospitality with genuine
+            connection. When you join us, you're not just attending an event;
+            you're arriving among a select group of peers who appreciate the
+            unique value of exclusive access and boating as a lifestyle.
           </p>
 
           {/* Boat graphic */}
           <img
             src={boat}
             alt="boat"
-            className="absolute right-0 bottom-0 w-48 md:w-[500px] xl:w-[800px]"
+            className="hidden md:block absolute right-0 bottom-0 w-48 md:w-[500px] xl:w-[800px]"
           />
         </div>
       </div>
@@ -661,9 +650,9 @@ const Event = () => {
           </p>
           <button
             onClick={() => setShowEmailSignupForm(true)}
-            className="text-white border border-white md:text-xl lg:text-2xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/10 hover:bg-white hover:text-midnightblue transition"
+            className="text-midnightblue border border-white md:text-xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/80 hover:bg-transparent hover:text-white transition"
           >
-            Sign Up For Future Events
+            Find out about Future Events
           </button>
         </div>
       </div>
