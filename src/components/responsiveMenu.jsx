@@ -26,9 +26,9 @@ const ResponsiveMenu = ({ open, setOpen }) => {
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/">Home</Link>
               </li>
-              <li className="cursor-pointer hover:text-gray-300">
+              {/* <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/events">Events</Link>
-              </li>
+              </li> */}
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/fleet">Fleet</Link>
               </li>

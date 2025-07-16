@@ -2,23 +2,14 @@ import React, { useState } from "react";
 import {
   events_hero,
   quay_401,
-  fleet,
-  building,
   sky,
   boat,
   section_two,
   image,
-  section_3_whole,
   ocean,
   boat2,
+  go
 } from "../assets/images";
-import {
-  calender,
-  champagne,
-  vector,
-  location,
-  calendar2,
-} from "../assets/icons";
 
 import op_logo from "../assets/logos/op_logo.png";
 
@@ -481,9 +472,9 @@ const Event = () => {
         {/* Button */}
         <button
           onClick={() => setShowForm(true)}
-          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
-          Join Our Waitlist
+          Sign Up For Future Events
         </button>
 
         {/* Bottom Shape */}
@@ -538,82 +529,6 @@ const Event = () => {
         </p>
       </div>
 
-      {/* KYCxOceanPrime */}
-      <div className="flex flex-col gap-6 items-center justify-center">
-        <div className="flex items-center font-bold text-midnightblue text-2xl xl:text-3xl">
-          <p>In Collaboration With</p>
-        </div>
-        <div className="flex items-center">
-          <img
-            src={op_logo}
-            alt="Ocean Prime logo"
-            className="w-56 md:w-40 xl:w-80"
-          />
-        </div>
-      </div>
-
-      {/* Section 3 Mobile View */}
-      <div className="md:hidden flex flex-col justify-center items-center space-y-4 px-6">
-        {/* Img Box */}
-        <div className="relative w-full">
-          <div className="absolute top-6 -left-3 h-10 w-4 rounded-md bg-midnightblue" />
-          <img
-            src={fleet}
-            alt="A fleet preview"
-            className="w-full rounded-lg"
-          />
-          <div className="absolute top-2 -left-3 flex items-center gap-2 bg-midnightblue rounded-e-xl px-4 h-12">
-            <img src={calender} alt="calendar icon" className="w-6 h-6" />
-            <div className="flex flex-col justify-center text-white text-xs">
-              <p>UPCOMING</p>
-              <p>THURSDAY, JULY 10 | 5:00 - 8:00 PM</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-midnightblue h-16 w-full rounded-md flex items-center justify-center gap-2 text-white">
-          <img src={champagne} alt="Champagne icon" className="w-10 h-10" />
-          <p className="font-bold">GRAND OPENING AT THE QUAY COMMONS</p>
-          <img src={champagne} alt="Champagne icon" className="w-10 h-10" />
-        </div>
-
-        <img
-          src={building}
-          alt="Building | Quay Commons"
-          className="rounded-md w-full"
-        />
-
-        <div className="rounded-md w-full border-2 border-midnightblue pb-8 mb-10 space-y-8">
-          <div className="relative inline-block">
-            <img src={vector} alt="vector art" className="block w-full" />
-            <p className="absolute inset-0 flex justify-center items-center text-white font-semibold text-center px-4">
-              AN INVITATION TO THE INNER CIRCLE
-            </p>
-          </div>
-          <p className="text-midnightblue text-center">
-            Kokomo Yacht Club cordially invites you to the unveiling of their
-            new waterfront home at Sarasota's most prestigious address.
-          </p>
-          <div className="flex flex-col items-center justify-center">
-            <img src={location} alt="location icon" className="w-12" />
-            <p className="text-midnightblue text-center">
-              501 Quay Commons | Sarasota, Florida
-            </p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <img src={calendar2} alt="calendar icon" className="w-12" />
-            <p className="text-midnightblue text-center">
-              Thursday, July 10 | 5:00 - 8:00 PM
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Section 3 Desktop View */}
-      <div className="hidden md:flex md:justify-center md:items-center px-10">
-        <img src={section_3_whole} alt="image of section 3" />
-      </div>
-
       {/* Section 4 */}
       <div className="text-midnightblue md:py-16 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
         <p>
@@ -626,13 +541,13 @@ const Event = () => {
         </p>
         <button
           onClick={() => setShowForm(true)}
-          className="text-white font-semibold mt-4 w-[250px] md:w-[300px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+          className="text-white font-semibold mt-4 w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
-          Join Our Waitlist
+          Sign Up For Future Events
         </button>
       </div>
 
-      {/* Section 5 */}
+      {/* Events Highlight Section */}
       <div
         className="relative w-full bg-cover bg-center  xl:h-[80vh] md:h-[60vh] h-[50vh] shadow-midnight"
         style={{ backgroundImage: `url(${quay_401})` }}
@@ -654,6 +569,27 @@ const Event = () => {
               <li>EXCLUSIVE MEMBERSHIP INCENTIVES</li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Past Events */}
+      <div className="grid grid-cols-1 md:grid-cols-2 md:pt-20 px-6 md:px-10 gap-8">
+        <div>
+          <img src={go} alt="Fleet at Grand Opening" className="rounded-lg shadow-lg" />
+        </div>
+        <div className="grid grid-cols-1 text-midnightblue text-center md:text-left h-fit gap-2">
+          <p className="text-xl md:text-3xl xl:text-5xl font-semibold">Inside Past Events</p>
+          <p className="md:text-xl">
+            Kokomo events are private by nature, but here’s a glimpse for those with the right kind of curiosity.
+          </p>
+          <p className="font-semibold md:text-xl">
+            Previous Highlights Include:
+          </p>
+          <ul className="md:text-xl">
+            <li>Sunday Polo & Brunch – A Members-Only Outing</li>
+            <li>Meet the Fleet – Private Yacht Showcase</li>
+            <li>Grand Opening at Quay Commons</li>
+          </ul>
         </div>
       </div>
 
@@ -709,7 +645,7 @@ const Event = () => {
         {/* Top-left Heading */}
         <div className="absolute top-[2%] md:top-[8%] left-4 md:left-10 flex flex-col md:gap-2 w-2/3 md:w-1/2">
           <p className="font-semibold text-2xl md:text-4xl lg:text-4xl xl:text-6xl">
-            Join Our Waitlist
+            Get On The List
           </p>
           <p className="text-sm md:text-lg lg:text-lg xl:text-xl max-w-xs md:max-w-xs">
             Because exclusivity starts with access
@@ -727,7 +663,7 @@ const Event = () => {
             onClick={() => setShowEmailSignupForm(true)}
             className="text-white border border-white md:text-xl lg:text-2xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/10 hover:bg-white hover:text-midnightblue transition"
           >
-            Join Our Waitlist
+            Sign Up For Future Events
           </button>
         </div>
       </div>
@@ -770,8 +706,8 @@ const Event = () => {
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
           <Form
             onClose={() => setShowForm(false)}
-            event={"Waitlist"}
-            title={"Join Our Waitlist"}
+            event={"Future Events"}
+            title={"Sign Up For Future Events"}
           />
         </div>
       )}
@@ -779,8 +715,8 @@ const Event = () => {
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
           <EmailMarketingForm
             onClose={() => setShowEmailSignupForm(false)}
-            event={"Waitlist"}
-            title={"Join Our Waitlist"}
+            event={"Future Events"}
+            title={"Sign Up For Future Events"}
           />
         </div>
       )}
