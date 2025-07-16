@@ -119,8 +119,10 @@ import hh4 from "./hh4.webp";
 import hh5 from "./hh5.webp";
 import hh6 from "./hh6.webp";
 import hh7 from "./hh7.webp";
+import go from "./go.webp";
 
 export {
+  go,
   hh1,
   hh2,
   hh3,
