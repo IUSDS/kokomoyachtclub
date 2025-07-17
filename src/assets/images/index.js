@@ -120,8 +120,10 @@ import hh5 from "./hh5.webp";
 import hh6 from "./hh6.webp";
 import hh7 from "./hh7.webp";
 import go from "./go.webp";
+import pvt_din_hero from "./pvt_din_hero.webp";
 
 export {
+  pvt_din_hero,
   go,
   hh1,
   hh2,
