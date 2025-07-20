@@ -19,10 +19,22 @@ const PrivateDining = () => {
   return (
     <>
       <Helmet>
-        <meta property="og:title" content="Private Dining Experience | Kokomo Charters" />
-        <meta property="og:description" content="A Five-Star Meal with a Million-Star View on the Gulf." />
-        <meta property="og:image" content="https://kokomoyachtclub.vip/images/pvt_din_hero.webp" />
-        <meta property="og:url" content="https://kokomoyachtclub.vip/private-dining" />
+        <meta
+          property="og:title"
+          content="Private Dining Experience | Kokomo Charters"
+        />
+        <meta
+          property="og:description"
+          content="A Five-Star Meal with a Million-Star View on the Gulf."
+        />
+        <meta
+          property="og:image"
+          content="https://kokomoyachtclub.vip/images/pvt_din_hero.webp"
+        />
+        <meta
+          property="og:url"
+          content="https://kokomoyachtclub.vip/private-dining"
+        />
       </Helmet>
 
       <div className="flex flex-col">
@@ -73,36 +85,32 @@ const PrivateDining = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 text-center xl:text-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 text-center">
               <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-midnightblue leading-tight">
-                  Reimagine Fine Dining
-                </h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   Welcome aboard a dining experience unlike any other, where the
                   sun melts into the Gulf and your private table floats on the
-                  calm waters. Kokomo Charters invites you to reimagine what
+                  calm waters. Kokomo Yacht Club invites you to reimagine what
                   dining can be: elevated cuisine served on open water, with the
                   Gulf breeze as your backdrop and each course a celebration of
                   craftsmanship.
                 </p>
               </div>
               <div className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-midnightblue leading-tight">
-                  Artistry Meets Exclusivity
-                </h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  In partnership with Taste & Design Catering, this experience
-                  blends the artistry of fine dining with the exclusivity of your
-                  own private yacht. A table like no other at your service, where
-                  the view is ever-changing and the menu is anything but standard.
+                  From the moment you arrive, ambient lighting flickers softly
+                  like candlelight on the water, while the gentle Gulf breeze
+                  ushers in the promise of an unforgettable evening. This is
+                  your private yacht, your table set to sea, where impeccable
+                  service meets an ever-changing view, and your meal is anything
+                  but ordinary.
                 </p>
               </div>
             </div>
 
             <div className="flex justify-center mt-12">
               <Button
-                text="Inquire For Membership"
+                text="Inquire About Membership"
                 bg_color="midnightblue"
                 text_color="white"
                 navigate_to="contact"
@@ -138,19 +146,27 @@ const PrivateDining = () => {
                   transition={{ type: "spring", stiffness: 300 }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent xl:rounded-l-lg" />
+                <a
+                  href="https://loveandartistry.pic-time.com/portfolio"
+                  target="_blank"
+                >
+                  <p className="absolute right-4 bottom-2 z-10 text-sm text-white drop-shadow-lg">
+                    Photos by Love & Artistry
+                  </p>
+                </a>
               </div>
 
               <div className="space-y-6 text-white/90 text-center xl:text-left">
                 <p className="text-lg leading-relaxed">
-                  This isn't pre-fixed, it's personal. Our culinary team crafts
-                  your menu around your palate—refined, relaxed, or daring. Start
-                  with Wagyu tartare kissed with caviar, or a South American
-                  octopus sear. Move into the likes of duck fat pavé, celery root
-                  purée, or tropical panna cotta that echoes the colors of the
-                  sunset overhead.
+                  This isn’t pre-fixed; it’s personal. Our culinary team crafts
+                  your menu around your palate, which could be refined, relaxed,
+                  or daring. Start with Wagyu tartare kissed with caviar or a
+                  South American octopus sear. Move into the likes of duck fat
+                  pavé, celery root purée, or tropical panna cotta that echoes
+                  the colors of the sunset overhead.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  Have a vision already? We'll design around it. Prefer to be
+                  Have a vision already? We’ll design around it. Prefer to be
                   surprised? Let our chef guide your voyage through flavor.
                 </p>
               </div>
@@ -174,6 +190,14 @@ const PrivateDining = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent xl:rounded-l-lg" />
+              <a
+                href="https://loveandartistry.pic-time.com/-kokomoyacht/gallery"
+                target="_blank"
+              >
+                <p className="absolute right-4 bottom-2 z-10 text-sm text-white drop-shadow-lg">
+                  Photos by Love & Artistry
+                </p>
+              </a>
             </div>
           </div>
         </motion.section>
@@ -200,7 +224,10 @@ const PrivateDining = () => {
                 { src: tablethree, alt: "Sunset dining experience" },
                 { src: tablefour, alt: "Luxurious yacht dining setup" },
               ].map((image, idx) => (
-                <div key={idx} className="relative group overflow-hidden rounded-lg shadow-xl">
+                <div
+                  key={idx}
+                  className="relative group overflow-hidden rounded-lg shadow-xl"
+                >
                   <motion.img
                     src={image.src}
                     alt={image.alt}
@@ -244,16 +271,19 @@ const PrivateDining = () => {
 
               <div className="space-y-6 text-white/90 text-center xl:text-left">
                 <p className="text-lg leading-relaxed">
-                  This is where world-class service meets barefoot ease. Our crew,
-                  in concert with Taste & Design's culinary stylists, ensures your
-                  experience is seamless, intimate, and meticulously executed—from
-                  the first sip to the final course.
+                  This is where world-class service meets barefoot ease. Our
+                  crew, in concert with Taste & Design's culinary stylists,
+                  ensures your experience is seamless, intimate, and
+                  meticulously executed—from the first sip to the final course.
                 </p>
                 <p className="text-lg leading-relaxed">
                   Every detail is choreographed to perfection, yet feels
-                  effortlessly natural. From the moment you step aboard until the
-                  last star reflects on the water, you're in the hands of true
-                  hospitality professionals.
+                  effortlessly natural. From the moment you step aboard until
+                  the last star reflects on the water, you're in the hands of
+                  true hospitality professionals.
+                </p>
+                <p className="text-sm font-extralight font- leading-relaxed">
+                  In partnership with Taste & Design Catering
                 </p>
               </div>
             </div>
@@ -269,6 +299,14 @@ const PrivateDining = () => {
                     transition={{ type: "spring", stiffness: 300 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg" />
+                  <a
+                    href="https://loveandartistry.pic-time.com/-kokomoyacht/gallery"
+                    target="_blank"
+                  >
+                    <p className="absolute right-4 bottom-2 z-10 text-sm text-white drop-shadow-lg">
+                      Photos by Love & Artistry
+                    </p>
+                  </a>
                 </div>
 
                 <div className="absolute -bottom-8 -left-4 md:-left-20 md:-bottom-20 xl:-left-4 xl:-bottom-10 z-20 w-[60%] xl:w-[40%] aspect-[4/3]">
@@ -310,6 +348,14 @@ const PrivateDining = () => {
                     transition={{ type: "spring", stiffness: 300 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg" />
+                  <a
+                    href="https://loveandartistry.pic-time.com/-kokomoyacht/gallery"
+                    target="_blank"
+                  >
+                    <p className="absolute left-4 bottom-2 z-10 text-sm text-white drop-shadow-lg">
+                      Photos by Love & Artistry
+                    </p>
+                  </a>
                 </div>
 
                 <div className="absolute -bottom-8 -right-4 xl:-right-4 md:-right-20 md:-bottom-20 xl:-bottom-10 z-20 w-[60%] xl:w-[40%] aspect-[4/3]">
@@ -347,7 +393,7 @@ const PrivateDining = () => {
               </div>
 
               <Button
-                text="Inquire For Membership"
+                text="Inquire About Membership"
                 bg_color="midnightblue"
                 text_color="white"
                 navigate_to="contact"
