@@ -5,7 +5,7 @@ import useAuthStore from "../authStore";
 const ProtectedRoute = ({ children, requiredRole }) => {
   const user_type = useAuthStore((state) => state.user_type);
 
-  console.log("🔎 User in ProtectedRoute:", user_type);
+  // console.log("User in ProtectedRoute:", user_type);
 
   if (!user_type) {
     console.warn("No user detected. Redirecting to login.");

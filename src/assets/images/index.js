@@ -120,8 +120,28 @@ import hh5 from "./hh5.webp";
 import hh6 from "./hh6.webp";
 import hh7 from "./hh7.webp";
 import go from "./go.webp";
+import pvt_din_hero from "./pvt_din_hero.webp";
+import menu_pd from "./menu_pd.webp";
+import tableone from "./tableone.webp";
+import tabletwo from "./tabletwo.webp";
+import tablethree from "./tablethree.webp";
+import tablefour from "./tablefour.webp";
+import pd from "./pd.webp";
+import pd2 from "./pd2.webp";
+import pd3 from "./pd3.webp";
+import pd4 from "./pd4.webp";
 
 export {
+  pd,
+  pd2,
+  pd3,
+  pd4,
+  tablefour,
+  tableone,
+  tablethree,
+  tabletwo,
+  menu_pd,
+  pvt_din_hero,
   go,
   hh1,
   hh2,
