@@ -42,6 +42,9 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                 <Link onClick={() => setOpen(false)} to="/founders">Founder</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
+                <Link onClick={() => setOpen(false)} to="/private-dining">Private Dining</Link>
+              </li>
+              <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
               </li>
               {isLoggedIn && user_type && ( // Ensure user_type is not null before accessing user_type
