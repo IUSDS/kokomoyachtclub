@@ -136,11 +136,12 @@ const Navbar = () => {
               <ul className="flex items-center gap-4 text-midnightblue text-base font-nunito">
                 {[
                   "home",
-                  "events",
+                  // "events",
                   "fleet",
                   "membership",
                   "list-your-yacht",
                   "founders",
+                  "private-dining",
                   "contact",
                 ].map((menu) => (
                   <li
@@ -155,7 +156,9 @@ const Navbar = () => {
                     >
                       {menu === "list-your-yacht"
                         ? "List Your Yacht"
-                        : menu.charAt(0).toUpperCase() + menu.slice(1)}
+                        : menu === "private-dining" ?
+                        "Private Dining" : menu.charAt(0).toUpperCase() + menu.slice(1)
+                        }
                     </Link>
                   </li>
                 ))}
