@@ -6,9 +6,14 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [successMsg, setSuccessMsg] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
+
+  const API_BASE = import.meta.env.DEV
+  ? "http://localhost:8000"
+  : "https://api.kokomoyachtclub.vip";
+
   const handleResetReq = async () => {
     try {
-      const response = await fetch("https://api.kokomoyachtclub.vip/forgot/forgot-password", {
+      const response = await fetch(`${API_BASE}/forgot/forgot-password`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
