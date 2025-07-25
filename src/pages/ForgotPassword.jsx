@@ -83,7 +83,7 @@ const ForgotPassword = () => {
         <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-midnightblue mb-3 tracking-tight">
+            <h1 className="text-3xl font-bold text-midnightblue mb-8 tracking-tight">
               Forgot Your Password?
             </h1>
             <p className="text-gray-400 text-center leading-relaxed">
