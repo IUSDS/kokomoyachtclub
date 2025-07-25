@@ -34,6 +34,7 @@ export default function BookingHistoryTable({ transactions }) {
             <tr>
               {[
                 "Item",
+                "Tour Type",
                 "Booking ID",
                 "Date",
                 "Status",
@@ -70,6 +71,7 @@ export default function BookingHistoryTable({ transactions }) {
                   <tr key={index}>
                     <td className="px-4 py-2 text-sm">{tx.description}</td>
                     <td className="px-4 py-2 text-sm" colSpan="3"></td>
+                    <td className="px-4 py-2 text-sm" colSpan="3"></td>
                     <td className="px-4 py-2 text-sm text-right">
                       {tx.points}
                     </td>
@@ -83,8 +85,19 @@ export default function BookingHistoryTable({ transactions }) {
               return (
                 <tr key={tx.booking_id}>
                   <td className="px-4 py-2 text-sm">{tx.item}</td>
+                  <td className="px-4 py-2 text-sm">{tx.tour_type}</td>
                   <td className="px-4 py-2 text-sm">{tx.booking_id}</td>
-                  <td className="px-4 py-2 text-sm">{tx.date}</td>
+                  <td className="px-4 py-2 text-sm">
+                    {new Date(tx.start_at).toLocaleString("en-US", {
+                      weekday: "short", // "Wed"
+                      month: "short", // "Aug"
+                      day: "numeric", // "20"
+                      year: "numeric", // "2025"
+                      hour: "2-digit", // "03"
+                      minute: "2-digit", // "15"
+                      hour12: true, // AM/PM
+                    })}
+                  </td>
                   <td className="px-4 py-2 text-sm">{tx.status}</td>
                   <td className="px-4 py-2 text-sm text-right">{tx.points}</td>
                   <td className="px-4 py-2 text-sm text-right">{tx.balance}</td>
