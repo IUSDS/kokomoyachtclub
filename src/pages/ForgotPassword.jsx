@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const [countdown, setCountdown] = useState(0);
   const intervalRef = useRef(null);
 
-  const blockDuration = 10;
+  const blockDuration = 60;
 
   const handleResetReq = async () => {
     if (isButtonDisabled) {
