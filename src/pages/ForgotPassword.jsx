@@ -10,33 +10,82 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [successMsg, setSuccessMsg] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const intervalRef = useRef(null);
 
+  const TIMER_KEY = 'passwordResetTimer';
   const blockDuration = 60;
 
-  const handleResetReq = async () => {
-    if (isButtonDisabled) {
-      return;
+  // Check for existing timer on component mount
+  useEffect(() => {
+    const savedTimer = localStorage.getItem(TIMER_KEY);
+    if (savedTimer) {
+      try {
+        const { email: savedEmail, timestamp } = JSON.parse(savedTimer);
+        const elapsed = Date.now() - timestamp;
+        const remaining = 60000 - elapsed; // 60 seconds in milliseconds
+        
+        if (remaining > 0) {
+          setEmail(savedEmail);
+          startCountdown(remaining);
+        } else {
+          // Timer expired, clean up
+          localStorage.removeItem(TIMER_KEY);
+        }
+      } catch (error) {
+        // Invalid localStorage data, clean up
+        localStorage.removeItem(TIMER_KEY);
+      }
+    }
+  }, []);
+
+  const startCountdown = (duration) => {
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
     }
 
-    // Disable the button immediately and start countdown
     setIsButtonDisabled(true);
-    setCountdown(blockDuration);
+    setCountdown(Math.ceil(duration / 1000));
 
-    // Start the countdown timer
     intervalRef.current = setInterval(() => {
-      setCountdown((prevCount) => {
-        if (prevCount <= 1) {
+      setCountdown((prev) => {
+        if (prev <= 1) {
           clearInterval(intervalRef.current);
           setIsButtonDisabled(false);
+          localStorage.removeItem(TIMER_KEY);
           return 0;
         }
-        return prevCount - 1;
+        return prev - 1;
       });
     }, 1000);
+  };
+
+  const showSuccess = (message) => {
+    setFailMsg(false);
+    setSuccessMsg(true);
+    setTimeout(() => {
+      setSuccessMsg(false);
+    }, 10000);
+  };
+
+  const showError = (message) => {
+    setSuccessMsg(false);
+    setErrorMessage(message);
+    setFailMsg(true);
+    setTimeout(() => {
+      setFailMsg(false);
+      setErrorMessage("");
+    }, 13000);
+  };
+
+  const handleResetReq = async () => {
+    if (isButtonDisabled || !email.trim()) {
+      return;
+    }
 
     try {
       const response = await fetch(`${API_BASE}/forgot/forgot-password`, {
@@ -48,22 +97,43 @@ const ForgotPassword = () => {
         body: new URLSearchParams({ email: email }).toString(),
       });
 
-      if (!response.ok) {
-        setSuccessMsg(false);
-        setFailMsg(true);
-        setTimeout(() => {
-          setFailMsg(false);
-        }, 13000);
-        throw new Error("Failed to send reset request");
+      const data = await response.json();
+
+      // Handle different response scenarios
+      if (response.ok) {
+        // Success case
+        if (data.start_timer) {
+          // Save timer info to localStorage
+          localStorage.setItem(TIMER_KEY, JSON.stringify({
+            email: email,
+            timestamp: Date.now()
+          }));
+          
+          startCountdown(data.remaining_time || 60000);
+        }
+        
+        showSuccess(data.message || "Reset link sent successfully!");
+        
+      } else {
+        // Error cases (400, 429, etc.)
+        const errorDetail = data.detail || data;
+        
+        if (errorDetail.start_timer) {
+          // Rate limiting case - start timer even though it's an error
+          localStorage.setItem(TIMER_KEY, JSON.stringify({
+            email: email,
+            timestamp: Date.now()
+          }));
+          
+          startCountdown(errorDetail.remaining_time || 60000);
+        }
+        
+        showError(errorDetail.message || "An error occurred");
       }
 
-      setFailMsg(false);
-      setSuccessMsg(true);
-      setTimeout(() => {
-        setSuccessMsg(false);
-      }, 10000);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Network error:", error);
+      showError("Network error. Please check your connection and try again.");
     }
   };
 
@@ -105,6 +175,7 @@ const ForgotPassword = () => {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={isButtonDisabled}
                 />
               </div>
             </div>
@@ -113,7 +184,7 @@ const ForgotPassword = () => {
               className={`
                 w-full py-4 px-6 rounded-2xl font-semibold text-white transition-all duration-300 transform
                 ${
-                  isButtonDisabled
+                  isButtonDisabled || !email.trim()
                     ? "bg-gray-600/50 cursor-not-allowed scale-95"
                     : "bg-gradient-to-r from-midnightblue to-cyan-500 cursor-pointer hover:scale-x-105 hover:shadow-xl shadow-lg transform transition-all duration-300"
                 }
@@ -175,10 +246,15 @@ const ForgotPassword = () => {
                     </div>
                     <div>
                       <p className="text-white font-medium">
-                        Email not found
+                        {errorMessage || "An error occurred"}
                       </p>
                       <p className="text-white text-sm mt-1">
-                        This email address is not registered with us.
+                        {errorMessage.includes("not found") 
+                          ? "This email address is not registered with us."
+                          : errorMessage.includes("wait")
+                          ? "Too many requests. Please be patient."
+                          : "Please try again or contact support."
+                        }
                       </p>
                     </div>
                   </div>
