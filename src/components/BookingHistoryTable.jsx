@@ -56,27 +56,21 @@ export default function BookingHistoryTable({ transactions }) {
               <td className="px-4 py-2 text-sm font-semibold">
                 Opening Balance
               </td>
-              <td className="px-4 py-2 text-sm"></td>
-              <td className="px-4 py-2 text-sm"></td>
-              <td className="px-4 py-2 text-sm"></td>
-              <td className="px-4 py-2 text-sm text-right"></td>
-              <td className="px-4 py-2 text-sm text-right font-semibold">
-                {transactions.opening_balance}
-              </td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm text-right">
+                    </td>
+                    <td className="px-4 py-2 text-sm text-right">
+                      {transactions.opening_balance}
+                    </td>
             </tr>
 
             {transactions.data.map((tx, index) => {
               if (tx.source === "Point Adjustment") {
                 return (
                   <tr key={index}>
-                    {/* <td className="px-4 py-2 text-sm">{tx.description}</td>
-                    <td className="px-4 py-2 text-sm" colSpan="3"></td>
-                    <td className="px-4 py-2 text-sm text-right">
-                      {tx.points}
-                    </td>
-                    <td className="px-4 py-2 text-sm text-right">
-                      {tx.balance}
-                    </td> */}
 
                     <td className="px-4 py-2 text-sm">{tx.description}</td>
                     <td className="px-4 py-2 text-sm"></td>
