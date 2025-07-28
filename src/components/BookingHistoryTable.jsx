@@ -102,7 +102,7 @@ export default function BookingHistoryTable({ transactions }) {
                     })}
                   </td>
                   <td className="px-4 py-2 text-sm">{tx.status}</td>
-                  <td className="px-4 py-2 text-sm text-right">{tx.points}</td>
+                  <td className="px-4 py-2 text-sm text-right">{tx.points_cost}</td>
                   <td className="px-4 py-2 text-sm text-right">{tx.balance}</td>
                 </tr>
               );
