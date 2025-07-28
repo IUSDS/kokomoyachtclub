@@ -26,7 +26,7 @@ export default function BookingHistoryTable({ transactions }) {
 
   return (
     <table className="min-w-full divide-y divide-gray-200 bg-white rounded-md shadow">
-      {transactions.booking_data.length === 0 ? (
+      {transactions.data.length === 0 ? (
         <div className="text-center text-gray-500 py-6">No bookings found.</div>
       ) : (
         <table className="min-w-full divide-y divide-gray-200 bg-white rounded-md shadow">
@@ -34,6 +34,7 @@ export default function BookingHistoryTable({ transactions }) {
             <tr>
               {[
                 "Item",
+                "Tour Type",
                 "Booking ID",
                 "Date",
                 "Status",
@@ -55,21 +56,27 @@ export default function BookingHistoryTable({ transactions }) {
               <td className="px-4 py-2 text-sm font-semibold">
                 Opening Balance
               </td>
-              <td className="px-4 py-2 text-sm"></td>
-              <td className="px-4 py-2 text-sm"></td>
-              <td className="px-4 py-2 text-sm"></td>
-              <td className="px-4 py-2 text-sm text-right"></td>
-              <td className="px-4 py-2 text-sm text-right font-semibold">
-                {transactions.opening_balance}
-              </td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm text-right">
+                    </td>
+                    <td className="px-4 py-2 text-sm text-right">
+                      {transactions.opening_balance}
+                    </td>
             </tr>
 
-            {transactions.booking_data.map((tx, index) => {
-              if (tx.source === "adjustment") {
+            {transactions.data.map((tx, index) => {
+              if (tx.source === "Point Adjustment") {
                 return (
                   <tr key={index}>
+
                     <td className="px-4 py-2 text-sm">{tx.description}</td>
-                    <td className="px-4 py-2 text-sm" colSpan="3"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
+                    <td className="px-4 py-2 text-sm"></td>
                     <td className="px-4 py-2 text-sm text-right">
                       {tx.points}
                     </td>
@@ -83,8 +90,17 @@ export default function BookingHistoryTable({ transactions }) {
               return (
                 <tr key={tx.booking_id}>
                   <td className="px-4 py-2 text-sm">{tx.item}</td>
+                  <td className="px-4 py-2 text-sm">{tx.tour_type}</td>
                   <td className="px-4 py-2 text-sm">{tx.booking_id}</td>
-                  <td className="px-4 py-2 text-sm">{tx.date}</td>
+                  <td className="px-8 py-2 text-sm">
+                    {new Date(tx.start_at).toLocaleString("en-US", {
+                      month: "short", // "Aug"
+                      day: "numeric", // "20"
+                      hour: "2-digit", // "03"
+                      minute: "2-digit", // "15"
+                      hour12: true, // AM/PM
+                    })}
+                  </td>
                   <td className="px-4 py-2 text-sm">{tx.status}</td>
                   <td className="px-4 py-2 text-sm text-right">{tx.points}</td>
                   <td className="px-4 py-2 text-sm text-right">{tx.balance}</td>
