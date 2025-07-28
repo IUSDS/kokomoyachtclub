@@ -103,7 +103,7 @@ const fleetData = [
   {
     location: "Sarasota",
     title: "52' Rally Point",
-    points: "270 Mariner Points",
+    points: "285 Mariner Points",
     id: "rallypoint",
     description:
       "Indulge in effortless sophistication aboard Rally Point, blending Italian elegance with modern luxury. Designed for discerning guests, Rally Point delivers unmatched comfort, panoramic vistas, and refined amenities, perfect for intimate gatherings, sunset cruises, or exclusive celebrations along Sarasota’s stunning coastline.",
