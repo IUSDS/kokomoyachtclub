@@ -69,6 +69,12 @@ import {
   hh5,
   hh6,
   hh7,
+  rp1,
+  rp2,
+  rp3,
+  rp4,
+  rp5,
+  rp6,
 } from "../assets/images";
 import { useLocation, Link } from "react-router-dom";
 import MembershipLevels from "../components/MembershipLevels";
@@ -96,6 +102,17 @@ const fleetData = [
   },
   {
     location: "Sarasota",
+    title: "52' Rally Point",
+    points: "285 Mariner Points",
+    id: "rallypoint",
+    description:
+      "Indulge in effortless sophistication aboard Rally Point, blending Italian elegance with modern luxury. Designed for discerning guests, Rally Point delivers unmatched comfort, panoramic vistas, and refined amenities, perfect for intimate gatherings, sunset cruises, or exclusive celebrations along Sarasota’s stunning coastline.",
+    images: [rp1, rp2, rp3, rp4, rp5, rp6],
+    buttonText: "Become a Member to Book",
+    reverse: false,
+  },
+  {
+    location: "Sarasota",
     title: "50' Memory Maker",
     points: "246 Mariner Points",
     id: "memorymaker",
@@ -103,7 +120,7 @@ const fleetData = [
       "Our 50' Three Bedroom, Three Story Power Catamaran perfect for half days, full days and multi-day excursions. Experience unmatched elegance with three stories of luxury, four spacious entertaining areas, and state-of-the-art amenities. Memory Maker has 3 bedrooms with ensuite bathrooms, an office, full galley and family room. Ideal for full day and half day dayboating plus amazing overnight and multi-day journeys.",
     images: [memory_maker, MM1, MM2, MM3],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota",
@@ -114,7 +131,7 @@ const fleetData = [
       "Welcome to our amazing Cruisers Yachts GLS 42. With dual beach doors, large U-shaped main seating, galley with a raised wet bar, and a spacious open bow, the entertainment possibilities are endless. The lower cabin features an aft stateroom and U-shaped dinette that converts into a berth. A full galley and standing head with shower complete this remarkable yacht.",
     images: [giddy_up, GU1, GU2, GU3, home4, GU5],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota",
@@ -125,7 +142,7 @@ const fleetData = [
       "She is the nicest sailing vessel in the market. Unlike traditional sailing catamarans the Bali 4.2 has a front bow that is completely solid with tons of room for seating and enjoying the day. The entire stern of the vessel opens to create a wide open flow from cabin to the cockpit. She is great for both sailing adventures as well as non sailing day boating. She is perfect for overnight and multi-night excursions with her 4 bedrooms, 4 full baths and crew quarters.",
     images: [home7, wl2, wl3, wl4, wl5, wl6, wl7],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota",
@@ -136,7 +153,7 @@ const fleetData = [
       "A sleek 40-foot luxury yacht designed for both relaxation and celebration. Golden Ticket offers spacious seating, shaded lounge areas, and a top-tier sound system—perfect for sunset cruises, private gatherings, or laid-back days exploring Sarasota’s waters in style. Step aboard and enjoy smooth cruising with a professional captain and crew who make every moment feel effortless. Whether you're sipping champagne under the sun or dancing to your favorite playlist, Golden Ticket delivers the perfect blend of comfort and coastal charm.",
     images: [gt1, gt3, gt4, gt5, gt6, gt7, gt8],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota",
@@ -147,7 +164,7 @@ const fleetData = [
       "Happy Hour is the perfect blend of elegance and relaxation on the water. Her sleek lines and spacious layout make her ideal for everything from casual day cruising to unforgettable sunset celebrations. With an open bow sunpad, shaded aft deck, and generous interior salon, she’s designed for effortless entertaining. Onboard, you’ll enjoy a modern galley, plush lounge seating, and seamless indoor-outdoor flow. Whether you're hosting a private gathering or enjoying a quiet escape, Happy Hour offers smooth cruising and upscale comfort.",
     images: [hh1, hh2, hh3, hh4, hh5, hh6, hh7],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Sarasota",
@@ -158,7 +175,7 @@ const fleetData = [
       "Our 38' Open Bow Day Boat for up to 13 guests. Perfect for day trips to restaurants, sandbars or simply cruising, this open bow day boat offers ultimate comfort with spacious seating, cushioned flooring throughout, mahogany tables, shade for the entire boat, full bathroom, an advanced stereo system, water toys and twin 350’s for plenty of “Get Up and Go”.",
     images: [home5, TS1, TS2],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Sarasota",
@@ -169,7 +186,7 @@ const fleetData = [
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
 
   // ───── St. Petersburg ─────
@@ -182,7 +199,7 @@ const fleetData = [
       "“Memories, Not Dreams” promises a one-of-a-kind luxury experience in St. Petersburg’s vibrant waters, where every detail caters to an unparalleled voyage. This yacht offers expansive lounge areas, cutting-edge amenities, and agile performance for an unrivaled sea adventure. With luxurious bedrooms, state-of-the-art kitchen facilities, and a plethora of entertainment options, your time at sea is transformed into an exceptional escapade.",
     images: [mnd1, mnd6, mnd2, mnd4, mnd5],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "St. Petersburg",
@@ -193,7 +210,7 @@ const fleetData = [
       "Set sail on the 44’ Congetta for a luxury day on the water in St. Pete. From cruising along the Gulf Coast to docking at waterfront restaurants or lounging on secluded beaches, this power catamaran is your ticket to a customized and carefree boating experience.",
     images: [congetta1, congetta2, congetta3, congetta4, congetta5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
 
   // ───── Anna Maria ─────
@@ -206,7 +223,7 @@ const fleetData = [
       "The 50’ Lil’ Bit Nauti brings a fresh take on luxury cruising, combining modern design, stability, and wide-open comfort. This Aquila 44 power catamaran is built for those who love smooth sailing, panoramic views, and versatile indoor-outdoor living. With a spacious flybridge, expansive lounging areas, and a sleek, stylish layout, it’s the perfect vessel for sunset cruises, island-hopping, or relaxing day trips along Florida’s beautiful coastline.",
     images: [lib1, lib2, lib3, lib4, lib5, lib6],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
   {
     location: "Anna Maria",
@@ -217,7 +234,7 @@ const fleetData = [
       "Happy Hour is the perfect blend of elegance and relaxation on the water. Her sleek lines and spacious layout make her ideal for everything from casual day cruising to unforgettable sunset celebrations. With an open bow sunpad, shaded aft deck, and generous interior salon, she’s designed for effortless entertaining. Onboard, you’ll enjoy a modern galley, plush lounge seating, and seamless indoor-outdoor flow. Whether you're hosting a private gathering or enjoying a quiet escape, Happy Hour offers smooth cruising and upscale comfort.",
     images: [hh1, hh2, hh3, hh4, hh5, hh6, hh7],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
   {
     location: "Anna Maria",
@@ -228,7 +245,7 @@ const fleetData = [
       "Sleek, modern, and built for both speed and comfort, the 35’ Aviara is the ultimate day yacht for those who love to cruise in style. Perfect for sandbar lounging, sunset cruising, and entertaining, this premium vessel combines cutting-edge design with effortless luxury on the water.",
     images: [aviara1, aviara2, aviara3, aviara4, aviara5],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
 
   // ───── Tampa Bay ─────
@@ -241,7 +258,7 @@ const fleetData = [
       "The 44’ Fountaine Pajot delivers the perfect blend of performance, comfort, and style for exploring Tampa Bay. Whether you’re island-hopping, relaxing at a sandbar, or enjoying a sunset cruise, this sleek power catamaran provides a smooth, spacious ride with all the amenities for a first-class experience.",
     images: [congetta1, congetta2, congetta3, congetta4, congetta5],
     buttonText: "Become a Member to Book",
-    reverse: false,
+    reverse: true,
   },
 
   // ───── Venice ─────
@@ -261,7 +278,7 @@ const fleetData = [
       thirst_trap_4,
     ],
     buttonText: "Become a Member to Book",
-    reverse: true,
+    reverse: false,
   },
 ];
 

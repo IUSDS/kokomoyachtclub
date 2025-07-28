@@ -130,8 +130,20 @@ import pd from "./pd.webp";
 import pd2 from "./pd2.webp";
 import pd3 from "./pd3.webp";
 import pd4 from "./pd4.webp";
+import rp1 from "./rp1.webp";
+import rp2 from "./rp2.webp";
+import rp3 from "./rp3.webp";
+import rp4 from "./rp4.webp";
+import rp5 from "./rp5.webp";
+import rp6 from "./rp6.webp";
 
 export {
+  rp1,
+  rp2,
+  rp3,
+  rp4,
+  rp5,
+  rp6,
   pd,
   pd2,
   pd3,
