@@ -10,7 +10,7 @@ import {
   home5,
   fleet,
   home7,
-  home8,
+  rp2,
   home9,
   mnd,
   congetta,
@@ -116,6 +116,7 @@ const Home = () => {
 
   const fleetImages = [
     { name: "Peace", size: "63'", location: "Sarasota", img: peace1 },
+    { name: "Rally Point", size: "52'", location: "Sarasota", img: rp2 },
     { name: "Memory Maker", size: "50'", location: "Sarasota", img: home3 },
     { name: "Giddy Up", size: "43'", location: "Sarasota", img: home4 },
     { name: "Wanderlust", size: "42'", location: "Sarasota", img: home7 },
