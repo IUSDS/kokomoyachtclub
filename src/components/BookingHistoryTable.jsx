@@ -77,6 +77,7 @@ export default function BookingHistoryTable({ transactions }) {
                       {new Date(tx.date).toLocaleString("en-US", {
                         month: "short", // "Aug"
                         day: "numeric", // "20"
+                        year: "numeric",   
                         hour: "2-digit", // "03"
                         minute: "2-digit", // "15"
                         hour12: true, // AM/PM
@@ -105,6 +106,7 @@ export default function BookingHistoryTable({ transactions }) {
                     ).toLocaleString("en-US", {
                       month: "short",
                       day: "numeric",
+                      year: "numeric",   
                       hour: "2-digit",
                       minute: "2-digit",
                       hour12: true,

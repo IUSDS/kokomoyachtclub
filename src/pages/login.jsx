@@ -79,10 +79,7 @@ export default function Login() {
 
       {/* Form */}
       <main className="flex-grow flex flex-col items-center justify-center p-4">
-        <h1 className="flex items-center text-center px-4 justify-center text-black md:text-4xl text-xl font-bold">
-          Welcome to Kokomo Yacht Club
-        </h1>
-        <p className="text-gray-600 text-center">Please log in to continue</p>
+        <p className="text-gray-600 text-center text-xl">Please log in to continue</p>
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-md space-y-6 p-8 rounded-xl"
