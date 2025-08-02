@@ -80,6 +80,7 @@ export default function BookingHistoryTable({ transactions }) {
                         hour: "2-digit", // "03"
                         minute: "2-digit", // "15"
                         hour12: true, // AM/PM
+                        timeZone: "America/New_York", // THIS IS THE CORRECTION
                       })}
                     </td>
                     <td className="px-4 py-2 text-sm"></td>
@@ -100,20 +101,23 @@ export default function BookingHistoryTable({ transactions }) {
                   <td className="px-4 py-2 text-sm">{tx.booking_id}</td>
                   <td className="px-8 py-2 text-sm">
                     {new Date(
-                      tx.start_at
-                        .replace(" at ", " ")
-                        .replace(" PM", " PM") 
+                      tx.start_at.replace(" at ", " ").replace(" PM", " PM")
                     ).toLocaleString("en-US", {
                       month: "short",
                       day: "numeric",
-                      hour: "2-digit", 
-                      minute: "2-digit", 
-                      hour12: true, 
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                      timeZone: "America/New_York",
                     })}
                   </td>
                   <td className="px-4 py-2 text-sm">{tx.status}</td>
-                  <td className="px-4 py-2 text-sm text-right">{tx.points_cost}</td>
-                  <td className="px-4 py-2 text-sm text-right">{tx.balance_after_booking}</td>
+                  <td className="px-4 py-2 text-sm text-right">
+                    {tx.points_cost}
+                  </td>
+                  <td className="px-4 py-2 text-sm text-right">
+                    {tx.balance_after_booking}
+                  </td>
                 </tr>
               );
             })}

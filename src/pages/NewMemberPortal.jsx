@@ -119,11 +119,15 @@ const NewMemberPortal = () => {
     formData.append("company_name", values.companyName);
     if (values.picture) formData.append("picture", values.picture);
 
+    for (let [key, val] of formData.entries()) {
+      console.log(key, val);
+    }
+
     try {
-      const res = await fetch(
-        "https://api.kokomoyachtclub.vip/update/update/user/",
-        { method: "PUT", body: formData }
-      );
+      const res = await fetch(`${API_BASE}/update/update/user/`, {
+        method: "PUT",
+        body: formData,
+      });
       if (!res.ok) {
         const txt = await res.text();
         throw new Error(`Update failed: ${res.status} ${txt}`);

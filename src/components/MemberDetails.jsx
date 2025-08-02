@@ -33,6 +33,7 @@ const MemberDetails = ({ userData,onSave }) => {
   }, [userData]);
 
   const handlePictureChange = (e) => {
+    console.log("Selected file:", e.target.files[0]);
     if (e.target.files.length) setPicture(e.target.files[0]);
   };
 
@@ -182,6 +183,7 @@ const MemberDetails = ({ userData,onSave }) => {
         <input
           type="file"
           accept="image/*"
+          name="picture"
           onChange={handlePictureChange}
           className="focus:outline-none"
         />
