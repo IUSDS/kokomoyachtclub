@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import CustomAlert from '../components/CustomAlert';
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import CustomAlert from "../components/CustomAlert";
 
 const Modal = ({ isModalOpen, closeModal }) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [alertBody, setAlertBody] = useState('');
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const API_BASE = import.meta.env.DEV
     ? "http://localhost:8000"
@@ -21,15 +22,17 @@ const Modal = ({ isModalOpen, closeModal }) => {
 
   const handleAlertClose = () => {
     setAlertOpen(false);
-  }
+  };
 
   const handleModalSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); // Disable the button immediately
 
     if (!/^\d{10}$/.test(phone)) {
       setAlertTitle("Invalid Number!");
       setAlertBody("Please enter a 10-digit mobile number.");
       setAlertOpen(true);
+      setIsButtonDisabled(false); // Re-enable if validation fails
       return;
     }
 
@@ -37,37 +40,51 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setAlertTitle("Invalid Email!");
       setAlertBody("Please enter a valid email.");
       setAlertOpen(true);
+      setIsButtonDisabled(false); // Re-enable if validation fails
       return;
     }
 
     try {
-      const response = await fetch(`${API_BASE}/visitors/add-visitors-details`, {
-        method: 'POST',
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          visitor_name: name,
-          phone_no: phone,
-        })
-      });
+      const response = await fetch(
+        `${API_BASE}/visitors/add-visitors-details`,
+        {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            visitor_name: name,
+            phone_no: phone,
+          }),
+        }
+      );
+
       if (!response.ok) {
-        throw new Error('Error submitting form');
+        throw new Error("Error submitting form");
       }
 
       setAlertTitle("Successful");
       setAlertBody("Thank you for sharing your details.");
       setAlertOpen(true);
 
-      setName('');
-      setPhone('');
-      setEmail('');
+      setName("");
+      setPhone("");
+      setEmail("");
 
-      window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf","_blank");
+      window.open(
+        "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf",
+        "_blank"
+      );
+
+      // Re-enable the button after 5 seconds
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 5000);
     } catch (error) {
       console.error(error);
+      setIsButtonDisabled(false); // Re-enable if there's an error
     }
   };
 
@@ -110,7 +127,8 @@ const Modal = ({ isModalOpen, closeModal }) => {
                     Download Our Brochure
                   </h2>
                   <p className="text-blue-100 mb-4">
-                    Thank you for your interest in Kokomo Yacht Club! Please fill out the form below to download our brochure.
+                    Thank you for your interest in Kokomo Yacht Club! Please
+                    fill out the form below to download our brochure.
                   </p>
                   <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-white mx-auto rounded-full"></div>
                 </div>
@@ -178,9 +196,16 @@ const Modal = ({ isModalOpen, closeModal }) => {
                     </button>
                     <button
                       type="submit"
-                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-white to-blue-100 text-slate-900 font-semibold hover:from-blue-50 hover:to-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                      disabled={isButtonDisabled}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg ${
+                        isButtonDisabled
+                          ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                          : "bg-gradient-to-r from-white to-blue-100 text-slate-900 hover:from-blue-50 hover:to-white transform hover:scale-105 hover:shadow-xl"
+                      }`}
                     >
-                      Submit & Download
+                      {isButtonDisabled
+                        ? "Please wait..."
+                        : "Submit & Download"}
                     </button>
                   </div>
                 </form>
@@ -189,7 +214,12 @@ const Modal = ({ isModalOpen, closeModal }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      <CustomAlert onClose={handleAlertClose} isVisible={alertopen} title={alertTitle} body={alertBody} />
+      <CustomAlert
+        onClose={handleAlertClose}
+        isVisible={alertopen}
+        title={alertTitle}
+        body={alertBody}
+      />
     </div>
   );
 };

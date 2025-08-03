@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { home5 } from '../assets/images';
-import CustomAlert from './CustomAlert';
+import React, { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { home5 } from "../assets/images";
+import CustomAlert from "./CustomAlert";
 
 const ContactForm = () => {
   const [isVerified, setIsVerified] = useState(false);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [alertBody, setAlertBody] = useState('');
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleCaptcha = (value) => {
     console.log("Captcha value:", value);
@@ -25,25 +26,28 @@ const ContactForm = () => {
   };
 
   const API_BASE = import.meta.env.DEV
-  ? "http://localhost:8000"
-  : "https://api.kokomoyachtclub.vip";
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); // Disable the button immediately
 
     // 1. Optional reCAPTCHA check
     /*
-    if (!isVerified) {
-      alert("Please verify that you are not a robot!");
-      return;
-    }
-    */
+  if (!isVerified) {
+    alert("Please verify that you are not a robot!");
+    setIsButtonDisabled(false); // Re-enable if validation fails
+    return;
+  }
+  */
 
     // 2. Validate Phone (must be 10 digits)
     if (!/^\d{10}$/.test(phone)) {
       setAlertTitle("Invalid Number!");
       setAlertBody("Please enter a 10-digit mobile number.");
       setAlertOpen(true);
+      setIsButtonDisabled(false); // Re-enable if validation fails
       return;
     }
 
@@ -52,6 +56,7 @@ const ContactForm = () => {
       setAlertTitle("Invalid Email!");
       setAlertBody("Please enter a valid email.");
       setAlertOpen(true);
+      setIsButtonDisabled(false); // Re-enable if validation fails
       return;
     }
 
@@ -75,8 +80,6 @@ const ContactForm = () => {
         throw new Error("Error submitting form");
       }
 
-      // console.log("Form submitted successfully!");
-      // Show a success message (optional)
       setAlertTitle("Successful");
       setAlertBody("Thank you for sharing your details.");
       setAlertOpen(true);
@@ -88,24 +91,33 @@ const ContactForm = () => {
       setEmail("");
       setMessage("");
       setIsVerified(false);
+
+      // Re-enable the button after 5 seconds
+      setTimeout(() => {
+        setIsButtonDisabled(false);
+      }, 5000);
     } catch (error) {
       console.error(error);
-      // Optionally show an error alert
-      setAlertTitle('Failed');
-      setAlertBody('Could not submit form. Please try again.');
+      setAlertTitle("Failed");
+      setAlertBody("Could not submit form. Please try again.");
       setAlertOpen(true);
+      setIsButtonDisabled(false); // Re-enable if there's an error
     }
   };
 
   const handleAlertColse = () => {
     setAlertOpen(false);
-  }
+  };
 
   return (
     <div>
       <div className="flex flex-col xl:flex-row">
         <div className="fade-in relative xl:h-screen inset-0 bg-cover bg-center xl:w-1/2">
-          <img src={home5} alt="Contact Us" className="h-full w-full object-cover" />
+          <img
+            src={home5}
+            alt="Contact Us"
+            className="h-full w-full object-cover"
+          />
           <div className="absolute inset-0 bg-midnightblue bg-opacity-30"></div>
         </div>
         <div className="fade-in xl:w-1/2 flex flex-col items-start py-10 px-8 gap-4 bg-midnightblue text-white">
@@ -182,15 +194,25 @@ const ContactForm = () => {
             </div> */}
             <button
               type="submit"
-              className="mt-4 px-2 py-2 w-full rounded-full bg-blue-600 hover:bg-blue-700 transition-colors"
+              disabled={isButtonDisabled}
+              className={`mt-4 px-2 py-2 w-full rounded-full transition-colors ${
+                isButtonDisabled
+                  ? "bg-gray-500 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
-              Send
+              {isButtonDisabled ? "Sending..." : "Send"}
             </button>
           </form>
         </div>
       </div>
       {/* Custom Alert Section */}
-      <CustomAlert onClose={handleAlertColse} isVisible={alertopen} title={alertTitle} body={alertBody} />
+      <CustomAlert
+        onClose={handleAlertColse}
+        isVisible={alertopen}
+        title={alertTitle}
+        body={alertBody}
+      />
     </div>
   );
 };
