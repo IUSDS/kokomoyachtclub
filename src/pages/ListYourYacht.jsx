@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { list_yacht } from "../assets/images";
 import { RiCloseLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const ListYourYacht = () => {
   const [formOpen, setFormOpen] = useState(false);
@@ -80,62 +81,104 @@ const ListYourYacht = () => {
 
   // Submit form to backend
   const submitForm = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError(null);
+  e.preventDefault();
+  setIsSubmitting(true);
+  setSubmitError(null);
 
-    const API_BASE = import.meta.env.DEV
-      ? "http://localhost:8000"
-      : "https://api.kokomoyachtclub.vip";
+  const API_BASE = import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
 
-    try {
-      const submissionData = {
-        visitor_first_name: formData.firstName,
-        visitor_last_name: formData.lastName,
-        visitor_email: formData.email,
-        visitor_phone_number: `${formData.countryCode}${formData.phone}`,
-        yacht_model: formData.model,
-        yacht_manufacture_year: parseInt(formData.year),
-        yacht_size: parseInt(formData.size),
-        visitor_message: formData.message || "",
-      };
+  try {
+    const submissionData = {
+      visitor_first_name: formData.firstName,
+      visitor_last_name: formData.lastName,
+      visitor_email: formData.email,
+      visitor_phone_number: `${formData.countryCode}${formData.phone}`,
+      yacht_model: formData.model,
+      yacht_manufacture_year: parseInt(formData.year),
+      yacht_size: parseInt(formData.size),
+      visitor_message: formData.message || "",
+    };
 
-      const response = await fetch(`${API_BASE}/visitors/add-yacht-visitor`, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(submissionData),
-      });
+    const response = await fetch(`${API_BASE}/visitors/add-yacht-visitor`, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submissionData),
+    });
 
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        throw new Error(
-          errorData?.detail || `Submission failed: ${response.status}`
-        );
-      }
-
-      const data = await response.json();
-      console.log("Submission successful:", data);
-      setSubmitSuccess(true);
-      resetForm();
-
-      // Keep the button disabled for 5 seconds after successful submission
-      setTimeout(() => {
-        setIsSubmitting(false);
-        // Close the form modal after 5 seconds on success
-        if (formOpen) {
-          setFormOpen(false);
-          setSubmitSuccess(false);
-        }
-      }, 5000);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitError(error.message || "Failed to submit. Please try again.");
-      setIsSubmitting(false); // Re-enable immediately on error
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      throw new Error(
+        errorData?.detail || `Submission failed: ${response.status}`
+      );
     }
-  };
+
+    // ✅ Backend submission done
+    const data = await response.json();
+    console.log("Submission successful:", data);
+    setSubmitSuccess(true);
+    resetForm(); // clear form values
+    setIsSubmitting(false); // re-enable submit button
+
+    // ✅ Close modal only if it's open (i.e., popup form)
+    if (formOpen) {
+      setFormOpen(false);
+      setSubmitSuccess(false);
+    }
+
+    // ✅ Show success Swal
+    await Swal.fire({
+  html: `
+    <div id="swal-custom-card" class="relative w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-2xl shadow-2xl overflow-hidden p-8 backdrop-blur-sm">
+
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
+      <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full opacity-5 blur-3xl"></div>
+
+      <h2 class="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-12 text-center">
+        Details Submitted!
+      </h2>
+      <p class="text-blue-100 text-2xl text-center mb-8">
+        Thank you for your interest in <br/> <strong>Kokomo Yacht Club</strong>.
+      </p>
+      <p class="text-blue-100 mb-6 text-lg text-center">
+        Your brochure has been opened in a new tab.
+      </p>
+
+      <div class="text-center mt-6">
+        <button id="swal-close-button" class="bg-white text-slate-900 px-6 py-3 rounded-xl font-semibold hover:bg-blue-100 transition-all duration-300">
+          Got it
+        </button>
+      </div>
+    </div>
+  `,
+  background: "transparent",
+  showConfirmButton: false,
+  customClass: {
+    popup: "p-0 bg-transparent shadow-none",
+  },
+  didOpen: () => {
+    const btn = document.getElementById("swal-close-button");
+    if (btn) btn.addEventListener("click", () => Swal.close());
+  },
+});
+
+
+
+
+
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    setSubmitError(error.message || "Failed to submit. Please try again.");
+    setIsSubmitting(false);
+  }
+};
+
+
 
   // Validate form before submission
   const validateForm = () => {
@@ -320,19 +363,6 @@ const ListYourYacht = () => {
         >
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
-
-        {submitSuccess && (
-          <div className="mt-4 p-3 bg-green-100 text-green-800 rounded-md text-center">
-            Your yacht details have been successfully submitted! We'll be in
-            touch soon.
-          </div>
-        )}
-
-        {submitError && (
-          <div className="mt-4 p-3 bg-red-100 text-red-800 rounded-md text-center">
-            {submitError}
-          </div>
-        )}
       </>
     );
   };

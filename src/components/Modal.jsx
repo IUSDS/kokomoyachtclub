@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CustomAlert from "../components/CustomAlert";
+import Swal from "sweetalert2";
 
 const Modal = ({ isModalOpen, closeModal }) => {
   const [name, setName] = useState("");
@@ -25,68 +26,111 @@ const Modal = ({ isModalOpen, closeModal }) => {
   };
 
   const handleModalSubmit = async (e) => {
-    e.preventDefault();
-    setIsButtonDisabled(true); // Disable the button immediately
+  e.preventDefault();
+  setIsButtonDisabled(true); // Disable the button
 
-    if (!/^\d{10}$/.test(phone)) {
-      setAlertTitle("Invalid Number!");
-      setAlertBody("Please enter a 10-digit mobile number.");
-      setAlertOpen(true);
-      setIsButtonDisabled(false); // Re-enable if validation fails
-      return;
+  // Validation
+  if (!/^\d{10}$/.test(phone)) {
+    setAlertTitle("Invalid Number!");
+    setAlertBody("Please enter a 10-digit mobile number.");
+    setAlertOpen(true);
+    setIsButtonDisabled(false);
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    setAlertTitle("Invalid Email!");
+    setAlertBody("Please enter a valid email.");
+    setAlertOpen(true);
+    setIsButtonDisabled(false);
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE}/visitors/add-visitors-details`, {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        visitor_name: name,
+        phone_no: phone,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("API Error:", response.status, errorData);
+      throw new Error("Submission failed");
     }
 
-    if (!validateEmail(email)) {
-      setAlertTitle("Invalid Email!");
-      setAlertBody("Please enter a valid email.");
-      setAlertOpen(true);
-      setIsButtonDisabled(false); // Re-enable if validation fails
-      return;
-    }
+    // Reset form fields
+    setName("");
+    setPhone("");
+    setEmail("");
 
-    try {
-      const response = await fetch(
-        `${API_BASE}/visitors/add-visitors-details`,
-        {
-          method: "POST",
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            visitor_name: name,
-            phone_no: phone,
-          }),
-        }
-      );
+    // Open brochure immediately in a new tab
+    window.open(
+      "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf",
+      "_blank"
+    );
 
-      if (!response.ok) {
-        throw new Error("Error submitting form");
-      }
+    // Close the modal
+    closeModal();
 
-      setAlertTitle("Successful");
-      setAlertBody("Thank you for sharing your details.");
-      setAlertOpen(true);
+    await Swal.fire({
+  html: `
+    <div class="swal-custom-container relative w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-2xl shadow-2xl overflow-hidden p-8 backdrop-blur-sm">
+      
+      <!-- Decorative Elements -->
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
+      <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full opacity-5 blur-3xl"></div>
 
-      setName("");
-      setPhone("");
-      setEmail("");
+      <!-- Message Content -->
+      <h2 class="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-12 text-center">
+        Details Submitted!
+      </h2>
+      <p class="text-blue-100 text-2xl text-center mb-8">
+        Thank you for your interest in <br/> <strong>Kokomo Yacht Club</strong>.
+      </p>
+      <p class="text-blue-100 mb-6 text-lg text-center">
+        Your brochure has been opened in a new tab.
+      </p>
 
-      window.open(
-        "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf",
-        "_blank"
-      );
+      <!-- Manual Close Button -->
+      <div class="text-center mt-6">
+        <button id="swal-close-btn" class="bg-white text-slate-900 px-6 py-3 rounded-xl font-semibold hover:bg-blue-100 transition-all duration-300">
+          Got it
+        </button>
+      </div>
+    </div>
+  `,
+  background: "transparent",
+  showConfirmButton: false,
+  customClass: {
+    popup: "p-0 bg-transparent shadow-none",
+  },
+  didOpen: () => {
+    const btn = document.getElementById("swal-close-btn");
+    if (btn) btn.addEventListener("click", () => Swal.close());
+  },
+});
 
-      // Re-enable the button after 5 seconds
-      setTimeout(() => {
-        setIsButtonDisabled(false);
-      }, 5000);
-    } catch (error) {
-      console.error(error);
-      setIsButtonDisabled(false); // Re-enable if there's an error
-    }
-  };
+
+
+  } catch (error) {
+    console.error(error);
+    setAlertTitle("Submission Failed");
+    setAlertBody("Something went wrong. Please try again later.");
+    setAlertOpen(true);
+  } finally {
+    setIsButtonDisabled(false); 
+  }
+};
+
 
   return (
     <div>
@@ -203,9 +247,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
                           : "bg-gradient-to-r from-white to-blue-100 text-slate-900 hover:from-blue-50 hover:to-white transform hover:scale-105 hover:shadow-xl"
                       }`}
                     >
-                      {isButtonDisabled
-                        ? "Please wait..."
-                        : "Submit & Download"}
+                      {isButtonDisabled ? "Please wait..." : "Submit Details"}
                     </button>
                   </div>
                 </form>
