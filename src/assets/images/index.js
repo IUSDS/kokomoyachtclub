@@ -130,8 +130,32 @@ import pd from "./pd.webp";
 import pd2 from "./pd2.webp";
 import pd3 from "./pd3.webp";
 import pd4 from "./pd4.webp";
+import galleryimg1 from "./galleryimg1.webp";
+import galleryimg2 from "./galleryimg2.webp";
+import galleryimg3 from "./galleryimg3.webp";
+import galleryimg4 from "./galleryimg4.webp";
+import galleryimg5 from "./galleryimg5.webp";
+import galleryimg6 from "./galleryimg6.webp";
+import galleryimg7 from "./galleryimg7.webp";
+import galleryimg8 from "./galleryimg8.webp";
+import galleryimg9 from "./galleryimg9.webp";
+import galleryimg10 from "./galleryimg10.webp";
+import galleryimg11 from "./galleryimg11.webp";
+import galleryimg12 from "./galleryimg12.webp";
 
 export {
+  galleryimg1,
+  galleryimg2,
+  galleryimg3,
+  galleryimg4,
+  galleryimg5,
+  galleryimg6,
+  galleryimg7,
+  galleryimg8,
+  galleryimg9,
+  galleryimg10,
+  galleryimg11,
+  galleryimg12,
   pd,
   pd2,
   pd3,

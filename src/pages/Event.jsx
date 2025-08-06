@@ -572,8 +572,9 @@ const Event = () => {
           </ul>
           <button
             className="text-white w-fit md:text-lg bg-midnightblue px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-all duration-300 xl:mt-4"
-          >
+          > <a href="/gallery">
             View Private Gallery
+          </a>
           </button>
         </div>
       </div>

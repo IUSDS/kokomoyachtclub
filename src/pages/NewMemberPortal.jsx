@@ -120,10 +120,10 @@ const NewMemberPortal = () => {
     if (values.picture) formData.append("picture", values.picture);
 
     try {
-      const res = await fetch(
-        "https://api.kokomoyachtclub.vip/update/update/user/",
-        { method: "PUT", body: formData }
-      );
+      const res = await fetch(`${API_BASE}/update/update/user/`, {
+        method: "PUT",
+        body: formData,
+      });
       if (!res.ok) {
         const txt = await res.text();
         throw new Error(`Update failed: ${res.status} ${txt}`);
@@ -252,6 +252,14 @@ const NewMemberPortal = () => {
                 className="w-20 object-cover"
                 onError={handleImageError}
               />
+              /*<img
+  src={`${user.picture_url}?t=${Date.now()}`}
+  alt="Profile"
+  className="w-20 object-cover"
+  onError={handleImageError}
+/>
+the picture url is showing, "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/profile_pictures/testuser/rp3.webp"
+*/
             )}
           </div>
           {/* Membership type and Points */}

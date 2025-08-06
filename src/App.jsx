@@ -27,6 +27,7 @@ import NewMemberPortal from "./pages/NewMemberPortal";
 import Seo from "./components/Seo";
 import Event from "./pages/Event";
 import PrivateDining from "./pages/PrivateDining";
+import Gallery from "./pages/gallery";
 
 function ExternalRedirect({ url }) {
   useEffect(() => {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/new-member-portal" element={<NewMemberPortal />} />
           <Route path="/events" element={<Event />} />
           <Route path="/private-dining" element={<PrivateDining />} />
+          <Route path="/gallery" element={<Gallery />} />
           {/* Protected Routes */}
           <Route 
             path="/member-portal"
