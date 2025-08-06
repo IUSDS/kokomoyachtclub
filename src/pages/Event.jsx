@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   events_hero,
-  quay_401,
   sky,
   boat,
   section_two,
@@ -11,7 +10,7 @@ import {
   go,
 } from "../assets/images";
 
-import op_logo from "../assets/logos/op_logo.png";
+import EventSection from "../components/EventSection";
 
 const Form = ({ onClose, event, title }) => {
   const [formData, setFormData] = useState({
@@ -461,29 +460,34 @@ const Event = () => {
     <div className="space-y-12">
       {/* Hero section */}
       <div
-        className="relative w-full h-[544px] md:h-[744px] xl:h-[944px] bg-cover bg-center "
+        className="relative w-full h-[544px] md:h-[744px] xl:h-[944px] bg-cover bg-center"
         style={{ backgroundImage: `url(${events_hero})` }}
       >
         {/* Title */}
-        <p className="absolute top-[25%] left-1/2 transform -translate-x-1/2 text-xl w-[90%] font-bold md:text-5xl xl:text-7xl text-white text-center drop-shadow-md">
-          EVENTS AT KOKOMO YACHT CLUB
-        </p>
+        <div className="absolute inset-x-0 top-[20%] md:top-[25%] flex justify-center px-4">
+          <h1 className="text-2xl md:text-5xl xl:text-7xl font-bold text-white text-center drop-shadow-md max-w-6xl leading-tight">
+            EVENTS AT KOKOMO YACHT CLUB
+          </h1>
+        </div>
 
         {/* Button */}
-        <button
-          onClick={() => setShowForm(true)}
-          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
-        >
-          Sign Up For Future Events
-        </button>
+        <div className="absolute inset-x-0 top-[60%] md:top-[65%] flex justify-center px-4">
+          <button
+            onClick={() => setShowForm(true)}
+            className="text-white font-semibold text-lg md:text-xl xl:text-2xl bg-midnightblue px-8 py-4 md:px-10 md:py-5 rounded-full shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap"
+          >
+            RSVP NOW
+          </button>
+        </div>
 
         {/* Bottom Shape */}
-        <div className="custom-shape-divider-bottom-1750074161">
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 120"
             preserveAspectRatio="none"
+            className="relative block w-full h-[60px] md:h-[80px] xl:h-[100px]"
           >
             <path
               d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
@@ -529,6 +533,9 @@ const Event = () => {
         </p>
       </div>
 
+      {/* Current Event */}
+      <EventSection />
+
       {/* Section 4 */}
       <div className="text-midnightblue md:py-8 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
         {/* <p>
@@ -543,40 +550,68 @@ const Event = () => {
           onClick={() => setShowForm(true)}
           className="text-white font-semibold w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
         >
-          Sign Up For Future Events
+          RSVP NOW
         </button>
       </div>
 
       {/* Past Events */}
-      <div className="grid grid-cols-1 md:grid-cols-2 px-6 md:px-10 gap-8">
-        <div>
-          <img
-            src={go}
-            alt="Fleet at Grand Opening"
-            className="rounded-lg shadow-lg"
-          />
+      <section className="">
+        <div className="mx-auto px-6 md:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Image */}
+            <div className="order-2 lg:order-1">
+              <div className="relative">
+                <img
+                  src={go}
+                  alt="Fleet at Grand Opening - Kokomo Yacht Club exclusive event"
+                  className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover rounded-xl shadow-2xl"
+                />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="order-1 lg:order-2 space-y-6">
+              <div className="space-y-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold text-midnightblue leading-tight">
+                  Inside Past Events
+                </h2>
+                
+                <p className="text-base md:text-lg xl:text-xl text-gray-700 leading-relaxed">
+                  Kokomo events are private by nature, but here's a glimpse for those
+                  with the right kind of curiosity.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg md:text-xl xl:text-2xl font-semibold text-midnightblue">
+                  Previous Highlights Include:
+                </h3>
+                
+                <ul className="space-y-2 text-base md:text-lg xl:text-xl text-gray-700">
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-midnightblue rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Grand Opening at Quay Commons
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-midnightblue rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Exclusive Member Sunset Cruises
+                  </li>
+                  <li className="flex items-start">
+                    <span className="inline-block w-2 h-2 bg-midnightblue rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                    Private Networking Gatherings
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-4">
+                <button className="bg-midnightblue text-white font-semibold text-base md:text-lg px-8 py-3 md:px-10 md:py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300">
+                  View Private Gallery
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-1 text-midnightblue text-left h-fit gap-2">
-          <p className="text-xl md:text-3xl xl:text-5xl font-semibold">
-            Inside Past Events
-          </p>
-          <p className="md:text-xl">
-            Kokomo events are private by nature, but here’s a glimpse for those
-            with the right kind of curiosity.
-          </p>
-          <p className="font-semibold md:text-xl xl:mt-4">
-            Previous Highlights Include:
-          </p>
-          <ul className="md:text-xl">
-            <li> - Grand Opening at Quay Commons</li>
-          </ul>
-          <button
-            className="text-white w-fit md:text-lg bg-midnightblue px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-all duration-300 xl:mt-4"
-          >
-            View Private Gallery
-          </button>
-        </div>
-      </div>
+      </section>
 
       {/* Section 6 */}
       <div
@@ -695,8 +730,8 @@ const Event = () => {
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
           <Form
             onClose={() => setShowForm(false)}
-            event={"Future Events"}
-            title={"Sign Up For Future Events"}
+            event={"Anchors Away Event RSVP"}
+            title={"Anchors Away Event RSVP"}
           />
         </div>
       )}

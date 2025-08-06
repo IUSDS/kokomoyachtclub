@@ -26,9 +26,9 @@ const ResponsiveMenu = ({ open, setOpen }) => {
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/">Home</Link>
               </li>
-              {/* <li className="cursor-pointer hover:text-gray-300">
+              <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/events">Events</Link>
-              </li> */}
+              </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/fleet">Fleet</Link>
               </li>
@@ -47,18 +47,12 @@ const ResponsiveMenu = ({ open, setOpen }) => {
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/contact">Contact</Link>
               </li>
-              {isLoggedIn && user_type && ( // Ensure user_type is not null before accessing user_type
+              {isLoggedIn && user_type && (
                 user_type.toLowerCase() === "user" ? (
                   <>
                     <li className="cursor-pointer hover:text-gray-300">
                       <Link onClick={() => setOpen(false)} to="/member-portal">Dashboard</Link>
                     </li>
-                    {/* <li className="cursor-pointer hover:text-gray-300">
-                      <Link onClick={() => setOpen(false)} to="/update-details">Update Details</Link>
-                    </li>
-                    <li className="cursor-pointer hover:text-gray-300">
-                      <Link onClick={() => setOpen(false)} to="/booking-history">Booking History</Link>
-                    </li> */}
                   </>
                 ) : user_type.toLowerCase() === "admin" ? (
                   <>

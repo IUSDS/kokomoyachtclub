@@ -136,8 +136,10 @@ import rp3 from "./rp3.webp";
 import rp4 from "./rp4.webp";
 import rp5 from "./rp5.webp";
 import rp6 from "./rp6.webp";
+import brandlogo from "./brandlogo.webp";
 
 export {
+  brandlogo,
   rp1,
   rp2,
   rp3,
