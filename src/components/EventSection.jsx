@@ -27,8 +27,8 @@ export default function EventSection() {
   return (
     <section className="px-4 sm:px-6 md:px-8 lg:px-16">
       <div className="max-w-5xl mx-auto text-center">
-        <p className="text-xs sm:text-sm uppercase text-gray-600 mb-2">Exclusive Invitation</p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6">
+        <p className="text-xs sm:text-sm uppercase text-gray-600 mb-4">Exclusive Invitation</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 font-great">
           Anchors Away & <span className="font-normal">Luxury All Day</span>
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-gray-700 mx-auto max-w-3xl leading-relaxed">
@@ -36,7 +36,7 @@ export default function EventSection() {
         </p>
       </div>
 
-      <div className="mt-8 flex justify-center">
+      <div className="flex justify-center">
         <img
           src={brandlogo}
           alt="Event Branding"
@@ -44,7 +44,7 @@ export default function EventSection() {
         />
       </div>
 
-      <div className="mt-12 bg-midnightblue p-6 sm:p-8 md:p-10 lg:p-12 border rounded-lg">
+      <div className="bg-midnightblue p-6 sm:p-8 md:p-10 lg:p-12 border rounded-lg">
         <h2 className="text-2xl sm:text-3xl md:text-4xl text-center mb-6 font-light text-white">
           Event Details
         </h2>
