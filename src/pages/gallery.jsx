@@ -35,16 +35,6 @@ const NewPage = () => {
 
   return (
     <>
-      <Helmet>
-        <meta property="og:title" content="New Page Title | Your Site" />
-        <meta
-          property="og:description"
-          content="Short description of your new page."
-        />
-        <meta property="og:image" content={galleryimg1} />
-        <meta property="og:url" content="https://yourdomain.com/new-page" />
-      </Helmet>
-
       <div className="flex flex-col">
         {/* Hero Section */}
         <section
@@ -93,7 +83,7 @@ const NewPage = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {galleryImages.map((img, idx) => (
                 <div
                   key={idx}

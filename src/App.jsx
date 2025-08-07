@@ -65,7 +65,7 @@ function App() {
           <Route path="/new-member-portal" element={<NewMemberPortal />} />
           <Route path="/events" element={<Event />} />
           <Route path="/private-dining" element={<PrivateDining />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/events/gallery" element={<Gallery />} />
           {/* Protected Routes */}
           <Route 
             path="/member-portal"
