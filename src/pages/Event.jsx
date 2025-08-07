@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   events_hero,
-  quay_401,
   sky,
   boat,
   section_two,
@@ -10,8 +9,8 @@ import {
   boat2,
   go,
 } from "../assets/images";
-
-import op_logo from "../assets/logos/op_logo.png";
+import { X } from 'lucide-react';
+import EventSection from "../components/EventSection";
 
 const Form = ({ onClose, event, title }) => {
   const [formData, setFormData] = useState({
@@ -19,6 +18,7 @@ const Form = ({ onClose, event, title }) => {
     email: "",
     phone_no: "",
     event_name: event,
+    attendees: "",
   });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({ type: "", text: "" });
@@ -73,8 +73,8 @@ const Form = ({ onClose, event, title }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
+    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden animate-in fade-in duration-300" onClick={(e) => e.stopPropagation()}>
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
@@ -85,9 +85,7 @@ const Form = ({ onClose, event, title }) => {
           onClick={onClose}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-all duration-200 group"
         >
-          <span className="text-white text-xl group-hover:rotate-90 transition-transform duration-200">
-            ×
-          </span>
+          <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform duration-200" />
         </button>
 
         <div className="p-8">
@@ -100,17 +98,15 @@ const Form = ({ onClose, event, title }) => {
 
           {message.text && (
             <div
-              className={`text-sm mb-6 p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
-                message.type === "success"
-                  ? "bg-emerald-500 bg-opacity-20 border-emerald-400 text-emerald-100"
-                  : "bg-red-500 bg-opacity-20 border-red-400 text-red-100"
-              }`}
+              className={`text-sm mb-6 p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${message.type === "success"
+                ? "bg-emerald-500 bg-opacity-20 border-emerald-400 text-emerald-100"
+                : "bg-red-500 bg-opacity-20 border-red-400 text-red-100"
+                }`}
             >
               <div className="flex items-center">
                 <div
-                  className={`w-2 h-2 rounded-full mr-3 ${
-                    message.type === "success" ? "bg-emerald-400" : "bg-red-400"
-                  }`}
+                  className={`w-2 h-2 rounded-full mr-3 ${message.type === "success" ? "bg-emerald-400" : "bg-red-400"
+                    }`}
                 ></div>
                 {message.text}
               </div>
@@ -191,7 +187,7 @@ const Form = ({ onClose, event, title }) => {
               )}
             </div>
 
-            {/* <div className="group">
+            <div className="group">
               <label className="block mb-2 text-sm font-medium text-blue-100 group-focus-within:text-white transition-colors">
                 Number of Attendees
               </label>
@@ -213,7 +209,7 @@ const Form = ({ onClose, event, title }) => {
                   {errors.attendees}
                 </p>
               )}
-            </div> */}
+            </div>
 
             <button
               type="button"
@@ -306,8 +302,8 @@ const EmailMarketingForm = ({ onClose, event, title }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="w-full max-w-md mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
+    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={onClose}>
+      <div className="w-full max-w-md mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden animate-in fade-in duration-300" onClick={(e) => e.stopPropagation()}>
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
@@ -318,9 +314,7 @@ const EmailMarketingForm = ({ onClose, event, title }) => {
           onClick={onClose}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-all duration-200 group"
         >
-          <span className="text-white text-xl group-hover:rotate-90 transition-transform duration-200">
-            ×
-          </span>
+          <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform duration-200" />
         </button>
 
         <div className="p-8">
@@ -333,17 +327,15 @@ const EmailMarketingForm = ({ onClose, event, title }) => {
 
           {message.text && (
             <div
-              className={`text-sm mb-6 p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
-                message.type === "success"
-                  ? "bg-emerald-500 bg-opacity-20 border-emerald-400 text-emerald-100"
-                  : "bg-red-500 bg-opacity-20 border-red-400 text-red-100"
-              }`}
+              className={`text-sm mb-6 p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${message.type === "success"
+                ? "bg-emerald-500 bg-opacity-20 border-emerald-400 text-emerald-100"
+                : "bg-red-500 bg-opacity-20 border-red-400 text-red-100"
+                }`}
             >
               <div className="flex items-center">
                 <div
-                  className={`w-2 h-2 rounded-full mr-3 ${
-                    message.type === "success" ? "bg-emerald-400" : "bg-red-400"
-                  }`}
+                  className={`w-2 h-2 rounded-full mr-3 ${message.type === "success" ? "bg-emerald-400" : "bg-red-400"
+                    }`}
                 ></div>
                 {message.text}
               </div>
@@ -458,43 +450,36 @@ const Event = () => {
   const [showForm, setShowForm] = useState(false);
   const [showEmailSignupForm, setShowEmailSignupForm] = useState(false);
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 lg:space-y-20">
+
       {/* Hero section */}
-      <div
-        className="relative w-full h-[544px] md:h-[744px] xl:h-[944px] bg-cover bg-center "
+      <section
+        className="relative w-full h-[60vh] bg-cover bg-center"
         style={{ backgroundImage: `url(${events_hero})` }}
       >
         {/* Title */}
-        <p className="absolute top-[25%] left-1/2 transform -translate-x-1/2 text-xl w-[90%] font-bold md:text-5xl xl:text-7xl text-white text-center drop-shadow-md">
-          EVENTS AT KOKOMO YACHT CLUB
-        </p>
+        <div className="absolute inset-x-0 bottom-[25%] md:bottom-[20%] flex flex-col justify-center items-center px-4">
+          <h1 className="text-2xl md:text-5xl xl:text-7xl font-bold text-white text-center drop-shadow-md max-w-6xl leading-tight">
+            EVENTS AT
+          </h1>
+          <h1 className="text-2xl md:text-5xl xl:text-7xl font-bold text-white text-center drop-shadow-md max-w-6xl leading-tight">
+            KOKOMO YACHT CLUB
+          </h1>
+        </div>
 
         {/* Button */}
-        <button
-          onClick={() => setShowForm(true)}
-          className="absolute top-[65%] left-1/2 transform -translate-x-1/2 text-white font-semibold w-[250px] md:w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
-        >
-          Sign Up For Future Events
-        </button>
-
-        {/* Bottom Shape */}
-        <div className="custom-shape-divider-bottom-1750074161">
-          <svg
-            data-name="Layer 1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1200 120"
-            preserveAspectRatio="none"
+        {/* <div className="absolute inset-x-0 bottom-[15%] md:bottom-[8%] flex justify-center px-4">
+          <button
+            onClick={() => setShowForm(true)}
+            className="text-white font-semibold text-lg md:text-xl xl:text-2xl bg-midnightblue px-8 py-4 md:px-10 md:py-5 rounded-full shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap"
           >
-            <path
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-              className="shape-fill"
-            />
-          </svg>
-        </div>
-      </div>
+            RSVP NOW
+          </button>
+        </div> */}
+      </section>
 
       {/* Section 1 */}
-      <div className="flex flex-col-reverse md:flex-row items-center px-4 md:px-8 lg:px-16">
+      <section className="flex flex-col-reverse md:flex-row items-center px-4 md:px-8 lg:px-16">
         {/* Text */}
         <div className="w-full md:w-1/2 flex flex-col space-y-3 pt-8">
           <p className="font-bold text-2xl sm:text-3xl xl:w-2/3 lg:text-4xl text-center md:text-left text-midnightblue">
@@ -519,68 +504,74 @@ const Event = () => {
             className="w-72 sm:w-60 md:w-80 lg:w-[75%] rounded-xl"
           />
         </div>
-      </div>
+      </section>
 
       {/* Section 2 */}
-      <div className="bg-midnightblue h-20 flex justify-center items-center">
+      <section className="bg-midnightblue h-20 flex justify-center items-center">
         <p className="text-white text-sm md:text-xl lg:text-3xl px-4 text-center font-semibold">
           THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOYFUL AND
           HASSLE-FREE
         </p>
-      </div>
+      </section>
 
-      {/* Section 4 */}
-      <div className="text-midnightblue md:py-8 text-center font-semibold text-lg md:text-xl lg:text-2xl md:gap-4 px-8 flex flex-col items-center justify-center ">
-        {/* <p>
-          ENJOY A FIRST LOOK AT OUR NEWLY EXPANDED LUXURY FLEET WHILE IMMERSING
-          YOURSELF IN THE CHARM OF SARASOTA'S MOST UNIQUE LUXURY BOATING CLUB.
-        </p>
-        <p>
-          KINDLY RSVP BY JULY 7 TO RESERVE YOUR SPOT—AND JOIN US FOR AN
-          EXCLUSIVE POST-EVENT SUNSET CRUISE.
-        </p> */}
-        <button
-          onClick={() => setShowForm(true)}
-          className="text-white font-semibold w-fit text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
-        >
-          Sign Up For Future Events
-        </button>
-      </div>
+      {/* Current Event */}
+      <section className="flex flex-col space-y-6 items-center justify-center">
+        <EventSection showForm={() => setShowForm(true)}/>
+      </section>
 
       {/* Past Events */}
-      <div className="grid grid-cols-1 md:grid-cols-2 px-6 md:px-10 gap-8">
-        <div>
-          <img
-            src={go}
-            alt="Fleet at Grand Opening"
-            className="rounded-lg shadow-lg"
-          />
+      <section className="mx-auto px-6 md:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 justify-center items-start">
+          {/* Image */}
+          <div className="relative">
+            <img
+              src={go}
+              alt="Fleet at Grand Opening - Kokomo Yacht Club exclusive event"
+              className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover rounded-xl shadow-2xl"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="space-y-4 text-center lg:text-left">
+            <div className="space-y-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold text-midnightblue leading-tight">
+                Inside Past Events
+              </h2>
+
+              <p className="text-base md:text-lg xl:text-xl text-gray-700 leading-relaxed">
+                Kokomo events are private by nature, but here's a glimpse for those
+                with the right kind of curiosity.
+              </p>
+            </div>
+
+            <div className="mt-12 p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-sm border">
+              <div className="grid gap-3 sm:gap-4">
+                {[
+                  'Grand Opening at Quay Commons',
+                  'Exclusive Member Sunset Cruises',
+                  'Private Networking Gatherings'
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-blue-900 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
+                    <span className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="">
+              <button className="bg-midnightblue text-white font-semibold text-base md:text-lg px-8 py-3 md:px-10 md:py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300">
+                View Private Gallery
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-1 text-midnightblue text-left h-fit gap-2">
-          <p className="text-xl md:text-3xl xl:text-5xl font-semibold">
-            Inside Past Events
-          </p>
-          <p className="md:text-xl">
-            Kokomo events are private by nature, but here’s a glimpse for those
-            with the right kind of curiosity.
-          </p>
-          <p className="font-semibold md:text-xl xl:mt-4">
-            Previous Highlights Include:
-          </p>
-          <ul className="md:text-xl">
-            <li> - Grand Opening at Quay Commons</li>
-          </ul>
-          <button
-            className="text-white w-fit md:text-lg bg-midnightblue px-4 py-2 rounded-full shadow-lg hover:scale-105 transition-all duration-300 xl:mt-4"
-          > <a href="/gallery">
-            View Private Gallery
-          </a>
-          </button>
-        </div>
-      </div>
+      </section>
 
       {/* Section 6 */}
-      <div
+      <section
         className="md:pt-20 px-6 md:px-10"
         style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.5)" }}
       >
@@ -612,13 +603,13 @@ const Event = () => {
             className="hidden md:block absolute right-0 bottom-0 w-48 md:w-[500px] xl:w-[800px]"
           />
         </div>
-      </div>
+      </section>
 
       {/* spacer */}
-      <div className="hidden md:block w-full h-10 xl:h-56"></div>
+      <div className="hidden md:block w-full h-10 xl:h-32"></div>
 
-      {/* Section 7 */}
-      <div
+      {/* Email Marketing */}
+      <section
         className="relative mx-6 md:mx-10 bg-cover bg-center rounded-lg shadow-lg text-white min-h-[500px] md:min-h-[600px] xl:min-h-[800px] flex items-center"
         style={{
           backgroundImage: `url(${ocean})`,
@@ -629,7 +620,7 @@ const Event = () => {
         <img
           src={boat2}
           alt="Boat"
-          className="absolute left-1/2 md:left-[65%] lg:left-[60%] xl:left-[50%] top-52 md:top-40 xl:top-36 transform -translate-x-1/2 -translate-y-1/2 w-64 md:w-[400px] xl:w-[750px]"
+          className="absolute left-1/2 md:left-[65%] lg:left-[70%] xl:left-[55%] top-52 md:top-40 xl:top-36 transform -translate-x-1/2 -translate-y-1/2 w-64 md:w-[400px] xl:w-[650px]"
         />
 
         {/* Top-left Heading */}
@@ -651,15 +642,15 @@ const Event = () => {
           </p>
           <button
             onClick={() => setShowEmailSignupForm(true)}
-            className="text-midnightblue border border-white md:text-xl rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/80 hover:bg-transparent hover:text-white transition"
+            className="text-midnightblue border border-white md:text-lg rounded-full px-4 md:px-6 xl:px-10 py-1 bg-white/80 hover:bg-transparent hover:text-white transition"
           >
             Find out about Future Events
           </button>
         </div>
-      </div>
+      </section>
 
       {/* Section 8 */}
-      <div className="flex flex-col md:flex-row-reverse items-center gap-8 px-6 md:px-10 pt-6">
+      <section className="flex flex-col md:flex-row-reverse items-center gap-8 px-6 md:px-10 pt-6">
         {/* Image Section */}
         <img
           src={image}
@@ -689,15 +680,15 @@ const Event = () => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Forms */}
       {showForm && (
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
           <Form
             onClose={() => setShowForm(false)}
-            event={"Future Events"}
-            title={"Sign Up For Future Events"}
+            event={"Anchors Away Event RSVP"}
+            title={"Anchors Away Event RSVP"}
           />
         </div>
       )}

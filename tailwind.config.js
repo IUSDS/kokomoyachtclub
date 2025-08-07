@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         jakarta: ["Plus Jakarta Sans", "sans-serif"],
         monteserrat: ["Monteserrat", "sans-serif"],
+        great: ['"Great Vibes"', 'cursive'],
       },
       fontWeight: {
         veryLight: "50",

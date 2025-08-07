@@ -119,6 +119,10 @@ const NewMemberPortal = () => {
     formData.append("company_name", values.companyName);
     if (values.picture) formData.append("picture", values.picture);
 
+    for (let [key, val] of formData.entries()) {
+      console.log(key, val);
+    }
+
     try {
       const res = await fetch(`${API_BASE}/update/update/user/`, {
         method: "PUT",

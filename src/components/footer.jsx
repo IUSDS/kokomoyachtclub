@@ -27,6 +27,16 @@ const footer = () => {
                 </li>
                 <li>
                   <a
+                    href={`/fleet#rallypoint`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    52' Rally Point
+                  </a>
+                </li>
+                <li>
+                  <a
                     href={`/fleet#memorymaker`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -89,12 +99,22 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href={`/fleet#wnaderlust`}
+                    href={`/fleet#wanderlust`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer hover:text-blue-600"
                   >
                     42' Wanderlust
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/fleet#goldenticket`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer hover:text-blue-600"
+                  >
+                    40' Golden Ticket
                   </a>
                 </li>
                 <li>

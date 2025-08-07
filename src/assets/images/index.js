@@ -130,6 +130,7 @@ import pd from "./pd.webp";
 import pd2 from "./pd2.webp";
 import pd3 from "./pd3.webp";
 import pd4 from "./pd4.webp";
+<<<<<<< HEAD
 import galleryimg1 from "./galleryimg1.webp";
 import galleryimg2 from "./galleryimg2.webp";
 import galleryimg3 from "./galleryimg3.webp";
@@ -156,6 +157,24 @@ export {
   galleryimg10,
   galleryimg11,
   galleryimg12,
+=======
+import rp1 from "./rp1.webp";
+import rp2 from "./rp2.webp";
+import rp3 from "./rp3.webp";
+import rp4 from "./rp4.webp";
+import rp5 from "./rp5.webp";
+import rp6 from "./rp6.webp";
+import brandlogo from "./brandlogo.webp";
+
+export {
+  brandlogo,
+  rp1,
+  rp2,
+  rp3,
+  rp4,
+  rp5,
+  rp6,
+>>>>>>> 434c0f0dfb56fca214b09545706515df4fbf360d
   pd,
   pd2,
   pd3,
