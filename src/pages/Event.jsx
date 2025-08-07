@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   events_hero,
   sky,
@@ -449,6 +450,10 @@ const EmailMarketingForm = ({ onClose, event, title }) => {
 const Event = () => {
   const [showForm, setShowForm] = useState(false);
   const [showEmailSignupForm, setShowEmailSignupForm] = useState(false);
+  const navigate = useNavigate();
+  const handleGallery = () => {
+    navigate('gallery');
+  }
   return (
     <div className="space-y-12 lg:space-y-20">
 
@@ -458,7 +463,7 @@ const Event = () => {
         style={{ backgroundImage: `url(${events_hero})` }}
       >
         {/* Title */}
-        <div className="absolute inset-x-0 bottom-[25%] md:bottom-[20%] flex flex-col justify-center items-center px-4">
+        <div className="absolute inset-x-0 bottom-[20%] md:bottom-[10%] flex flex-col justify-center items-center px-4">
           <h1 className="text-2xl md:text-5xl xl:text-7xl font-bold text-white text-center drop-shadow-md max-w-6xl leading-tight">
             EVENTS AT
           </h1>
@@ -478,6 +483,19 @@ const Event = () => {
         </div> */}
       </section>
 
+      {/* Current Event */}
+      <section className="flex flex-col space-y-6 items-center justify-center">
+        <EventSection showForm={() => setShowForm(true)}/>
+      </section>
+
+      {/* Section 2 */}
+      <section className="bg-midnightblue h-20 flex justify-center items-center">
+        <p className="text-white text-sm md:text-xl lg:text-3xl px-4 text-center font-semibold">
+          THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOYFUL AND
+          HASSLE-FREE
+        </p>
+      </section>
+
       {/* Section 1 */}
       <section className="flex flex-col-reverse md:flex-row items-center px-4 md:px-8 lg:px-16">
         {/* Text */}
@@ -487,7 +505,7 @@ const Event = () => {
           </p>
           <div className="mx-auto md:mx-0 w-16 sm:w-24 lg:w-32 h-1 rounded-full bg-midnightblue" />
           <p className="text-sm sm:text-base xl:w-[80%] md:text-lg text-center md:text-left">
-            Welcome to the inner circle of coastal sophistication. At Kokomo
+            At Kokomo
             Yacht Club, our events are private gateways to a life less ordinary.
             Our curated events are designed to bring the community together in
             one of Sarasota's premier locations. With a team dedicated to
@@ -504,19 +522,6 @@ const Event = () => {
             className="w-72 sm:w-60 md:w-80 lg:w-[75%] rounded-xl"
           />
         </div>
-      </section>
-
-      {/* Section 2 */}
-      <section className="bg-midnightblue h-20 flex justify-center items-center">
-        <p className="text-white text-sm md:text-xl lg:text-3xl px-4 text-center font-semibold">
-          THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOYFUL AND
-          HASSLE-FREE
-        </p>
-      </section>
-
-      {/* Current Event */}
-      <section className="flex flex-col space-y-6 items-center justify-center">
-        <EventSection showForm={() => setShowForm(true)}/>
       </section>
 
       {/* Past Events */}
@@ -548,7 +553,7 @@ const Event = () => {
               <div className="grid gap-3 sm:gap-4">
                 {[
                   'Grand Opening at Quay Commons',
-                  'Exclusive Member Sunset Cruises',
+                  'Tour the Fleet',
                   'Private Networking Gatherings'
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-gray-50 rounded-lg transition-colors">
@@ -562,7 +567,9 @@ const Event = () => {
             </div>
 
             <div className="">
-              <button className="bg-midnightblue text-white font-semibold text-base md:text-lg px-8 py-3 md:px-10 md:py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300">
+              <button 
+                className="bg-midnightblue text-white font-semibold text-base md:text-lg px-8 py-3 md:px-10 md:py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
+                onClick={handleGallery}>
                 View Private Gallery
               </button>
             </div>

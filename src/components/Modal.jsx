@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import CustomAlert from '../components/CustomAlert';
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import CustomAlert from "../components/CustomAlert";
+import Swal from "sweetalert2";
+import { X } from 'lucide-react';
 
 const Modal = ({ isModalOpen, closeModal }) => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
-  const [alertTitle, setAlertTitle] = useState('');
-  const [alertBody, setAlertBody] = useState('');
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertBody, setAlertBody] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const API_BASE = import.meta.env.DEV
     ? "http://localhost:8000"
@@ -21,15 +24,18 @@ const Modal = ({ isModalOpen, closeModal }) => {
 
   const handleAlertClose = () => {
     setAlertOpen(false);
-  }
+  };
 
   const handleModalSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); // Disable the button
 
+    // Validation
     if (!/^\d{10}$/.test(phone)) {
       setAlertTitle("Invalid Number!");
       setAlertBody("Please enter a 10-digit mobile number.");
       setAlertOpen(true);
+      setIsButtonDisabled(false);
       return;
     }
 
@@ -37,39 +43,95 @@ const Modal = ({ isModalOpen, closeModal }) => {
       setAlertTitle("Invalid Email!");
       setAlertBody("Please enter a valid email.");
       setAlertOpen(true);
+      setIsButtonDisabled(false);
       return;
     }
 
     try {
       const response = await fetch(`${API_BASE}/visitors/add-visitors-details`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
+          accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: email,
+          email,
           visitor_name: name,
           phone_no: phone,
-        })
+        }),
       });
+
       if (!response.ok) {
-        throw new Error('Error submitting form');
+        const errorData = await response.json();
+        console.error("API Error:", response.status, errorData);
+        throw new Error("Submission failed");
       }
 
-      setAlertTitle("Successful");
-      setAlertBody("Thank you for sharing your details.");
-      setAlertOpen(true);
+      // Reset form fields
+      setName("");
+      setPhone("");
+      setEmail("");
 
-      setName('');
-      setPhone('');
-      setEmail('');
+      // Open brochure immediately in a new tab
+      window.open(
+        "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf",
+        "_blank"
+      );
 
-      window.open("https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf","_blank");
+      // Close the modal
+      closeModal();
+
+      await Swal.fire({
+        html: `
+    <div class="swal-custom-container relative w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-2xl shadow-2xl overflow-hidden p-8 backdrop-blur-sm">
+      
+      <!-- Decorative Elements -->
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
+      <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full opacity-5 blur-3xl"></div>
+
+      <!-- Message Content -->
+      <h2 class="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-12 text-center">
+        Details Submitted!
+      </h2>
+      <p class="text-blue-100 text-2xl text-center mb-8">
+        Thank you for your interest in <br/> <strong>Kokomo Yacht Club</strong>.
+      </p>
+      <p class="text-blue-100 mb-6 text-lg text-center">
+        Your brochure has been opened in a new tab.
+      </p>
+
+      <!-- Manual Close Button -->
+      <div class="text-center mt-6">
+        <button id="swal-close-btn" class="bg-white text-slate-900 px-6 py-3 rounded-xl font-semibold hover:bg-blue-100 transition-all duration-300">
+          Got it
+        </button>
+      </div>
+    </div>
+  `,
+        background: "transparent",
+        showConfirmButton: false,
+        customClass: {
+          popup: "p-0 bg-transparent shadow-none",
+        },
+        didOpen: () => {
+          const btn = document.getElementById("swal-close-btn");
+          if (btn) btn.addEventListener("click", () => Swal.close());
+        },
+      });
+
+
+
     } catch (error) {
       console.error(error);
+      setAlertTitle("Submission Failed");
+      setAlertBody("Something went wrong. Please try again later.");
+      setAlertOpen(true);
+    } finally {
+      setIsButtonDisabled(false);
     }
   };
+
 
   return (
     <div>
@@ -81,6 +143,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50"
+            onClick={closeModal}
           >
             <motion.div
               initial={{ y: -100 }}
@@ -88,6 +151,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
               exit={{ y: 100 }}
               transition={{ duration: 0.3 }}
               className="w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-3xl shadow-2xl relative overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Decorative elements */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
@@ -99,9 +163,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
                 onClick={closeModal}
                 className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-all duration-200 group"
               >
-                <span className="text-white text-xl group-hover:rotate-90 transition-transform duration-200">
-                  ×
-                </span>
+                <X className="w-4 h-4 text-white group-hover:rotate-90 transition-transform duration-200" />
               </button>
 
               <div className="p-8">
@@ -110,7 +172,8 @@ const Modal = ({ isModalOpen, closeModal }) => {
                     Download Our Brochure
                   </h2>
                   <p className="text-blue-100 mb-4">
-                    Thank you for your interest in Kokomo Yacht Club! Please fill out the form below to download our brochure.
+                    Thank you for your interest in Kokomo Yacht Club! Please
+                    fill out the form below to download our brochure.
                   </p>
                   <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-white mx-auto rounded-full"></div>
                 </div>
@@ -178,9 +241,13 @@ const Modal = ({ isModalOpen, closeModal }) => {
                     </button>
                     <button
                       type="submit"
-                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-white to-blue-100 text-slate-900 font-semibold hover:from-blue-50 hover:to-white transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                      disabled={isButtonDisabled}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg ${isButtonDisabled
+                          ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                          : "bg-gradient-to-r from-white to-blue-100 text-slate-900 hover:from-blue-50 hover:to-white transform hover:scale-105 hover:shadow-xl"
+                        }`}
                     >
-                      Submit & Download
+                      {isButtonDisabled ? "Please wait..." : "Submit Details"}
                     </button>
                   </div>
                 </form>
@@ -189,7 +256,12 @@ const Modal = ({ isModalOpen, closeModal }) => {
           </motion.div>
         )}
       </AnimatePresence>
-      <CustomAlert onClose={handleAlertClose} isVisible={alertopen} title={alertTitle} body={alertBody} />
+      <CustomAlert
+        onClose={handleAlertClose}
+        isVisible={alertopen}
+        title={alertTitle}
+        body={alertBody}
+      />
     </div>
   );
 };

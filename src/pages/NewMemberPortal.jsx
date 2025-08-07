@@ -256,6 +256,14 @@ const NewMemberPortal = () => {
                 className="w-20 object-cover"
                 onError={handleImageError}
               />
+              /*<img
+  src={`${user.picture_url}?t=${Date.now()}`}
+  alt="Profile"
+  className="w-20 object-cover"
+  onError={handleImageError}
+/>
+the picture url is showing, "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/profile_pictures/testuser/rp3.webp"
+*/
             )}
           </div>
           {/* Membership type and Points */}

@@ -19,3 +19,28 @@
 .custom-shape-divider-bottom-1750074161 .shape-fill {
     fill: #FFFFFF;
 }
+
+.swal2-timer-progress-bar {
+  background: #ffffff !important;
+}
+
+/* Fixes overflow and ensures progress bar stays within rounded corners */
+.swal2-popup {
+  overflow: hidden !important;
+  border-radius: 1rem !important; /* match your modal rounded-xl */
+}
+
+/* Ensures the timer bar appears at the bottom and respects container width */
+.swal2-timer-progress-bar {
+  background-color: #ffffff !important;
+  height: 4px !important;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+
+

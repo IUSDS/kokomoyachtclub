@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import Testimonial from "../components/TestimonialsSection";
 import CustomAlert from "../components/CustomAlert";
 import { div } from "framer-motion/client";
+import Swal from "sweetalert2";
 
 const Contact = () => {
   const [isVerified, setIsVerified] = useState(false);
@@ -20,6 +21,7 @@ const Contact = () => {
   const location = useLocation();
   const [emailConsent, setEmailConsent] = useState(false);
   const [smsConsent, setSmsConsent] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     // Restore scroll position
@@ -66,81 +68,105 @@ const Contact = () => {
   };
 
   const API_BASE = import.meta.env.DEV
-  ? "http://localhost:8000"
-  : "https://api.kokomoyachtclub.vip";
+    ? "http://localhost:8000"
+    : "https://api.kokomoyachtclub.vip";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsButtonDisabled(true); 
 
-    // 1. Optional reCAPTCHA check
-    /*
-    if (!isVerified) {
-      alert("Please verify that you are not a robot!");
-      return;
-    }
-    */
-
-    // 2. Validate Phone (must be 10 digits)
-    if (!/^\d{10}$/.test(phone)) {
-      setAlertTitle("Invalid Number!");
-      setAlertBody("Please enter a 10-digit mobile number.");
-      setAlertOpen(true);
-      return;
-    }
-
-    // 3. Validate Email
-    if (!validateEmail(email)) {
-      setAlertTitle("Invalid Email!");
-      setAlertBody("Please enter a valid email.");
-      setAlertOpen(true);
-      return;
-    }
-
-    // 4. Submit Form
     try {
-      const response = await fetch(
-        `${API_BASE}/visitors/become-a-member`,
-        {
-          method: "POST",
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            visitor_name: name,
-            phone_no: phone,
-            req_help: help,
-            ques: message,
-            email_consent: emailConsent,
-            sms_consent: smsConsent,  
-          }),
-        }
-      );
+      // Your existing validation checks
+      if (!/^\d{10}$/.test(phone)) {
+        setAlertTitle("Invalid Number!");
+        setAlertBody("Please enter a 10-digit mobile number.");
+        setAlertOpen(true);
+        setIsButtonDisabled(false); // Re-enable button on validation error
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        setAlertTitle("Invalid Email!");
+        setAlertBody("Please enter a valid email.");
+        setAlertOpen(true);
+        setIsButtonDisabled(false); // Re-enable button on validation error
+        return;
+      }
+
+      // Submit form
+      const response = await fetch(`${API_BASE}/visitors/become-a-member`, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          visitor_name: name,
+          phone_no: phone,
+          req_help: help,
+          ques: message,
+          email_consent: emailConsent,
+          sms_consent: smsConsent,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Error submitting form");
       }
 
-      console.log("Form submitted successfully!");
-      // Show a success message (optional)
-      setAlertTitle("Successful");
-      setAlertBody("Thank you for sharing your details.");
-      setAlertOpen(true);
+      await Swal.fire({
+        html: `
+        <div class="swal-custom-container relative w-full max-w-lg mx-auto bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white rounded-2xl shadow-2xl overflow-hidden p-8 backdrop-blur-sm">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-white to-blue-400"></div>
+          <div class="absolute -top-20 -right-20 w-40 h-40 bg-blue-500 rounded-full opacity-10 blur-3xl"></div>
+          <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-white rounded-full opacity-5 blur-3xl"></div>
 
-      // 5. Clear Fields
+          <h2 class="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-12 text-center">
+  Thank You for Reaching Out!
+</h2>
+<p class="text-blue-100 text-2xl text-center mb-8">
+  We appreciate your interest in the <strong>Kokomo Yacht Club</strong>.
+</p>
+<p class="text-blue-100 mb-6 text-lg text-center">
+  Our team will be in touch with you shortly regarding your inquiry or membership application.
+</p>
+
+
+          <div class="text-center mt-6">
+            <button id="swal-close-btn" class="bg-white text-slate-900 px-6 py-3 rounded-xl font-semibold hover:bg-blue-100 transition-all duration-300">
+              Got it
+            </button>
+          </div>
+        </div>
+      `,
+        background: "transparent",
+        showConfirmButton: false,
+        customClass: {
+          popup: "p-0 bg-transparent shadow-none",
+        },
+        didOpen: () => {
+          const btn = document.getElementById("swal-close-btn");
+          if (btn) btn.addEventListener("click", () => Swal.close());
+        },
+      });
+
+      // Clear form fields
       setName("");
       setPhone("");
       setEmail("");
       setHelp("I Want to Join the Yacht Club");
       setMessage("");
       setIsVerified(false);
+      setEmailConsent(false);
+      setSmsConsent(false);
     } catch (error) {
       console.error(error);
-      // Optionally show an error alert
       setAlertTitle("Submission Failed!");
       setAlertBody("Could not submit form. Please try again.");
       setAlertOpen(true);
+    } finally {
+      setIsButtonDisabled(false);
     }
   };
 
@@ -321,7 +347,11 @@ const Contact = () => {
                   <label htmlFor="smsConsent" className="text-sm text-gray-700">
                     <p className="text-md">Yes, please text me!</p>
                     <p className="text-sm">
-                      By signing up for text messages you agree to receive messages from Kokomo Yacht Club at the number provided, including automated reminders and marketing messages. Message frequency varies. Msg & data rates may apply. Reply STOP to unsubscribe. View our Privacy Policy.
+                      By signing up for text messages you agree to receive
+                      messages from Kokomo Yacht Club at the number provided,
+                      including automated reminders and marketing messages.
+                      Message frequency varies. Msg & data rates may apply.
+                      Reply STOP to unsubscribe. View our Privacy Policy.
                     </p>
                   </label>
                 </div>
@@ -336,9 +366,12 @@ const Contact = () => {
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white rounded-full py-2 font-semibold hover:bg-blue-700"
+                    disabled={isButtonDisabled}
+                    className={`w-full bg-blue-600 text-white rounded-full py-2 font-semibold hover:bg-blue-700 ${
+                      isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                   >
-                    Send
+                    {isButtonDisabled ? "Please wait..." : "Send"}
                   </button>
                 </div>
               </form>
