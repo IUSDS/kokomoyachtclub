@@ -74,7 +74,7 @@ const Modal = ({ isModalOpen, closeModal }) => {
 
       // Open brochure immediately in a new tab
       window.open(
-        "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/kyc_brochure.pdf",
+        "https://image-bucket-kokomo-yacht-club.s3.ap-southeast-2.amazonaws.com/KYC+Summer+2025-+Brochure.pdf",
         "_blank"
       );
 
