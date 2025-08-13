@@ -36,7 +36,7 @@ const ResponsiveMenu = ({ open, setOpen }) => {
                 <Link onClick={() => setOpen(false)} to="/membership">Membership</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
-                <Link onClick={() => setOpen(false)} to="/list-your-yacht">List Your Yacht</Link>
+                <Link onClick={() => setOpen(false)} to="/srq-yacht-management">SRQ Yacht Management</Link>
               </li>
               <li className="cursor-pointer hover:text-gray-300">
                 <Link onClick={() => setOpen(false)} to="/founders">Founder</Link>

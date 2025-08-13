@@ -139,7 +139,7 @@ const Navbar = () => {
                   "events",
                   "fleet",
                   "membership",
-                  "list-your-yacht",
+                  "srq-yacht-management",
                   "founders",
                   "private-dining",
                   "contact",
@@ -154,8 +154,8 @@ const Navbar = () => {
                       to={menu === "home" ? "/" : `/${menu}`}
                       onClick={() => setSelectedMenu(menu)}
                     >
-                      {menu === "list-your-yacht"
-                        ? "List Your Yacht"
+                      {menu === "srq-yacht-management"
+                        ? "SRQ Yacht Management"
                         : menu === "private-dining" ?
                         "Private Dining" : menu.charAt(0).toUpperCase() + menu.slice(1)
                         }
