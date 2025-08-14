@@ -13,6 +13,7 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [organization, setOrganization] = useState("");
   const [help, setHelp] = useState("I Want to Join the Yacht Club");
   const [message, setMessage] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
@@ -108,6 +109,7 @@ const Contact = () => {
           ques: message,
           email_consent: emailConsent,
           sms_consent: smsConsent,
+          organization: organization,
         }),
       });
 
@@ -160,6 +162,7 @@ const Contact = () => {
       setIsVerified(false);
       setEmailConsent(false);
       setSmsConsent(false);
+      setOrganization("");
     } catch (error) {
       console.error(error);
       setAlertTitle("Submission Failed!");
@@ -290,6 +293,25 @@ const Contact = () => {
                   </label>
                 </div>
 
+                {/* Industry/Organization Field (optional field) */}
+                <div>
+                  <label
+                    htmlFor="organization"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Organization <span className="text-slate-600 ml-1">*(optional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    value={organization}
+                    onChange={(e) => setName(e.target.value)}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Organization"
+                  />
+                </div>
+
                 {/* Dropdown - How Can We Help? */}
                 <div className="space-y-2 relative">
                   <label
@@ -331,6 +353,7 @@ const Contact = () => {
                     onChange={(e) => setMessage(e.target.value)}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Message"
+                    style={{ resize: "none" }}
                   ></textarea>
                 </div>
 
