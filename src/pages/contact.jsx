@@ -13,6 +13,7 @@ const Contact = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [organization, setOrganization] = useState("");
   const [help, setHelp] = useState("I Want to Join the Yacht Club");
   const [message, setMessage] = useState("");
   const [alertopen, setAlertOpen] = useState(false);
@@ -108,6 +109,7 @@ const Contact = () => {
           ques: message,
           email_consent: emailConsent,
           sms_consent: smsConsent,
+          organization: organization,
         }),
       });
 
@@ -160,6 +162,7 @@ const Contact = () => {
       setIsVerified(false);
       setEmailConsent(false);
       setSmsConsent(false);
+      setOrganization("");
     } catch (error) {
       console.error(error);
       setAlertTitle("Submission Failed!");
@@ -218,7 +221,7 @@ const Contact = () => {
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Name
+                    Name*
                   </label>
                   <input
                     type="text"
@@ -238,7 +241,7 @@ const Contact = () => {
                     htmlFor="phone"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Phone
+                    Phone*
                   </label>
                   <input
                     type="tel"
@@ -258,7 +261,7 @@ const Contact = () => {
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Email
+                    Email*
                   </label>
                   <input
                     type="email"
@@ -288,6 +291,25 @@ const Contact = () => {
                   >
                     Sign up for news and updates
                   </label>
+                </div>
+
+                {/* Industry/Organization Field (optional field) */}
+                <div>
+                  <label
+                    htmlFor="organization"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Organization
+                  </label>
+                  <input
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
+                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Organization"
+                  />
                 </div>
 
                 {/* Dropdown - How Can We Help? */}
@@ -331,6 +353,7 @@ const Contact = () => {
                     onChange={(e) => setMessage(e.target.value)}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Message"
+                    style={{ resize: "none" }}
                   ></textarea>
                 </div>
 

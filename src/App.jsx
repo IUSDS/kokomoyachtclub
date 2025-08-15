@@ -95,7 +95,7 @@ function App() {
           {/* Other Pages */}
           <Route path="/forgot_password" element={<ForgotPassword />} />
           <Route path="/new_password" element={<NewPassword />} />
-          <Route path="/list-your-yacht" element={<ListYourYacht />} />
+          <Route path="/srq-yacht-management" element={<ListYourYacht />} />
         </Routes>
       </div>
       <Footer />

@@ -205,10 +205,10 @@ const footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/list-your-yacht"
+                    href="/srq-yacht-management"
                     className="cursor-pointer hover:text-blue-600"
                   >
-                    List Your Yacht
+                    SRQ Yacht Management
                   </a>
                 </li>
                 <li>
