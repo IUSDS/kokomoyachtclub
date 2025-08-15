@@ -221,7 +221,7 @@ const Contact = () => {
                     htmlFor="name"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Name
+                    Name*
                   </label>
                   <input
                     type="text"
@@ -241,7 +241,7 @@ const Contact = () => {
                     htmlFor="phone"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Phone
+                    Phone*
                   </label>
                   <input
                     type="tel"
@@ -261,7 +261,7 @@ const Contact = () => {
                     htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Email
+                    Email*
                   </label>
                   <input
                     type="email"
@@ -299,7 +299,7 @@ const Contact = () => {
                     htmlFor="organization"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Organization <span className="text-slate-600 ml-1">*(optional)</span>
+                    Organization
                   </label>
                   <input
                     type="text"
