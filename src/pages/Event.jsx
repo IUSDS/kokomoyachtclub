@@ -511,9 +511,9 @@ const Event = () => {
           {/* CTA */}
           <button
             onClick={() => setShowForm(true)}
-            className="mt-12 text-white font-semibold w-fit md:w-[250px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+            className="text-white font-semibold w-fit text-lg md:text-xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
           >
-            RSVP NOW
+            Sign Up for Future Events
           </button>
         </div>
 
