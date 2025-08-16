@@ -13,6 +13,7 @@ import {
 import { X } from 'lucide-react';
 import EventSection from "../components/EventSection";
 
+// Form Component
 const Form = ({ onClose, event, title }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -447,6 +448,8 @@ const EmailMarketingForm = ({ onClose, event, title }) => {
   );
 };
 
+// Main Component
+
 const Event = () => {
   const [showForm, setShowForm] = useState(false);
   const [showEmailSignupForm, setShowEmailSignupForm] = useState(false);
@@ -459,7 +462,7 @@ const Event = () => {
 
       {/* Hero section */}
       <section
-        className="relative w-full h-[60vh] bg-cover bg-center"
+        className="relative w-full h-[70vh] bg-cover bg-center"
         style={{ backgroundImage: `url(${events_hero})` }}
       >
         {/* Title */}
@@ -484,22 +487,14 @@ const Event = () => {
       </section>
 
       {/* Current Event */}
-      <section className="flex flex-col space-y-6 items-center justify-center">
+      {/* <section className="flex flex-col space-y-6 items-center justify-center">
         <EventSection showForm={() => setShowForm(true)}/>
-      </section>
-
-      {/* Section 2 */}
-      <section className="bg-midnightblue h-20 flex justify-center items-center">
-        <p className="text-white text-sm md:text-xl lg:text-3xl px-4 text-center font-semibold">
-          THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOYFUL AND
-          HASSLE-FREE
-        </p>
-      </section>
+      </section> */}
 
       {/* Section 1 */}
       <section className="flex flex-col-reverse md:flex-row items-center px-4 md:px-8 lg:px-16">
         {/* Text */}
-        <div className="w-full md:w-1/2 flex flex-col space-y-3 pt-8">
+        <div className="w-full md:w-1/2 flex flex-col space-y-6 pt-8">
           <p className="font-bold text-2xl sm:text-3xl xl:w-2/3 lg:text-4xl text-center md:text-left text-midnightblue">
             The Exclusive Boat Club of Sarasota
           </p>
@@ -512,6 +507,14 @@ const Event = () => {
             creating an effortless and unforgettable experience, this private
             club is set to redefine luxury boating and a unique social scene.
           </p>
+
+          {/* CTA */}
+          <button
+            onClick={() => setShowForm(true)}
+            className="mt-12 text-white font-semibold w-fit md:w-[250px] text-lg md:text-2xl bg-midnightblue px-6 py-4 rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            RSVP NOW
+          </button>
         </div>
 
         {/* Images */}
@@ -522,6 +525,14 @@ const Event = () => {
             className="w-72 sm:w-60 md:w-80 lg:w-[75%] rounded-xl"
           />
         </div>
+      </section>
+
+      {/* Section 2 */}
+      <section className="bg-midnightblue h-20 flex justify-center items-center">
+        <p className="text-white text-sm md:text-xl lg:text-3xl px-4 text-center font-semibold">
+          THIS IS BOATING THE WAY IT SHOULD BE – SEAMLESS, JOYFUL AND
+          HASSLE-FREE
+        </p>
       </section>
 
       {/* Past Events */}
@@ -550,13 +561,14 @@ const Event = () => {
             </div>
 
             <div className="mt-12 p-4 sm:p-6 lg:p-8 bg-white rounded-lg shadow-sm border">
-              <div className="grid gap-3 sm:gap-4">
+              <div className="grid gap-1 sm:gap-4">
                 {[
+                  'Anchors Away & Luxury All Day',
                   'Grand Opening at Quay Commons',
                   'Tour the Fleet',
                   'Private Networking Gatherings'
                 ].map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 hover:bg-gray-50 rounded-lg transition-colors">
+                  <div key={index} className="flex items-start gap-3 cursor-default sm:gap-4 p-1 sm:p-2 hover:bg-gray-50 rounded-lg transition-colors">
                     <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-blue-900 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                     <span className="text-base sm:text-lg lg:text-xl text-gray-700 leading-relaxed">
                       {item}
@@ -567,7 +579,7 @@ const Event = () => {
             </div>
 
             <div className="">
-              <button 
+              <button
                 className="bg-midnightblue text-white font-semibold text-base md:text-lg px-8 py-3 md:px-10 md:py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
                 onClick={handleGallery}>
                 View Private Gallery
@@ -694,8 +706,8 @@ const Event = () => {
         <div className="fixed inset-0 shadow-xl flex justify-center items-center z-50">
           <Form
             onClose={() => setShowForm(false)}
-            event={"Anchors Away Event RSVP"}
-            title={"Anchors Away Event RSVP"}
+            event={"Waitlist"}
+            title={"Signup for Future Events"}
           />
         </div>
       )}
