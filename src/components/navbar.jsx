@@ -146,7 +146,7 @@ const Navbar = () => {
                 ].map((menu) => (
                   <li
                     key={menu}
-                    className={`cursor-pointer inline-block py-1 px-2 text-lg font-medium no-underline hover:text-blue-600 ${
+                    className={`cursor-pointer inline-block py-1 px-2 text-base font-medium no-underline hover:text-blue-600 ${
                       selectedMenu === menu ? "text-blue-600" : ""
                     }`}
                   >
